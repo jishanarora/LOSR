@@ -1,8 +1,10 @@
-package Comp3350.LOSR;
+package comp3350.losr;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import comp3350.losr.R;
 
 public class MainActivity extends AppCompatActivity {
 

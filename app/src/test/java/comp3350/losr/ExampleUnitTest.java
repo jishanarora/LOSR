@@ -1,4 +1,4 @@
-package Comp3350.LOSR;
+package comp3350.losr;
 
 import org.junit.Test;
 
