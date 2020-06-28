@@ -8,17 +8,17 @@ import android.view.View;
 
 import comp3350.losr.R;
 
-public class NavigationPageActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation_page);
+        setContentView(R.layout.activity_signin_page);
     }
 
-    public void buttonProfileOnClick(View v)
+    public void buttonLoginOnClick(View v)
     {
-        Intent profileIntent = new Intent(NavigationPageActivity.this, ProfileActivity.class);
-        startActivity(profileIntent);
+        Intent navigationIntent = new Intent(SignInActivity.this, NavigationPageActivity.class);
+        startActivity(navigationIntent);
     }
 }
