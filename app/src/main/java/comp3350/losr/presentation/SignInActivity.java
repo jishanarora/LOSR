@@ -21,4 +21,10 @@ public class SignInActivity extends AppCompatActivity {
         Intent navigationIntent = new Intent(SignInActivity.this, NavigationPageActivity.class);
         startActivity(navigationIntent);
     }
+
+    public void textViewRegisterOnClick(View v)
+    {
+        Intent registerIntent = new Intent(SignInActivity.this, RegisterActivity.class);
+        startActivity(registerIntent);
+    }
 }
