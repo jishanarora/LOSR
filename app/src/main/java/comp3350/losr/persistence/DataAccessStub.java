@@ -1,4 +1,4 @@
 package comp3350.losr.persistence;
 
-public class DataAcessStub {
+public class DataAccessStub {
 }
