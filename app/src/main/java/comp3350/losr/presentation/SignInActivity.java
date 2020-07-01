@@ -7,13 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 
 import comp3350.losr.R;
+import comp3350.losr.application.Main;
 
 public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Main.startUp();
+
         setContentView(R.layout.activity_signin_page);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
+        Main.shutDown();
     }
 
     public void buttonLoginOnClick(View v)
