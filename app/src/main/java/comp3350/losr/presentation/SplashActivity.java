@@ -17,8 +17,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         SystemClock.sleep(3000);
-        Intent signInIntent= new Intent(SplashActivity.this,SignInActivity.class);
-        startActivity(signInIntent);
+        Intent RegisterIntent= new Intent(SplashActivity.this,RegisterActivity.class);
+        startActivity(RegisterIntent);
         finish();
     }
 

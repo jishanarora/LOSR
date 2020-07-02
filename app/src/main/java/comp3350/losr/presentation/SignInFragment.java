@@ -1,0 +1,84 @@
+package comp3350.losr.presentation;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.view.LayoutInflater;
+import android.view.TextureView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import comp3350.losr.R;
+
+
+
+public class SignInFragment extends Fragment {
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public SignInFragment() {
+        // Required empty public constructor
+    }
+
+    private TextView dontHaveAnAccount;
+    private FrameLayout parentFrameLayout;
+    private Button signInBtn;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+       View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
+       dontHaveAnAccount= view.findViewById(R.id.tv_dont_have_an_account);
+       parentFrameLayout=getActivity().findViewById(R.id.register_framelayout);
+       signInBtn=view.findViewById(R.id.sign_in_button);
+       return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new SignUpFragment());
+            }
+        });
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
+                startActivity(navigationIntent);
+                getActivity().finish();
+            }
+        });
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
+        fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
+        fragmentTransaction.commit();
+    }
+
+
+    public void buttonLoginOnClick(View v)
+    {
+        Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
+        startActivity(navigationIntent);
+        getActivity().finish();
+    }
+
+}
