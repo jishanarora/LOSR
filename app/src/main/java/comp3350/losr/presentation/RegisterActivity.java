@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import comp3350.losr.R;
+import comp3350.losr.application.Main;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -17,9 +18,20 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Main.startUp();
+
         setContentView(R.layout.activity_register);
         frameLayout= findViewById(R.id.register_framelayout);
         setFragment(new SignInFragment());
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
+        Main.shutDown();
     }
 
     private void setFragment(Fragment fragment)
