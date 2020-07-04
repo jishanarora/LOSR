@@ -28,6 +28,7 @@ public class DataAccessStub {
         users.add(newUser);
         newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", new ArrayList<Boolean>());
         users.add(newUser);
+
         newUser = new User("Sean", "Lett", "seanlett@gmail.com", new ArrayList<Boolean>());
         users.add(newUser);
         newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", new ArrayList<Boolean>());
