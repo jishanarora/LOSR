@@ -126,11 +126,11 @@ public class UserTest extends TestCase
         System.out.println("testUserEquals complete");
     }
 
-    public void testUserDiffAnswers() {
+    public void testUserEqualsDiffAnswers() {
         User user;
         User user1;
 
-        System.out.println("Starting testUserEquals");
+        System.out.println("Starting testUserEqualsDiffAnswers");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password", new ArrayList<Boolean>());
         user.updateAnswerList(Boolean.FALSE, 0);
@@ -148,7 +148,7 @@ public class UserTest extends TestCase
 
         assertFalse(user.equals(user1));
 
-        System.out.println("testUserEquals complete");
+        System.out.println("testUserEqualsDiffAnswers complete");
     }
 
 }

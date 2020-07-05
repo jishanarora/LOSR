@@ -1,11 +1,12 @@
 package comp3350.losr.objects;
 
 
-public class Profile {
+public class Profile
+{
     private int age;
-    private String bio;
-    private String gender;
-    private String genderPreference;
+    private String bio = "Hi!";
+    private String gender = "Not Specified";
+    private String genderPreference = "Not Specified";
     private int birthYear;
     private int birthMonth;
     private int birthDay;
@@ -13,7 +14,8 @@ public class Profile {
     public Profile() {
     }
 
-    public void setBio(String bio) {
+    public void setBio(String bio)
+    {
         if(bio == null)
         {
             this.bio = "";
@@ -32,14 +34,16 @@ public class Profile {
             System.out.println("Please choose either Male or Female");
     }
 
-    public void setGenderPreference(String preference) {
+    public void setGenderPreference(String preference)
+    {
         if (preference.equals("Male") || preference.equals("Female"))
             genderPreference = preference;
         else
             System.out.println("Please choose either Male or Female");
     }
 
-    public void setDateOfBirth(int year, int month, int day) {
+    public void setDateOfBirth(int year, int month, int day)
+    {
         if ((month >= 1 && month <= 12 && day >= 1) &&
                 (((month == 1 || month == 3 || month == 5 || month == 7
                         || month == 8 || month == 10 || month == 12) && (day <= 31))
@@ -48,25 +52,41 @@ public class Profile {
             birthYear = year;
             birthMonth = month;
             birthDay = day;
-            age = 2020 - year;
+            if(year == 0)
+            {
+                age = 0;
+            }
+            else
+            {
+                age = 2020 - year;
+            }
         } else {
             System.out.println("Please enter a valid date.");
         }
     }
 
-    public int getAge() {
+    public int getAge()
+    {
         return age;
     }
 
-    public String getBio() {
+    public String getBio()
+    {
         return bio;
     }
 
-    public String getGenderPreference() {
+    public String getGenderPreference()
+    {
         return genderPreference;
     }
 
-    public String dateOfBirth() {
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public String dateOfBirth()
+    {
         String year = birthYear + "";
         String month, day;
 
@@ -83,7 +103,8 @@ public class Profile {
         return day + "/" + month + "/" + year;
     }
 
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         boolean result;
         Profile p;
 
