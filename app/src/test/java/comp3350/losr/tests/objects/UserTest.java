@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
+import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.User;
 
 public class UserTest extends TestCase
@@ -93,6 +94,32 @@ public class UserTest extends TestCase
         assertEquals(2, userAnswers.size());
 
         System.out.println("testUserAverage3 completed");
+    }
+
+    public void testUserEquals()
+    {
+        User user;
+        User user1;
+
+        System.out.println("Starting testUserEquals");
+
+        user = new User("Sam", "Smith", "samsmith@gmail.com", new ArrayList<Boolean>());
+        user.updateAnswerList(Boolean.FALSE, 0);
+        user.updateAnswerList(Boolean.FALSE, 1);
+        user.updateDateOfBirth(1999, 1, 25);
+        user.updateBio("Hi! My name is Sam!");
+        user.updatePreference("Female");
+
+        user1 = new User("Sam", "Smith", "samsmith@gmail.com", new ArrayList<Boolean>());
+        user1.updateAnswerList(Boolean.FALSE, 0);
+        user1.updateAnswerList(Boolean.FALSE, 1);
+        user1.updateDateOfBirth(1999, 1, 25);
+        user1.updateBio("Hi! My name is Sam!");
+        user1.updatePreference("Female");
+
+        assertTrue(user.equals(user1));
+
+        System.out.println("testUserEquals complete");
     }
 
 }

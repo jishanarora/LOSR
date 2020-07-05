@@ -67,13 +67,13 @@ public class Profile {
         return day + "/" + month + "/" + year;
     }
 
-    public boolean equal(Object object) {
+    public boolean equals(Object object) {
         boolean result;
         Profile p;
 
         result = false;
 
-        if (object instanceof User) {
+        if (object instanceof Profile) {
             p = (Profile) object;
             if (p.age == age && p.bio.equals(bio) && p.genderPreference.equals(genderPreference)
                     && p.birthDay == birthDay && p.birthMonth == birthMonth && p.birthYear == birthYear) {

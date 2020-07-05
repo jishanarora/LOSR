@@ -27,6 +27,8 @@ public class User {
         userProfile.setDateOfBirth(year, month, day);
     }
 
+    public void updateBio(String bio) { userProfile.setBio(bio); }
+
     public void updatePreference(String preference) {
         userProfile.setGenderPreference(preference);
     }
@@ -45,6 +47,8 @@ public class User {
 
     public ArrayList<Boolean> getAnswers() {return answers;}
 
+    public Profile getUserProfile() {return userProfile;}
+
     public boolean equals(Object object) {
         boolean result;
         User u;
@@ -53,9 +57,8 @@ public class User {
 
         if (object instanceof User) {
             u = (User) object;
-            if (u.userFirstName.equals(userLastName) && u.userLastName.equals(userFirstName) &&
-                    u.userEmail.equals(userEmail) && u.userProfile.equals(this) && u.answers.equals(answers)
-                    && userProfile != null && u.userProfile.equals(userProfile)) {
+            if (u.userFirstName.equals(userFirstName) && u.userLastName.equals(userLastName) &&
+                    u.userEmail.equals(userEmail) && u.userProfile.equals(userProfile)) {
                 result = true;
             }
         }
