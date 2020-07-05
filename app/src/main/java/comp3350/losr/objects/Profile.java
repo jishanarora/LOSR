@@ -4,6 +4,7 @@ package comp3350.losr.objects;
 public class Profile {
     private int age;
     private String bio;
+    private String gender;
     private String genderPreference;
     private int birthYear;
     private int birthMonth;
@@ -13,14 +14,29 @@ public class Profile {
     }
 
     public void setBio(String bio) {
-        this.bio = bio;
+        if(bio == null)
+        {
+            this.bio = "";
+        }
+        else
+        {
+            this.bio = bio;
+        }
+    }
+
+    public void setGender(String gender)
+    {
+        if (gender.equals("Male") || gender.equals("Female"))
+            this.gender = gender;
+        else
+            System.out.println("Please choose either Male or Female");
     }
 
     public void setGenderPreference(String preference) {
         if (preference.equals("Male") || preference.equals("Female"))
             genderPreference = preference;
         else
-            System.out.println("Please choose a valid gender.");
+            System.out.println("Please choose either Male or Female");
     }
 
     public void setDateOfBirth(int year, int month, int day) {

@@ -6,14 +6,16 @@ public class User {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
+    private String userPassword;
     private ArrayList<Boolean> answers;
     private Profile userProfile;
 
 
-    public User(String userFirstName, String userLastName, String userEmail, ArrayList<Boolean> answers) {
+    public User(String userFirstName, String userLastName, String userEmail, String userPassword, ArrayList<Boolean> answers) {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
+        this.userPassword = userPassword;
         this.answers = answers;
         userProfile = new Profile();
     }
@@ -44,6 +46,8 @@ public class User {
     public String getUserEmail() {
         return userEmail;
     }
+
+    public String getUserPassword() {return userPassword;}
 
     public ArrayList<Boolean> getAnswers() {return answers;}
 
