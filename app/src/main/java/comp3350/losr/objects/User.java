@@ -58,7 +58,7 @@ public class User {
         if (object instanceof User) {
             u = (User) object;
             if (u.userFirstName.equals(userFirstName) && u.userLastName.equals(userLastName) &&
-                    u.userEmail.equals(userEmail) && u.userProfile.equals(userProfile)) {
+                    u.userEmail.equals(userEmail) && u.answers.equals(answers) && u.userProfile.equals(userProfile)) {
                 result = true;
             }
         }
