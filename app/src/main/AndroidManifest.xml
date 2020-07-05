@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.RegisterActivity"></activity>
-        <activity android:name=".presentation.NavigationPageActivity" />
-        <activity android:name=".presentation.ProfileActivity" />
-        <activity android:name=".presentation.SignInActivity">
+        <activity android:name=".presentation.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".presentation.NavigationPageActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.ProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".presentation.SplashActivity" android:theme="@style/SplashTheme" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
