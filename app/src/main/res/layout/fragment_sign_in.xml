@@ -94,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:clickable="false"
             android:text="OR"
             android:textColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@+id/tv_dont_have_an_account"

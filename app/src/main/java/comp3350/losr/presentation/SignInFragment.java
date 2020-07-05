@@ -52,6 +52,7 @@ public class SignInFragment extends Fragment {
         dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                RegisterActivity.onSignUpFrgment=true;
                 setFragment(new SignUpFragment());
             }
         });
@@ -74,11 +75,5 @@ public class SignInFragment extends Fragment {
     }
 
 
-    public void buttonLoginOnClick(View v)
-    {
-        Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
-        startActivity(navigationIntent);
-        getActivity().finish();
-    }
 
 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -15,6 +16,7 @@ import comp3350.losr.application.Main;
 public class RegisterActivity extends AppCompatActivity {
 
     private FrameLayout frameLayout;
+    public static boolean onSignUpFrgment=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_register);
         frameLayout= findViewById(R.id.register_framelayout);
-        setFragment(new SignInFragment());
+        setDefaultFragment(new SignInFragment());
     }
 
     @Override
@@ -34,11 +36,31 @@ public class RegisterActivity extends AppCompatActivity {
         Main.shutDown();
     }
 
-    private void setFragment(Fragment fragment)
+    private void setDefaultFragment(Fragment fragment)
     {
         FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(), fragment);
         fragmentTransaction.commit();
+    }
+    private void setFragment(Fragment fragment)
+    {
+        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left,R.anim.slideout_from_right);
+        fragmentTransaction.replace(frameLayout.getId(), fragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK)
+        {
+            if(onSignUpFrgment)
+            { onSignUpFrgment=false;
+             setFragment(new SignInFragment());
+                return false;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void buttonRegisterOnClick(View v)
