@@ -43,6 +43,8 @@ public class User {
         return userEmail;
     }
 
+    public ArrayList<Boolean> getAnswers() {return answers;}
+
     public boolean equals(Object object) {
         boolean result;
         User u;
