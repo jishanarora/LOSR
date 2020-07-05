@@ -2,8 +2,6 @@ package comp3350.losr.tests.objects;
 
 import junit.framework.TestCase;
 
-import java.util.PriorityQueue;
-
 import comp3350.losr.objects.Profile;
 
 public class ProfileTest extends TestCase {
