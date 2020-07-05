@@ -104,48 +104,10 @@ public class ProfileTest extends TestCase {
         System.out.println("Starting testProfileNullVals");
 
         profile = new Profile();
-
         profile.setBio(null);
-        try
-        {
-            profile.setGender(null);
-            fail();
-        }
-        catch(NullPointerException npe) {}
-        try
-        {
-            profile.setGenderPreference(null);
-            fail();
-        }
-        catch(NullPointerException npe) {}
 
         assertEquals("", profile.getBio());
-        assertEquals("Not Specified", profile.getGender());
-        assertEquals("Not Specified", profile.getGenderPreference());
 
         System.out.println("testProfileNullVals complete");
-    }
-
-    public void testProfileInvalidGender()
-    {
-        Profile profile;
-
-        System.out.println("Starting testProfileInvalidGender");
-
-        profile = new Profile();
-
-        profile.setGenderPreference("xyz");
-        profile.setGender("zxy");
-
-        assertEquals("Not Specified", profile.getGenderPreference());
-        assertEquals("Not Specified", profile.getGender());
-
-        profile.setGenderPreference("~@$$%^%$^");
-        profile.setGender("!~@^^**%^");
-
-        assertEquals("Not Specified", profile.getGenderPreference());
-        assertEquals("Not Specified", profile.getGender());
-
-        System.out.println("testProfileInvalidGender complete");
     }
 }

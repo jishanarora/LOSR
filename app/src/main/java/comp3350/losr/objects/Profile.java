@@ -28,40 +28,25 @@ public class Profile
 
     public void setGender(String gender)
     {
-        if (gender.equals("Male") || gender.equals("Female"))
-            this.gender = gender;
-        else
-            System.out.println("Please choose either Male or Female");
+        this.gender = gender;
     }
 
     public void setGenderPreference(String preference)
     {
-        if (preference.equals("Male") || preference.equals("Female"))
-            genderPreference = preference;
-        else
-            System.out.println("Please choose either Male or Female");
+        genderPreference = preference;
     }
 
     public void setDateOfBirth(int year, int month, int day)
     {
-        if ((month >= 1 && month <= 12 && day >= 1) &&
-                (((month == 1 || month == 3 || month == 5 || month == 7
-                        || month == 8 || month == 10 || month == 12) && (day <= 31))
-                        || ((month == 2 || month == 4 || month == 6 || month == 9
-                        || month == 11) && day <= 30))) {
-            birthYear = year;
-            birthMonth = month;
-            birthDay = day;
-            if(year == 0)
-            {
-                age = 0;
-            }
-            else
-            {
-                age = 2020 - year;
-            }
-        } else {
-            System.out.println("Please enter a valid date.");
+        birthYear = year;
+        birthMonth = month;
+        birthDay = day;
+        if(year == 0)
+        {
+            age = 0;
+        }
+        else {
+            age = 2020 - year;
         }
     }
 
