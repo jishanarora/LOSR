@@ -10,6 +10,7 @@ public class DataAccessStub {
     private String dbType = "stub";
 
     private ArrayList<User> users;
+    private User currentUser;
 
     public DataAccessStub(String name)
     {
@@ -37,9 +38,12 @@ public class DataAccessStub {
         System.out.println("Opened connection to "+dbType+" database "+dbName);
     }
 
+    public User getCurrentUser(){return currentUser;}
+
     public void addUser(User newUser)
     {
         users.add(newUser);
+        currentUser = newUser;
     }
 
     public void deleteUser(User selectedUser)
