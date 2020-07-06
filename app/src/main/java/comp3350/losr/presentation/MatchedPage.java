@@ -22,7 +22,7 @@ public class MatchedPage extends Fragment {
         // Required empty public constructor
     }
 
-    private TextView alreadyHaveAnAccount;
+    private TextView losrFound;
     private FrameLayout parentFrameLayout;
 
     @Override
@@ -30,19 +30,16 @@ public class MatchedPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.matched_page, container, false);
-        alreadyHaveAnAccount= view.findViewById(R.id.tv_already_have_an_account);
+        losrFound= view.findViewById(R.id.found_text);
         parentFrameLayout=getActivity().findViewById(R.id.register_framelayout);
         return view;
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        alreadyHaveAnAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setFragment(new SignInFragment());
-            }
-        });
+//        losrFound.setOnClickListener(new View.OnClickListener() {
+//
+//        });
     }
 
     private void setFragment(Fragment fragment) {
