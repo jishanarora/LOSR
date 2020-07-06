@@ -6,14 +6,16 @@ public class User {
     private String userFirstName;
     private String userLastName;
     private String userEmail;
+    private String userPassword;
     private ArrayList<Boolean> answers;
     private Profile userProfile;
 
 
-    public User(String userFirstName, String userLastName, String userEmail, ArrayList<Boolean> answers) {
+    public User(String userFirstName, String userLastName, String userEmail, String userPassword, ArrayList<Boolean> answers) {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
+        this.userPassword = userPassword;
         this.answers = answers;
         userProfile = new Profile();
     }
@@ -26,6 +28,8 @@ public class User {
     public void updateDateOfBirth(int year, int month, int day) {
         userProfile.setDateOfBirth(year, month, day);
     }
+
+    public void updateBio(String bio) { userProfile.setBio(bio); }
 
     public void updatePreference(String preference) {
         userProfile.setGenderPreference(preference);
@@ -43,6 +47,12 @@ public class User {
         return userEmail;
     }
 
+    public String getUserPassword() {return userPassword;}
+
+    public ArrayList<Boolean> getAnswers() {return answers;}
+
+    public Profile getUserProfile() {return userProfile;}
+
     public boolean equals(Object object) {
         boolean result;
         User u;
@@ -51,9 +61,8 @@ public class User {
 
         if (object instanceof User) {
             u = (User) object;
-            if (u.userFirstName.equals(userLastName) && u.userLastName.equals(userFirstName) &&
-                    u.userEmail.equals(userEmail) && u.userProfile.equals(this) && u.answers.equals(answers)
-                    && userProfile != null && u.userProfile.equals(userProfile)) {
+            if (u.userFirstName.equals(userFirstName) && u.userLastName.equals(userLastName) &&
+                    u.userEmail.equals(userEmail) && u.answers.equals(answers) && u.userProfile.equals(userProfile)) {
                 result = true;
             }
         }

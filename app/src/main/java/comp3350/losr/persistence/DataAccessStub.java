@@ -22,16 +22,16 @@ public class DataAccessStub {
 
         users = new ArrayList<>();
 
-        newUser = new User("John", "Doe", "johndoe@gmail.com", new ArrayList<Boolean>());
+        newUser = new User("John", "Doe", "johndoe@gmail.com", "password", new ArrayList<Boolean>());
         users.add(newUser);
-        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", new ArrayList<Boolean>());
+        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password", new ArrayList<Boolean>());
         users.add(newUser);
-        newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", new ArrayList<Boolean>());
+        newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", "password", new ArrayList<Boolean>());
         users.add(newUser);
 
-        newUser = new User("Sean", "Lett", "seanlett@gmail.com", new ArrayList<Boolean>());
+        newUser = new User("Sean", "Lett", "seanlett@gmail.com", "password", new ArrayList<Boolean>());
         users.add(newUser);
-        newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", new ArrayList<Boolean>());
+        newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", "password", new ArrayList<Boolean>());
         users.add(newUser);
 
         System.out.println("Opened connection to "+dbType+" database "+dbName);
