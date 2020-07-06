@@ -16,7 +16,7 @@ import comp3350.losr.application.Main;
 public class RegisterActivity extends AppCompatActivity {
 
     private FrameLayout frameLayout;
-    public static boolean onSignUpFrgment=false;
+    public static boolean onSignUpFragment =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==KeyEvent.KEYCODE_BACK)
         {
-            if(onSignUpFrgment)
-            { onSignUpFrgment=false;
+            if(onSignUpFragment)
+            { onSignUpFragment =false;
              setFragment(new SignInFragment());
                 return false;
             }

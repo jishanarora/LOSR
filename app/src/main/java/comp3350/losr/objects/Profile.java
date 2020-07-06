@@ -5,8 +5,9 @@ public class Profile
 {
     private int age;
     private String bio = "Hi!";
-    private String gender = "Not Specified";
-    private String genderPreference = "Not Specified";
+    private User.user_gender gender;
+    //private String gender = "Not Specified";
+    private User.user_gender genderPreference;
     private int birthYear;
     private int birthMonth;
     private int birthDay;
@@ -26,12 +27,16 @@ public class Profile
         }
     }
 
-    public void setGender(String gender)
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    public void setGender(User.user_gender gender)
     {
         this.gender = gender;
     }
 
-    public void setGenderPreference(String preference)
+    public void setGenderPreference(User.user_gender preference)
     {
         genderPreference = preference;
     }
@@ -60,14 +65,14 @@ public class Profile
         return bio;
     }
 
-    public String getGenderPreference()
-    {
-        return genderPreference;
-    }
-
-    public String getGender()
+    public User.user_gender getGender()
     {
         return gender;
+    }
+
+    public User.user_gender getGenderPreference()
+    {
+        return genderPreference;
     }
 
     public String dateOfBirth()

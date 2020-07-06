@@ -3,13 +3,15 @@ package comp3350.losr.objects;
 import java.util.ArrayList;
 
 public class User {
+
+    public enum user_gender {Male, Female, Losr}
+
     private String userFirstName;
     private String userLastName;
     private String userEmail;
     private String userPassword;
     private ArrayList<Boolean> answers;
     private Profile userProfile;
-
 
     public User(String userFirstName, String userLastName, String userEmail, String userPassword, ArrayList<Boolean> answers) {
         this.userFirstName = userFirstName;
@@ -18,6 +20,15 @@ public class User {
         this.userPassword = userPassword;
         this.answers = answers;
         userProfile = new Profile();
+    }
+
+    //set methods
+    public void setUserProfile(int age, String bio, user_gender gender, user_gender preference, int year, int month, int day){
+        userProfile.setAge(age);
+        userProfile.setBio(bio);
+        userProfile.setGender(gender);
+        userProfile.setGenderPreference(preference);
+        userProfile.setDateOfBirth(year, month, day);
     }
 
     //update a specific answer
@@ -31,8 +42,8 @@ public class User {
 
     public void updateBio(String bio) { userProfile.setBio(bio); }
 
-    public void updatePreference(String preference) {
-        userProfile.setGenderPreference(preference);
+    public void updatePreference(user_gender pref){
+        userProfile.setGenderPreference(pref);
     }
 
     public String getUserFirstName() {

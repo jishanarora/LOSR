@@ -7,4 +7,8 @@
     <string name="register_here_button">Register Here</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textview">TextView</string>
+    <string name="losr_logo">LOSR Logo</string>
+    <string name="found">LOSR Found!</string>
+    <string name="todo">TODO</string>
 </resources>
