@@ -11,7 +11,7 @@ public class Matches {
     {
         this.currentUser = currentUser;
         this.matchedUser = matchedUser;
-        matchPercent = matchPercentage(currentUser, matchedUser);
+        matchPercent = matchPercentage(currentUser.getAnswers(), matchedUser.getAnswers());
     }
 
     public int getMatchPercent()

@@ -1,20 +1,22 @@
 package comp3350.losr.business;
 
+import java.util.ArrayList;
+
 import comp3350.losr.objects.User;
 
 public class CheckMatches {
 
     // checks gender compatibility and % of same answers to return an int match % number
-    public static int matchPercentage(User curr, User match){
+    public static int matchPercentage(ArrayList<Boolean> curr, ArrayList<Boolean> match){
         int overall_compatibility;
 
         int similar = 0;
-        for (int i = 0; i < match.getAnswers().size(); i++) {
-            if (curr.getAnswers().get(i) == match.getAnswers().get(i)){
+        for (int i = 0; i < match.size(); i++) {
+            if (curr.get(i) == match.get(i)){
                 similar++;
             }
         }
-        overall_compatibility = similar/match.getAnswers().size();
+        overall_compatibility = similar/match.size();
 
         return overall_compatibility; // should this even be null?
     }

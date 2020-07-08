@@ -34,7 +34,7 @@ public class AccessMatches {
 
         for(int i = 0; i < potentialMatches.size(); i++)
         {
-            matchCheck = matchPercentage(currentUser, potentialMatches.get(i));
+            matchCheck = matchPercentage(currentUser.getAnswers(), potentialMatches.get(i).getAnswers());
 
             if(matchCheck > 0)
             {
