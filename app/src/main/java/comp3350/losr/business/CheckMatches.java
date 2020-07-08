@@ -5,9 +5,9 @@ import comp3350.losr.objects.User;
 public class CheckMatches {
 
     // checks gender compatibility and % of same answers to return an int match % number
-    public static int match_percentage(User curr, User match){
-        int overall_compatibility = 0;
-        if (are_gender_compatible(curr, match)){
+    public static int matchPercentage(User curr, User match){
+        int overall_compatibility = -1;
+        if (areGenderCompatible(curr, match)){
 
             int similar = 0;
             for (int i = 0; i < match.getAnswers().size(); i++) {
@@ -21,7 +21,7 @@ public class CheckMatches {
     }
 
     // compares genders and gender preference to ensure compatibility
-    public static boolean are_gender_compatible(User curr, User match){
+    public static boolean areGenderCompatible(User curr, User match){
 
 
 

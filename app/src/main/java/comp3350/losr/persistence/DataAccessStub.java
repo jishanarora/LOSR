@@ -1,8 +1,11 @@
 package comp3350.losr.persistence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.losr.objects.User;
+
+import static comp3350.losr.business.CheckMatches.areGenderCompatible;
 
 public class DataAccessStub {
 
@@ -65,20 +68,13 @@ public class DataAccessStub {
         }
     }
 
-    public ArrayList<User> getGenderedUsers(){
-        ArrayList<User> genderedUsers = new ArrayList<>();
-
-        User.user_gender genderPref = currentUser.getUserProfile().getGenderPreference();
-        User.user_gender gender = currentUser.getUserProfile().getGender();
-
+    public List<User> getUsers(){
         for (int i = 0; i < users.size(); i++) {
-            //make sure both are interested in each others gender
-            if (users.get(i).getUserProfile().getGender() == genderPref && gender == users.get(i).getUserProfile().getGenderPreference()){
-                genderedUsers.add(users.get(i));
+            if(!users.get(i).equals(currentUser)) {
+                users.add(users.get(i));
             }
         }
-
-        return genderedUsers;
+        return users;
     }
 
     public void closeConnection()
