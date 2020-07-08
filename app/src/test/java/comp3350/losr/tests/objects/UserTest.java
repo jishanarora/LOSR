@@ -9,9 +9,10 @@ import comp3350.losr.objects.User;
 import static org.junit.Assert.assertNotEquals;
 
 public class UserTest extends TestCase {
-    public void testUserEmpty() {
-        User user;
+    User user;
+    User user1;
 
+    public void testUserEmpty() {
         System.out.println("Starting testUserEmpty");
 
         user = new User("", "", "", "", new ArrayList<Boolean>());
@@ -27,8 +28,6 @@ public class UserTest extends TestCase {
     }
 
     public void testUserAverage() {
-        User user;
-
         System.out.println("Starting testUserAverage");
 
         user = new User("John", "Doe", "johndoe@gmail.com", "password", new ArrayList<Boolean>());
@@ -50,8 +49,6 @@ public class UserTest extends TestCase {
     }
 
     public void testUserAverage2() {
-        User user;
-
         System.out.println("Starting testUserAverage2");
 
         user = new User("Mary", "Poppins", "marypoppins@gmail.com", "password1", new ArrayList<Boolean>());
@@ -75,8 +72,6 @@ public class UserTest extends TestCase {
     }
 
     public void testUserAverage3() {
-        User user;
-
         System.out.println("Starting testUserAverage3");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password5", new ArrayList<Boolean>());
@@ -97,9 +92,6 @@ public class UserTest extends TestCase {
     }
 
     public void testUserEquals() {
-        User user;
-        User user1;
-
         System.out.println("Starting testUserEquals");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password", new ArrayList<Boolean>());
@@ -123,9 +115,6 @@ public class UserTest extends TestCase {
     }
 
     public void testUserEqualsDiffAnswers() {
-        User user;
-        User user1;
-
         System.out.println("Starting testUserEqualsDiffAnswers");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password", new ArrayList<Boolean>());

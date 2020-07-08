@@ -6,13 +6,15 @@ import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.User;
 
 public class ProfileTest extends TestCase {
+    Profile profile;
+
+    public void setUp()
+    {
+        profile = new Profile();
+    }
 
     public void testProfileEmpty() {
-        Profile profile;
-
         System.out.println("Starting testProfileEmpty");
-
-        profile = new Profile();
 
         assertNotNull(profile);
         assertEquals("Hi!", profile.getBio());
@@ -25,11 +27,7 @@ public class ProfileTest extends TestCase {
     }
 
     public void testProfileAverage1() {
-        Profile profile;
-
         System.out.println("Starting testProfileAverage1");
-
-        profile = new Profile();
 
         profile.setBio("My bio");
         profile.setGender(User.user_gender.Male);
@@ -47,11 +45,7 @@ public class ProfileTest extends TestCase {
     }
 
     public void testProfileAverage2() {
-        Profile profile;
-
         System.out.println("Starting testProfileAverage2");
-
-        profile = new Profile();
 
         profile.setBio("Hello! This is my bio!");
         profile.setGender(User.user_gender.Female);
@@ -69,12 +63,10 @@ public class ProfileTest extends TestCase {
     }
 
     public void testProfileEquals() {
-        Profile profile;
         Profile profile2;
 
         System.out.println("Starting testProfileEquals");
 
-        profile = new Profile();
         profile2 = new Profile();
 
         profile.setBio("Hello! This is my bio!");
@@ -96,11 +88,9 @@ public class ProfileTest extends TestCase {
     }
 
     public void testProfileNullVals() {
-        Profile profile;
 
         System.out.println("Starting testProfileNullVals");
 
-        profile = new Profile();
         profile.setBio(null);
 
         assertEquals("", profile.getBio());
