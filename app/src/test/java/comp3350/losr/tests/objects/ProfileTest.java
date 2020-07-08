@@ -16,8 +16,6 @@ public class ProfileTest extends TestCase {
 
         assertNotNull(profile);
         assertEquals("Hi!", profile.getBio());
-        //assertEquals("Not Specified", profile.getGender());
-        //assertEquals("Not Specified", profile.getGenderPreference());
         assertNull(profile.getGender());
         assertNull(profile.getGenderPreference());
         assertEquals("00/00/0", profile.dateOfBirth());

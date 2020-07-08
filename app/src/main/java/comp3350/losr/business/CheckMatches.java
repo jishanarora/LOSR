@@ -30,7 +30,6 @@ public class CheckMatches {
             }
             overall_compatibility = ((float)similar/((float)smaller.size()+difference))*100;
         }
-        //System.out.println(overall_compatibility);
         return (int)overall_compatibility; // should this even be null?
     }
 

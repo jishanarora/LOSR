@@ -2,19 +2,19 @@ package comp3350.losr.objects;
 
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
-public class Matches {
+public class Match {
     private User currentUser;
     private User matchedUser;
-    private float matchPercent;
+    private int matchPercent;
 
-    public Matches(User currentUser, User matchedUser)
+    public Match(User currentUser, User matchedUser)
     {
         this.currentUser = currentUser;
         this.matchedUser = matchedUser;
         matchPercent = matchPercentage(currentUser.getAnswers(), matchedUser.getAnswers());
     }
 
-    public float getMatchPercent()
+    public int getMatchPercent()
     {
         return matchPercent;
     }

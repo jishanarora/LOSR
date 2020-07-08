@@ -23,6 +23,8 @@ public class CheckMatchesTest extends TestCase {
 
     public void testOneEmpty()
     {
+        System.out.println("Starting testOneEmpty");
+
         list1.add(Boolean.FALSE);
         assertEquals(0, matchPercentage(list1, list2));
 
@@ -30,10 +32,14 @@ public class CheckMatchesTest extends TestCase {
 
         list2.add(Boolean.TRUE);
         assertEquals(0, matchPercentage(list1, list2));
+
+        System.out.println("testOneEmpty complete");
     }
 
     public void testNull()
     {
+        System.out.println("Starting testNull");
+
         list1 = null;
         list2 = null;
 
@@ -43,10 +49,14 @@ public class CheckMatchesTest extends TestCase {
             fail();
         }
         catch(NullPointerException npe){}
+
+        System.out.println("testNull Complete");
     }
 
     public void testOneNull()
     {
+        System.out.println("Starting testOneNull");
+
         list1 = null;
         list2.add(Boolean.TRUE);
 
@@ -63,10 +73,38 @@ public class CheckMatchesTest extends TestCase {
             fail();
         }
         catch(NullPointerException npe){}
+
+        System.out.println("testOneNull complete");
+    }
+
+    public void testNullItems()
+    {
+        System.out.println("Starting testNullItems");
+
+        list1.add(null);
+        list2.add(null);
+
+        try
+        {
+            matchPercentage(list1,list2);
+            fail();
+        }
+        catch(NullPointerException npe){}
+
+        try
+        {
+            matchPercentage(list2,list1);
+            fail();
+        }
+        catch(NullPointerException npe){}
+
+        System.out.println("testNullItems complete");
     }
 
     public void testFullMatch()
     {
+        System.out.println("Starting testFullMatch");
+
         list1.add(Boolean.TRUE);
         list1.add(Boolean.FALSE);
         list1.add(Boolean.TRUE);
@@ -79,10 +117,14 @@ public class CheckMatchesTest extends TestCase {
         assertEquals(100, matchPercentage(list2,list1));
         assertEquals(100, matchPercentage(list1, list1));
         assertEquals(100, matchPercentage(list2,list2));
+
+        System.out.println("testFullMatch complete");
     }
 
     public void testHalfMatch()
     {
+        System.out.println("Starting testHalfMatch");
+
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
@@ -95,10 +137,14 @@ public class CheckMatchesTest extends TestCase {
 
         assertEquals(50, matchPercentage(list1,list2));
         assertEquals(50, matchPercentage(list2,list1));
+
+        System.out.println("testHalfMatch complete");
     }
 
     public void testQuarterMatch()
     {
+        System.out.println("Starting testQuarterMatch");
+
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
@@ -111,10 +157,14 @@ public class CheckMatchesTest extends TestCase {
 
         assertEquals(25, matchPercentage(list1,list2));
         assertEquals(25, matchPercentage(list2,list1));
+
+        System.out.println("testQuarterMatch complete");
     }
 
     public void testDiffLengths()
     {
+        System.out.println("Starting testDiffLengths");
+
         list1.add(Boolean.TRUE);
         list1.add(Boolean.FALSE);
         list1.add(Boolean.FALSE);
@@ -126,5 +176,7 @@ public class CheckMatchesTest extends TestCase {
 
         assertEquals(25, matchPercentage(list1,list2));
         assertEquals(25, matchPercentage(list2,list1));
+
+        System.out.println("testDiffLengths complete");
     }
 }
