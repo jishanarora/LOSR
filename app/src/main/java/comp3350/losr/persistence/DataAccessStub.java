@@ -65,11 +65,15 @@ public class DataAccessStub {
         }
     }
 
-    public ArrayList<User> getGenderedUsers(User.user_gender gender){
+    public ArrayList<User> getGenderedUsers(){
         ArrayList<User> genderedUsers = new ArrayList<>();
 
+        User.user_gender genderPref = currentUser.getUserProfile().getGenderPreference();
+        User.user_gender gender = currentUser.getUserProfile().getGender();
+
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserProfile().getGender() == gender){
+            //make sure both are interested in each others gender
+            if (users.get(i).getUserProfile().getGender() == genderPref && gender == users.get(i).getUserProfile().getGenderPreference()){
                 genderedUsers.add(users.get(i));
             }
         }
