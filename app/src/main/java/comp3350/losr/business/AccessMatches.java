@@ -10,6 +10,7 @@ import comp3350.losr.objects.Matches;
 import comp3350.losr.objects.User;
 import comp3350.losr.persistence.DataAccessStub;
 
+import static comp3350.losr.business.CheckMatches.areGenderCompatible;
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
 public class AccessMatches {
@@ -26,7 +27,7 @@ public class AccessMatches {
     public List<Matches> getMatches()
     {
         List<Matches> allMatches = new ArrayList<>();
-        List<User> potentialMatches = userAccess.getUsers();
+        List<User> potentialMatches = userAccess.getGenderedUsers();
         User currentUser = dataAccess.getCurrentUser();
 
         int matchCheck;

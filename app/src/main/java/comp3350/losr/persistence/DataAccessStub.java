@@ -68,9 +68,9 @@ public class DataAccessStub {
         }
     }
 
-    public List<User> getUsers(){
+    public List<User> getGenderedUsers(){
         for (int i = 0; i < users.size(); i++) {
-            if(!users.get(i).equals(currentUser)) {
+            if(!users.get(i).equals(currentUser) && areGenderCompatible(currentUser, users.get(i))) {
                 users.add(users.get(i));
             }
         }

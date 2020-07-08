@@ -17,9 +17,9 @@ public class AccessUsers
         dataAccess = (DataAccessStub) DatabaseService.getDataAccess(Main.dbName);
     }
 
-    public List<User> getUsers()
+    public List<User> getGenderedUsers()
     {
-        return dataAccess.getUsers();
+        return dataAccess.getGenderedUsers();
     }
 
     //Just a way to retrieve the current "Logged in" user

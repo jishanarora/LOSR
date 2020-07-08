@@ -6,17 +6,16 @@ public class CheckMatches {
 
     // checks gender compatibility and % of same answers to return an int match % number
     public static int matchPercentage(User curr, User match){
-        int overall_compatibility = -1;
-        if (areGenderCompatible(curr, match)){
+        int overall_compatibility;
 
-            int similar = 0;
-            for (int i = 0; i < match.getAnswers().size(); i++) {
-                if (curr.getAnswers().get(i) == match.getAnswers().get(i)){
-                    similar++;
-                }
+        int similar = 0;
+        for (int i = 0; i < match.getAnswers().size(); i++) {
+            if (curr.getAnswers().get(i) == match.getAnswers().get(i)){
+                similar++;
             }
-            overall_compatibility = similar/match.getAnswers().size();
         }
+        overall_compatibility = similar/match.getAnswers().size();
+
         return overall_compatibility; // should this even be null?
     }
 
