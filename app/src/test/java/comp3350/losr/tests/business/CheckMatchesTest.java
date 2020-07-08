@@ -48,7 +48,7 @@ public class CheckMatchesTest extends TestCase {
             matchPercentage(list1, list2);
             fail();
         }
-        catch(NullPointerException npe){}
+        catch(NullPointerException npe){System.out.println("null pointer");}
 
         System.out.println("testNull Complete");
     }
@@ -65,14 +65,14 @@ public class CheckMatchesTest extends TestCase {
             matchPercentage(list1, list2);
             fail();
         }
-        catch(NullPointerException npe){}
+        catch(NullPointerException npe){System.out.println("null pointer");}
 
         try
         {
             matchPercentage(list2, list1);
             fail();
         }
-        catch(NullPointerException npe){}
+        catch(NullPointerException npe){System.out.println("null pointer");}
 
         System.out.println("testOneNull complete");
     }
@@ -89,14 +89,14 @@ public class CheckMatchesTest extends TestCase {
             matchPercentage(list1,list2);
             fail();
         }
-        catch(NullPointerException npe){}
+        catch(NullPointerException npe){System.out.println("null pointer");}
 
         try
         {
             matchPercentage(list2,list1);
             fail();
         }
-        catch(NullPointerException npe){}
+        catch(NullPointerException npe){System.out.println("null pointer");}
 
         System.out.println("testNullItems complete");
     }
@@ -178,5 +178,66 @@ public class CheckMatchesTest extends TestCase {
         assertEquals(25, matchPercentage(list2,list1));
 
         System.out.println("testDiffLengths complete");
+    }
+
+    public void testMissingAnswers()
+    {
+        System.out.println("Starting testMissingAnswers");
+
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(null);
+        list1.add(Boolean.TRUE);
+
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+        list1.add(null);
+        list2.add(Boolean.TRUE);
+
+        try
+        {
+            matchPercentage(list1,list2);
+        }
+        catch(NullPointerException npe)
+        {
+            System.out.println("null pointer");
+        }
+
+        System.out.println("testMissingAnswers complete");
+    }
+
+    public void testBigList()
+    {
+        System.out.println("Starting testBigList");
+
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
+
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+
+        assertEquals(66, matchPercentage(list1,list2));
+
+        System.out.println("testBigList completed");
     }
 }
