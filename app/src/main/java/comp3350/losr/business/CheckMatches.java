@@ -8,15 +8,18 @@ public class CheckMatches {
 
     // checks gender compatibility and % of same answers to return an int match % number
     public static int matchPercentage(ArrayList<Boolean> curr, ArrayList<Boolean> match){
-        int overall_compatibility;
+        int overall_compatibility = 0;
 
         int similar = 0;
-        for (int i = 0; i < match.size(); i++) {
-            if (curr.get(i) == match.get(i)){
-                similar++;
+
+        if(match.size() > 0 && curr.size() > 0) {
+            for (int i = 0; i < match.size(); i++) {
+                if (curr.get(i) == match.get(i)) {
+                    similar++;
+                }
             }
+            overall_compatibility = similar/match.size();
         }
-        overall_compatibility = similar/match.size();
 
         return overall_compatibility; // should this even be null?
     }
