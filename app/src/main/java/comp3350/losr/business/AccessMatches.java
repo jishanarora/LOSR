@@ -30,7 +30,7 @@ public class AccessMatches {
         List<User> potentialMatches = userAccess.getGenderedUsers();
         User currentUser = dataAccess.getCurrentUser();
 
-        int matchCheck;
+        float matchCheck;
 
         for(int i = 0; i < potentialMatches.size(); i++)
         {

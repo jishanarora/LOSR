@@ -5,7 +5,7 @@ import static comp3350.losr.business.CheckMatches.matchPercentage;
 public class Matches {
     private User currentUser;
     private User matchedUser;
-    private int matchPercent;
+    private float matchPercent;
 
     public Matches(User currentUser, User matchedUser)
     {
@@ -14,7 +14,7 @@ public class Matches {
         matchPercent = matchPercentage(currentUser.getAnswers(), matchedUser.getAnswers());
     }
 
-    public int getMatchPercent()
+    public float getMatchPercent()
     {
         return matchPercent;
     }

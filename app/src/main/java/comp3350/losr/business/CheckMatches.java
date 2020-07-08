@@ -8,20 +8,30 @@ public class CheckMatches {
 
     // checks gender compatibility and % of same answers to return an int match % number
     public static int matchPercentage(ArrayList<Boolean> curr, ArrayList<Boolean> match){
-        int overall_compatibility = 0;
+        float overall_compatibility = 0;
 
         int similar = 0;
+        ArrayList<Boolean> bigger = curr;
+        ArrayList<Boolean> smaller = match;
 
-        if(match.size() > 0 && curr.size() > 0) {
-            for (int i = 0; i < match.size(); i++) {
-                if (curr.get(i) == match.get(i)) {
+        if(match.size() > curr.size())
+        {
+            bigger = match;
+            smaller =  curr;
+        }
+
+        int difference = bigger.size() - smaller.size();
+
+        if(bigger.size() > 0 && smaller.size() > 0) {
+            for (int i = 0; i < smaller.size(); i++) {
+                if (bigger.get(i).equals(smaller.get(i))) {
                     similar++;
                 }
             }
-            overall_compatibility = similar/match.size();
+            overall_compatibility = ((float)similar/((float)smaller.size()+difference))*100;
         }
-
-        return overall_compatibility; // should this even be null?
+        //System.out.println(overall_compatibility);
+        return (int)overall_compatibility; // should this even be null?
     }
 
     // compares genders and gender preference to ensure compatibility
