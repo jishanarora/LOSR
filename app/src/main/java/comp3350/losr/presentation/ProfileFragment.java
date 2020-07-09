@@ -1,11 +1,16 @@
 package comp3350.losr.presentation;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import comp3350.losr.R;
 
@@ -15,6 +20,9 @@ import comp3350.losr.R;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+    private GridView gridView;
+    private ImageView imageView;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +36,7 @@ public class ProfileFragment extends Fragment {
     public ProfileFragment() {
         // Required empty public constructor
     }
+
 
     public static ProfileFragment newInstance() {
         
@@ -70,5 +79,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+
     }
+
 }
