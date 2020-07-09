@@ -23,8 +23,7 @@ public class User {
     }
 
     //set methods
-    public void setUserProfile(int age, String bio, user_gender gender, user_gender preference, int year, int month, int day){
-        userProfile.setAge(age);
+    public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day){
         userProfile.setBio(bio);
         userProfile.setGender(gender);
         userProfile.setGenderPreference(preference);

@@ -1,27 +1,40 @@
 package comp3350.losr.business;
 
+import java.util.ArrayList;
+
 import comp3350.losr.objects.User;
 
 public class CheckMatches {
 
     // checks gender compatibility and % of same answers to return an int match % number
-    public static int match_percentage(User curr, User match){
-        int overall_compatibility = 0;
-        if (are_gender_compatible(curr, match)){
+    public static int matchPercentage(ArrayList<Boolean> curr, ArrayList<Boolean> match){
+        float overall_compatibility = 0;
 
-            int similar = 0;
-            for (int i = 0; i < match.getAnswers().size(); i++) {
-                if (curr.getAnswers().get(i) == match.getAnswers().get(i)){
+        int similar = 0;
+        ArrayList<Boolean> bigger = curr;
+        ArrayList<Boolean> smaller = match;
+
+        if(match.size() > curr.size())
+        {
+            bigger = match;
+            smaller =  curr;
+        }
+
+        int difference = bigger.size() - smaller.size();
+
+        if(bigger.size() > 0 && smaller.size() > 0) {
+            for (int i = 0; i < smaller.size(); i++) {
+                if (bigger.get(i).equals(smaller.get(i))) {
                     similar++;
                 }
             }
-            overall_compatibility = similar/match.getAnswers().size();
+            overall_compatibility = ((float)similar/((float)smaller.size()+difference))*100;
         }
-        return overall_compatibility; // should this even be null?
+        return (int)overall_compatibility; // should this even be null?
     }
 
     // compares genders and gender preference to ensure compatibility
-    public static boolean are_gender_compatible(User curr, User match){
+    public static boolean areGenderCompatible(User curr, User match){
 
 
 
