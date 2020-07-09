@@ -33,6 +33,7 @@ public class NavigationPageActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.mipmap.flames);
         tabLayout.getTabAt(2).setIcon(R.mipmap.message);
 
+        viewPager.setCurrentItem(1,false);
         tabLayout.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(1).getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(2).getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
