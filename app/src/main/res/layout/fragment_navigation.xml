@@ -1,13 +1,49 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="comp3350.losr.presentation.NavigationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Navigation Fragment" />
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="467dp"
+            android:layout_height="432dp"
+            android:layout_marginTop="150dp"
+            android:src="@mipmap/profile_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="116dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="24dp"
+            android:text="No"
+            android:textSize="25dp"
+            android:background="@color/red"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="116dp"
+            android:layout_height="67dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:text="Yes"
+            android:background="@color/green"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
