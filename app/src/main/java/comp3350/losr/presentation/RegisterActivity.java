@@ -1,14 +1,14 @@
 package comp3350.losr.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import comp3350.losr.R;
 import comp3350.losr.application.Main;
@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
         super.onDestroy();
 
-        Main.shutDown();
+//        Main.shutDown();
     }
 
     private void setDefaultFragment(Fragment fragment)
