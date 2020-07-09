@@ -35,6 +35,16 @@ public class User {
         answers.add(spot, answer);
     }
 
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
+    {
+        answers.clear();
+        answers.add(a1);
+        answers.add(a2);
+        answers.add(a3);
+        answers.add(a4);
+        answers.add(a5);
+    }
+
     public void updateDateOfBirth(int year, int month, int day) {
         userProfile.setDateOfBirth(year, month, day);
     }
