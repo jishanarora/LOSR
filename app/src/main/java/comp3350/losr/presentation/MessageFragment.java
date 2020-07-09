@@ -66,7 +66,6 @@ public class MessageFragment extends Fragment {
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
 
-
         return rootView;
     }
 
@@ -95,9 +94,9 @@ public class MessageFragment extends Fragment {
             TextView matchName = (TextView) convertView.findViewById(R.id.matchName);
             TextView matchPercent = (TextView) convertView.findViewById(R.id.matchPercent);
 
-            matchName.setText(currMatch.getMatchedUser().getUserFirstName());
-            matchPercent.setText(currMatch.getMatchPercent());
-
+            matchName.setText(String.format("%s %s", currMatch.getMatchedUser().getUserFirstName(), currMatch.getMatchedUser().getUserLastName()));
+            matchPercent.setText(Integer.toString(currMatch.getMatchPercent()) + "% Match");
+           
             return convertView;
         }
 

@@ -8,14 +8,14 @@
         android:id="@+id/matchName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="34sp"
         tools:text="@tools:sample/full_names" />
 
     <TextView
         android:id="@+id/matchPercent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="34sp"
         android:gravity="end"
         tools:text="23%" />
 </LinearLayout>
