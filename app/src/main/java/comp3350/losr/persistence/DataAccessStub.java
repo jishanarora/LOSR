@@ -88,12 +88,13 @@ public class DataAccessStub {
     }
 
     public List<User> getGenderedUsers(){
+        ArrayList<User> gendered = new ArrayList<User>();
         for (int i = 0; i < users.size(); i++) {
             if(!users.get(i).equals(currentUser) && areGenderCompatible(currentUser, users.get(i))) {
-                users.add(users.get(i));
+                gendered.add(users.get(i));
             }
         }
-        return users;
+        return gendered;
     }
 
     public void closeConnection()

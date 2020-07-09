@@ -1,17 +1,21 @@
 package comp3350.losr.presentation;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessMatches;
+import comp3350.losr.objects.Match;
 
 
 public class MessageFragment extends Fragment {
@@ -54,35 +58,50 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_message, container,false);
-        ArrayList<String> matchItems = getMatchesList();
+
+        AccessMatches matchesAccess = new AccessMatches();
+        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
+        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
+
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
-        matchesListView.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.matches_listview_detail, matchItems));
+        matchesListView.setAdapter(matchAdapter);
 
 
         return rootView;
     }
 
-    private ArrayList<String> getMatchesList(){
+//    private ArrayList<String> getMatchesList(){
+//
 //        AccessMatches matchesAccess = new AccessMatches();
-
 //        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-//        ArrayList<ListviewContactItem> contactlist = new ArrayList<ListviewContactItem>();
-        ArrayList<String> matches = new ArrayList<String>();
+//        MatchesAdapter matchAdapter = new MatchesAdapter(this, matchList);
+//
+//        return matches;
+//    }
 
-        String match = new String();
+    public class MatchesAdapter extends ArrayAdapter<Match>{
+        public MatchesAdapter(Context context, ArrayList<Match> matches){
+            super(context, 0, matches);
+        }
 
-        match = "Guy 1";
-        matches.add(match);
+        public View getView(int position, View convertView, ViewGroup parent){
 
-        match = new String();
-        match = "Guy 2";
-        matches.add(match);
+            Match currMatch = getItem(position);
 
-        match = new String();
-        match = "Guy 3";
-        matches.add(match);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
+            }
 
-        return matches;
+            TextView matchName = (TextView) convertView.findViewById(R.id.matchName);
+            TextView matchPercent = (TextView) convertView.findViewById(R.id.matchPercent);
+
+            matchName.setText(currMatch.getMatchedUser().getUserFirstName());
+            matchPercent.setText(currMatch.getMatchPercent());
+
+            return convertView;
+        }
+
+
     }
 
 }
