@@ -11,15 +11,17 @@ import comp3350.losr.persistence.DataAccessStub;
 public class AccessUsers
 {
     private DataAccessStub dataAccess;
-    //private List<User> potentialMatches;
 
     public AccessUsers()
     {
         dataAccess = (DataAccessStub) DatabaseService.getDataAccess(Main.dbName);
     }
 
-    public ArrayList<User> getUsers()
+    public List<User> getGenderedUsers()
     {
         return dataAccess.getGenderedUsers();
     }
+
+    //Just a way to retrieve the current "Logged in" user
+    public User getCurrentUser() {return dataAccess.getCurrentUser();}
 }
