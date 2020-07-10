@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.persistence.DataAccessStub;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +25,7 @@ import comp3350.losr.R;
 public class ProfileFragment extends Fragment {
     private GridView gridView;
     private ImageView imageView;
+    private DataAccessStub dataAccessStub;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -78,8 +82,21 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
-
+        AccessUsers accessUsers= new AccessUsers();
+        View view=inflater.inflate(R.layout.fragment_profile, container, false);
+        TextView name=view.findViewById(R.id.profile_name);
+        name.setText(accessUsers.getCurrentUser().getUserFirstName() + " " + accessUsers.getCurrentUser().getUserLastName());
+        TextView email = view.findViewById(R.id.profile_email);
+        email.setText(accessUsers.getCurrentUser().getUserEmail());
+        TextView gender= view.findViewById(R.id.profile_gender);
+        gender.setText(accessUsers.getCurrentUser().getUserProfile().getGender().toString());
+        TextView genderPreference= view.findViewById(R.id.profile_gender_preference);
+        genderPreference.setText(accessUsers.getCurrentUser().getUserProfile().getGenderPreference().toString());
+        TextView bio= view.findViewById(R.id.profile_bio);
+        bio.setText(accessUsers.getCurrentUser().getUserProfile().getBio());
+        TextView dob= view.findViewById(R.id.profile_date_of_birth);
+        dob.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
+        return view;
     }
 
 }
