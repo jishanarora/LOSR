@@ -5,9 +5,9 @@ public class Profile
 {
     private int age;
     private String bio = "Hi!";
-    private User.user_gender gender;
+    private User.user_gender gender = User.user_gender.Losr;
     //private String gender = "Not Specified";
-    private User.user_gender genderPreference;
+    private User.user_gender genderPreference = User.user_gender.Losr;
     private int birthYear;
     private int birthMonth;
     private int birthDay;
