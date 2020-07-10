@@ -1,13 +1,13 @@
 package comp3350.losr.objects;
 
-
+//used to hold a lot of the user information
 public class Profile
 {
     private int age;
     private String bio = "Hi!";
-    private User.user_gender gender;
+    private User.user_gender gender = User.user_gender.Losr;
     //private String gender = "Not Specified";
-    private User.user_gender genderPreference;
+    private User.user_gender genderPreference = User.user_gender.Losr;
     private int birthYear;
     private int birthMonth;
     private int birthDay;
@@ -25,10 +25,6 @@ public class Profile
         {
             this.bio = bio;
         }
-    }
-
-    public void setAge(int age){
-        this.age = age;
     }
 
     public void setGender(User.user_gender gender)

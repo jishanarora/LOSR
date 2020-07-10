@@ -84,15 +84,11 @@ public class NavigationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
 
-        //userFName = (EditText) rootView.findViewById(R.id.editTextNewFName);
-        //userLName = (EditText) rootView.findViewById(R.id.editTextNewLName);
-        //userGender = (EditText) rootView.findViewById(R.id.editTextNewGender);
-        //userGenderPref = (EditText) rootView.findViewById(R.id.editTextNewGenderPref);
-
         Button buttonAddUser = rootView.findViewById(R.id.buttonAddUser);
         buttonAddUser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
+                //grab all info entered when adding new user
                 userFName = getView().findViewById(R.id.editTextNewFName);
                 userLName = getView().findViewById(R.id.editTextNewLName);
                 userGender = getView().findViewById(R.id.editTextNewGender);
@@ -124,13 +120,13 @@ public class NavigationFragment extends Fragment {
                 }
 
                 AccessUsers au = new AccessUsers();
-                System.out.println(au.getGenderedUsers().size());
+
                 User newUser = new User(fName, lName, fName+""+lName+"@gmail.com", "password", new ArrayList<Boolean>());
                 newUser.setUserProfile("", newGender, newGenderPref, 1999, 1, 20);
+                //randomly assign the new users answers
                 newUser.randomAnswers();
 
                 au.addUser(newUser);
-                System.out.println(au.getGenderedUsers().size());
             }
         });
         // Inflate the layout for this fragment

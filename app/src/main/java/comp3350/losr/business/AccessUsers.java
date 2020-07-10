@@ -1,6 +1,5 @@
 package comp3350.losr.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.application.DatabaseService;

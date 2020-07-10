@@ -62,10 +62,4 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    public void buttonRegisterOnClick(View v)
-    {
-        Intent navigationIntent = new Intent(RegisterActivity.this, NavigationPageActivity.class);
-        startActivity(navigationIntent);
-    }
 }

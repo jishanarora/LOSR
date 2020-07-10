@@ -33,15 +33,6 @@ public class MessageFragment extends Fragment {
         return fragment;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MessageFragment newInstance(String param1, String param2) {
         MessageFragment fragment = new MessageFragment();
         Bundle args = new Bundle();
@@ -68,15 +59,6 @@ public class MessageFragment extends Fragment {
 
         return rootView;
     }
-
-//    private ArrayList<String> getMatchesList(){
-//
-//        AccessMatches matchesAccess = new AccessMatches();
-//        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-//        MatchesAdapter matchAdapter = new MatchesAdapter(this, matchList);
-//
-//        return matches;
-//    }
 
     public class MatchesAdapter extends ArrayAdapter<Match>{
         public MatchesAdapter(Context context, ArrayList<Match> matches){

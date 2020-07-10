@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
+//all null tests will throw exceptions because the answers should never be null
 public class CheckMatchesTest extends TestCase {
     private ArrayList<Boolean> list1;
     private ArrayList<Boolean> list2;
@@ -34,6 +35,22 @@ public class CheckMatchesTest extends TestCase {
         assertEquals(0, matchPercentage(list1, list2));
 
         System.out.println("testOneEmpty complete");
+    }
+
+    public void testOneMatch()
+    {
+        list1.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+
+        assertEquals(100, matchPercentage(list1, list2));
+    }
+
+    public void testOneNotMatch()
+    {
+        list1.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+
+        assertEquals(0, matchPercentage(list1, list2));
     }
 
     public void testNull()

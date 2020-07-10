@@ -21,7 +21,6 @@ import comp3350.losr.R;
 
 public class SignInFragment extends Fragment {
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
