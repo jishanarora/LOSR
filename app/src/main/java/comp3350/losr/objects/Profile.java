@@ -1,6 +1,6 @@
 package comp3350.losr.objects;
 
-
+//used to hold a lot of the user information
 public class Profile
 {
     private int age;
@@ -25,10 +25,6 @@ public class Profile
         {
             this.bio = bio;
         }
-    }
-
-    public void setAge(int age){
-        this.age = age;
     }
 
     public void setGender(User.user_gender gender)

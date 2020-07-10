@@ -36,6 +36,7 @@ public class User {
         answers.add(spot, answer);
     }
 
+    //different wants to set a users answers mainly for testing
     public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
     {
         answers.clear();

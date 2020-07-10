@@ -2,6 +2,7 @@ package comp3350.losr.objects;
 
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
+//simple object to hold two matched users and how good their compatibility is.
 public class Match {
     private User currentUser;
     private User matchedUser;

@@ -11,6 +11,8 @@ public class CheckMatches {
         float overall_compatibility = 0;
 
         int similar = 0;
+
+        //bigger and smaller are used to track the lists if one has more answers than the other.
         ArrayList<Boolean> bigger = curr;
         ArrayList<Boolean> smaller = match;
 
@@ -35,9 +37,6 @@ public class CheckMatches {
 
     // compares genders and gender preference to ensure compatibility
     public static boolean areGenderCompatible(User curr, User match){
-
-
-
         return curr.getUserProfile().getGenderPreference() == match.getUserProfile().getGender() &&
                 curr.getUserProfile().getGender() == match.getUserProfile().getGenderPreference();
     }

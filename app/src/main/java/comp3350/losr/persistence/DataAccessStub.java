@@ -26,6 +26,7 @@ public class DataAccessStub {
 
         users = new ArrayList<>();
 
+        //This is the placeholder user that "you are" when you use the app
         currentUser = new User("Sam", "Green", "samgreen@gamil.com", "password", new ArrayList<Boolean>());
         currentUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1997, 7, 20);
         currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);

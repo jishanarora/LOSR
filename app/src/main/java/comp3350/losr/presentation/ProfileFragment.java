@@ -1,6 +1,5 @@
 package comp3350.losr.presentation;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import comp3350.losr.R;
 import comp3350.losr.business.AccessUsers;
@@ -28,12 +25,10 @@ public class ProfileFragment extends Fragment {
     private DataAccessStub dataAccessStub;
 
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -59,7 +54,6 @@ public class ProfileFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ProfileFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
@@ -84,18 +78,25 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         AccessUsers accessUsers= new AccessUsers();
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
+
         TextView name=view.findViewById(R.id.profile_name);
         name.setText(accessUsers.getCurrentUser().getUserFirstName() + " " + accessUsers.getCurrentUser().getUserLastName());
+
         TextView email = view.findViewById(R.id.profile_email);
         email.setText(accessUsers.getCurrentUser().getUserEmail());
+
         TextView gender= view.findViewById(R.id.profile_gender);
         gender.setText(accessUsers.getCurrentUser().getUserProfile().getGender().toString());
+
         TextView genderPreference= view.findViewById(R.id.profile_gender_preference);
         genderPreference.setText(accessUsers.getCurrentUser().getUserProfile().getGenderPreference().toString());
+
         TextView bio= view.findViewById(R.id.profile_bio);
         bio.setText(accessUsers.getCurrentUser().getUserProfile().getBio());
+
         TextView dob= view.findViewById(R.id.profile_date_of_birth);
         dob.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
+
         return view;
     }
 
