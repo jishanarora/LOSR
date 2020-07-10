@@ -1,5 +1,6 @@
 package comp3350.losr.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
 
 
 /**
@@ -17,6 +24,11 @@ import comp3350.losr.R;
  * create an instance of this fragment.
  */
 public class NavigationFragment extends Fragment {
+
+    private EditText userFName;
+    private EditText userLName;
+    private EditText userGender;
+    private EditText userGenderPref;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,12 +76,66 @@ public class NavigationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
+
+        //userFName = (EditText) rootView.findViewById(R.id.editTextNewFName);
+        //userLName = (EditText) rootView.findViewById(R.id.editTextNewLName);
+        //userGender = (EditText) rootView.findViewById(R.id.editTextNewGender);
+        //userGenderPref = (EditText) rootView.findViewById(R.id.editTextNewGenderPref);
+
+        Button buttonAddUser = rootView.findViewById(R.id.buttonAddUser);
+        buttonAddUser.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                userFName = getView().findViewById(R.id.editTextNewFName);
+                userLName = getView().findViewById(R.id.editTextNewLName);
+                userGender = getView().findViewById(R.id.editTextNewGender);
+                userGenderPref = getView().findViewById(R.id.editTextNewGenderPref);
+
+                String fName = userFName.getText().toString();
+                String lName = userLName.getText().toString();
+                String ug = userGender.getText().toString();
+                String ugp = userGenderPref.getText().toString();
+                User.user_gender newGender;
+                User.user_gender newGenderPref;
+
+
+                if(ug.equals("F") || ug.equals("Female"))
+                {
+                    newGender = User.user_gender.Female;
+                }
+                else
+                {
+                    newGender = User.user_gender.Male;
+                }
+                if(ugp.equals("F") || ugp.equals("Female"))
+                {
+                    newGenderPref = User.user_gender.Female;
+                }
+                else
+                {
+                    newGenderPref = User.user_gender.Male;
+                }
+
+                AccessUsers au = new AccessUsers();
+                System.out.println(au.getGenderedUsers().size());
+                User newUser = new User(fName, lName, fName+""+lName+"@gmail.com", "password", new ArrayList<Boolean>());
+                newUser.setUserProfile("", newGender, newGenderPref, 1999, 1, 20);
+                newUser.randomAnswers();
+
+                au.addUser(newUser);
+                System.out.println(au.getGenderedUsers().size());
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_navigation, container, false);
+        return rootView;
     }
+
+
 }

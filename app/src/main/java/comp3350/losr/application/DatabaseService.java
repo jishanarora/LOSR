@@ -26,7 +26,7 @@ public class DatabaseService {
         if (dataService == null)
         {
             //should not be here before calling createDataAccess at least once
-            System.out.println("TEMP, tried to access data when you hadn't created any data to access");
+            System.out.println("tried to access data when you hadn't created any data to access");
             System.exit(1);
         }
         return dataService;
