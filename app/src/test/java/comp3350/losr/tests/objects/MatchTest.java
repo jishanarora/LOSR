@@ -3,7 +3,10 @@ package comp3350.losr.tests.objects;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import comp3350.losr.application.Main;
+import comp3350.losr.business.AccessMatches;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
 
@@ -41,4 +44,5 @@ public class MatchTest extends TestCase {
         assertEquals(user2, match.getMatchedUser());
         assertEquals(50, match.getMatchPercent());
     }
+
 }

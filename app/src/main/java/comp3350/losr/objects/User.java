@@ -1,6 +1,7 @@
 package comp3350.losr.objects;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class User {
 
@@ -43,6 +44,27 @@ public class User {
         answers.add(a3);
         answers.add(a4);
         answers.add(a5);
+    }
+
+
+    public void randomAnswers()
+    {
+        Random random;
+        int num;
+        for(int i = 0; i < 5; i++)
+        {
+            random = new Random();
+            num = random.nextInt(2);
+
+            if(num == 0)
+            {
+                answers.add(Boolean.TRUE);
+            }
+            else
+            {
+                answers.add(Boolean.FALSE);
+            }
+        }
     }
 
     public void updateDateOfBirth(int year, int month, int day) {

@@ -73,7 +73,6 @@ public class DataAccessStub {
     public void addUser(User newUser)
     {
         users.add(newUser);
-        currentUser = newUser;
     }
 
     public void deleteUser(User selectedUser)
