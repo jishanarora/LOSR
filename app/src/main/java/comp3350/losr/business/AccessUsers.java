@@ -24,4 +24,9 @@ public class AccessUsers
 
     //Just a way to retrieve the current "Logged in" user
     public User getCurrentUser() {return dataAccess.getCurrentUser();}
+
+    public void addUser(User newUser)
+    {
+        dataAccess.addUser(newUser);
+    }
 }
