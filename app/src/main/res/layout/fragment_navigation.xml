@@ -1,10 +1,10 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="comp3350.losr.presentation.NavigationFragment">
-
+  
     <EditText
         android:id="@+id/editTextNewFName"
         android:layout_width="300dp"
@@ -72,3 +72,4 @@
         app:layout_constraintVertical_bias="0.83" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

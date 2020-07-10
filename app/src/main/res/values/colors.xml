@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#CE0000</color>
     <color name="colorAccent">#ffffff</color>
     <color name="buttonRed">#9f0000</color>
+    <color name="green">#3deb34</color>
+    <color name="red">#eb4334</color>
 </resources>
