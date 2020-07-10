@@ -127,7 +127,7 @@ public class NavigationFragment extends Fragment {
                 System.out.println(au.getGenderedUsers().size());
                 User newUser = new User(fName, lName, fName+""+lName+"@gmail.com", "password", new ArrayList<Boolean>());
                 newUser.setUserProfile("", newGender, newGenderPref, 1999, 1, 20);
-                newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+                newUser.randomAnswers();
 
                 au.addUser(newUser);
                 System.out.println(au.getGenderedUsers().size());
