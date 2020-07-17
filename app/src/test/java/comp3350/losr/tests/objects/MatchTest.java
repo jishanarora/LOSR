@@ -11,23 +11,21 @@ public class MatchTest extends TestCase {
 
     public void testEmpty()
     {
-        User user1 = new User("","","","",new ArrayList<Boolean>());
-        User user2 = new User("","","","",new ArrayList<Boolean>());
+        User user1 = new User("","","","");
+        User user2 = new User("","","","");
 
         Match match = new Match(user1, user2);
 
-        try
-        {
-            assertEquals(user1, match.getCurrentUser());
-            fail();
-        }
-        catch(NullPointerException npe){}
+
+        assertEquals(user1, match.getCurrentUser());
+        assertEquals(user2, match.getMatchedUser());
+
     }
 
     public void testAverage()
     {
-        User user1 = new User("firstName","lastName","email@email.com","password", new ArrayList<Boolean>());
-        User user2 = new User("firstName1","lastName1","email1@email.com","password1",new ArrayList<Boolean>());
+        User user1 = new User("firstName","lastName","email@email.com","password");
+        User user2 = new User("firstName1","lastName1","email1@email.com","password1");
         user1.getAnswers().add(Boolean.FALSE);
         user1.getAnswers().add(Boolean.FALSE);
         user2.getAnswers().add(Boolean.FALSE);
@@ -44,8 +42,8 @@ public class MatchTest extends TestCase {
 
     public void testFullMatch()
     {
-        User user1 = new User("firstName","lastName","email@email.com","password", new ArrayList<Boolean>());
-        User user2 = new User("firstName1","lastName1","email1@email.com","password1",new ArrayList<Boolean>());
+        User user1 = new User("firstName","lastName","email@email.com","password");
+        User user2 = new User("firstName1","lastName1","email1@email.com","password1");
         user1.getAnswers().add(Boolean.FALSE);
         user1.getAnswers().add(Boolean.FALSE);
         user2.getAnswers().add(Boolean.FALSE);
@@ -62,8 +60,8 @@ public class MatchTest extends TestCase {
 
     public void test0Match()
     {
-        User user1 = new User("firstName","lastName","email@email.com","password", new ArrayList<Boolean>());
-        User user2 = new User("firstName1","lastName1","email1@email.com","password1",new ArrayList<Boolean>());
+        User user1 = new User("firstName","lastName","email@email.com","password");
+        User user2 = new User("firstName1","lastName1","email1@email.com","password1");
         user1.getAnswers().add(Boolean.TRUE);
         user1.getAnswers().add(Boolean.TRUE);
         user2.getAnswers().add(Boolean.FALSE);

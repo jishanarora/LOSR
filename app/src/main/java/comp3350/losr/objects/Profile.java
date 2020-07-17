@@ -1,19 +1,61 @@
 package comp3350.losr.objects;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 //used to hold a lot of the user information
 public class Profile
 {
     private int age;
     private String bio = "Hi!";
     private User.user_gender gender = User.user_gender.Losr;
-    //private String gender = "Not Specified";
     private User.user_gender genderPreference = User.user_gender.Losr;
     private int birthYear;
     private int birthMonth;
     private int birthDay;
+    private ArrayList<Boolean> answers;
 
     public Profile() {
+        answers = new ArrayList<>();
     }
+
+    //update a specific answer
+    public void updateAnswerList(Boolean answer, int spot) {
+        answers.add(spot, answer);
+    }
+
+    //different wants to set a users answers mainly for testing
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
+    {
+        answers.clear();
+        answers.add(a1);
+        answers.add(a2);
+        answers.add(a3);
+        answers.add(a4);
+        answers.add(a5);
+    }
+
+    public void randomAnswers()
+    {
+        Random random;
+        int num;
+        for(int i = 0; i < 5; i++)
+        {
+            random = new Random();
+            num = random.nextInt(2);
+
+            if(num == 0)
+            {
+                answers.add(Boolean.TRUE);
+            }
+            else
+            {
+                answers.add(Boolean.FALSE);
+            }
+        }
+    }
+
+    public ArrayList<Boolean> getAnswers() {return answers;}
 
     public void setBio(String bio)
     {
@@ -99,7 +141,7 @@ public class Profile
         if (object instanceof Profile) {
             p = (Profile) object;
             if (p.age == age && p.bio.equals(bio) && p.genderPreference.equals(genderPreference)
-                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.birthYear == birthYear) {
+                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.answers.equals(answers) && p.birthYear == birthYear) {
                 result = true;
             }
         }

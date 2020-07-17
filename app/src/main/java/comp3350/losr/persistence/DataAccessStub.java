@@ -27,41 +27,41 @@ public class DataAccessStub {
         users = new ArrayList<>();
 
         //This is the placeholder user that "you are" when you use the app
-        currentUser = new User("Sam", "Green", "samgreen@gamil.com", "password", new ArrayList<Boolean>());
+        currentUser = new User("Sam", "Green", "samgreen@gamil.com", "password");
         currentUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1997, 7, 20);
         currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
 
-        newUser = new User("John", "Doe", "johndoe@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("John", "Doe", "johndoe@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 8, 8);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE);
         users.add(newUser);
 
-        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password");
         newUser.setUserProfile("Hello there :)", User.user_gender.Female, User.user_gender.Female, 1998, 11, 16);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
         users.add(newUser);
 
-        newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1998, 4, 13);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
         users.add(newUser);
 
-        newUser = new User("Sean", "Lett", "seanlett@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("Sean", "Lett", "seanlett@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 9, 13);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
         users.add(newUser);
 
-        newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", "password");
         newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2001, 9, 22);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
         users.add(newUser);
 
-        newUser = new User("Jessica", "Fie", "jessicafie@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("Jessica", "Fie", "jessicafie@gmail.com", "password");
         newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2000, 5, 15);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
         users.add(newUser);
 
-        newUser = new User("Amy", "Kowall", "amykowall@gmail.com", "password", new ArrayList<Boolean>());
+        newUser = new User("Amy", "Kowall", "amykowall@gmail.com", "password");
         newUser.setUserProfile("Yo", User.user_gender.Female, User.user_gender.Male, 1999, 1, 2);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
         users.add(newUser);
