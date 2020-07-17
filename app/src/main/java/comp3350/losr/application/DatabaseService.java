@@ -1,27 +1,38 @@
 package comp3350.losr.application;
 
+import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessStub;
 
 public class DatabaseService {
 
     //Initially the database has nothing
-    private static DataAccessStub dataService = null;
+    private static DataAccess dataService = null;
 
     //create and/or send db pointer to the caller
-    public static DataAccessStub createDataAccess(String dbName)
+    public static DataAccess createDataAccess(String dbName)
     {
         //if our database is "empty"/not there
         if (dataService == null)
         {
             //create one
             dataService = new DataAccessStub(dbName);
-            dataService.openConnection();
+            dataService.openConnection(Main.getDBPathName());
         }
         //return to whoever called it
         return dataService;
     }
 
-    public static DataAccessStub getDataAccess(String dbName)
+    public static DataAccess createDataAccess(DataAccess newDataService)
+    {
+        if (dataService == null)
+        {
+            dataService = newDataService;
+            dataService.openConnection(Main.getDBPathName());
+        }
+        return dataService;
+    }
+
+    public static DataAccess getDataAccess(String dbName)
     {
         if (dataService == null)
         {

@@ -7,7 +7,7 @@ import comp3350.losr.objects.User;
 
 import static comp3350.losr.business.CheckMatches.areGenderCompatible;
 
-public class DataAccessStub {
+public class DataAccessStub implements DataAccess{
 
     private String dbName;
     private String dbType = "stub";
@@ -20,7 +20,7 @@ public class DataAccessStub {
         this.dbName = name;
     }
 
-    public void openConnection()
+    public void openConnection(String path)
     {
         User newUser;
 
@@ -88,7 +88,7 @@ public class DataAccessStub {
     }
 
     public List<User> getGenderedUsers(){
-        ArrayList<User> gendered = new ArrayList<User>();
+        ArrayList<User> gendered = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             if(!users.get(i).equals(currentUser) && areGenderCompatible(currentUser, users.get(i))) {
                 gendered.add(users.get(i));

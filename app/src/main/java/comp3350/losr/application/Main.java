@@ -3,6 +3,7 @@ package comp3350.losr.application;
 public class Main {
 
     public static final String dbName = "Users";
+    public static String dbPathName = "";
 
     public static void main(String[] args)
     {
@@ -21,6 +22,18 @@ public class Main {
     public static void shutDown()
     {
         DatabaseService.closeDataAccess();
+    }
+
+    public static String getDBPathName() {
+        if (dbPathName == null)
+            return dbName;
+        else
+            return dbPathName;
+    }
+
+    public static void setDBPathName(String pathName) {
+        System.out.println("Setting DB path to: " + pathName);
+        dbPathName = pathName;
     }
 
 }
