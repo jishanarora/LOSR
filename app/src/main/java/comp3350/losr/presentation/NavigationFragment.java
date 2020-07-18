@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-
 import comp3350.losr.R;
 import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.User;
@@ -121,7 +119,7 @@ public class NavigationFragment extends Fragment {
 
                 AccessUsers au = new AccessUsers();
 
-                User newUser = new User(fName, lName, fName+""+lName+"@gmail.com", "password", new ArrayList<Boolean>());
+                User newUser = new User(fName, lName, fName+""+lName+"@gmail.com", "password");
                 newUser.setUserProfile("", newGender, newGenderPref, 1999, 1, 20);
                 //randomly assign the new users answers
                 newUser.randomAnswers();

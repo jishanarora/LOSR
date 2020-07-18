@@ -1,7 +1,6 @@
 package comp3350.losr.objects;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class User {
 
@@ -11,15 +10,13 @@ public class User {
     private String userLastName;
     private String userEmail;
     private String userPassword;
-    private ArrayList<Boolean> answers;
     private Profile userProfile;
 
-    public User(String userFirstName, String userLastName, String userEmail, String userPassword, ArrayList<Boolean> answers) {
+    public User(String userFirstName, String userLastName, String userEmail, String userPassword) {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
-        this.answers = answers;
         userProfile = new Profile();
     }
 
@@ -33,40 +30,21 @@ public class User {
 
     //update a specific answer
     public void updateAnswerList(Boolean answer, int spot) {
-        answers.add(spot, answer);
+        userProfile.updateAnswerList(answer,spot);
     }
 
     //different wants to set a users answers mainly for testing
     public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
     {
-        answers.clear();
-        answers.add(a1);
-        answers.add(a2);
-        answers.add(a3);
-        answers.add(a4);
-        answers.add(a5);
+        userProfile.updateAllAnswers(a1,a2,a3,a4,a5);
     }
-
 
     public void randomAnswers()
     {
-        Random random;
-        int num;
-        for(int i = 0; i < 5; i++)
-        {
-            random = new Random();
-            num = random.nextInt(2);
-
-            if(num == 0)
-            {
-                answers.add(Boolean.TRUE);
-            }
-            else
-            {
-                answers.add(Boolean.FALSE);
-            }
-        }
+        userProfile.randomAnswers();
     }
+
+    public ArrayList<Boolean> getAnswers() {return userProfile.getAnswers();}
 
     public void updateDateOfBirth(int year, int month, int day) {
         userProfile.setDateOfBirth(year, month, day);
@@ -92,8 +70,6 @@ public class User {
 
     public String getUserPassword() {return userPassword;}
 
-    public ArrayList<Boolean> getAnswers() {return answers;}
-
     public Profile getUserProfile() {return userProfile;}
 
     public boolean equals(Object object) {
@@ -105,7 +81,7 @@ public class User {
         if (object instanceof User) {
             u = (User) object;
             if (u.userFirstName.equals(userFirstName) && u.userLastName.equals(userLastName) &&
-                    u.userEmail.equals(userEmail) && u.answers.equals(answers) && u.userProfile.equals(userProfile)) {
+                    u.userEmail.equals(userEmail) && u.userProfile.equals(userProfile)) {
                 result = true;
             }
         }
