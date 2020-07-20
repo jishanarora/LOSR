@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import comp3350.losr.R;
+import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
+import comp3350.losr.persistence.DataAccessObject;
 import comp3350.losr.persistence.DataAccessStub;
 
 /**
@@ -96,6 +98,10 @@ public class ProfileFragment extends Fragment {
 
         TextView dob= view.findViewById(R.id.profile_date_of_birth);
         dob.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
+
+        DataAccessObject test = new DataAccessObject("Users");
+        test.openConnection(Main.dbPathName);
+        test.getUsers();
 
         return view;
     }

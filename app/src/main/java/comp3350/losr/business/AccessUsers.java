@@ -5,6 +5,8 @@ import java.util.List;
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
 import comp3350.losr.objects.User;
+import comp3350.losr.persistence.DataAccess;
+import comp3350.losr.persistence.DataAccessObject;
 import comp3350.losr.persistence.DataAccessStub;
 
 public class AccessUsers
@@ -16,8 +18,14 @@ public class AccessUsers
         dataAccess = (DataAccessStub) DatabaseService.getDataAccess(Main.dbName);
     }
 
+    public void getUsers()
+    {
+        dataAccess.getUsers();
+    }
+
     public List<User> getGenderedUsers()
     {
+        dataAccess.getUsers();
         return dataAccess.getGenderedUsers();
     }
 

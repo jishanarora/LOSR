@@ -1,6 +1,7 @@
 package comp3350.losr.application;
 
 import comp3350.losr.persistence.DataAccess;
+import comp3350.losr.persistence.DataAccessObject;
 import comp3350.losr.persistence.DataAccessStub;
 
 public class DatabaseService {

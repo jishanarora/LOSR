@@ -87,6 +87,11 @@ public class DataAccessStub implements DataAccess{
         }
     }
 
+    public List<User> getUsers()
+    {
+        return null;
+    }
+
     public List<User> getGenderedUsers(){
         ArrayList<User> gendered = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
@@ -94,6 +99,7 @@ public class DataAccessStub implements DataAccess{
                 gendered.add(users.get(i));
             }
         }
+
         return gendered;
     }
 
