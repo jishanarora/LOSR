@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.User;
 
 public class DataAccessObject implements DataAccess
@@ -94,8 +95,11 @@ public class DataAccessObject implements DataAccess
     {
         users = new ArrayList<>();
 
-        String firstName;
-        String lastName;
+        String email, password, firstName, lastName, bio;
+        User.user_gender genderEnum, genderPEnum;
+        String gender, genderP;
+        int day, month, year;
+        boolean q1, q2, q3, q4, q5;
 
         try
         {
@@ -111,9 +115,41 @@ public class DataAccessObject implements DataAccess
         {
             while(rs1.next())
             {
-                firstName = rs1.getString("fName");
-                lastName = rs1.getString("lName");
-                System.out.println("My name is "+firstName+" "+lastName);
+                email = rs1.getString("email"); password = rs1.getString("password"); firstName = rs1.getString("fName"); lastName = rs1.getString("lName");
+                bio = rs1.getString("bio");
+                gender = rs1.getString("gender"); genderP = rs1.getString("genderP");
+                day = rs1.getInt("day"); month = rs1.getInt("month"); year = rs1.getInt("year");
+                q1 = rs1.getBoolean("Q1"); q2 = rs1.getBoolean("Q2"); q3 = rs1.getBoolean("Q3"); q4 = rs1.getBoolean("Q4"); q5 = rs1.getBoolean("Q5");
+
+                switch (gender)
+                {
+                    case "male":
+                        genderEnum = User.user_gender.Male;
+                        break;
+                    case "female":
+                        genderEnum = User.user_gender.Female;
+                        break;
+                    default:
+                        genderEnum = User.user_gender.Losr;
+                }
+                switch (genderP)
+                {
+                    case "male":
+                        genderPEnum = User.user_gender.Male;
+                        break;
+                    case "female":
+                        genderPEnum = User.user_gender.Female;
+                        break;
+                    default:
+                        genderPEnum = User.user_gender.Losr;
+                }
+
+
+                User test = new User(firstName, lastName, email, password);
+                test.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                test.updateAllAnswers(q1,q2,q3,q4,q5);
+
+                System.out.println(test.toString());
             }
         }
         catch(Exception e)

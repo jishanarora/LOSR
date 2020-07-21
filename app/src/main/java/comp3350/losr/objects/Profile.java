@@ -19,6 +19,19 @@ public class Profile
         answers = new ArrayList<>();
     }
 
+    public String toString()
+    {
+        String message;
+
+        message = "bio: "+bio+" gender: "+gender.toString()+" gender pref: "+ genderPreference.toString()+" year: "+birthYear+" month: "+birthMonth+" day: "+birthDay+" answers: ";
+        for(int i = 0; i < answers.size(); i++)
+        {
+            message += answers.get(i).toString()+" ";
+        }
+
+        return message;
+    }
+
     //update a specific answer
     public void updateAnswerList(Boolean answer, int spot) {
         answers.add(spot, answer);

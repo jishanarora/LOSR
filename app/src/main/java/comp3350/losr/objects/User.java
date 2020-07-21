@@ -20,6 +20,16 @@ public class User {
         userProfile = new Profile();
     }
 
+    public String toString()
+    {
+        String message;
+
+        message = "email: "+userEmail+" password: "+userPassword+" first name: "+userFirstName+" last name: "+userLastName+" ";
+        message += this.userProfile.toString();
+
+        return message;
+    }
+
     //set methods
     public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day){
         userProfile.setBio(bio);
