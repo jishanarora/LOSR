@@ -82,51 +82,6 @@ public class NavigationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
 
-        Button buttonAddUser = rootView.findViewById(R.id.buttonAddUser);
-        buttonAddUser.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                //grab all info entered when adding new user
-                userFName = getView().findViewById(R.id.editTextNewFName);
-                userLName = getView().findViewById(R.id.editTextNewLName);
-                userGender = getView().findViewById(R.id.editTextNewGender);
-                userGenderPref = getView().findViewById(R.id.editTextNewGenderPref);
-
-                String fName = userFName.getText().toString();
-                String lName = userLName.getText().toString();
-                String ug = userGender.getText().toString();
-                String ugp = userGenderPref.getText().toString();
-                User.user_gender newGender;
-                User.user_gender newGenderPref;
-
-
-                if(ug.equals("F") || ug.equals("Female"))
-                {
-                    newGender = User.user_gender.Female;
-                }
-                else
-                {
-                    newGender = User.user_gender.Male;
-                }
-                if(ugp.equals("F") || ugp.equals("Female"))
-                {
-                    newGenderPref = User.user_gender.Female;
-                }
-                else
-                {
-                    newGenderPref = User.user_gender.Male;
-                }
-
-                AccessUsers au = new AccessUsers();
-
-                User newUser = new User(fName, lName, fName+""+lName+"@gmail.com", "password");
-                newUser.setUserProfile("", newGender, newGenderPref, 1999, 1, 20);
-                //randomly assign the new users answers
-                newUser.randomAnswers();
-
-                au.addUser(newUser);
-            }
-        });
         // Inflate the layout for this fragment
         return rootView;
     }

@@ -11,8 +11,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import comp3350.losr.R;
+import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
-import comp3350.losr.persistence.DataAccessStub;
+import comp3350.losr.persistence.DataAccessObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +23,6 @@ import comp3350.losr.persistence.DataAccessStub;
 public class ProfileFragment extends Fragment {
     private GridView gridView;
     private ImageView imageView;
-    private DataAccessStub dataAccessStub;
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
