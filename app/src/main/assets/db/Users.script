@@ -6,4 +6,5 @@ GRANT DBA TO SA
 SET WRITE_DELAY 20
 SET SCHEMA PUBLIC
 INSERT INTO USERS VALUES('mbathie@gmail.com', 'password', 'michael', 'bathie', 'hi', 'male', 'female', 25, 1, 1999, true, false, false, true, true)
-INSERT INTO USERS VALUES('bspado@gmail.com', 'password', 'branden', 'spado', 'yo', 'male', 'female', 8, 1, 1998, false, false, false, true, true)
+INSERT INTO USERS VALUES('bspado@gmail.com', 'password', 'branden', 'spado', 'yo', 'female', 'male', 8, 1, 1998, false, false, false, true, true)
+INSERT INTO USERS VALUES('test@gmail.com', 'password', 'michael', 'bathie', 'hi', 'male', 'female', 25, 1, 1999, true, false, false, true, true)

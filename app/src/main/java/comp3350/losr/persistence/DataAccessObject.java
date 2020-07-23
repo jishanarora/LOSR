@@ -21,12 +21,15 @@ public class DataAccessObject implements DataAccess
     private String dbType;
 
     private List<User> users;
+    private User currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
 
     private String cmdString;
 
     public DataAccessObject(String dbName)
     {
         this.dbName = dbName;
+        currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 25, 1);
+        currentUser.updateAllAnswers(true, false, false, true ,true);
     }
 
     public void openConnection(String dbPath)
@@ -88,10 +91,10 @@ public class DataAccessObject implements DataAccess
 
     public User getCurrentUser()
     {
-        return null;
+        return currentUser;
     }
 
-    public List<User> getUsers()
+    public List<User> getGenderedUsers()
     {
         users = new ArrayList<>();
 
@@ -103,7 +106,7 @@ public class DataAccessObject implements DataAccess
 
         try
         {
-            cmdString = "SELECT * FROM USERS";
+            cmdString = "SELECT * FROM USERS WHERE USERS.gender = "+"'"+currentUser.getUserProfile().genderPrefToString()+"'";
             rs1 = s1.executeQuery(cmdString);
         }
         catch(Exception e)
@@ -144,12 +147,15 @@ public class DataAccessObject implements DataAccess
                         genderPEnum = User.user_gender.Losr;
                 }
 
+                if(genderPEnum.toString().equals(currentUser.getUserProfile().getGender().toString()) && !email.equals(currentUser.getUserEmail()))
+                {
+                    User newUser = new User(firstName, lastName, email, password);
+                    newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                    newUser.updateAllAnswers(q1, q2, q3, q4, q5);
+                    users.add(newUser);
+                    System.out.println(newUser.toString());
+                }
 
-                User test = new User(firstName, lastName, email, password);
-                test.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
-                test.updateAllAnswers(q1,q2,q3,q4,q5);
-
-                System.out.println(test.toString());
             }
         }
         catch(Exception e)
@@ -158,11 +164,6 @@ public class DataAccessObject implements DataAccess
         }
 
         return users;
-    }
-
-    public List<User> getGenderedUsers()
-    {
-        return null;
     }
 
 }

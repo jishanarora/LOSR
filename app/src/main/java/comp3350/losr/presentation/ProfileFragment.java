@@ -101,7 +101,7 @@ public class ProfileFragment extends Fragment {
 
         DataAccessObject test = new DataAccessObject("Users");
         test.openConnection(Main.dbPathName);
-        test.getUsers();
+        test.getGenderedUsers();
 
         return view;
     }

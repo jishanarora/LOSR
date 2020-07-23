@@ -14,8 +14,6 @@ public interface DataAccess {
 
     void deleteUser(User selectedUser);
 
-    List<User> getUsers();
-
     List<User> getGenderedUsers();
 
 }

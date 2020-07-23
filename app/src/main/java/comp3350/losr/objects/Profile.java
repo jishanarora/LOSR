@@ -68,7 +68,45 @@ public class Profile
         }
     }
 
-    public ArrayList<Boolean> getAnswers() {return answers;}
+    public String genderToString()
+    {
+        String result;
+
+        if(genderPreference == User.user_gender.Female)
+        {
+            result = "female";
+        }
+        else if(genderPreference == User.user_gender.Male)
+        {
+            result = "male";
+        }
+        else
+        {
+            result = "losr";
+        }
+
+        return result;
+    }
+
+    public String genderPrefToString()
+    {
+        String result;
+
+        if(genderPreference == User.user_gender.Female)
+        {
+            result = "female";
+        }
+        else if(genderPreference == User.user_gender.Male)
+        {
+            result = "male";
+        }
+        else
+        {
+            result = "losr";
+        }
+
+        return result;
+    }
 
     public void setBio(String bio)
     {
@@ -106,25 +144,15 @@ public class Profile
         }
     }
 
-    public int getAge()
-    {
-        return age;
-    }
+    public int getAge() { return age; }
 
-    public String getBio()
-    {
-        return bio;
-    }
+    public String getBio() { return bio; }
 
-    public User.user_gender getGender()
-    {
-        return gender;
-    }
+    public User.user_gender getGender() { return gender; }
 
-    public User.user_gender getGenderPreference()
-    {
-        return genderPreference;
-    }
+    public User.user_gender getGenderPreference() { return genderPreference; }
+
+    public ArrayList<Boolean> getAnswers() {return answers;}
 
     public String dateOfBirth()
     {
