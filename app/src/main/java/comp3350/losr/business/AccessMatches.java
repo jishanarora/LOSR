@@ -8,18 +8,18 @@ import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
-import comp3350.losr.persistence.DataAccessStub;
+import comp3350.losr.persistence.DataAccessObject;
 
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
 public class AccessMatches {
 
-    private DataAccessStub dataAccess;
+    private DataAccessObject dataAccess;
     private AccessUsers userAccess;
 
     public AccessMatches()
     {
-        dataAccess = (DataAccessStub) DatabaseService.getDataAccess(Main.dbName);
+        dataAccess = (DataAccessObject) DatabaseService.getDataAccess(Main.dbName);
         userAccess = new AccessUsers();
     }
 

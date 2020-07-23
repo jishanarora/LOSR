@@ -1,13 +1,14 @@
-package comp3350.losr.persistence;
+package comp3350.losr.tests.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.objects.User;
+import comp3350.losr.persistence.DataAccess;
 
 import static comp3350.losr.business.CheckMatches.areGenderCompatible;
 
-public class DataAccessStub implements DataAccess{
+public class DataAccessStub implements DataAccess {
 
     private String dbName;
     private String dbType = "stub";

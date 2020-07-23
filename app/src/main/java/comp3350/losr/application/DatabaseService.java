@@ -2,7 +2,6 @@ package comp3350.losr.application;
 
 import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
-import comp3350.losr.persistence.DataAccessStub;
 
 public class DatabaseService {
 
@@ -16,7 +15,7 @@ public class DatabaseService {
         if (dataService == null)
         {
             //create one
-            dataService = new DataAccessStub(dbName);
+            dataService = new DataAccessObject(dbName);
             dataService.openConnection(Main.getDBPathName());
         }
         //return to whoever called it
