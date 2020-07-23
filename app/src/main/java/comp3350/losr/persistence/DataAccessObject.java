@@ -80,13 +80,38 @@ public class DataAccessObject implements DataAccess
         System.out.println("closed connection to "+dbType+" database "+dbName);
     }
 
-    public void addUser(User newUser){
+    public void addUser(User newUser)
+    {
+        String values;
 
+        try
+        {
+            values = newUser.getUserEmail()
+                    +", '" +newUser.getUserPassword()
+                    +"', '" +newUser.getUserFirstName()
+                    +"', '" +newUser.getUserLastName()
+                    +"', 'hi', 'losr', 'losr', 0, 0, 0, false, false, false, false, false";
+
+            cmdString = "Insert into USERS " +" Values(" +values +")";
+            s1.executeUpdate(cmdString);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    public void deleteUser(User selectedUser)
+    public void deleteUser(User delete)
     {
-
+        try
+        {
+            cmdString = "Delete from USERS where email= '" +delete.getUserEmail()+"'";
+            s1.executeUpdate(cmdString);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public User getCurrentUser()

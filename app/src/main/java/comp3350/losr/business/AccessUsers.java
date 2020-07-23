@@ -31,6 +31,8 @@ public class AccessUsers
         dataAccess.addUser(newUser);
     }
 
+    public void deleteUser(User delete) {dataAccess.deleteUser(delete);}
+
     //Call when a user is trying to login. pass what they enter for the email and password into this.
     //If that user exists it will return a User object of that user. If the user does not exist null is returned.
     public User tryLogin(String email, String password)
