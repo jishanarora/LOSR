@@ -24,8 +24,17 @@ public class AccessUsers
     //Just a way to retrieve the current "Logged in" user
     public User getCurrentUser() {return dataAccess.getCurrentUser();}
 
+    public void setCurrentUser(User newUser) {dataAccess.setCurrentUser(newUser);}
+
     public void addUser(User newUser)
     {
         dataAccess.addUser(newUser);
+    }
+
+    //Call when a user is trying to login. pass what they enter for the email and password into this.
+    //If that user exists it will return a User object of that user. If the user does not exist null is returned.
+    public User tryLogin(String email, String password)
+    {
+        return dataAccess.tryLogin(email, password);
     }
 }

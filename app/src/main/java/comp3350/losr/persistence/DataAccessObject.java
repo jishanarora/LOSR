@@ -94,6 +94,74 @@ public class DataAccessObject implements DataAccess
         return currentUser;
     }
 
+    public void setCurrentUser(User newUser) { currentUser = newUser; }
+
+    public User tryLogin(String userEmail, String userPassword)
+    {
+        User returningUser = null;
+
+        String email, password, firstName, lastName, bio;
+        User.user_gender genderEnum, genderPEnum;
+        String gender, genderP;
+        int day, month, year;
+        boolean q1, q2, q3, q4, q5;
+
+        try
+        {
+            cmdString = "SELECT * FROM USERS WHERE email = "+"'"+userEmail+"'"+" AND password = "+"'"+userPassword+"'";
+            rs1 = s1.executeQuery(cmdString);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            while(rs1.next())
+            {
+                email = rs1.getString("email"); password = rs1.getString("password"); firstName = rs1.getString("fName"); lastName = rs1.getString("lName");
+                bio = rs1.getString("bio");
+                gender = rs1.getString("gender"); genderP = rs1.getString("genderP");
+                day = rs1.getInt("day"); month = rs1.getInt("month"); year = rs1.getInt("year");
+                q1 = rs1.getBoolean("Q1"); q2 = rs1.getBoolean("Q2"); q3 = rs1.getBoolean("Q3"); q4 = rs1.getBoolean("Q4"); q5 = rs1.getBoolean("Q5");
+
+                switch (gender)
+                {
+                    case "male":
+                        genderEnum = User.user_gender.Male;
+                        break;
+                    case "female":
+                        genderEnum = User.user_gender.Female;
+                        break;
+                    default:
+                        genderEnum = User.user_gender.Losr;
+                }
+                switch (genderP)
+                {
+                    case "male":
+                        genderPEnum = User.user_gender.Male;
+                        break;
+                    case "female":
+                        genderPEnum = User.user_gender.Female;
+                        break;
+                    default:
+                        genderPEnum = User.user_gender.Losr;
+                }
+
+                returningUser = new User(firstName, lastName, email, password);
+                returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                returningUser.updateAllAnswers(q1, q2, q3, q4, q5);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return returningUser;
+    }
+
     public List<User> getGenderedUsers()
     {
         users = new ArrayList<>();
@@ -106,7 +174,7 @@ public class DataAccessObject implements DataAccess
 
         try
         {
-            cmdString = "SELECT * FROM USERS WHERE USERS.gender = "+"'"+currentUser.getUserProfile().genderPrefToString()+"'";
+            cmdString = "SELECT * FROM USERS WHERE gender = "+"'"+currentUser.getUserProfile().genderPrefToString()+"'";
             rs1 = s1.executeQuery(cmdString);
         }
         catch(Exception e)
@@ -153,7 +221,6 @@ public class DataAccessObject implements DataAccess
                     newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
                     newUser.updateAllAnswers(q1, q2, q3, q4, q5);
                     users.add(newUser);
-                    System.out.println(newUser.toString());
                 }
 
             }

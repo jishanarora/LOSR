@@ -1,6 +1,7 @@
 package comp3350.losr.presentation;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import comp3350.losr.R;
 import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
+import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
 
 /**
@@ -97,6 +100,15 @@ public class ProfileFragment extends Fragment {
         TextView dob= view.findViewById(R.id.profile_date_of_birth);
         dob.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
 
+        AccessUsers test = new AccessUsers();
+        User test1 = test.tryLogin("mbathie@gmail.com", "pasword");
+        if(test1 != null) {
+            System.out.println(test1.toString());
+        }
+        else
+        {
+            System.out.println("its null");
+        }
         return view;
     }
 
