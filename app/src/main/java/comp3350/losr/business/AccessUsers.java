@@ -26,12 +26,11 @@ public class AccessUsers
 
     public void setCurrentUser(User newUser) {dataAccess.setCurrentUser(newUser);}
 
-    public void addUser(User newUser)
-    {
-        dataAccess.addUser(newUser);
-    }
+    public void addUser(User newUser) { dataAccess.addUser(newUser); }
 
     public void deleteUser(User delete) {dataAccess.deleteUser(delete);}
+
+    public void updateUser(User update) {dataAccess.updateUser(update);}
 
     //Call when a user is trying to login. pass what they enter for the email and password into this.
     //If that user exists it will return a User object of that user. If the user does not exist null is returned.

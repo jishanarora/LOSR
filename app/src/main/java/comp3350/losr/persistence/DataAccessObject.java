@@ -114,6 +114,42 @@ public class DataAccessObject implements DataAccess
         }
     }
 
+    public void updateUser(User update)
+    {
+        String values;
+
+        Profile p = update.getUserProfile();
+        String[] dob = p.dateOfBirth().split("/");
+        List<Boolean> answers = p.getAnswers();
+
+        try
+        {
+            values = update.getUserEmail()
+                    + ", '" + update.getUserPassword()
+                    + "', '" + update.getUserFirstName()
+                    + "', '" + update.getUserLastName()
+                    + "', '" + p.getBio()
+                    + "', '" + p.genderToString()
+                    + "', '" + p.genderPrefToString()
+                    + "', '" + dob[2]
+                    + "', '" + dob[1]
+                    + "', '" + dob[0]
+                    + "', '" + answers.get(0)
+                    + "', '" + answers.get(1)
+                    + "', '" + answers.get(2)
+                    + "', '" + answers.get(3)
+                    + "', '" + answers.get(4);
+
+            //the only time you update a user is when you're currently logged in to that user
+            cmdString = "Update USERS " +" Set " +values +" where email = "+"'"+currentUser.getUserEmail()+"'";
+            s1.executeUpdate(cmdString);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public User getCurrentUser()
     {
         return currentUser;
