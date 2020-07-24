@@ -28,7 +28,7 @@ public class DataAccessObject implements DataAccess
     public DataAccessObject(String dbName)
     {
         this.dbName = dbName;
-        currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 25, 1);
+        currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
         currentUser.updateAllAnswers(true, false, false, true ,true);
     }
 
