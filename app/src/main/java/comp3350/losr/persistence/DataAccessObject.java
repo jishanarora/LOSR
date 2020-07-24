@@ -80,25 +80,33 @@ public class DataAccessObject implements DataAccess
         System.out.println("closed connection to "+dbType+" database "+dbName);
     }
 
-    public void addUser(User newUser)
+    public User addUser(User newUser)
     {
         String values;
+        User registered = null;
 
         try
         {
-            values = newUser.getUserEmail()
-                    +", '" +newUser.getUserPassword()
+            values = "'"+newUser.getUserEmail()
+                    +"', '" +newUser.getUserPassword()
                     +"', '" +newUser.getUserFirstName()
                     +"', '" +newUser.getUserLastName()
                     +"', 'hi', 'losr', 'losr', 0, 0, 0, false, false, false, false, false";
 
             cmdString = "Insert into USERS " +" Values(" +values +")";
             s1.executeUpdate(cmdString);
+
+            registered = new User(newUser.getUserEmail(), newUser.getUserPassword(), newUser.getUserFirstName(), newUser.getUserLastName());
+            registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0,0,0);
+            registered.updateAllAnswers(false,false,false,false,false);
+
+            currentUser = registered;
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
+        return registered;
     }
 
     public void deleteUser(User delete)
@@ -124,25 +132,27 @@ public class DataAccessObject implements DataAccess
 
         try
         {
-            values = update.getUserEmail()
-                    + ", '" + update.getUserPassword()
-                    + "', '" + update.getUserFirstName()
-                    + "', '" + update.getUserLastName()
-                    + "', '" + p.getBio()
-                    + "', '" + p.genderToString()
-                    + "', '" + p.genderPrefToString()
-                    + "', '" + dob[2]
-                    + "', '" + dob[1]
-                    + "', '" + dob[0]
-                    + "', '" + answers.get(0)
-                    + "', '" + answers.get(1)
-                    + "', '" + answers.get(2)
-                    + "', '" + answers.get(3)
-                    + "', '" + answers.get(4);
+            values = "email='"+update.getUserEmail()
+                    + "', password='" + update.getUserPassword()
+                    + "', fname='" + update.getUserFirstName()
+                    + "', lname='" + update.getUserLastName()
+                    + "', bio='" + p.getBio()
+                    + "', gender='" + p.genderToString()
+                    + "', genderp='" + p.genderPrefToString()
+                    + "', year= " + dob[2]
+                    + ", month= " + dob[1]
+                    + ", day= " + dob[0]
+                    + ", q1= " + answers.get(0)
+                    + ", q2= " + answers.get(1)
+                    + ", q3= " + answers.get(2)
+                    + ", q4= " + answers.get(3)
+                    + ", q5= " + answers.get(4);
 
             //the only time you update a user is when you're currently logged in to that user
-            cmdString = "Update USERS " +" Set " +values +" where email = "+"'"+currentUser.getUserEmail()+"'";
+            cmdString = "Update USERS Set " +values +" where email = "+"'"+currentUser.getUserEmail()+"'";
             s1.executeUpdate(cmdString);
+
+            currentUser = update;
         }
         catch(Exception e)
         {
@@ -154,8 +164,6 @@ public class DataAccessObject implements DataAccess
     {
         return currentUser;
     }
-
-    public void setCurrentUser(User newUser) { currentUser = newUser; }
 
     public User tryLogin(String userEmail, String userPassword)
     {
@@ -213,6 +221,8 @@ public class DataAccessObject implements DataAccess
                 returningUser = new User(firstName, lastName, email, password);
                 returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
                 returningUser.updateAllAnswers(q1, q2, q3, q4, q5);
+
+                currentUser = returningUser;
             }
         }
         catch(Exception e)

@@ -10,7 +10,7 @@ public interface DataAccess {
 
     void closeConnection();
 
-    void addUser(User newUser);
+    User addUser(User newUser);
 
     void deleteUser(User selectedUser);
 

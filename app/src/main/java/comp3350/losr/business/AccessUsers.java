@@ -24,16 +24,26 @@ public class AccessUsers
     //Just a way to retrieve the current "Logged in" user
     public User getCurrentUser() {return dataAccess.getCurrentUser();}
 
-    public void setCurrentUser(User newUser) {dataAccess.setCurrentUser(newUser);}
-
-    public void addUser(User newUser) { dataAccess.addUser(newUser); }
+    //Call this method when a user is registering. Take the email, password, first name, and last name
+    //that they enter and create a User object from it, then pass it to this method. If the registration is successful
+    //the method will return a fresh User object will the information that was added to the db (all the default values).
+    //If unsuccessful it returns null.
+    //*** If the registration is successful the passed user will be automatically set as the current user.
+    public User addUser(User newUser) {
+        return dataAccess.addUser(newUser);
+    }
 
     public void deleteUser(User delete) {dataAccess.deleteUser(delete);}
 
+    //Updates the current user as you should only be able to update an account if you're currently
+    //logged into it.
+    //** Important: this means that you should call getCurrentUser, make changes to that object, then pass it
+    //to updateUser.
     public void updateUser(User update) {dataAccess.updateUser(update);}
 
     //Call when a user is trying to login. pass what they enter for the email and password into this.
     //If that user exists it will return a User object of that user. If the user does not exist null is returned.
+    //*** If the user exists the database will automatically set that account as the current user.
     public User tryLogin(String email, String password)
     {
         return dataAccess.tryLogin(email, password);

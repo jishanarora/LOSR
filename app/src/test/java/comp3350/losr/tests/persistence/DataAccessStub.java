@@ -72,9 +72,10 @@ public class DataAccessStub implements DataAccess {
 
     public User getCurrentUser(){return currentUser;}
 
-    public void addUser(User newUser)
+    public User addUser(User newUser)
     {
         users.add(newUser);
+        return newUser;
     }
 
     public void deleteUser(User selectedUser)

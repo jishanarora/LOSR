@@ -100,15 +100,6 @@ public class ProfileFragment extends Fragment {
         TextView dob= view.findViewById(R.id.profile_date_of_birth);
         dob.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
 
-        AccessUsers test = new AccessUsers();
-        User test1 = test.tryLogin("mbathie@gmail.com", "pasword");
-        if(test1 != null) {
-            System.out.println(test1.toString());
-        }
-        else
-        {
-            System.out.println("its null");
-        }
         return view;
     }
 
