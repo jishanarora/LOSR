@@ -82,6 +82,8 @@ public class User {
 
     public Profile getUserProfile() {return userProfile;}
 
+    public void setUserFirstName(String name) { userFirstName = name; }
+
     public boolean equals(Object object) {
         boolean result;
         User u;

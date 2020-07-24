@@ -1,6 +1,7 @@
 package comp3350.losr.presentation;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import comp3350.losr.R;
 import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
+import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
 
 /**
