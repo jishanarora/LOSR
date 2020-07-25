@@ -8,8 +8,7 @@ import comp3350.losr.objects.User;
 public class ProfileTest extends TestCase {
     Profile profile;
 
-    public void setUp()
-    {
+    public void setUp() {
         profile = new Profile();
     }
 
@@ -85,6 +84,26 @@ public class ProfileTest extends TestCase {
         assertEquals(profile, profile2);
 
         System.out.println("testProfileEquals complete");
+    }
+
+    public void testDateOfBirthEdges1() {
+        System.out.println("Starting testDateOfBirthEdges1");
+
+        profile.setDateOfBirth(2020, 1, 1);
+        assertEquals("01/01/2020", profile.dateOfBirth());
+        assertEquals(0, profile.getAge());
+
+        System.out.println("testDateOfBirthEdges1 complete");
+    }
+
+    public void testDateOfBirthEdges2() {
+        System.out.println("Starting testDateOfBirthEdges2");
+
+        profile.setDateOfBirth(2000, 2, 29);
+        assertEquals("29/02/2000", profile.dateOfBirth());
+        assertEquals(20, profile.getAge());
+
+        System.out.println("testDateOfBirthEdges2 complete");
     }
 
     public void testProfileNullVals() {
