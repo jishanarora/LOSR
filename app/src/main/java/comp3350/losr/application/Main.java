@@ -4,7 +4,7 @@ public class Main
 {
 
     public static final String dbName = "Users";
-    public static String dbPathName = "";
+    public static String dbPathName = "database/Users";
 
     public static void main(String[] args)
     {

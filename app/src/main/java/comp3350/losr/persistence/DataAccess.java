@@ -15,5 +15,9 @@ public interface DataAccess
 
     void deleteUser(User selectedUser);
 
+    void updateUser(User update);
+
+    User tryLogin(String userEmail, String userPassword);
+
     List<User> getGenderedUsers();
 }
