@@ -1,7 +1,5 @@
 package comp3350.losr.tests.objects;
 
-import android.text.BoringLayout;
-
 import junit.framework.TestCase;
 
 import java.util.ArrayList;

@@ -8,7 +8,8 @@ import static comp3350.losr.business.CheckMatches.matchPercentage;
 
 //all null tests will throw exceptions because the answers should never be null
 //all answers lists are of size 5 and start with all false values
-public class CheckMatchesTest extends TestCase {
+public class CheckMatchesTest extends TestCase
+{
     private ArrayList<Boolean> list1;
     private ArrayList<Boolean> list2;
 

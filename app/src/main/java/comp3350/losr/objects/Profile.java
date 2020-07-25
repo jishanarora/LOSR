@@ -123,7 +123,7 @@ public class Profile
 
         if (birthYear == 0 && birthMonth == 0 && birthDay == 0)
         {
-            dateOfBirth = "00/00/0";
+            dateOfBirth = "00/00/0000";
         }
         else
         {
