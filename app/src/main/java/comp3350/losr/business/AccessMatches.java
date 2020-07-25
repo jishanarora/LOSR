@@ -12,7 +12,8 @@ import comp3350.losr.persistence.DataAccessObject;
 
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
-public class AccessMatches {
+public class AccessMatches
+{
 
     private DataAccessObject dataAccess;
     private AccessUsers userAccess;

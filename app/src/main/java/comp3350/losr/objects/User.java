@@ -2,7 +2,8 @@ package comp3350.losr.objects;
 
 import java.util.ArrayList;
 
-public class User {
+public class User
+{
 
     public enum user_gender {Male, Female, Losr}
 
@@ -12,7 +13,8 @@ public class User {
     private String userPassword;
     private Profile userProfile;
 
-    public User(String userFirstName, String userLastName, String userEmail, String userPassword) {
+    public User(String userFirstName, String userLastName, String userEmail, String userPassword)
+    {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
@@ -31,7 +33,8 @@ public class User {
     }
 
     //set methods
-    public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day){
+    public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day)
+    {
         userProfile.setBio(bio);
         userProfile.setGender(gender);
         userProfile.setGenderPreference(preference);
@@ -39,15 +42,10 @@ public class User {
     }
 
     //update a specific answer
-    public void updateAnswerList(Boolean answer, int spot) {
-        userProfile.updateAnswerList(answer,spot);
-    }
+    public void updateAnswerList(Boolean answer, int spot) { userProfile.updateAnswerList(answer,spot); }
 
     //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
-    {
-        userProfile.updateAllAnswers(a1,a2,a3,a4,a5);
-    }
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5) { userProfile.updateAllAnswers(a1,a2,a3,a4,a5); }
 
     public void randomAnswers()
     {
@@ -56,9 +54,7 @@ public class User {
 
     public ArrayList<Boolean> getAnswers() {return userProfile.getAnswers();}
 
-    public void updateDateOfBirth(int year, int month, int day) {
-        userProfile.setDateOfBirth(year, month, day);
-    }
+    public void updateDateOfBirth(int year, int month, int day) { userProfile.setDateOfBirth(year, month, day); }
 
     public void updateBio(String bio) { userProfile.setBio(bio); }
 
@@ -84,16 +80,19 @@ public class User {
 
     public void setUserFirstName(String name) { userFirstName = name; }
 
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         boolean result;
         User u;
 
         result = false;
 
-        if (object instanceof User) {
+        if (object instanceof User)
+        {
             u = (User) object;
             if (u.userFirstName.equals(userFirstName) && u.userLastName.equals(userLastName) &&
-                    u.userEmail.equals(userEmail) && u.userProfile.equals(userProfile)) {
+                    u.userEmail.equals(userEmail) && u.userProfile.equals(userProfile))
+            {
                 result = true;
             }
         }

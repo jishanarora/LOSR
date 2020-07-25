@@ -7,7 +7,8 @@ import java.util.Random;
 import java.util.Calendar;
 
 //used to hold a lot of the user information
-public class Profile {
+public class Profile
+{
     private int age;
     private String bio = "Hi!";
     private User.user_gender gender = User.user_gender.Losr;
@@ -21,7 +22,8 @@ public class Profile {
         answers = new ArrayList<>();
     }
 
-    public String toString() {
+    public String toString()
+    {
         String message;
 
         message = "bio: " + bio + " gender: " + gender.toString() + " gender pref: " + genderPreference.toString() + " year: " + birthYear + " month: " + birthMonth + " day: " + birthDay + " answers: ";
@@ -38,7 +40,8 @@ public class Profile {
     }
 
     //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5) {
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
+    {
         answers.clear();
         answers.add(a1);
         answers.add(a2);
@@ -47,53 +50,74 @@ public class Profile {
         answers.add(a5);
     }
 
-    public void randomAnswers() {
+    public void randomAnswers()
+    {
         Random random;
         int num;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
+        {
             random = new Random();
             num = random.nextInt(2);
 
-            if (num == 0) {
+            if (num == 0)
+            {
                 answers.add(Boolean.TRUE);
-            } else {
+            }
+            else
+            {
                 answers.add(Boolean.FALSE);
             }
         }
     }
 
-    public String genderToString() {
+    public String genderToString()
+    {
         String result;
 
-        if (genderPreference == User.user_gender.Female) {
+        if (genderPreference == User.user_gender.Female)
+        {
             result = "female";
-        } else if (genderPreference == User.user_gender.Male) {
+        }
+        else if (genderPreference == User.user_gender.Male)
+        {
             result = "male";
-        } else {
+        }
+        else
+        {
             result = "losr";
         }
 
         return result;
     }
 
-    public String genderPrefToString() {
+    public String genderPrefToString()
+    {
         String result;
 
-        if (genderPreference == User.user_gender.Female) {
+        if (genderPreference == User.user_gender.Female)
+        {
             result = "female";
-        } else if (genderPreference == User.user_gender.Male) {
+        }
+        else if (genderPreference == User.user_gender.Male)
+        {
             result = "male";
-        } else {
+        }
+        else
+        {
             result = "losr";
         }
 
         return result;
     }
 
-    public void setBio(String bio) {
-        if (bio == null) {
+    public void setBio(String bio)
+    {
+        if (bio == null)
+        {
             this.bio = "";
-        } else {
+        }
+        else
+        {
             this.bio = bio;
         }
     }
@@ -106,13 +130,17 @@ public class Profile {
         genderPreference = preference;
     }
 
-    public void setDateOfBirth(int year, int month, int day) {
+    public void setDateOfBirth(int year, int month, int day)
+    {
         birthYear = year;
         birthMonth = month;
         birthDay = day;
-        if (year == 0) {
+        if (year == 0)
+        {
             age = 0;
-        } else {
+        }
+        else
+        {
             age = Calendar.getInstance().get(Calendar.YEAR) - year;
         }
     }
@@ -127,12 +155,16 @@ public class Profile {
 
     public ArrayList<Boolean> getAnswers() { return answers; }
 
-    public String dateOfBirth() {
+    public String dateOfBirth()
+    {
         String dateOfBirth;
 
-        if (birthYear == 0 && birthMonth == 0 && birthDay == 0) {
+        if (birthYear == 0 && birthMonth == 0 && birthDay == 0)
+        {
             dateOfBirth = "00/00/0";
-        } else {
+        }
+        else
+        {
             Calendar myCal = Calendar.getInstance();
             myCal.set(Calendar.YEAR, birthYear);
             myCal.set(Calendar.MONTH, birthMonth - 1);
@@ -146,16 +178,19 @@ public class Profile {
         return dateOfBirth;
     }
 
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         boolean result;
         Profile p;
 
         result = false;
 
-        if (object instanceof Profile) {
+        if (object instanceof Profile)
+        {
             p = (Profile) object;
             if (p.age == age && p.bio.equals(bio) && p.genderPreference.equals(genderPreference)
-                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.answers.equals(answers) && p.birthYear == birthYear) {
+                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.answers.equals(answers) && p.birthYear == birthYear)
+            {
                 result = true;
             }
         }

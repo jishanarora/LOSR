@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import comp3350.losr.objects.User;
 
-public class CheckMatches {
+public class CheckMatches
+{
 
     // checks gender compatibility and % of same answers to return an int match % number
-    public static int matchPercentage(ArrayList<Boolean> curr, ArrayList<Boolean> match){
+    public static int matchPercentage(ArrayList<Boolean> curr, ArrayList<Boolean> match)
+    {
         float overall_compatibility = 0;
 
         int similar = 0;
@@ -36,7 +38,8 @@ public class CheckMatches {
     }
 
     // compares genders and gender preference to ensure compatibility
-    public static boolean areGenderCompatible(User curr, User match){
+    public static boolean areGenderCompatible(User curr, User match)
+    {
         return curr.getUserProfile().getGenderPreference() == match.getUserProfile().getGender() &&
                 curr.getUserProfile().getGender() == match.getUserProfile().getGenderPreference();
     }
