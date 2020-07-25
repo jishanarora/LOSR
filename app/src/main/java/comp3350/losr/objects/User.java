@@ -42,15 +42,24 @@ public class User
     }
 
     //update a specific answer
-    public void updateAnswerList(Boolean answer, int spot) { userProfile.updateAnswerList(answer,spot); }
+    public String updateAnswer(Boolean answer, int spot)
+    {
+        String message = null;
+        int numQuestions = this.userProfile.getNumQuestions();
+
+        //if this fails the spot is out of bounds
+        if(spot >= 0 && spot < numQuestions) {
+            userProfile.updateAnswer(answer,spot);
+            message = "success";
+        }
+
+        return message;
+    }
 
     //different wants to set a users answers mainly for testing
     public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5) { userProfile.updateAllAnswers(a1,a2,a3,a4,a5); }
 
-    public void randomAnswers()
-    {
-        userProfile.randomAnswers();
-    }
+    public void randomAnswers() { userProfile.randomAnswers(); }
 
     public ArrayList<Boolean> getAnswers() {return userProfile.getAnswers();}
 

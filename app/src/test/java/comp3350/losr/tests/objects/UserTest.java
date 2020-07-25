@@ -22,7 +22,7 @@ public class UserTest extends TestCase {
         assertEquals("", user.getUserLastName());
         assertEquals("", user.getUserEmail());
         assertEquals("", user.getUserPassword());
-        assertEquals(0, user.getAnswers().size());
+        assertEquals(5, user.getAnswers().size());
 
         System.out.println("testUserEmpty completed");
     }
@@ -31,9 +31,8 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserAverage");
 
         user = new User("John", "Doe", "johndoe@gmail.com", "password");
-        user.updateAnswerList(Boolean.TRUE, 0);
-        user.updateAnswerList(Boolean.TRUE, 1);
-        user.updateAnswerList(Boolean.FALSE, 2);
+        user.updateAnswer(Boolean.TRUE, 0);
+        user.updateAnswer(Boolean.TRUE, 2);
         ArrayList<Boolean> userAnswers = user.getAnswers();
 
         assertNotNull(user);
@@ -41,9 +40,9 @@ public class UserTest extends TestCase {
         assertEquals("Doe", user.getUserLastName());
         assertEquals("johndoe@gmail.com", user.getUserEmail());
         assertEquals("password", user.getUserPassword());
-        assertTrue(userAnswers.get(1));
-        assertFalse(userAnswers.get(2));
-        assertEquals(3, userAnswers.size());
+        assertTrue(userAnswers.get(0));
+        assertTrue(userAnswers.get(2));
+        assertEquals(5, userAnswers.size());
 
         System.out.println("testUserAverage completed");
     }
@@ -52,10 +51,8 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserAverage2");
 
         user = new User("Mary", "Poppins", "marypoppins@gmail.com", "password1");
-        user.updateAnswerList(Boolean.TRUE, 0);
-        user.updateAnswerList(Boolean.FALSE, 1);
-        user.updateAnswerList(Boolean.FALSE, 2);
-        user.updateAnswerList(Boolean.TRUE, 3);
+        user.updateAnswer(Boolean.TRUE, 0);
+        user.updateAnswer(Boolean.TRUE, 3);
         ArrayList<Boolean> userAnswers = user.getAnswers();
 
         assertNotNull(user);
@@ -64,9 +61,8 @@ public class UserTest extends TestCase {
         assertEquals("marypoppins@gmail.com", user.getUserEmail());
         assertEquals("password1", user.getUserPassword());
         assertTrue(userAnswers.get(0));
-        assertFalse(userAnswers.get(2));
         assertTrue(userAnswers.get(3));
-        assertEquals(4, userAnswers.size());
+        assertEquals(5, userAnswers.size());
 
         System.out.println("testUserAverage2 completed");
     }
@@ -75,8 +71,8 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserAverage3");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password5");
-        user.updateAnswerList(Boolean.FALSE, 0);
-        user.updateAnswerList(Boolean.FALSE, 1);
+        user.updateAnswer(Boolean.TRUE, 0);
+        user.updateAnswer(Boolean.TRUE, 1);
         ArrayList<Boolean> userAnswers = user.getAnswers();
 
         assertNotNull(user);
@@ -84,9 +80,9 @@ public class UserTest extends TestCase {
         assertEquals("Smith", user.getUserLastName());
         assertEquals("samsmith@gmail.com", user.getUserEmail());
         assertEquals("password5", user.getUserPassword());
-        assertFalse(userAnswers.get(0));
-        assertFalse(userAnswers.get(1));
-        assertEquals(2, userAnswers.size());
+        assertTrue(userAnswers.get(0));
+        assertTrue(userAnswers.get(1));
+        assertEquals(5, userAnswers.size());
 
         System.out.println("testUserAverage3 completed");
     }
@@ -95,15 +91,15 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserEquals");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user.updateAnswerList(Boolean.FALSE, 0);
-        user.updateAnswerList(Boolean.FALSE, 1);
+        user.updateAnswer(Boolean.FALSE, 0);
+        user.updateAnswer(Boolean.FALSE, 1);
         user.updateDateOfBirth(1999, 1, 25);
         user.updateBio("Hi! My name is Sam!");
         user.updatePreference(User.user_gender.Female);
 
         user1 = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user1.updateAnswerList(Boolean.FALSE, 0);
-        user1.updateAnswerList(Boolean.FALSE, 1);
+        user1.updateAnswer(Boolean.FALSE, 0);
+        user1.updateAnswer(Boolean.FALSE, 1);
         user1.updateDateOfBirth(1999, 1, 25);
         user1.updateBio("Hi! My name is Sam!");
         user1.updatePreference(User.user_gender.Female);
@@ -118,15 +114,15 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserEqualsDiffAnswers");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user.updateAnswerList(Boolean.FALSE, 0);
-        user.updateAnswerList(Boolean.FALSE, 1);
+        user.updateAnswer(Boolean.FALSE, 0);
+        user.updateAnswer(Boolean.FALSE, 1);
         user.updateDateOfBirth(1999, 1, 25);
         user.updateBio("Hi! My name is Sam!");
         user.updatePreference(User.user_gender.Female);
 
         user1 = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user1.updateAnswerList(Boolean.TRUE, 0);
-        user1.updateAnswerList(Boolean.FALSE, 1);
+        user1.updateAnswer(Boolean.TRUE, 0);
+        user1.updateAnswer(Boolean.FALSE, 1);
         user1.updateDateOfBirth(1999, 1, 25);
         user1.updateBio("Hi! My name is Sam!");
         user1.updatePreference(User.user_gender.Female);

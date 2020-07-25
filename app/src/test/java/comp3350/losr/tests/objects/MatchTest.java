@@ -2,8 +2,6 @@ package comp3350.losr.tests.objects;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
-
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
 
@@ -26,10 +24,9 @@ public class MatchTest extends TestCase {
     {
         User user1 = new User("firstName","lastName","email@email.com","password");
         User user2 = new User("firstName1","lastName1","email1@email.com","password1");
-        user1.getAnswers().add(Boolean.FALSE);
-        user1.getAnswers().add(Boolean.FALSE);
-        user2.getAnswers().add(Boolean.FALSE);
-        user2.getAnswers().add(Boolean.TRUE);
+        user1.updateAnswer(Boolean.TRUE, 2);
+        user1.updateAnswer(Boolean.TRUE, 3);
+        user2.updateAnswer(Boolean.TRUE, 2);
         user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25);
         user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22);
 
@@ -37,17 +34,14 @@ public class MatchTest extends TestCase {
 
         assertEquals(user1, match.getCurrentUser());
         assertEquals(user2, match.getMatchedUser());
-        assertEquals(50, match.getMatchPercent());
+        assertEquals(80, match.getMatchPercent());
     }
 
     public void testFullMatch()
     {
         User user1 = new User("firstName","lastName","email@email.com","password");
         User user2 = new User("firstName1","lastName1","email1@email.com","password1");
-        user1.getAnswers().add(Boolean.FALSE);
-        user1.getAnswers().add(Boolean.FALSE);
-        user2.getAnswers().add(Boolean.FALSE);
-        user2.getAnswers().add(Boolean.FALSE);
+
         user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25);
         user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22);
 
@@ -62,10 +56,9 @@ public class MatchTest extends TestCase {
     {
         User user1 = new User("firstName","lastName","email@email.com","password");
         User user2 = new User("firstName1","lastName1","email1@email.com","password1");
-        user1.getAnswers().add(Boolean.TRUE);
-        user1.getAnswers().add(Boolean.TRUE);
-        user2.getAnswers().add(Boolean.FALSE);
-        user2.getAnswers().add(Boolean.FALSE);
+
+        user1.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+
         user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25);
         user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22);
 

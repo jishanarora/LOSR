@@ -9,17 +9,27 @@ import java.util.Calendar;
 //used to hold a lot of the user information
 public class Profile
 {
-    private int age;
     private String bio = "Hi!";
+
     private User.user_gender gender = User.user_gender.Losr;
     private User.user_gender genderPreference = User.user_gender.Losr;
+
     private int birthYear;
     private int birthMonth;
     private int birthDay;
+    private int age;
+
+    private int numQuestions = 5;
     private ArrayList<Boolean> answers;
 
-    public Profile() {
-        answers = new ArrayList<>();
+    public Profile()
+    {
+        answers = new ArrayList<>(numQuestions);
+
+        for(int i = 0; i < numQuestions; i ++)
+        {
+            answers.add(Boolean.FALSE);
+        }
     }
 
     public String toString()
@@ -27,7 +37,8 @@ public class Profile
         String message;
 
         message = "bio: " + bio + " gender: " + gender.toString() + " gender pref: " + genderPreference.toString() + " year: " + birthYear + " month: " + birthMonth + " day: " + birthDay + " answers: ";
-        for (int i = 0; i < answers.size(); i++) {
+        for (int i = 0; i < answers.size(); i++)
+        {
             message += answers.get(i).toString() + " ";
         }
 
@@ -35,8 +46,9 @@ public class Profile
     }
 
     //update a specific answer
-    public void updateAnswerList(Boolean answer, int spot) {
-        answers.add(spot, answer);
+    //bounds check is made from User
+    public void updateAnswer(Boolean answer, int spot) {
+        answers.set(spot, answer);
     }
 
     //different wants to set a users answers mainly for testing
@@ -154,6 +166,8 @@ public class Profile
     public User.user_gender getGenderPreference() { return genderPreference; }
 
     public ArrayList<Boolean> getAnswers() { return answers; }
+
+    public int getNumQuestions() { return numQuestions; }
 
     public String dateOfBirth()
     {
