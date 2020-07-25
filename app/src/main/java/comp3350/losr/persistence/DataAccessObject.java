@@ -165,6 +165,11 @@ public class DataAccessObject implements DataAccess
         return currentUser;
     }
 
+    public void  setCurrentUser(User user)
+    {
+        currentUser=user;
+    }
+
     public User tryLogin(String userEmail, String userPassword)
     {
         User returningUser = null;

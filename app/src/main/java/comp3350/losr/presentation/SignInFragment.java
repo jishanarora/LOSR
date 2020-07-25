@@ -12,17 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import comp3350.losr.R;
-
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
 
 
 public class SignInFragment extends Fragment {
 
-    private String mParam1;
-    private String mParam2;
+    private EditText email;
+    private EditText password;
 
     public SignInFragment() {
         // Required empty public constructor
@@ -40,8 +43,29 @@ public class SignInFragment extends Fragment {
        dontHaveAnAccount= view.findViewById(R.id.tv_dont_have_an_account);
        parentFrameLayout=getActivity().findViewById(R.id.register_framelayout);
        signInBtn=view.findViewById(R.id.sign_in_button);
-       return view;
+        email=view.findViewById(R.id.sign_in_email);
+        password=view.findViewById(R.id.sign_in_password);
+        return view;
     }
+
+    public void signIn(EditText email, EditText password)
+    {
+        String emailStr = email.getText().toString().trim();
+        String passwordStr = password.getText().toString().trim();
+        AccessUsers accessUsers= new AccessUsers();
+        User currentUser=accessUsers.tryLogin(emailStr,passwordStr);
+        if(currentUser==null)
+        {
+            Toast.makeText(this.getContext(), "User not found", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            accessUsers.setCurrentUser(currentUser);
+            Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
+            startActivity(navigationIntent);
+            getActivity().finish();
+        }
+
+     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -57,9 +81,7 @@ public class SignInFragment extends Fragment {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
-                startActivity(navigationIntent);
-                getActivity().finish();
+                signIn(email,password);
             }
         });
     }
