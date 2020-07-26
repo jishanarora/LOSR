@@ -28,9 +28,10 @@ public class DataAccessStub implements DataAccess {
         users = new ArrayList<>();
 
         //This is the placeholder user that "you are" when you use the app
-        currentUser = new User("Michael", "Bathie", "mbathie@gamil.com", "password");
+        currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
         currentUser.setUserProfile("Hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
         currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
+        users.add(currentUser);
 
         newUser = new User("John", "Doe", "johndoe@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 8, 8);
@@ -38,7 +39,7 @@ public class DataAccessStub implements DataAccess {
         users.add(newUser);
 
         newUser = new User("mary", "poppins", "marypoppins@gmail.com", "password");
-        newUser.setUserProfile("Hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16);
+        newUser.setUserProfile("hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
         users.add(newUser);
 
@@ -111,7 +112,7 @@ public class DataAccessStub implements DataAccess {
 
     public String tryLogin(String userEmail, String userPassword)
     {
-        String message = null;
+        String message = "Could not find an account with that email";
 
         for(int i = 0; i < users.size(); i++)
         {
@@ -120,16 +121,14 @@ public class DataAccessStub implements DataAccess {
                 if(users.get(i).getUserPassword().equals(userPassword))
                 {
                     currentUser = users.get(i);
-                    break;
+                    message = null;
                 }
                 else
                 {
                     message = "Incorrect password";
-                    break;
                 }
+                break;
             }
-
-            message = "Count not find an account with that email";
         }
 
         return message;

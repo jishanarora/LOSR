@@ -11,6 +11,8 @@ public interface DataAccess
 
     void closeConnection();
 
+    User getCurrentUser();
+
     User addUser(User newUser);
 
     void deleteUser(User selectedUser);

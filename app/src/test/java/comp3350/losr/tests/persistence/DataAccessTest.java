@@ -14,8 +14,6 @@ public class DataAccessTest extends TestCase
 {
     private DataAccess dataAccess;
 
-    public DataAccessTest(){}
-
     public void setUp() {
         // Use the following statements to run with the stub database:
         //dataAccess = new DataAccessStub("Stub");
@@ -62,12 +60,77 @@ public class DataAccessTest extends TestCase
         System.out.println("testGetGenderedUsers complete");
     }
 
+    public void testTryLoginSuccess()
+    {
+        System.out.println("Starting testTryLoginSuccess");
+        assertNull(dataAccess.tryLogin("mbathie@gmail.com", "password"));
+        System.out.println("testTryLoginSuccess complete");
+    }
+
+    public void testTryLoginWrongEmail()
+    {
+        System.out.println("Starting testTryLoginWrongEmail");
+        assertEquals("Could not find an account with that email",dataAccess.tryLogin("mbathie@gmail.co", "password"));
+        System.out.println("testTryLoginWrongEmail complete");
+    }
+
+    public void testTryLoginWrongPassword()
+    {
+        System.out.println("Starting testTryLoginWrongPassword");
+        assertEquals("Incorrect password", dataAccess.tryLogin("mbathie@gmail.com", "pasword"));
+        System.out.println("testTryLoginWrongPassword complete");
+    }
+
+    public void testTryLoginBothWrong()
+    {
+        System.out.println("Starting testTryLoginBothWrong");
+        assertEquals("Could not find an account with that email", dataAccess.tryLogin("mbathie@gail.com", "passord"));
+        System.out.println("testTryLoginBothWrong complete");
+    }
+
     public void testAddUser()
     {
         System.out.println("Starting testAddUser");
 
         dataAccess.addUser(new User("test","test","test","test"));
+        assertNull(dataAccess.tryLogin("test","test"));
 
         System.out.println("testAddUser complete");
+    }
+
+    public void testUpdateUser()
+    {
+        System.out.println("Starting testUpdateUser");
+
+        User test = dataAccess.getCurrentUser();
+        test.updateBio("new bio");
+        test.updateGender(User.user_gender.Female);
+        test.updateDateOfBirth(1998, 1, 25);
+        test.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+        dataAccess.updateUser(test);
+
+        ArrayList<Boolean> temp = new ArrayList<>();
+        temp.add(Boolean.TRUE);
+        temp.add(Boolean.FALSE);
+        temp.add(Boolean.TRUE);
+        temp.add(Boolean.TRUE);
+        temp.add(Boolean.TRUE);
+
+        assertEquals("new bio", dataAccess.getCurrentUser().getUserProfile().getBio());
+        assertEquals(User.user_gender.Female, dataAccess.getCurrentUser().getUserProfile().getGender());
+        assertEquals(22, dataAccess.getCurrentUser().getUserProfile().getAge());
+        assertEquals(temp, dataAccess.getCurrentUser().getAnswers());
+
+        System.out.println("testUpdateUser complete");
+    }
+
+    public void testDeleteUser()
+    {
+        System.out.println("Starting testDeleteUser");
+
+        dataAccess.deleteUser(dataAccess.getCurrentUser());
+        assertEquals("Could not find an account with that email", dataAccess.tryLogin("mbathie@gmail.com", "password"));
+
+        System.out.println("testDeleteUser complete");
     }
 }

@@ -5,13 +5,13 @@ import java.util.List;
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
 import comp3350.losr.objects.User;
-import comp3350.losr.persistence.DataAccessObject;
+import comp3350.losr.persistence.DataAccess;
 
 public class AccessUsers
 {
-    private DataAccessObject dataAccess;
+    private DataAccess dataAccess;
 
-    public AccessUsers() { dataAccess = (DataAccessObject) DatabaseService.getDataAccess(Main.dbName); }
+    public AccessUsers() { dataAccess = DatabaseService.getDataAccess(Main.dbName); }
 
     public List<User> getGenderedUsers()
     {
