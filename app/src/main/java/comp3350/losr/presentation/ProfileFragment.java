@@ -1,7 +1,6 @@
 package comp3350.losr.presentation;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import comp3350.losr.R;
-import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
-import comp3350.losr.objects.User;
-import comp3350.losr.persistence.DataAccess;
-import comp3350.losr.persistence.DataAccessObject;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment
+{
     private GridView gridView;
     private ImageView imageView;
 
@@ -35,12 +31,14 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProfileFragment() {
+    public ProfileFragment()
+    {
         // Required empty public constructor
     }
 
 
-    public static ProfileFragment newInstance() {
+    public static ProfileFragment newInstance()
+    {
         
         Bundle args = new Bundle();
         
@@ -57,7 +55,8 @@ public class ProfileFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ProfileFragment.
      */
-    public static ProfileFragment newInstance(String param1, String param2) {
+    public static ProfileFragment newInstance(String param1, String param2)
+    {
         ProfileFragment fragment = new ProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -67,9 +66,11 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -77,7 +78,8 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         AccessUsers accessUsers= new AccessUsers();
         View view=inflater.inflate(R.layout.fragment_profile, container, false);

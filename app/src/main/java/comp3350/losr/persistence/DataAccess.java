@@ -4,16 +4,22 @@ import java.util.List;
 
 import comp3350.losr.objects.User;
 
-public interface DataAccess {
+public interface DataAccess
+{
 
     void openConnection(String string);
 
     void closeConnection();
 
+    User getCurrentUser();
+
     User addUser(User newUser);
 
     void deleteUser(User selectedUser);
 
-    List<User> getGenderedUsers();
+    void updateUser(User update);
 
+    String tryLogin(String userEmail, String userPassword);
+
+    List<User> getGenderedUsers();
 }

@@ -3,7 +3,8 @@ package comp3350.losr.application;
 import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
 
-public class DatabaseService {
+public class DatabaseService
+{
 
     //Initially the database has nothing
     private static DataAccess dataService = null;

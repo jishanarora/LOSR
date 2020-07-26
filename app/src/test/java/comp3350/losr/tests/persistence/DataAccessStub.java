@@ -28,17 +28,18 @@ public class DataAccessStub implements DataAccess {
         users = new ArrayList<>();
 
         //This is the placeholder user that "you are" when you use the app
-        currentUser = new User("Sam", "Green", "samgreen@gamil.com", "password");
-        currentUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1997, 7, 20);
-        currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
+        currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
+        currentUser.setUserProfile("Hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
+        currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
+        users.add(currentUser);
 
         newUser = new User("John", "Doe", "johndoe@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 8, 8);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE);
         users.add(newUser);
 
-        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password");
-        newUser.setUserProfile("Hello there :)", User.user_gender.Female, User.user_gender.Female, 1998, 11, 16);
+        newUser = new User("mary", "poppins", "marypoppins@gmail.com", "password");
+        newUser.setUserProfile("hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
         users.add(newUser);
 
@@ -87,6 +88,50 @@ public class DataAccessStub implements DataAccess {
         {
             users.remove(index);
         }
+    }
+
+    public void updateUser(User update)
+    {
+        String email = update.getUserEmail();
+        int spot = -1;
+
+        for(int i = 0; i < users.size(); i++)
+        {
+            if(users.get(i).getUserEmail().equals(email))
+            {
+                spot = i;
+                break;
+            }
+        }
+
+        if(spot > 0)
+        {
+            users.set(spot, update);
+        }
+    }
+
+    public String tryLogin(String userEmail, String userPassword)
+    {
+        String message = "Could not find an account with that email";
+
+        for(int i = 0; i < users.size(); i++)
+        {
+            if(users.get(i).getUserEmail().equals(userEmail))
+            {
+                if(users.get(i).getUserPassword().equals(userPassword))
+                {
+                    currentUser = users.get(i);
+                    message = null;
+                }
+                else
+                {
+                    message = "Incorrect password";
+                }
+                break;
+            }
+        }
+
+        return message;
     }
 
     public List<User> getGenderedUsers(){

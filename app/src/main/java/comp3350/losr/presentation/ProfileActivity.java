@@ -10,10 +10,12 @@ import comp3350.losr.R;
 import comp3350.losr.business.AccessMatches;
 import comp3350.losr.objects.Match;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
     }

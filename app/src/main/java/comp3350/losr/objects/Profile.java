@@ -3,119 +3,107 @@ package comp3350.losr.objects;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 import java.util.Calendar;
 
 //used to hold a lot of the user information
-public class Profile {
-    private int age;
+public class Profile
+{
     private String bio = "Hi!";
+
     private User.user_gender gender = User.user_gender.Losr;
     private User.user_gender genderPreference = User.user_gender.Losr;
+
     private int birthYear;
     private int birthMonth;
     private int birthDay;
+    private int age;
+
+    private int numQuestions = 5;
     private ArrayList<Boolean> answers;
 
-    public Profile() {
-        answers = new ArrayList<>();
+    public Profile()
+    {
+        answers = new ArrayList<>(numQuestions);
+
+        for(int i = 0; i < numQuestions; i ++)
+        {
+            answers.add(Boolean.FALSE);
+        }
     }
 
-    public String toString() {
+    public String toString()
+    {
         String message;
 
         message = "bio: " + bio + " gender: " + gender.toString() + " gender pref: " + genderPreference.toString() + " year: " + birthYear + " month: " + birthMonth + " day: " + birthDay + " answers: ";
-        for (int i = 0; i < answers.size(); i++) {
+        for (int i = 0; i < answers.size(); i++)
+        {
             message += answers.get(i).toString() + " ";
         }
 
         return message;
     }
 
-    //update a specific answer
-    public void updateAnswerList(Boolean answer, int spot) {
-        answers.add(spot, answer);
-    }
+    public boolean equals(Object object)
+    {
+        boolean result;
+        Profile p;
 
-    //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5) {
-        answers.clear();
-        answers.add(a1);
-        answers.add(a2);
-        answers.add(a3);
-        answers.add(a4);
-        answers.add(a5);
-    }
+        result = false;
 
-    public void randomAnswers() {
-        Random random;
-        int num;
-        for (int i = 0; i < 5; i++) {
-            random = new Random();
-            num = random.nextInt(2);
-
-            if (num == 0) {
-                answers.add(Boolean.TRUE);
-            } else {
-                answers.add(Boolean.FALSE);
+        if (object instanceof Profile)
+        {
+            p = (Profile) object;
+            if (p.age == age && p.bio.equals(bio) && p.genderPreference.equals(genderPreference)
+                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.answers.equals(answers) && p.birthYear == birthYear)
+            {
+                result = true;
             }
         }
+        return result;
     }
 
-    public String genderToString() {
+    public String genderToString()
+    {
         String result;
 
-        if (genderPreference == User.user_gender.Female) {
+        if (genderPreference == User.user_gender.Female)
+        {
             result = "female";
-        } else if (genderPreference == User.user_gender.Male) {
+        }
+        else if (genderPreference == User.user_gender.Male)
+        {
             result = "male";
-        } else {
+        }
+        else
+        {
             result = "losr";
         }
 
         return result;
     }
 
-    public String genderPrefToString() {
+    public String genderPrefToString()
+    {
         String result;
 
-        if (genderPreference == User.user_gender.Female) {
+        if (genderPreference == User.user_gender.Female)
+        {
             result = "female";
-        } else if (genderPreference == User.user_gender.Male) {
+        }
+        else if (genderPreference == User.user_gender.Male)
+        {
             result = "male";
-        } else {
+        }
+        else
+        {
             result = "losr";
         }
 
         return result;
     }
 
-    public void setBio(String bio) {
-        if (bio == null) {
-            this.bio = "";
-        } else {
-            this.bio = bio;
-        }
-    }
 
-    public void setGender(User.user_gender gender) {
-        this.gender = gender;
-    }
-
-    public void setGenderPreference(User.user_gender preference) {
-        genderPreference = preference;
-    }
-
-    public void setDateOfBirth(int year, int month, int day) {
-        birthYear = year;
-        birthMonth = month;
-        birthDay = day;
-        if (year == 0) {
-            age = 0;
-        } else {
-            age = Calendar.getInstance().get(Calendar.YEAR) - year;
-        }
-    }
 
     public int getAge() { return age; }
 
@@ -127,12 +115,18 @@ public class Profile {
 
     public ArrayList<Boolean> getAnswers() { return answers; }
 
-    public String dateOfBirth() {
+    public int getNumQuestions() { return numQuestions; }
+
+    public String dateOfBirth()
+    {
         String dateOfBirth;
 
-        if (birthYear == 0 && birthMonth == 0 && birthDay == 0) {
-            dateOfBirth = "00/00/0";
-        } else {
+        if (birthYear == 0 && birthMonth == 0 && birthDay == 0)
+        {
+            dateOfBirth = "00/00/0000";
+        }
+        else
+        {
             Calendar myCal = Calendar.getInstance();
             myCal.set(Calendar.YEAR, birthYear);
             myCal.set(Calendar.MONTH, birthMonth - 1);
@@ -146,19 +140,55 @@ public class Profile {
         return dateOfBirth;
     }
 
-    public boolean equals(Object object) {
-        boolean result;
-        Profile p;
+    //update a specific answer
+    //bounds check is made from User
+    public void updateAnswer(Boolean answer, int spot) {
+        answers.set(spot, answer);
+    }
 
-        result = false;
+    //different wants to set a users answers mainly for testing
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
+    {
+        answers.clear();
+        answers.add(a1);
+        answers.add(a2);
+        answers.add(a3);
+        answers.add(a4);
+        answers.add(a5);
+    }
 
-        if (object instanceof Profile) {
-            p = (Profile) object;
-            if (p.age == age && p.bio.equals(bio) && p.genderPreference.equals(genderPreference)
-                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.answers.equals(answers) && p.birthYear == birthYear) {
-                result = true;
-            }
+    public void setBio(String bio)
+    {
+        if (bio == null)
+        {
+            this.bio = "";
         }
-        return result;
+        else
+        {
+            this.bio = bio;
+        }
+    }
+
+    public void setGender(User.user_gender gender) {
+        this.gender = gender;
+    }
+
+    public void setGenderPreference(User.user_gender preference) {
+        genderPreference = preference;
+    }
+
+    public void setDateOfBirth(int year, int month, int day)
+    {
+        birthYear = year;
+        birthMonth = month;
+        birthDay = day;
+        if (year == 0)
+        {
+            age = 0;
+        }
+        else
+        {
+            age = Calendar.getInstance().get(Calendar.YEAR) - year;
+        }
     }
 }

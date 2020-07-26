@@ -7,50 +7,18 @@ import java.util.ArrayList;
 import static comp3350.losr.business.CheckMatches.matchPercentage;
 
 //all null tests will throw exceptions because the answers should never be null
-public class CheckMatchesTest extends TestCase {
+//all answers lists are of size 5 and start with all false values
+public class CheckMatchesTest extends TestCase
+{
     private ArrayList<Boolean> list1;
     private ArrayList<Boolean> list2;
 
+    private int numQuestions = 5;
+
     public void setUp()
     {
-        list1 = new ArrayList<>();
-        list2 = new ArrayList<>();
-    }
-
-    public void testEmpty()
-    {
-        assertEquals(0, matchPercentage(list1, list2));
-    }
-
-    public void testOneEmpty()
-    {
-        System.out.println("Starting testOneEmpty");
-
-        list1.add(Boolean.FALSE);
-        assertEquals(0, matchPercentage(list1, list2));
-
-        list1.clear();
-
-        list2.add(Boolean.TRUE);
-        assertEquals(0, matchPercentage(list1, list2));
-
-        System.out.println("testOneEmpty complete");
-    }
-
-    public void testOneMatch()
-    {
-        list1.add(Boolean.FALSE);
-        list2.add(Boolean.FALSE);
-
-        assertEquals(100, matchPercentage(list1, list2));
-    }
-
-    public void testOneNotMatch()
-    {
-        list1.add(Boolean.TRUE);
-        list2.add(Boolean.FALSE);
-
-        assertEquals(0, matchPercentage(list1, list2));
+        list1 = new ArrayList<>(numQuestions);
+        list2 = new ArrayList<>(numQuestions);
     }
 
     public void testNull()
@@ -75,6 +43,11 @@ public class CheckMatchesTest extends TestCase {
         System.out.println("Starting testOneNull");
 
         list1 = null;
+
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
         list2.add(Boolean.TRUE);
 
         try
@@ -99,6 +72,15 @@ public class CheckMatchesTest extends TestCase {
         System.out.println("Starting testNullItems");
 
         list1.add(null);
+        list1.add(null);
+        list1.add(null);
+        list1.add(null);
+        list1.add(null);
+
+        list2.add(null);
+        list2.add(null);
+        list2.add(null);
+        list2.add(null);
         list2.add(null);
 
         try
@@ -125,9 +107,13 @@ public class CheckMatchesTest extends TestCase {
         list1.add(Boolean.TRUE);
         list1.add(Boolean.FALSE);
         list1.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
 
         list2.add(Boolean.TRUE);
         list2.add(Boolean.FALSE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
         list2.add(Boolean.TRUE);
 
         assertEquals(100, matchPercentage(list1,list2));
@@ -138,10 +124,11 @@ public class CheckMatchesTest extends TestCase {
         System.out.println("testFullMatch complete");
     }
 
-    public void testHalfMatch()
+    public void test20Match()
     {
-        System.out.println("Starting testHalfMatch");
+        System.out.println("Starting test20Match");
 
+        list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
@@ -149,52 +136,80 @@ public class CheckMatchesTest extends TestCase {
 
         list2.add(Boolean.TRUE);
         list2.add(Boolean.FALSE);
-        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
         list2.add(Boolean.FALSE);
 
-        assertEquals(50, matchPercentage(list1,list2));
-        assertEquals(50, matchPercentage(list2,list1));
+        assertEquals(20, matchPercentage(list1,list2));
+        assertEquals(20, matchPercentage(list2,list1));
 
-        System.out.println("testHalfMatch complete");
+        System.out.println("test20Match complete");
     }
 
-    public void testQuarterMatch()
+    public void test40Match()
     {
-        System.out.println("Starting testQuarterMatch");
+        System.out.println("Starting test40Match");
 
-        list1.add(Boolean.TRUE);
-        list1.add(Boolean.TRUE);
-        list1.add(Boolean.TRUE);
-        list1.add(Boolean.TRUE);
-
-        list2.add(Boolean.FALSE);
-        list2.add(Boolean.FALSE);
-        list2.add(Boolean.TRUE);
-        list2.add(Boolean.FALSE);
-
-        assertEquals(25, matchPercentage(list1,list2));
-        assertEquals(25, matchPercentage(list2,list1));
-
-        System.out.println("testQuarterMatch complete");
-    }
-
-    public void testDiffLengths()
-    {
-        System.out.println("Starting testDiffLengths");
-
-        list1.add(Boolean.TRUE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
         list1.add(Boolean.FALSE);
         list1.add(Boolean.FALSE);
         list1.add(Boolean.TRUE);
 
         list2.add(Boolean.FALSE);
         list2.add(Boolean.FALSE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
 
+        assertEquals(40, matchPercentage(list1,list2));
+        assertEquals(40, matchPercentage(list2,list1));
 
-        assertEquals(25, matchPercentage(list1,list2));
-        assertEquals(25, matchPercentage(list2,list1));
+        System.out.println("test40Match complete");
+    }
 
-        System.out.println("testDiffLengths complete");
+    public void test60Match()
+    {
+        System.out.println("Starting test60Match");
+
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.TRUE);
+
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.TRUE);
+        list2.add(Boolean.FALSE);
+
+        assertEquals(60, matchPercentage(list1,list2));
+        assertEquals(60, matchPercentage(list2,list1));
+
+        System.out.println("test60Match complete");
+    }
+
+    public void test80Match()
+    {
+        System.out.println("Starting test80Match");
+
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.FALSE);
+        list1.add(Boolean.TRUE);
+
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+        list2.add(Boolean.FALSE);
+
+        assertEquals(80, matchPercentage(list1,list2));
+        assertEquals(80, matchPercentage(list2,list1));
+
+        System.out.println("test80Match complete");
     }
 
     public void testMissingAnswers()
@@ -205,11 +220,13 @@ public class CheckMatchesTest extends TestCase {
         list1.add(Boolean.FALSE);
         list1.add(null);
         list1.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
 
         list2.add(Boolean.TRUE);
         list2.add(Boolean.FALSE);
         list1.add(null);
         list2.add(Boolean.TRUE);
+        list1.add(Boolean.TRUE);
 
         try
         {
@@ -223,38 +240,24 @@ public class CheckMatchesTest extends TestCase {
         System.out.println("testMissingAnswers complete");
     }
 
-    public void testBigList()
+    public void testAverageList()
     {
-        System.out.println("Starting testBigList");
+        System.out.println("Starting testAverageList");
 
         list1.add(Boolean.FALSE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.TRUE);
         list1.add(Boolean.FALSE);
-        list1.add(Boolean.FALSE);
-        list1.add(Boolean.TRUE);
-        list1.add(Boolean.FALSE);
-        list1.add(Boolean.TRUE);
-        list1.add(Boolean.FALSE);
-        list1.add(Boolean.TRUE);
-        list1.add(Boolean.TRUE);
 
         list2.add(Boolean.TRUE);
         list2.add(Boolean.TRUE);
         list2.add(Boolean.TRUE);
         list2.add(Boolean.FALSE);
         list2.add(Boolean.TRUE);
-        list2.add(Boolean.TRUE);
-        list2.add(Boolean.TRUE);
-        list2.add(Boolean.FALSE);
-        list2.add(Boolean.TRUE);
-        list2.add(Boolean.FALSE);
-        list2.add(Boolean.TRUE);
-        list2.add(Boolean.TRUE);
 
-        assertEquals(66, matchPercentage(list1,list2));
+        assertEquals(40, matchPercentage(list1,list2));
 
-        System.out.println("testBigList completed");
+        System.out.println("testAverageList completed");
     }
 }

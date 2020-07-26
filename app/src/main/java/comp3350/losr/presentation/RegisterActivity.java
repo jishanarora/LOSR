@@ -20,12 +20,14 @@ import java.io.InputStreamReader;
 import comp3350.losr.R;
 import comp3350.losr.application.Main;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity
+{
 
     private FrameLayout frameLayout;
     public static boolean onSignUpFragment =false;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         copyDatabaseToDevice();
@@ -59,7 +61,8 @@ public class RegisterActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    private void copyDatabaseToDevice() {
+    private void copyDatabaseToDevice()
+    {
         final String DB_PATH = "db";
 
         String[] assetNames;
@@ -83,7 +86,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException
+    {
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {
@@ -111,12 +115,14 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
         if(keyCode==KeyEvent.KEYCODE_BACK)
         {
             if(onSignUpFragment)
-            { onSignUpFragment =false;
-             setFragment(new SignInFragment());
+            {
+                onSignUpFragment =false;
+                setFragment(new SignInFragment());
                 return false;
             }
         }

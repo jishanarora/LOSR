@@ -5,16 +5,13 @@ import java.util.List;
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
 import comp3350.losr.objects.User;
-import comp3350.losr.persistence.DataAccessObject;
+import comp3350.losr.persistence.DataAccess;
 
 public class AccessUsers
 {
-    private DataAccessObject dataAccess;
+    private DataAccess dataAccess;
 
-    public AccessUsers()
-    {
-        dataAccess = (DataAccessObject) DatabaseService.getDataAccess(Main.dbName);
-    }
+    public AccessUsers() { dataAccess = DatabaseService.getDataAccess(Main.dbName); }
 
     public List<User> getGenderedUsers()
     {
@@ -42,10 +39,7 @@ public class AccessUsers
     public void updateUser(User update) {dataAccess.updateUser(update);}
 
     //Call when a user is trying to login. pass what they enter for the email and password into this.
-    //If that user exists it will return a User object of that user. If the user does not exist null is returned.
+    //If that user exists it will return null. If the user does not exist an error message is returned.
     //*** If the user exists the database will automatically set that account as the current user.
-    public User tryLogin(String email, String password)
-    {
-        return dataAccess.tryLogin(email, password);
-    }
+    public String tryLogin(String email, String password) { return dataAccess.tryLogin(email, password); }
 }

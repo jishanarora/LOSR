@@ -165,9 +165,12 @@ public class DataAccessObject implements DataAccess
         return currentUser;
     }
 
-    public User tryLogin(String userEmail, String userPassword)
+    public String tryLogin(String userEmail, String userPassword)
     {
-        User returningUser = null;
+        String message = null;
+        User returningUser;
+
+        int check = 0;
 
         String email, password, firstName, lastName, bio;
         User.user_gender genderEnum, genderPEnum;
@@ -177,8 +180,13 @@ public class DataAccessObject implements DataAccess
 
         try
         {
-            cmdString = "SELECT * FROM USERS WHERE email = "+"'"+userEmail+"'"+" AND password = "+"'"+userPassword+"'";
+            cmdString = "SELECT * FROM USERS WHERE email = "+"'"+userEmail+"'";
             rs1 = s1.executeQuery(cmdString);
+
+            if(rs1 == null)
+            {
+                System.out.println("do you go here");
+            }
         }
         catch(Exception e)
         {
@@ -218,11 +226,25 @@ public class DataAccessObject implements DataAccess
                         genderPEnum = User.user_gender.Losr;
                 }
 
-                returningUser = new User(firstName, lastName, email, password);
-                returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
-                returningUser.updateAllAnswers(q1, q2, q3, q4, q5);
+                if(userPassword.equals(password))
+                {
+                    returningUser = new User(firstName, lastName, email, password);
+                    returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                    returningUser.updateAllAnswers(q1, q2, q3, q4, q5);
 
-                currentUser = returningUser;
+                    currentUser = returningUser;
+                }
+                else
+                {
+                    message = "Incorrect password";
+                }
+
+                check++;
+            }
+
+            if(check <= 0)
+            {
+                message = "Could not find an account with that email";
             }
         }
         catch(Exception e)
@@ -230,7 +252,7 @@ public class DataAccessObject implements DataAccess
             e.printStackTrace();
         }
 
-        return returningUser;
+        return message;
     }
 
     public List<User> getGenderedUsers()
@@ -303,5 +325,4 @@ public class DataAccessObject implements DataAccess
 
         return users;
     }
-
 }

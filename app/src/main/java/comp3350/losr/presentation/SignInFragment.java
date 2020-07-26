@@ -19,12 +19,14 @@ import comp3350.losr.R;
 
 
 
-public class SignInFragment extends Fragment {
+public class SignInFragment extends Fragment
+{
 
     private String mParam1;
     private String mParam2;
 
-    public SignInFragment() {
+    public SignInFragment()
+    {
         // Required empty public constructor
     }
 
@@ -34,7 +36,8 @@ public class SignInFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
        dontHaveAnAccount= view.findViewById(R.id.tv_dont_have_an_account);
@@ -44,9 +47,11 @@ public class SignInFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
-        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
+        dontHaveAnAccount.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 RegisterActivity.onSignUpFragment =true;
@@ -54,7 +59,8 @@ public class SignInFragment extends Fragment {
             }
         });
 
-        signInBtn.setOnClickListener(new View.OnClickListener() {
+        signInBtn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
@@ -64,7 +70,8 @@ public class SignInFragment extends Fragment {
         });
     }
 
-    private void setFragment(Fragment fragment) {
+    private void setFragment(Fragment fragment)
+    {
         FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);

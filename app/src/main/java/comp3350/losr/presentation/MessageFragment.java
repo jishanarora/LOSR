@@ -18,13 +18,16 @@ import comp3350.losr.business.AccessMatches;
 import comp3350.losr.objects.Match;
 
 
-public class MessageFragment extends Fragment {
+public class MessageFragment extends Fragment
+{
 
-    public MessageFragment() {
+    public MessageFragment()
+    {
         // Required empty public constructor
     }
 
-    public static MessageFragment newInstance() {
+    public static MessageFragment newInstance()
+    {
 
         Bundle args = new Bundle();
 
@@ -33,7 +36,8 @@ public class MessageFragment extends Fragment {
         return fragment;
     }
 
-    public static MessageFragment newInstance(String param1, String param2) {
+    public static MessageFragment newInstance(String param1, String param2)
+    {
         MessageFragment fragment = new MessageFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -46,7 +50,8 @@ public class MessageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_message, container,false);
 
@@ -60,16 +65,20 @@ public class MessageFragment extends Fragment {
         return rootView;
     }
 
-    public class MatchesAdapter extends ArrayAdapter<Match>{
-        public MatchesAdapter(Context context, ArrayList<Match> matches){
+    public class MatchesAdapter extends ArrayAdapter<Match>
+    {
+        public MatchesAdapter(Context context, ArrayList<Match> matches)
+        {
             super(context, 0, matches);
         }
 
-        public View getView(int position, View convertView, ViewGroup parent){
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
 
             Match currMatch = getItem(position);
 
-            if (convertView == null) {
+            if (convertView == null)
+            {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
             }
 
