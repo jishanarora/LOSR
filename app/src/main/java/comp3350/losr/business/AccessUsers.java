@@ -39,7 +39,7 @@ public class AccessUsers
     public void updateUser(User update) {dataAccess.updateUser(update);}
 
     //Call when a user is trying to login. pass what they enter for the email and password into this.
-    //If that user exists it will return a User object of that user. If the user does not exist null is returned.
+    //If that user exists it will return null. If the user does not exist an error message is returned.
     //*** If the user exists the database will automatically set that account as the current user.
-    public User tryLogin(String email, String password) { return dataAccess.tryLogin(email, password); }
+    public String tryLogin(String email, String password) { return dataAccess.tryLogin(email, password); }
 }

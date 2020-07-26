@@ -109,20 +109,30 @@ public class DataAccessStub implements DataAccess {
         }
     }
 
-    public User tryLogin(String userEmail, String userPassword)
+    public String tryLogin(String userEmail, String userPassword)
     {
-        User returningUser = null;
+        String message = null;
 
         for(int i = 0; i < users.size(); i++)
         {
-            if(users.get(i).getUserEmail().equals(userEmail) && users.get(i).getUserPassword().equals(userPassword))
+            if(users.get(i).getUserEmail().equals(userEmail))
             {
-                returningUser = users.get(i);
-                break;
+                if(users.get(i).getUserPassword().equals(userPassword))
+                {
+                    currentUser = users.get(i);
+                    break;
+                }
+                else
+                {
+                    message = "Incorrect password";
+                    break;
+                }
             }
+
+            message = "Count not find an account with that email";
         }
 
-        return returningUser;
+        return message;
     }
 
     public List<User> getGenderedUsers(){

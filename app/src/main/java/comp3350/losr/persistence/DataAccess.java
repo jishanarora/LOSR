@@ -17,7 +17,7 @@ public interface DataAccess
 
     void updateUser(User update);
 
-    User tryLogin(String userEmail, String userPassword);
+    String tryLogin(String userEmail, String userPassword);
 
     List<User> getGenderedUsers();
 }
