@@ -158,6 +158,7 @@ public class SignUpFragment extends Fragment
             return true;
         }
     }
+
     public void confirmInput()
     {
         if (!validateEmail() | !validateFirstName() | !validateLastName() | !validatePassword())
