@@ -162,7 +162,6 @@ public class SignUpFragment extends Fragment
     {
         if (!validateEmail() | !validateFirstName() | !validateLastName() | !validatePassword())
         {
-            Toast.makeText(this.getContext(),"error", Toast.LENGTH_SHORT).show();
             return;
         }
         
