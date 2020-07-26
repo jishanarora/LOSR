@@ -158,11 +158,11 @@ public class SignUpFragment extends Fragment
             return true;
         }
     }
+
     public void confirmInput()
     {
         if (!validateEmail() | !validateFirstName() | !validateLastName() | !validatePassword())
         {
-            Toast.makeText(this.getContext(),"error", Toast.LENGTH_SHORT).show();
             return;
         }
         
