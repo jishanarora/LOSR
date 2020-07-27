@@ -1,14 +1,14 @@
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
-CREATE MEMORY TABLE USERS(EMAIL VARCHAR(50) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(40) NOT NULL,FNAME VARCHAR(30) NOT NULL,LNAME VARCHAR(30) NOT NULL,BIO VARCHAR(200),GENDER VARCHAR(6),GENDERP VARCHAR(6),YEAR INTEGER,MONTH INTEGER,DAY INTEGER,Q1 BOOLEAN,Q2 BOOLEAN,Q3 BOOLEAN,Q4 BOOLEAN,Q5 BOOLEAN)
+CREATE MEMORY TABLE USERS(EMAIL VARCHAR(50) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(40) NOT NULL,FNAME VARCHAR(30) NOT NULL,LNAME VARCHAR(30) NOT NULL,BIO VARCHAR(200),GENDER VARCHAR(6),GENDERP VARCHAR(6),YEAR INTEGER,MONTH INTEGER,DAY INTEGER,Q1 BOOLEAN,Q2 BOOLEAN,Q3 BOOLEAN,Q4 BOOLEAN,Q5 BOOLEAN,W1 INT, W2 INT,W3 INT,W4 INT,W5 INT)
 CREATE USER SA PASSWORD ""
 GRANT DBA TO SA
 SET WRITE_DELAY 20
 SET SCHEMA PUBLIC
-INSERT INTO USERS VALUES('amykowall@gmail.com','password','amy','kowall','yo','female','male',1999,1,2,TRUE,FALSE,TRUE,FALSE,TRUE)
-INSERT INTO USERS VALUES('garychalmers@gmail.com','password','gary','chalmers','hey','male','female',1998,4,13,FALSE,FALSE,FALSE,TRUE,FALSE)
-INSERT INTO USERS VALUES('jessicafie@gmail.com','password','jessica','fie','hi','female','male',2000,5,15,FALSE,FALSE,FALSE,TRUE,TRUE)
-INSERT INTO USERS VALUES('johndoe@gmail.com','password','john','doe','Hey','male','female',1999,8,8,TRUE,TRUE,TRUE,FALSE,FALSE)
-INSERT INTO USERS VALUES('laurastubbs@gmail.com','password','laura','stubbs','hi','female','male',2001,9,22,FALSE,TRUE,FALSE,TRUE,FALSE)
-INSERT INTO USERS VALUES('marypoppins@gmail.com','password','mary','poppins','hello there','female','male',1998,11,16,TRUE,TRUE,TRUE,TRUE,TRUE)
-INSERT INTO USERS VALUES('mbathie@gmail.com','password','michael','bathie','hi','male','female',25,1,1999,TRUE,FALSE,FALSE,TRUE,TRUE)
-INSERT INTO USERS VALUES('seanlett@gmail.com','password','sean','lett','hey','male','female',2000,9,13,FALSE,TRUE,TRUE,TRUE,FALSE)
+INSERT INTO USERS VALUES('amykowall@gmail.com','password','amy','kowall','yo','female','male',1999,1,2,TRUE,FALSE,TRUE,FALSE,TRUE,2,2,2,2,2)
+INSERT INTO USERS VALUES('garychalmers@gmail.com','password','gary','chalmers','hey','male','female',1998,4,13,FALSE,FALSE,FALSE,TRUE,FALSE,2,2,2,2,2)
+INSERT INTO USERS VALUES('jessicafie@gmail.com','password','jessica','fie','hi','female','male',2000,5,15,FALSE,FALSE,FALSE,TRUE,TRUE,2,2,2,2,2)
+INSERT INTO USERS VALUES('johndoe@gmail.com','password','john','doe','Hey','male','female',1999,8,8,TRUE,TRUE,TRUE,FALSE,FALSE,2,2,2,2,2)
+INSERT INTO USERS VALUES('laurastubbs@gmail.com','password','laura','stubbs','hi','female','male',2001,9,22,FALSE,TRUE,FALSE,TRUE,FALSE,2,2,2,2,2)
+INSERT INTO USERS VALUES('marypoppins@gmail.com','password','mary','poppins','hello there','female','male',1998,11,16,TRUE,TRUE,TRUE,TRUE,TRUE,2,2,2,2,2)
+INSERT INTO USERS VALUES('mbathie@gmail.com','password','michael','bathie','hi','male','female',25,1,1999,TRUE,FALSE,FALSE,TRUE,TRUE,2,2,2,2,2)
+INSERT INTO USERS VALUES('seanlett@gmail.com','password','sean','lett','hey','male','female',2000,9,13,FALSE,TRUE,TRUE,TRUE,FALSE,2,2,2,2,2)

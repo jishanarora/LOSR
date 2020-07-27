@@ -35,8 +35,8 @@ public class ProfileTest extends TestCase
         profile.setGender(User.user_gender.Male);
         profile.setGenderPreference(User.user_gender.Female);
         profile.setDateOfBirth(1999, 5, 20);
-        profile.updateAnswer(Boolean.TRUE, 0);
-        profile.updateAnswer(Boolean.TRUE, 2);
+        profile.updateAnswer(Boolean.TRUE, 2, 0);
+        profile.updateAnswer(Boolean.TRUE, 2, 2);
 
         assertNotNull(profile);
         assertEquals("My bio", profile.getBio());
@@ -44,11 +44,11 @@ public class ProfileTest extends TestCase
         assertEquals(User.user_gender.Female, profile.getGenderPreference());
         assertEquals("20/05/1999", profile.dateOfBirth());
         assertEquals(21, profile.getAge());
-        assertEquals(Boolean.TRUE, profile.getAnswers().get(0));
-        assertEquals(Boolean.FALSE, profile.getAnswers().get(1));
-        assertEquals(Boolean.TRUE, profile.getAnswers().get(2));
-        assertEquals(Boolean.FALSE, profile.getAnswers().get(3));
-        assertEquals(Boolean.FALSE, profile.getAnswers().get(4));
+        assertEquals(Boolean.TRUE, profile.getAnswers().get(0).getAnswer());
+        assertEquals(Boolean.FALSE, profile.getAnswers().get(1).getAnswer());
+        assertEquals(Boolean.TRUE, profile.getAnswers().get(2).getAnswer());
+        assertEquals(Boolean.FALSE, profile.getAnswers().get(3).getAnswer());
+        assertEquals(Boolean.FALSE, profile.getAnswers().get(4).getAnswer());
 
         System.out.println("testProfileAverage1 complete");
     }
@@ -61,8 +61,8 @@ public class ProfileTest extends TestCase
         profile.setGender(User.user_gender.Female);
         profile.setGenderPreference(User.user_gender.Female);
         profile.setDateOfBirth(1950, 2, 15);
-        profile.updateAnswer(Boolean.TRUE, 1);
-        profile.updateAnswer(Boolean.TRUE, 3);
+        profile.updateAnswer(Boolean.TRUE, 2, 1);
+        profile.updateAnswer(Boolean.TRUE, 2, 3);
 
         assertNotNull(profile);
         assertEquals("Hello! This is my bio!", profile.getBio());
@@ -70,11 +70,11 @@ public class ProfileTest extends TestCase
         assertEquals(User.user_gender.Female, profile.getGenderPreference());
         assertEquals("15/02/1950", profile.dateOfBirth());
         assertEquals(70, profile.getAge());
-        assertEquals(Boolean.FALSE, profile.getAnswers().get(0));
-        assertEquals(Boolean.TRUE, profile.getAnswers().get(1));
-        assertEquals(Boolean.FALSE, profile.getAnswers().get(2));
-        assertEquals(Boolean.TRUE, profile.getAnswers().get(3));
-        assertEquals(Boolean.FALSE, profile.getAnswers().get(4));
+        assertEquals(Boolean.FALSE, profile.getAnswers().get(0).getAnswer());
+        assertEquals(Boolean.TRUE, profile.getAnswers().get(1).getAnswer());
+        assertEquals(Boolean.FALSE, profile.getAnswers().get(2).getAnswer());
+        assertEquals(Boolean.TRUE, profile.getAnswers().get(3).getAnswer());
+        assertEquals(Boolean.FALSE, profile.getAnswers().get(4).getAnswer());
 
         System.out.println("testProfileAverage2 complete");
     }
@@ -91,13 +91,13 @@ public class ProfileTest extends TestCase
         profile.setGender(User.user_gender.Female);
         profile.setGenderPreference(User.user_gender.Female);
         profile.setDateOfBirth(1950, 2, 15);
-        profile.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+        profile.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
 
         profile2.setBio("Hello! This is my bio!");
         profile2.setGender(User.user_gender.Female);
         profile2.setGenderPreference(User.user_gender.Female);
         profile2.setDateOfBirth(1950, 2, 15);
-        profile2.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+        profile2.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
 
         assertNotNull(profile);
         assertNotNull(profile2);

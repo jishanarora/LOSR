@@ -7,12 +7,38 @@ public class Question {
     private Boolean answer;
     private int weight;
 
-    public Question(int qNum, String question, Boolean answer, int weight) {
+    //just for testing
+    public Question(Boolean answer)
+    {
+        qNum = 0;
+        question = "test";
+        this.answer = answer;
+        weight = 2;
+    }
+
+    public Question(int qNum, String question, Boolean answer, int weight)
+    {
         this.qNum = qNum;
         this.question = question;
         this.answer = answer;
         this.weight = weight;
+    }
 
+    public boolean equals(Question q)
+    {
+        boolean equal = false;
+
+        if(q.getqNum() == this.qNum && q.getQuestion().equals(this.question) && q.getAnswer() == this.answer && q.getWeight() == this.weight)
+        {
+            equal = true;
+        }
+
+        return equal;
+    }
+
+    public String toString()
+    {
+        return answer.toString();
     }
 
     // Get Methods

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.objects.Profile;
+import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
 
 public class DataAccessObject implements DataAccess
@@ -29,7 +30,7 @@ public class DataAccessObject implements DataAccess
     {
         this.dbName = dbName;
         currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
-        currentUser.updateAllAnswers(true, false, false, true ,true);
+        currentUser.updateAllAnswers(true, false, false, true ,true,2,2,2,2,2);
     }
 
     public void openConnection(String dbPath)
@@ -91,14 +92,14 @@ public class DataAccessObject implements DataAccess
                     +"', '" +newUser.getUserPassword()
                     +"', '" +newUser.getUserFirstName()
                     +"', '" +newUser.getUserLastName()
-                    +"', 'hi', 'losr', 'losr', 0, 0, 0, false, false, false, false, false";
+                    +"', 'hi', 'losr', 'losr', 0, 0, 0, false, false, false, false, false, 2, 2, 2, 2, 2";
 
             cmdString = "Insert into USERS " +" Values(" +values +")";
             s1.executeUpdate(cmdString);
 
             registered = new User(newUser.getUserEmail(), newUser.getUserPassword(), newUser.getUserFirstName(), newUser.getUserLastName());
             registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0,0,0);
-            registered.updateAllAnswers(false,false,false,false,false);
+            registered.updateAllAnswers(false,false,false,false,false,2,2,2,2,2);
 
             currentUser = registered;
         }
@@ -128,7 +129,7 @@ public class DataAccessObject implements DataAccess
 
         Profile p = update.getUserProfile();
         String[] dob = p.dateOfBirth().split("/");
-        List<Boolean> answers = p.getAnswers();
+        List<Question> answers = p.getAnswers();
 
         try
         {
@@ -142,11 +143,16 @@ public class DataAccessObject implements DataAccess
                     + "', year= " + dob[2]
                     + ", month= " + dob[1]
                     + ", day= " + dob[0]
-                    + ", q1= " + answers.get(0)
-                    + ", q2= " + answers.get(1)
-                    + ", q3= " + answers.get(2)
-                    + ", q4= " + answers.get(3)
-                    + ", q5= " + answers.get(4);
+                    + ", q1= " + answers.get(0).getAnswer()
+                    + ", q2= " + answers.get(1).getAnswer()
+                    + ", q3= " + answers.get(2).getAnswer()
+                    + ", q4= " + answers.get(3).getAnswer()
+                    + ", q5= " + answers.get(4).getAnswer()
+                    + ", w1= " + answers.get(0).getWeight()
+                    + ", w2= " + answers.get(1).getWeight()
+                    + ", w3= " + answers.get(2).getWeight()
+                    + ", w4= " + answers.get(3).getWeight()
+                    + ", w5= " + answers.get(4).getWeight();
 
             //the only time you update a user is when you're currently logged in to that user
             cmdString = "Update USERS Set " +values +" where email = "+"'"+currentUser.getUserEmail()+"'";
@@ -177,6 +183,7 @@ public class DataAccessObject implements DataAccess
         String gender, genderP;
         int day, month, year;
         boolean q1, q2, q3, q4, q5;
+        int w1, w2, w3, w4, w5;
 
         try
         {
@@ -202,6 +209,7 @@ public class DataAccessObject implements DataAccess
                 gender = rs1.getString("gender"); genderP = rs1.getString("genderP");
                 day = rs1.getInt("day"); month = rs1.getInt("month"); year = rs1.getInt("year");
                 q1 = rs1.getBoolean("Q1"); q2 = rs1.getBoolean("Q2"); q3 = rs1.getBoolean("Q3"); q4 = rs1.getBoolean("Q4"); q5 = rs1.getBoolean("Q5");
+                w1 = rs1.getInt("w1"); w2 = rs1.getInt("w2"); w3 = rs1.getInt("w3"); w4 = rs1.getInt("w4"); w5 = rs1.getInt("w5");
 
                 switch (gender)
                 {
@@ -230,7 +238,7 @@ public class DataAccessObject implements DataAccess
                 {
                     returningUser = new User(firstName, lastName, email, password);
                     returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
-                    returningUser.updateAllAnswers(q1, q2, q3, q4, q5);
+                    returningUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4 , w5);
 
                     currentUser = returningUser;
                 }
@@ -264,6 +272,7 @@ public class DataAccessObject implements DataAccess
         String gender, genderP;
         int day, month, year;
         boolean q1, q2, q3, q4, q5;
+        int w1, w2, w3, w4, w5;
 
         try
         {
@@ -284,6 +293,7 @@ public class DataAccessObject implements DataAccess
                 gender = rs1.getString("gender"); genderP = rs1.getString("genderP");
                 day = rs1.getInt("day"); month = rs1.getInt("month"); year = rs1.getInt("year");
                 q1 = rs1.getBoolean("Q1"); q2 = rs1.getBoolean("Q2"); q3 = rs1.getBoolean("Q3"); q4 = rs1.getBoolean("Q4"); q5 = rs1.getBoolean("Q5");
+                w1 = rs1.getInt("w1"); w2 = rs1.getInt("w2"); w3 = rs1.getInt("w3"); w4 = rs1.getInt("w4"); w5 = rs1.getInt("w5");
 
                 switch (gender)
                 {
@@ -312,7 +322,7 @@ public class DataAccessObject implements DataAccess
                 {
                     User newUser = new User(firstName, lastName, email, password);
                     newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
-                    newUser.updateAllAnswers(q1, q2, q3, q4, q5);
+                    newUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4 , w5);
                     users.add(newUser);
                 }
 

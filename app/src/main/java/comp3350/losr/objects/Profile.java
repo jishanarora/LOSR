@@ -19,7 +19,7 @@ public class Profile
     private int age;
 
     private int numQuestions = 5;
-    private ArrayList<Boolean> answers;
+    private ArrayList<Question> answers;
 
     public Profile()
     {
@@ -27,7 +27,7 @@ public class Profile
 
         for(int i = 0; i < numQuestions; i ++)
         {
-            answers.add(Boolean.FALSE);
+            answers.add(new Question(i+1, "tempQ"+i+1, Boolean.FALSE, 2));
         }
     }
 
@@ -55,9 +55,17 @@ public class Profile
         {
             p = (Profile) object;
             if (p.age == age && p.bio.equals(bio) && p.genderPreference.equals(genderPreference)
-                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.answers.equals(answers) && p.birthYear == birthYear)
+                    && p.birthDay == birthDay && p.birthMonth == birthMonth && p.birthYear == birthYear)
             {
                 result = true;
+
+                for(int i = 0; i < answers.size(); i ++)
+                {
+                    if(!answers.get(i).equals(p.getAnswers().get(i)))
+                    {
+                        result = false;
+                    }
+                }
             }
         }
         return result;
@@ -113,7 +121,7 @@ public class Profile
 
     public User.user_gender getGenderPreference() { return genderPreference; }
 
-    public ArrayList<Boolean> getAnswers() { return answers; }
+    public ArrayList<Question> getAnswers() { return answers; }
 
     public int getNumQuestions() { return numQuestions; }
 
@@ -142,19 +150,26 @@ public class Profile
 
     //update a specific answer
     //bounds check is made from User
-    public void updateAnswer(Boolean answer, int spot) {
-        answers.set(spot, answer);
+    public void updateAnswer(Boolean answer, int weight, int spot)
+    {
+        answers.get(spot).setAnswer(answer);
+        answers.get(spot).setWeight(weight);
     }
 
     //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5)
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5, int w1, int w2, int w3, int w4, int w5)
     {
-        answers.clear();
-        answers.add(a1);
-        answers.add(a2);
-        answers.add(a3);
-        answers.add(a4);
-        answers.add(a5);
+        answers.get(0).setAnswer(a1);
+        answers.get(0).setWeight(w1);
+        answers.get(1).setAnswer(a2);
+        answers.get(1).setWeight(w2);
+        answers.get(2).setAnswer(a3);
+        answers.get(2).setWeight(w3);
+        answers.get(3).setAnswer(a4);
+        answers.get(3).setWeight(w4);
+        answers.get(4).setAnswer(a5);
+        answers.get(4).setWeight(w5);
+
     }
 
     public void setBio(String bio)
