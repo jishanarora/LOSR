@@ -64,7 +64,7 @@ public class User
 
     public Profile getUserProfile() {return userProfile;}
 
-    public ArrayList<Boolean> getAnswers() {return userProfile.getAnswers();}
+    public ArrayList<Question> getAnswers() {return userProfile.getAnswers();}
 
 
 
@@ -95,14 +95,14 @@ public class User
     }
 
     //update a specific answer
-    public String updateAnswer(Boolean answer, int spot)
+    public String updateAnswer(Boolean answer, int weight, int spot)
     {
         String message = null;
         int numQuestions = this.userProfile.getNumQuestions();
 
         //if this fails the spot is out of bounds
         if(spot >= 0 && spot < numQuestions) {
-            userProfile.updateAnswer(answer,spot);
+            userProfile.updateAnswer(answer, weight, spot);
             message = "success";
         }
 
@@ -110,5 +110,8 @@ public class User
     }
 
     //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5) { userProfile.updateAllAnswers(a1,a2,a3,a4,a5); }
+    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5, int w1, int w2, int w3, int w4, int w5)
+    {
+        userProfile.updateAllAnswers(a1,a2,a3,a4,a5,w1,w2,w3,w4,w5);
+    }
 }

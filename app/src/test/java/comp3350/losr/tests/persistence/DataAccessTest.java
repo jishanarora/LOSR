@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.application.Main;
+import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
 import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
@@ -16,11 +17,11 @@ public class DataAccessTest extends TestCase
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        //dataAccess = new DataAccessStub("Stub");
-        //dataAccess.openConnection("Stub");
+        dataAccess = new DataAccessStub("Stub");
+        dataAccess.openConnection("Stub");
         // or switch to the real database:
-        dataAccess = new DataAccessObject(Main.dbName);
-        dataAccess.openConnection(Main.getDBPathName());
+        //dataAccess = new DataAccessObject(Main.dbName);
+        //dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers()
@@ -55,7 +56,11 @@ public class DataAccessTest extends TestCase
         assertEquals(User.user_gender.Female, test.get(spot).getUserProfile().getGender());
         assertEquals(User.user_gender.Male, test.get(spot).getUserProfile().getGenderPreference());
         assertEquals("16/11/1998", test.get(spot).getUserProfile().dateOfBirth());
-        assertEquals(temp, test.get(spot).getAnswers());
+        assertEquals(temp.get(0), test.get(spot).getAnswers().get(0).getAnswer());
+        assertEquals(temp.get(1), test.get(spot).getAnswers().get(1).getAnswer());
+        assertEquals(temp.get(2), test.get(spot).getAnswers().get(2).getAnswer());
+        assertEquals(temp.get(3), test.get(spot).getAnswers().get(3).getAnswer());
+        assertEquals(temp.get(4), test.get(spot).getAnswers().get(4).getAnswer());
 
         System.out.println("testGetGenderedUsers complete");
     }
@@ -106,20 +111,24 @@ public class DataAccessTest extends TestCase
         test.updateBio("new bio");
         test.updateGender(User.user_gender.Female);
         test.updateDateOfBirth(1998, 1, 25);
-        test.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+        test.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
         dataAccess.updateUser(test);
 
-        ArrayList<Boolean> temp = new ArrayList<>();
-        temp.add(Boolean.TRUE);
-        temp.add(Boolean.FALSE);
-        temp.add(Boolean.TRUE);
-        temp.add(Boolean.TRUE);
-        temp.add(Boolean.TRUE);
+        ArrayList<Question> temp = new ArrayList<>();
+        temp.add(new Question(1, "tempQ1", Boolean.TRUE, 2));
+        temp.add(new Question(2, "tempQ2", Boolean.FALSE, 2));
+        temp.add(new Question(3, "tempQ3", Boolean.TRUE, 2));
+        temp.add(new Question(4, "tempQ4", Boolean.TRUE, 2));
+        temp.add(new Question(5, "tempQ5", Boolean.TRUE, 2));
 
         assertEquals("new bio", dataAccess.getCurrentUser().getUserProfile().getBio());
         assertEquals(User.user_gender.Female, dataAccess.getCurrentUser().getUserProfile().getGender());
         assertEquals(22, dataAccess.getCurrentUser().getUserProfile().getAge());
-        assertEquals(temp, dataAccess.getCurrentUser().getAnswers());
+        assertEquals(temp.get(0).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(0).getAnswer());
+        assertEquals(temp.get(1).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(1).getAnswer());
+        assertEquals(temp.get(2).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(2).getAnswer());
+        assertEquals(temp.get(3).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(3).getAnswer());
+        assertEquals(temp.get(4).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(4).getAnswer());
 
         System.out.println("testUpdateUser complete");
     }
