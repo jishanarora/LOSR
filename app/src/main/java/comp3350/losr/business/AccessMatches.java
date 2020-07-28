@@ -39,11 +39,29 @@ public class AccessMatches
 
             if(matchCheck > 0)
             {
-                allMatches.add(new Match(currentUser, potentialMatches.get(i)));
+                allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
             }
 
         }
         return allMatches;
+    }
+
+    private int position(List<Match> matches, float target)
+    {
+        int left = 0;
+        int right = matches.size();
+
+        while (left < right)
+        {
+            int mid = (right + left) / 2;
+            if (matches.get(mid).getMatchPercent() == target)
+                right = mid;
+            else if (matches.get(mid).getMatchPercent() > target)
+                left = mid + 1;
+            else if (matches.get(mid).getMatchPercent() < target)
+                right = mid;
+        }
+        return left;
     }
 
 }

@@ -28,11 +28,10 @@ public class AccessMatchesTest extends TestCase
         System.out.println("Starting testGetMatches");
 
         assertEquals(4, am.getMatches().size());
-        assertEquals("marypoppins@gmail.com", am.getMatches().get(0).getMatchedUser().getUserEmail());
-        assertEquals("laurastubbs@gmail.com", am.getMatches().get(1).getMatchedUser().getUserEmail());
-        assertEquals("jessicafie@gmail.com", am.getMatches().get(2).getMatchedUser().getUserEmail());
-        assertEquals("amykowall@gmail.com", am.getMatches().get(3).getMatchedUser().getUserEmail());
-
+        assertEquals("jessicafie@gmail.com", am.getMatches().get(0).getMatchedUser().getUserEmail());
+        assertEquals("amykowall@gmail.com", am.getMatches().get(1).getMatchedUser().getUserEmail());
+        assertEquals("marypoppins@gmail.com", am.getMatches().get(2).getMatchedUser().getUserEmail());
+        assertEquals("laurastubbs@gmail.com", am.getMatches().get(3).getMatchedUser().getUserEmail());
 
         System.out.println("testGetMatches complete");
     }
