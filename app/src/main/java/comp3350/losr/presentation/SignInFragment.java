@@ -12,19 +12,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.hsqldb.User;
 
 import comp3350.losr.R;
-
+import comp3350.losr.business.AccessUsers;
 
 
 public class SignInFragment extends Fragment
 {
-
-    private String mParam1;
-    private String mParam2;
-
     public SignInFragment()
     {
         // Required empty public constructor
@@ -33,6 +33,8 @@ public class SignInFragment extends Fragment
     private TextView dontHaveAnAccount;
     private FrameLayout parentFrameLayout;
     private Button signInBtn;
+    private EditText email;
+    private EditText password;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,7 +45,9 @@ public class SignInFragment extends Fragment
        dontHaveAnAccount= view.findViewById(R.id.tv_dont_have_an_account);
        parentFrameLayout=getActivity().findViewById(R.id.register_framelayout);
        signInBtn=view.findViewById(R.id.sign_in_button);
-       return view;
+        email=view.findViewById(R.id.sign_in_email);
+        password=view.findViewById(R.id.sign_in_password);
+        return view;
     }
 
     @Override
@@ -76,6 +80,24 @@ public class SignInFragment extends Fragment
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
         fragmentTransaction.commit();
+    }
+
+    public void signIn(EditText email, EditText password)
+    {
+        String emailStr = email.getText().toString().trim();
+        String passwordStr = password.getText().toString().trim();
+        AccessUsers accessUsers= new AccessUsers();
+        String message =accessUsers.tryLogin(emailStr,passwordStr);
+        if(message!=null)
+        {
+            Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
+            startActivity(navigationIntent);
+            getActivity().finish();
+        }
+
     }
 
 
