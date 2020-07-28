@@ -8,6 +8,7 @@ import comp3350.losr.tests.business.AccessUsersTest;
 import comp3350.losr.tests.business.CheckMatchesTest;
 import comp3350.losr.tests.objects.MatchTest;
 import comp3350.losr.tests.objects.ProfileTest;
+import comp3350.losr.tests.objects.QuestionTest;
 import comp3350.losr.tests.objects.UserTest;
 import comp3350.losr.tests.persistence.DataAccessTest;
 
@@ -29,6 +30,7 @@ public class AllTests
         suite.addTestSuite(UserTest.class);
         suite.addTestSuite(ProfileTest.class);
         suite.addTestSuite(MatchTest.class);
+        suite.addTestSuite(QuestionTest.class);
     }
 
     private static void testBusiness()

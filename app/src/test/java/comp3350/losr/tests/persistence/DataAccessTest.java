@@ -17,11 +17,11 @@ public class DataAccessTest extends TestCase
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        dataAccess = new DataAccessStub("Stub");
-        dataAccess.openConnection("Stub");
+        //dataAccess = new DataAccessStub("Stub");
+        //dataAccess.openConnection("Stub");
         // or switch to the real database:
-        //dataAccess = new DataAccessObject(Main.dbName);
-        //dataAccess.openConnection(Main.getDBPathName());
+        dataAccess = new DataAccessObject(Main.dbName);
+        dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers()
@@ -141,5 +141,25 @@ public class DataAccessTest extends TestCase
         assertEquals("Could not find an account with that email", dataAccess.tryLogin("mbathie@gmail.com", "password"));
 
         System.out.println("testDeleteUser complete");
+    }
+
+    public void testRegistration()
+    {
+        System.out.println("Starting testRegistration");
+
+        assertEquals(new User("testFirstName", "testLastName", "testEmail", "testPassword"), dataAccess.addUser(new User("testFirstName", "testLastName", "testEmail", "testPassword")));
+        assertEquals(new User("testFirstName", "testLastName", "testEmail", "testPassword"), dataAccess.getCurrentUser());
+
+        System.out.println("testRegistration complete");
+    }
+
+    public void testLogin()
+    {
+        System.out.println("Starting testLogin");
+
+        assertNull(dataAccess.tryLogin("marypoppins@gmail.com", "password"));
+        assertEquals("marypoppins@gmail.com", dataAccess.getCurrentUser().getUserEmail());
+
+        System.out.println("testLogin complete");
     }
 }

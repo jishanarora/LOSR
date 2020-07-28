@@ -28,7 +28,7 @@ public class Question {
     {
         boolean equal = false;
 
-        if(q.getqNum() == this.qNum && q.getQuestion().equals(this.question) && q.getAnswer() == this.answer && q.getWeight() == this.weight)
+        if(q.getqNum() == this.qNum && q.getQuestion().equals(this.question) && q.getAnswer().equals(this.answer) && q.getWeight() == this.weight)
         {
             equal = true;
         }
