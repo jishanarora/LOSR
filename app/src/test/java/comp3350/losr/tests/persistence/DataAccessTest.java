@@ -142,4 +142,24 @@ public class DataAccessTest extends TestCase
 
         System.out.println("testDeleteUser complete");
     }
+
+    public void testRegistration()
+    {
+        System.out.println("Starting testRegistration");
+
+        assertEquals(new User("testFirstName", "testLastName", "testEmail", "testPassword"), dataAccess.addUser(new User("testFirstName", "testLastName", "testEmail", "testPassword")));
+        assertEquals(new User("testFirstName", "testLastName", "testEmail", "testPassword"), dataAccess.getCurrentUser());
+
+        System.out.println("testRegistration complete");
+    }
+
+    public void testLogin()
+    {
+        System.out.println("Starting testLogin");
+
+        assertNull(dataAccess.tryLogin("marypoppins@gmail.com", "password"));
+        assertEquals("marypoppins@gmail.com", dataAccess.getCurrentUser().getUserEmail());
+
+        System.out.println("testLogin complete");
+    }
 }

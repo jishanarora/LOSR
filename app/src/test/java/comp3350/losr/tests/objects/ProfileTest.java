@@ -18,7 +18,7 @@ public class ProfileTest extends TestCase
         System.out.println("Starting testProfileEmpty");
 
         assertNotNull(profile);
-        assertEquals("Hi!", profile.getBio());
+        assertEquals("hi", profile.getBio());
         assertEquals(User.user_gender.Losr, profile.getGender());
         assertEquals(User.user_gender.Losr, profile.getGenderPreference());
         assertEquals("00/00/0000", profile.dateOfBirth());

@@ -8,7 +8,7 @@ import java.util.Calendar;
 //used to hold a lot of the user information
 public class Profile
 {
-    private String bio = "Hi!";
+    private String bio = "hi";
 
     private User.user_gender gender = User.user_gender.Losr;
     private User.user_gender genderPreference = User.user_gender.Losr;

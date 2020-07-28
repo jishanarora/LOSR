@@ -97,7 +97,7 @@ public class DataAccessObject implements DataAccess
             cmdString = "Insert into USERS " +" Values(" +values +")";
             s1.executeUpdate(cmdString);
 
-            registered = new User(newUser.getUserEmail(), newUser.getUserPassword(), newUser.getUserFirstName(), newUser.getUserLastName());
+            registered = new User(newUser.getUserFirstName(), newUser.getUserLastName(), newUser.getUserEmail(), newUser.getUserPassword());
             registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0,0,0);
             registered.updateAllAnswers(false,false,false,false,false,2,2,2,2,2);
 
