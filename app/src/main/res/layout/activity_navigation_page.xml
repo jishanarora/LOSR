@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/navigation_layout"
     tools:context="comp3350.losr.presentation.NavigationPageActivity">
     
     <com.google.android.material.appbar.AppBarLayout

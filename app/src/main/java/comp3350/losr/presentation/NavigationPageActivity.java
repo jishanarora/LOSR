@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -35,7 +36,14 @@ public class NavigationPageActivity extends AppCompatActivity
         tabLayout.getTabAt(1).setIcon(R.mipmap.flames);
         tabLayout.getTabAt(2).setIcon(R.mipmap.message);
 
-        viewPager.setCurrentItem(1,false);
+        final Intent intent = new Intent(getIntent());
+         int value = intent.getIntExtra("value", -1);
+
+        if(value == 1) {
+            viewPager.setCurrentItem(0,false);
+        } else {
+            viewPager.setCurrentItem(1,false);
+        }
         tabLayout.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(1).getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(2).getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
