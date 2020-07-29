@@ -1,5 +1,6 @@
 package comp3350.losr.presentation;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -22,6 +23,8 @@ import android.widget.Toast;
 import java.util.regex.Pattern;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
 
 
 public class SignUpFragment extends Fragment
@@ -165,16 +168,18 @@ public class SignUpFragment extends Fragment
         {
             return;
         }
-        
-        //make call to create user here
 
-        String input = "Email: " + email.getText().toString().toLowerCase();
-        input += "\n";
-        input += "First Name: " + firstName.getText().toString();
-        input += "\n";
-        input += "Last Name: " + lastName.getText().toString();
-        input += "\n";
-        Toast.makeText(this.getContext(), input, Toast.LENGTH_SHORT).show();
+        AccessUsers accessUsers= new AccessUsers();
+        User registeredUser=accessUsers.addUser(new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString()));
+        if(registeredUser==null) {
+            Toast.makeText(this.getContext(), "Unable to register, Contact Support", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
+            startActivity(navigationIntent);
+            getActivity().finish();
+        }
+
     }
 
 

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,7 @@ public class SignInFragment extends Fragment
         {
             @Override
             public void onClick(View view) {
-                Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
-                startActivity(navigationIntent);
-                getActivity().finish();
+               signIn(email,password);
             }
         });
     }
@@ -87,18 +86,52 @@ public class SignInFragment extends Fragment
         String emailStr = email.getText().toString().trim();
         String passwordStr = password.getText().toString().trim();
         AccessUsers accessUsers= new AccessUsers();
-        String message =accessUsers.tryLogin(emailStr,passwordStr);
-        if(message!=null)
-        {
-            Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
-            startActivity(navigationIntent);
-            getActivity().finish();
+        if(validateEmail() && validatePassword()) {
+            String message = accessUsers.tryLogin(emailStr, passwordStr);
+            if (message != null) {
+                Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+            } else {
+                Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
+                startActivity(navigationIntent);
+                getActivity().finish();
+            }
         }
 
     }
+    private boolean validateEmail()
+    {
+        String emailInput = email.getText().toString().trim();
+        if (emailInput.isEmpty())
+        {
+            email.setError("Field can't be empty");
+            return false;
+        }
+        else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches())
+        {
+            email.setError("Please enter a valid email address");
+            return false;
+        }
+        else
+        {
+            email.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String passwordInput1 = password.getText().toString().trim();
+        if (passwordInput1.isEmpty())
+        {
+            password.setError("Field can't be empty");
+            return false;
+        }
+        else
+        {
+            password.setError(null);
+            return true;
+        }
+    }
+
 
 
 
