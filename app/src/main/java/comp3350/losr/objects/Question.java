@@ -8,6 +8,13 @@ public class Question {
     private int weight;
 
     //just for testing
+    public Question(Boolean answer, int weight)
+    {
+        qNum = 0;
+        question = "test";
+        this.answer = answer;
+        this.weight = weight;
+    }
     public Question(Boolean answer)
     {
         qNum = 0;
@@ -15,6 +22,7 @@ public class Question {
         this.answer = answer;
         weight = 2;
     }
+
 
     public Question(int qNum, String question, Boolean answer, int weight)
     {
