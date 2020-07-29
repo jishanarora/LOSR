@@ -43,9 +43,7 @@ public class QuestionTest extends TestCase
         System.out.println("Starting testEquals");
 
         q = new Question(1, "Q1", Boolean.FALSE, 2);
-        Question q2  = new Question(1, "Q1", Boolean.FALSE, 2);
-
-        assertTrue(q.equals(q2));
+        assertTrue(q.equals(new Question(1, "Q1", Boolean.FALSE, 2)));
 
         System.out.println("testEquals complete");
     }
