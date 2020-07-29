@@ -127,7 +127,7 @@ public class SignUpFragment extends Fragment
         }
         else if (usernameInput.length() > 15)
         {
-            lastName.setError("First Name too long");
+            lastName.setError("Last Name too long");
             return false;
         }
         else
@@ -144,9 +144,14 @@ public class SignUpFragment extends Fragment
             password.setError("Field can't be empty");
             return false;
         }
-        else if (!PASSWORD_PATTERN.matcher(passwordInput1).matches())
+        else if (passwordInput1.length() < 8)  //!PASSWORD_PATTERN.matcher(passwordInput1).matches()
         {
             password.setError("Password too weak");
+            return false;
+        }
+        else if(passwordInput1.length() > 40)
+        {
+            password.setError("Password too long");
             return false;
         }
         else if (!passwordInput1.equals(passwordInput2)) {

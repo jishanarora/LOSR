@@ -10,5 +10,5 @@ INSERT INTO USERS VALUES('jessicafie@gmail.com','password','jessica','fie','hi',
 INSERT INTO USERS VALUES('johndoe@gmail.com','password','john','doe','Hey','male','female',1999,8,8,TRUE,TRUE,TRUE,FALSE,FALSE,2,2,2,2,2)
 INSERT INTO USERS VALUES('laurastubbs@gmail.com','password','laura','stubbs','hi','female','male',2001,9,22,FALSE,TRUE,FALSE,TRUE,FALSE,2,2,2,2,2)
 INSERT INTO USERS VALUES('marypoppins@gmail.com','password','mary','poppins','hello there','female','male',1998,11,16,TRUE,TRUE,TRUE,TRUE,TRUE,2,2,2,2,2)
-INSERT INTO USERS VALUES('mbathie@gmail.com','password','michael','bathie','hi','male','female',25,1,1999,TRUE,FALSE,FALSE,TRUE,TRUE,2,2,2,2,2)
+INSERT INTO USERS VALUES('mbathie@gmail.com','password','michael','bathie','hi','male','female',1999,1,25,TRUE,FALSE,FALSE,TRUE,TRUE,2,2,2,2,2)
 INSERT INTO USERS VALUES('seanlett@gmail.com','password','sean','lett','hey','male','female',2000,9,13,FALSE,TRUE,TRUE,TRUE,FALSE,2,2,2,2,2)
