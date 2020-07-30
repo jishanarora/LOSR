@@ -39,9 +39,12 @@ public class NavigationPageActivity extends AppCompatActivity
         final Intent intent = new Intent(getIntent());
          int value = intent.getIntExtra("value", -1);
 
-        if(value == 1) {
+        if(value == 1)
+        {
             viewPager.setCurrentItem(0,false);
-        } else {
+        }
+        else
+        {
             viewPager.setCurrentItem(1,false);
         }
         tabLayout.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
