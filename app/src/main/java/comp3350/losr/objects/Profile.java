@@ -75,11 +75,11 @@ public class Profile
     {
         String result;
 
-        if (genderPreference == User.user_gender.Female)
+        if (gender == User.user_gender.Female)
         {
             result = "female";
         }
-        else if (genderPreference == User.user_gender.Male)
+        else if (gender == User.user_gender.Male)
         {
             result = "male";
         }
