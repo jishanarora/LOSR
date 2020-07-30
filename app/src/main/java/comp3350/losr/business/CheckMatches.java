@@ -20,8 +20,10 @@ public class CheckMatches
         int ansMatchVal;
         int diff;
 
-        for (int i = 0; i < numQuestions; i++) {
-            if (curr.get(i).getAnswer().equals(match.get(i).getAnswer())) {
+        for (int i = 0; i < numQuestions; i++)
+        {
+            if (curr.get(i).getAnswer().equals(match.get(i).getAnswer()))
+            {
                 ansMatchVal = 0;
                 // get the absolute difference between two weights
                 diff = Math.abs(curr.get(i).getWeight() - match.get(i).getWeight());

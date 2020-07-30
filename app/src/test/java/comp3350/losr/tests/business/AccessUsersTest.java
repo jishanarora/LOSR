@@ -63,10 +63,21 @@ public class AccessUsersTest extends TestCase
         test.setUserProfile("", User.user_gender.Female, User.user_gender.Male, 1,1,1);
         au.addUser(test);
 
+        //shouldnt increase to 5 because adding a user would mean they are registering, when you register you are set as the currentUser
+        //so you would not be included in the list of potential matches. Also the currentUser is now female and there are only 4 males.
+        assertEquals(4, au.getGenderedUsers().size());
+
+        User test2 = new User("","","test","");
+        test2.setUserProfile("", User.user_gender.Male, User.user_gender.Female, 1,1,1);
+        au.addUser(test2);
+
+        //the currentUser is now male so there should be 5 females as we added 1 extra earlier
         assertEquals(5, au.getGenderedUsers().size());
 
         au.deleteUser(test);
+        au.deleteUser(test2);
 
+        //we now delete the first User we added which brings the female count back down to 4
         assertEquals(4, au.getGenderedUsers().size());
 
         System.out.println("testAddAndDelete complete");
@@ -88,5 +99,28 @@ public class AccessUsersTest extends TestCase
         assertEquals("bathie", au.getCurrentUser().getUserLastName());
 
         System.out.println("testUpdate complete");
+    }
+
+    public void testGetSpecifiedUser()
+    {
+        System.out.println("Starting testGetSpecifiedUser");
+
+        User test = au.getSpecificUser("marypoppins@gmail.com");
+
+        assertEquals("marypoppins@gmail.com", test.getUserEmail());
+        assertEquals("password", test.getUserPassword());
+        assertEquals("mary", test.getUserFirstName());
+        assertEquals("poppins", test.getUserLastName());
+
+        System.out.println("testGetSpecifiedUser complete");
+    }
+
+    public void testGetSpecifiedUserFalse()
+    {
+        System.out.println("Starting testGetSpecifiedUserFalse");
+
+        assertNull(au.getSpecificUser("marypoppns@gmail.com"));
+
+        System.out.println("testGetSpecifiedUserFalse complete");
     }
 }

@@ -17,11 +17,11 @@ public class DataAccessTest extends TestCase
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        //dataAccess = new DataAccessStub("Stub");
-        //dataAccess.openConnection("Stub");
+        dataAccess = new DataAccessStub("Stub");
+        dataAccess.openConnection("Stub");
         // or switch to the real database:
-        dataAccess = new DataAccessObject(Main.dbName);
-        dataAccess.openConnection(Main.getDBPathName());
+        //dataAccess = new DataAccessObject(Main.dbName);
+        //dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers()
@@ -161,5 +161,28 @@ public class DataAccessTest extends TestCase
         assertEquals("marypoppins@gmail.com", dataAccess.getCurrentUser().getUserEmail());
 
         System.out.println("testLogin complete");
+    }
+
+    public void testGetSpecifiedUser()
+    {
+        System.out.println("Starting testGetSpecifiedUser");
+
+        User test = dataAccess.getSpecificUser("marypoppins@gmail.com");
+
+        assertEquals("marypoppins@gmail.com", test.getUserEmail());
+        assertEquals("password", test.getUserPassword());
+        assertEquals("mary", test.getUserFirstName());
+        assertEquals("poppins", test.getUserLastName());
+
+        System.out.println("testGetSpecifiedUser complete");
+    }
+
+    public void testGetSpecifiedUserFalse()
+    {
+        System.out.println("Starting testGetSpecifiedUserFalse");
+
+        assertNull(dataAccess.getSpecificUser("marypoppns@gmail.com"));
+
+        System.out.println("testGetSpecifiedUserFalse complete");
     }
 }

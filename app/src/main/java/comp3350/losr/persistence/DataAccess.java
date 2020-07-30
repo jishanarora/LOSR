@@ -13,6 +13,8 @@ public interface DataAccess
 
     User getCurrentUser();
 
+    User getSpecificUser(String email);
+
     User addUser(User newUser);
 
     void deleteUser(User selectedUser);

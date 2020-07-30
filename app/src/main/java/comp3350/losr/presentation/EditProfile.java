@@ -36,7 +36,8 @@ import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
 
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity
+{
 
     private Spinner answer1;
     private Spinner answer2;
@@ -67,7 +68,8 @@ public class EditProfile extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -75,9 +77,11 @@ public class EditProfile extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
@@ -318,17 +322,19 @@ public class EditProfile extends AppCompatActivity {
             }});
 
 
-
-        cancel.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
                 startActivity(intent);
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 accessUsers.getCurrentUser().setUserFirstName(firstName.getText().toString());
@@ -352,6 +358,8 @@ public class EditProfile extends AppCompatActivity {
                     accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
                 }
                 accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()),Boolean.parseBoolean(answer2.getSelectedItem().toString()),Boolean.parseBoolean(answer3.getSelectedItem().toString()),Boolean.parseBoolean(answer4.getSelectedItem().toString()),Boolean.parseBoolean(answer5.getSelectedItem().toString()),Integer.parseInt(weight1.getText().toString()),Integer.parseInt(weight2.getText().toString()),Integer.parseInt(weight3.getText().toString()),Integer.parseInt(weight4.getText().toString()),Integer.parseInt(weight5.getText().toString()));
+            public void onClick(View view)
+            {
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
                 startActivity(intent);
@@ -393,7 +401,8 @@ public class EditProfile extends AppCompatActivity {
         dateText.setText(sdf.format(myCalendar.getTime()));
     }
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
         intent.putExtra("value",1);
         startActivity(intent);
