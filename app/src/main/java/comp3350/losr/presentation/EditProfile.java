@@ -358,13 +358,12 @@ public class EditProfile extends AppCompatActivity
                     accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
                 }
                 accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()),Boolean.parseBoolean(answer2.getSelectedItem().toString()),Boolean.parseBoolean(answer3.getSelectedItem().toString()),Boolean.parseBoolean(answer4.getSelectedItem().toString()),Boolean.parseBoolean(answer5.getSelectedItem().toString()),Integer.parseInt(weight1.getText().toString()),Integer.parseInt(weight2.getText().toString()),Integer.parseInt(weight3.getText().toString()),Integer.parseInt(weight4.getText().toString()),Integer.parseInt(weight5.getText().toString()));
-            public void onClick(View view)
-            {
+
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
                 startActivity(intent);
-            }
-        });
+
+        }});
 
         final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
 
