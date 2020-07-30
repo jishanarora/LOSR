@@ -1,11 +1,14 @@
 package comp3350.losr.presentation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,7 +23,8 @@ import comp3350.losr.objects.Match;
 
 public class MessageFragment extends Fragment
 {
-
+    Button msgButton;
+    Button profileButton;
     public MessageFragment()
     {
         // Required empty public constructor
@@ -52,17 +56,33 @@ public class MessageFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_message, container,false);
 
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
+        final MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
 
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
 
+        matchesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), MessageActivity.class);
+                intent.putExtra("phoneNumber", matchAdapter.getEmail(position));
+                startActivity(intent);
+            }
+        });
+
+
         return rootView;
+    }
+
+    public void openMatchMessages(){
+        Intent intent = new Intent(getActivity(), MessageActivity.class);
+        startActivity(intent);
     }
 
     public class MatchesAdapter extends ArrayAdapter<Match>
@@ -91,7 +111,11 @@ public class MessageFragment extends Fragment
             return convertView;
         }
 
+        public String getEmail(int position) {
+            Match currMatch = getItem(position);
+            return currMatch.getMatchedUser().getUserEmail();
 
+        }
     }
 
 }
