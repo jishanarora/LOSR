@@ -18,6 +18,7 @@ public class AccessUsers
         return dataAccess.getGenderedUsers();
     }
 
+
     //Just a way to retrieve the current "Logged in" user
     public User getCurrentUser() {return dataAccess.getCurrentUser();}
 
