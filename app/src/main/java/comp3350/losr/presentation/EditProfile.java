@@ -21,7 +21,8 @@ import java.util.List;
 import comp3350.losr.R;
 
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity
+{
 
     private Spinner answer1;
     private Spinner answer2;
@@ -36,7 +37,8 @@ public class EditProfile extends AppCompatActivity {
     private Button save;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -44,9 +46,11 @@ public class EditProfile extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
@@ -72,18 +76,22 @@ public class EditProfile extends AppCompatActivity {
         gender1.setAdapter(genderAdapter);
         gender2.setAdapter(genderAdapter);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
                 startActivity(intent);
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
                 startActivity(intent);
@@ -94,7 +102,8 @@ public class EditProfile extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
         intent.putExtra("value",1);
         startActivity(intent);

@@ -1,7 +1,6 @@
 package comp3350.losr.presentation;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import comp3350.losr.R;
@@ -35,6 +34,10 @@ public class SignUpFragment extends Fragment
         // Required empty public constructor
     }
 
+    private final int PASSWORD_MIN_LENGTH = 8;
+    private final int PASSWORD_MAX_LENGTH = 40;
+    private final int NAME_MAX_LENGTH = 15;
+
     private TextView alreadyHaveAnAccount;
     private FrameLayout parentFrameLayout;
     private EditText firstName;
@@ -43,6 +46,7 @@ public class SignUpFragment extends Fragment
     private EditText password;
     private EditText confirmPassword;
     Button register;
+    /*
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     //"(?=.*[0-9])" +         //at least 1 digit
@@ -54,6 +58,12 @@ public class SignUpFragment extends Fragment
                     ".{4,}" +               //at least 4 characters
                     "$");
 
+     */
+
+    Pattern letter = Pattern.compile("[a-zA-z]");
+    Pattern digit = Pattern.compile("[0-9]");
+    Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+    //Pattern eight = Pattern.compile (".{8}");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,14 +112,22 @@ public class SignUpFragment extends Fragment
     private boolean validateFirstName()
     {
         String usernameInput = firstName.getText().toString().trim();
+        Matcher hasDigit = digit.matcher(usernameInput);
+        Matcher hasSpecial = special.matcher(usernameInput);
+
         if (usernameInput.isEmpty())
         {
             firstName.setError("Field can't be empty");
             return false;
         }
-        else if (usernameInput.length() > 15)
+        else if (usernameInput.length() > NAME_MAX_LENGTH)
         {
             firstName.setError("First Name too long");
+            return false;
+        }
+        else if(hasDigit.find() || hasSpecial.find())
+        {
+            firstName.setError("First name contains invalid characters");
             return false;
         }
         else
@@ -120,14 +138,22 @@ public class SignUpFragment extends Fragment
     }
     private boolean validateLastName() {
         String usernameInput = lastName.getText().toString().trim();
+        Matcher hasDigit = digit.matcher(usernameInput);
+        Matcher hasSpecial = special.matcher(usernameInput);
+
         if (usernameInput.isEmpty())
         {
             lastName.setError("Field can't be empty");
             return false;
         }
-        else if (usernameInput.length() > 15)
+        else if (usernameInput.length() > NAME_MAX_LENGTH)
         {
             lastName.setError("Last Name too long");
+            return false;
+        }
+        else if(hasDigit.find() || hasSpecial.find())
+        {
+            firstName.setError("Last name contains invalid characters");
             return false;
         }
         else
@@ -144,12 +170,12 @@ public class SignUpFragment extends Fragment
             password.setError("Field can't be empty");
             return false;
         }
-        else if (passwordInput1.length() < 8)  //!PASSWORD_PATTERN.matcher(passwordInput1).matches()
+        else if (passwordInput1.length() < PASSWORD_MIN_LENGTH)  //!PASSWORD_PATTERN.matcher(passwordInput1).matches()
         {
             password.setError("Password too weak");
             return false;
         }
-        else if(passwordInput1.length() > 40)
+        else if(passwordInput1.length() > PASSWORD_MAX_LENGTH)
         {
             password.setError("Password too long");
             return false;
@@ -195,7 +221,8 @@ public class SignUpFragment extends Fragment
         alreadyHaveAnAccount.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 setFragment(new SignInFragment());
             }
         });

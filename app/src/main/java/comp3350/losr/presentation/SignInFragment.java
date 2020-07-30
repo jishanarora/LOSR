@@ -58,7 +58,8 @@ public class SignInFragment extends Fragment
         dontHaveAnAccount.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 RegisterActivity.onSignUpFragment =true;
                 setFragment(new SignUpFragment());
             }
