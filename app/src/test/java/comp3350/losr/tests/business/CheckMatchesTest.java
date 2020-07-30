@@ -3,7 +3,6 @@ package comp3350.losr.tests.business;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 import comp3350.losr.objects.Question;
 
@@ -263,4 +262,111 @@ public class CheckMatchesTest extends TestCase
 
         System.out.println("testAverageList completed");
     }
+
+    public void testMaxWeightMatch()
+    {
+        System.out.println("Starting testAverageList");
+
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+
+        assertEquals(100, matchPercentage(list1,list2));
+
+        System.out.println("testMaxWeightMatch completed");
+    }
+
+    public void testSameWeightMatch()
+    {
+        System.out.println("Starting testAverageList");
+
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.FALSE,4));
+        list1.add(new Question(Boolean.TRUE,4));
+        list1.add(new Question(Boolean.TRUE,3));
+        list1.add(new Question(Boolean.TRUE,2));
+
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.FALSE,4));
+        list2.add(new Question(Boolean.TRUE,4));
+        list2.add(new Question(Boolean.TRUE,3));
+        list2.add(new Question(Boolean.TRUE,2));
+
+        assertEquals(100, matchPercentage(list1,list2));
+
+        System.out.println("testMidWeightMatch completed " + matchPercentage(list1,list2));
+    }
+
+    public void testMinWeightMatch()
+    {
+        System.out.println("Starting testAverageList");
+
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.TRUE,1));
+        list2.add(new Question(Boolean.TRUE,1));
+        list2.add(new Question(Boolean.TRUE,1));
+        list2.add(new Question(Boolean.TRUE,1));
+        list2.add(new Question(Boolean.TRUE,1));
+
+        assertEquals(20, matchPercentage(list1,list2));
+
+        System.out.println("testMaxWeightMatch completed "+ matchPercentage(list1,list2));
+    }
+
+    public void test24WeightMatch()
+    {
+        System.out.println("Starting test24WeightMatch");
+
+        list1.add(new Question(Boolean.FALSE,5));
+        list1.add(new Question(Boolean.TRUE,4));
+        list1.add(new Question(Boolean.TRUE,2));
+        list1.add(new Question(Boolean.FALSE,1));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,2));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,3));
+        list2.add(new Question(Boolean.TRUE,1));
+
+        assertEquals(24, matchPercentage(list1,list2));
+
+        System.out.println("testOppositeWeightMatch completed " + matchPercentage(list1,list2));
+    }
+
+    public void testOppositeWeightMatch()
+    {
+        System.out.println("Starting testAverageList");
+
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.FALSE,5));
+        list2.add(new Question(Boolean.FALSE,4));
+        list2.add(new Question(Boolean.FALSE,3));
+        list2.add(new Question(Boolean.FALSE,2));
+        list2.add(new Question(Boolean.FALSE,1));
+
+        assertEquals(0, matchPercentage(list1,list2));
+
+        System.out.println("testOppositeWeightMatch completed");
+    }
+
+
 }

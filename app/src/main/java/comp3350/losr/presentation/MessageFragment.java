@@ -85,7 +85,7 @@ public class MessageFragment extends Fragment
             TextView matchName = (TextView) convertView.findViewById(R.id.matchName);
             TextView matchPercent = (TextView) convertView.findViewById(R.id.matchPercent);
 
-            matchName.setText(String.format("%s %s", currMatch.getMatchedUser().getUserFirstName(), currMatch.getMatchedUser().getUserLastName()));
+            matchName.setText(String.format("  %s %s", currMatch.getMatchedUser().getUserFirstName(), currMatch.getMatchedUser().getUserLastName()));
             matchPercent.setText(Integer.toString(currMatch.getMatchPercent()) + "% Match");
            
             return convertView;

@@ -17,13 +17,21 @@ public class CheckMatches
         int numQuestions = curr.size();
         float overall_compatibility;
         int similar = 0;
+        int ansMatchVal;
+        int diff;
 
         for (int i = 0; i < numQuestions; i++) {
             if (curr.get(i).getAnswer().equals(match.get(i).getAnswer())) {
-                similar++;
+                ansMatchVal = 0;
+                // get the absolute difference between two weights
+                diff = Math.abs(curr.get(i).getWeight() - match.get(i).getWeight());
+
+                // "flip" that val to get a number that's higher for higher similarity and vice versa
+                ansMatchVal = 5-diff;
+                similar+= ansMatchVal;
             }
         }
-        overall_compatibility = ((float)similar/numQuestions)*100;
+        overall_compatibility = ((float)similar/(numQuestions*5))*100;
 
         return (int)overall_compatibility; // should this even be null?
     }
