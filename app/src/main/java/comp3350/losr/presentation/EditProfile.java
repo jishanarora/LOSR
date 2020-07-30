@@ -57,9 +57,9 @@ public class EditProfile extends AppCompatActivity
     private EditText bio;
     private AccessUsers accessUsers;
     Calendar myCalendar = Calendar.getInstance();
-    private int dateDay;
-    private int dateMonth;
-    private int dateYear;
+    private int dateDay=0;
+    private int dateMonth=0;
+    private int dateYear=0;
     private EditText weight1;
     private EditText weight2;
     private EditText weight3;
@@ -122,13 +122,13 @@ public class EditProfile extends AppCompatActivity
         lastName.setText(accessUsers.getCurrentUser().getUserLastName());
         bio.setText(accessUsers.getCurrentUser().getUserProfile().getBio());
         dateText.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
-        if (accessUsers.getCurrentUser().getUserProfile().genderToString().equals("Male")) {
+        if (accessUsers.getCurrentUser().getUserProfile().genderToString().equals("male")) {
             gender1.setSelection(0);
         } else {
             gender1.setSelection(1);
         }
 
-        if (accessUsers.getCurrentUser().getUserProfile().genderPrefToString().equals("Male")) {
+        if (accessUsers.getCurrentUser().getUserProfile().genderPrefToString().equals("male")) {
             gender2.setSelection(0);
         } else {
             gender2.setSelection(1);
@@ -166,6 +166,7 @@ public class EditProfile extends AppCompatActivity
         weight3.setText(Integer.toString(userAnswers.get(0).getWeight()));
         weight4.setText(Integer.toString(userAnswers.get(0).getWeight()));
         weight5.setText(Integer.toString(userAnswers.get(0).getWeight()));
+
 
         weight1.setInputType( InputType.TYPE_CLASS_NUMBER );
         InputFilter[] FilterArray = new InputFilter[1];
@@ -340,6 +341,7 @@ public class EditProfile extends AppCompatActivity
                 accessUsers.getCurrentUser().setUserFirstName(firstName.getText().toString());
                 accessUsers.getCurrentUser().setUserLastName(lastName.getText().toString());
                 accessUsers.getCurrentUser().getUserProfile().setBio(bio.getText().toString());
+                if(dateDay!=0 && dateMonth!=0 && dateYear!=0)
                 accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear,dateMonth,dateDay);
                 if(gender1.getSelectedItem().equals("Male"))
                 {
