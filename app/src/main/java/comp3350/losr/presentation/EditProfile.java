@@ -1,5 +1,6 @@
 package comp3350.losr.presentation;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,16 +10,30 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.Question;
+import comp3350.losr.objects.User;
 
 
 public class EditProfile extends AppCompatActivity {
@@ -34,6 +49,22 @@ public class EditProfile extends AppCompatActivity {
     private String[] gender = new String[]{"Male", "Female"};
     private Button cancel;
     private Button save;
+    private Button dateButton;
+    private EditText dateText;
+    private EditText firstName;
+    private EditText lastName;
+    private EditText bio;
+    private AccessUsers accessUsers;
+    Calendar myCalendar = Calendar.getInstance();
+    private int dateDay;
+    private int dateMonth;
+    private int dateYear;
+    private EditText weight1;
+    private EditText weight2;
+    private EditText weight3;
+    private EditText weight4;
+    private EditText weight5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +93,17 @@ public class EditProfile extends AppCompatActivity {
         gender2= findViewById(R.id.spinner7);
         cancel=findViewById(R.id.edit_profile_cancel);
         save=findViewById(R.id.edit_profile_save);
+        dateButton= findViewById(R.id.edit_profile_date_picker);
+        dateText= findViewById(R.id.edit_profile_date);
+        firstName=findViewById(R.id.edit_profile_first_name);
+        lastName=findViewById(R.id.edit_profile_last_name);
+        bio=findViewById(R.id.profile_bio);
+        weight1=findViewById(R.id.edit_profile_weight1);
+        weight2=findViewById(R.id.edit_profile_weight2);
+        weight3=findViewById(R.id.edit_profile_weight3);
+        weight4=findViewById(R.id.edit_profile_weight4);
+        weight5=findViewById(R.id.edit_profile_weight5);
+        accessUsers= new AccessUsers();
         ArrayAdapter<String> answersAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, answers);
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, gender);
         answer1.setAdapter(answersAdapter);
@@ -71,6 +113,211 @@ public class EditProfile extends AppCompatActivity {
         answer5.setAdapter(answersAdapter);
         gender1.setAdapter(genderAdapter);
         gender2.setAdapter(genderAdapter);
+
+        firstName.setText(accessUsers.getCurrentUser().getUserFirstName());
+        lastName.setText(accessUsers.getCurrentUser().getUserLastName());
+        bio.setText(accessUsers.getCurrentUser().getUserProfile().getBio());
+        dateText.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
+        if (accessUsers.getCurrentUser().getUserProfile().genderToString().equals("Male")) {
+            gender1.setSelection(0);
+        } else {
+            gender1.setSelection(1);
+        }
+
+        if (accessUsers.getCurrentUser().getUserProfile().genderPrefToString().equals("Male")) {
+            gender2.setSelection(0);
+        } else {
+            gender2.setSelection(1);
+        }
+
+        final ArrayList<Question> userAnswers=accessUsers.getCurrentUser().getUserProfile().getAnswers();
+        if (userAnswers.get(0).getAnswer() == true) {
+            answer1.setSelection(0);
+        } else {
+            answer1.setSelection(1);
+        }
+        if (userAnswers.get(1).getAnswer() == true) {
+            answer2.setSelection(0);
+        } else {
+            answer2.setSelection(1);
+        }
+        if (userAnswers.get(2).getAnswer() == true) {
+            answer3.setSelection(0);
+        } else {
+            answer3.setSelection(1);
+        }
+        if (userAnswers.get(3).getAnswer() == true) {
+            answer4.setSelection(0);
+        } else {
+            answer4.setSelection(1);
+        }
+        if (userAnswers.get(4).getAnswer() == true) {
+            answer5.setSelection(0);
+        } else {
+            answer5.setSelection(1);
+        }
+
+        weight1.setText(Integer.toString(userAnswers.get(0).getWeight()));
+        weight2.setText(Integer.toString(userAnswers.get(0).getWeight()));
+        weight3.setText(Integer.toString(userAnswers.get(0).getWeight()));
+        weight4.setText(Integer.toString(userAnswers.get(0).getWeight()));
+        weight5.setText(Integer.toString(userAnswers.get(0).getWeight()));
+
+        weight1.setInputType( InputType.TYPE_CLASS_NUMBER );
+        InputFilter[] FilterArray = new InputFilter[1];
+        FilterArray[0] = new InputFilter.LengthFilter(1);
+        weight1.setFilters(FilterArray);
+        weight1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+                String added_number = weight1.getText().toString();
+                if (added_number.length() != 0) {
+                    int number  = Integer.parseInt(added_number);
+
+                    if (number > 5) {
+                        weight1.setText("5");
+                        Toast.makeText(getApplicationContext(), "Not more than 5", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }});
+
+        weight2.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight2.setFilters(FilterArray);
+        weight2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+                String added_number = weight2.getText().toString();
+                if (added_number.length() != 0) {
+                    int number  = Integer.parseInt(added_number);
+
+                    if (number > 5) {
+                        weight2.setText("5");
+                        Toast.makeText(getApplicationContext(), "Not more than 5", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }});
+
+
+        weight3.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight3.setFilters(FilterArray);
+        weight3.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+                String added_number = weight3.getText().toString();
+                if (added_number.length() != 0) {
+                    int number  = Integer.parseInt(added_number);
+
+                    if (number > 5) {
+                        weight3.setText("5");
+                        Toast.makeText(getApplicationContext(), "Not more than 5", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }});
+
+
+        weight4.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight4.setFilters(FilterArray);
+        weight4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+                String added_number = weight4.getText().toString();
+                if (added_number.length() != 0) {
+                    int number  = Integer.parseInt(added_number);
+
+                    if (number > 5) {
+                        weight4.setText("5");
+                        Toast.makeText(getApplicationContext(), "Not more than 5", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }});
+
+
+        weight5.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight5.setFilters(FilterArray);
+        weight5.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO Auto-generated method stub
+
+                String added_number = weight5.getText().toString();
+                if (added_number.length() != 0) {
+                    int number  = Integer.parseInt(added_number);
+
+                    if (number > 5) {
+                        weight5.setText("5");
+                        Toast.makeText(getApplicationContext(), "Not more than 5", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // TODO Auto-generated method stub
+
+            }});
+
+
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,15 +331,67 @@ public class EditProfile extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                accessUsers.getCurrentUser().setUserFirstName(firstName.getText().toString());
+                accessUsers.getCurrentUser().setUserLastName(lastName.getText().toString());
+                accessUsers.getCurrentUser().getUserProfile().setBio(bio.getText().toString());
+                accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear,dateMonth,dateDay);
+                if(gender1.getSelectedItem().equals("Male"))
+                {
+                    accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Male);
+                }
+                else
+                {
+                    accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Female);
+                }
+                if(gender2.getSelectedItem().equals("Male"))
+                {
+                    accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Male);
+                }
+                else
+                {
+                    accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
+                }
+                accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()),Boolean.parseBoolean(answer2.getSelectedItem().toString()),Boolean.parseBoolean(answer3.getSelectedItem().toString()),Boolean.parseBoolean(answer4.getSelectedItem().toString()),Boolean.parseBoolean(answer5.getSelectedItem().toString()),Integer.parseInt(weight1.getText().toString()),Integer.parseInt(weight2.getText().toString()),Integer.parseInt(weight3.getText().toString()),Integer.parseInt(weight4.getText().toString()),Integer.parseInt(weight5.getText().toString()));
                 Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
                 intent.putExtra("value",1);
                 startActivity(intent);
             }
         });
 
+        final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
 
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                dateDay=dayOfMonth;
+                dateMonth=monthOfYear;
+                dateYear=year;
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(EditProfile.this, datePicker, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dateText.setText(sdf.format(myCalendar.getTime()));
+    }
     @Override
     public void onBackPressed() {
         Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
