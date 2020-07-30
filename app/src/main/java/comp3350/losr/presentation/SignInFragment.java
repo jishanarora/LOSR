@@ -96,7 +96,6 @@ public class SignInFragment extends Fragment
                 getActivity().finish();
             }
         }
-
     }
     private boolean validateEmail()
     {
