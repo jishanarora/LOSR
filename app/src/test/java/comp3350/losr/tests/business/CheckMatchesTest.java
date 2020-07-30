@@ -263,9 +263,10 @@ public class CheckMatchesTest extends TestCase
         System.out.println("testAverageList completed");
     }
 
+
     public void testMaxWeightMatch()
     {
-        System.out.println("Starting testAverageList");
+        System.out.println("Starting testMaxWeightMatch");
 
         list1.add(new Question(Boolean.TRUE,5));
         list1.add(new Question(Boolean.TRUE,5));
@@ -286,7 +287,7 @@ public class CheckMatchesTest extends TestCase
 
     public void testSameWeightMatch()
     {
-        System.out.println("Starting testAverageList");
+        System.out.println("Starting testSameWeightMatch");
 
         list1.add(new Question(Boolean.TRUE,5));
         list1.add(new Question(Boolean.FALSE,4));
@@ -302,12 +303,12 @@ public class CheckMatchesTest extends TestCase
 
         assertEquals(100, matchPercentage(list1,list2));
 
-        System.out.println("testMidWeightMatch completed " + matchPercentage(list1,list2));
+        System.out.println("testSameWeightMatch completed " + matchPercentage(list1,list2));
     }
 
     public void testMinWeightMatch()
     {
-        System.out.println("Starting testAverageList");
+        System.out.println("Starting testMinWeightMatch");
 
         list1.add(new Question(Boolean.TRUE,5));
         list1.add(new Question(Boolean.TRUE,5));
@@ -323,7 +324,7 @@ public class CheckMatchesTest extends TestCase
 
         assertEquals(20, matchPercentage(list1,list2));
 
-        System.out.println("testMaxWeightMatch completed "+ matchPercentage(list1,list2));
+        System.out.println("testMinWeightMatch completed "+ matchPercentage(list1,list2));
     }
 
     public void test24WeightMatch()
@@ -344,12 +345,75 @@ public class CheckMatchesTest extends TestCase
 
         assertEquals(24, matchPercentage(list1,list2));
 
-        System.out.println("testOppositeWeightMatch completed " + matchPercentage(list1,list2));
+        System.out.println("testMinWeightMatch completed " + matchPercentage(list1,list2));
+    }
+
+    public void test16WeightMatch()
+    {
+        System.out.println("Starting test16WeightMatch");
+
+        list1.add(new Question(Boolean.FALSE,5));
+        list1.add(new Question(Boolean.FALSE,4));
+        list1.add(new Question(Boolean.TRUE,4));
+        list1.add(new Question(Boolean.FALSE,3));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.FALSE,2));
+        list2.add(new Question(Boolean.FALSE,1));
+        list2.add(new Question(Boolean.TRUE,1));
+
+        assertEquals(16, matchPercentage(list1,list2));
+
+        System.out.println("test16WeightMatch completed " + matchPercentage(list1,list2));
+    }
+
+    public void test56WeightMatch()
+    {
+        System.out.println("Starting test56WeightMatch");
+
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,4));
+        list1.add(new Question(Boolean.TRUE,2));
+        list1.add(new Question(Boolean.TRUE,1));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,2));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,3));
+        list2.add(new Question(Boolean.TRUE,1));
+
+        assertEquals(56, matchPercentage(list1,list2));
+
+        System.out.println("test56WeightMatch completed " + matchPercentage(list1,list2));
+    }
+
+    public void test72WeightMatch()
+    {
+        System.out.println("Starting test72WeightMatch");
+
+        list1.add(new Question(Boolean.TRUE,5));
+        list1.add(new Question(Boolean.TRUE,4));
+        list1.add(new Question(Boolean.TRUE,2));
+        list1.add(new Question(Boolean.TRUE,2));
+        list1.add(new Question(Boolean.TRUE,5));
+
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,5));
+        list2.add(new Question(Boolean.TRUE,3));
+        list2.add(new Question(Boolean.TRUE,3));
+
+        assertEquals(72, matchPercentage(list1,list2));
+
+        System.out.println("test72WeightMatch completed " + matchPercentage(list1,list2));
     }
 
     public void testOppositeWeightMatch()
     {
-        System.out.println("Starting testAverageList");
+        System.out.println("Starting testOppositeWeightMatch");
 
         list1.add(new Question(Boolean.TRUE,5));
         list1.add(new Question(Boolean.TRUE,5));

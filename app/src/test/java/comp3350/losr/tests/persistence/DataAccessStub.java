@@ -73,9 +73,25 @@ public class DataAccessStub implements DataAccess {
 
     public User getCurrentUser(){return currentUser;}
 
+    public User getSpecificUser(String email)
+    {
+        User specifiedUser = null;
+
+        for(int i = 0; i < users.size(); i++)
+        {
+            if(users.get(i).getUserEmail().equals(email))
+            {
+                specifiedUser = users.get(i);
+                break;
+            }
+        }
+        return specifiedUser;
+    }
+
     public User addUser(User newUser)
     {
         users.add(newUser);
+        currentUser = newUser;
         return newUser;
     }
 

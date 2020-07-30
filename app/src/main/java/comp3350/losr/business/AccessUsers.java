@@ -21,6 +21,10 @@ public class AccessUsers
     //Just a way to retrieve the current "Logged in" user
     public User getCurrentUser() {return dataAccess.getCurrentUser();}
 
+    //returns null if something went wrong and it can't find that user, otherwise is returns the user with the
+    //specified email
+    public User getSpecificUser(String email) {return dataAccess.getSpecificUser(email);}
+
     //Call this method when a user is registering. Take the email, password, first name, and last name
     //that they enter and create a User object from it, then pass it to this method. If the registration is successful
     //the method will return a fresh User object will the information that was added to the db (all the default values).
