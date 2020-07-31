@@ -70,6 +70,7 @@ public class MessageFragment extends Fragment
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
 
+        /*
         myClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +78,7 @@ public class MessageFragment extends Fragment
                 startActivity(profileIntent);
             }
         };
+         */
 
 
 
