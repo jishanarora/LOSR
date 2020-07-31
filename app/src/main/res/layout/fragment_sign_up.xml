@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="comp3350.losr.presentation.SignUpFragment"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    tools:context="comp3350.losr.presentation.SignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,12 +30,12 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
 
+            android:backgroundTint="#70ffffff"
             android:ems="10"
             android:hint="Email ID"
-            android:textColorHint="#70ffffff"
-            android:backgroundTint="#70ffffff"
-            android:textColor="@color/colorAccent"
             android:inputType="textEmailAddress"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#70ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/losr_logo" />
@@ -64,12 +64,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:textColor="@color/colorAccent"
+            android:backgroundTint="#70ffffff"
             android:ems="10"
             android:hint="Password"
-            android:textColorHint="#70ffffff"
-            android:backgroundTint="#70ffffff"
             android:inputType="textPassword"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#70ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_first_name" />
@@ -83,12 +83,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:textColor="@color/colorAccent"
+            android:backgroundTint="#70ffffff"
             android:ems="10"
             android:hint="Confirm Password"
-            android:textColorHint="#70ffffff"
-            android:backgroundTint="#70ffffff"
             android:inputType="textPassword"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="#70ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_password" />
@@ -174,7 +174,6 @@
             app:layout_constraintTop_toBottomOf="@+id/sign_up_email" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </FrameLayout>

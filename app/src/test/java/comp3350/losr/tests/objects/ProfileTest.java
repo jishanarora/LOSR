@@ -5,16 +5,14 @@ import junit.framework.TestCase;
 import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.User;
 
-public class ProfileTest extends TestCase
-{
+public class ProfileTest extends TestCase {
     Profile profile;
 
     public void setUp() {
         profile = new Profile();
     }
 
-    public void testProfileEmpty()
-    {
+    public void testProfileEmpty() {
         System.out.println("Starting testProfileEmpty");
 
         assertNotNull(profile);
@@ -27,8 +25,7 @@ public class ProfileTest extends TestCase
         System.out.println("testProfileEmpty complete");
     }
 
-    public void testProfileAverage1()
-    {
+    public void testProfileAverage1() {
         System.out.println("Starting testProfileAverage1");
 
         profile.setBio("My bio");
@@ -53,8 +50,7 @@ public class ProfileTest extends TestCase
         System.out.println("testProfileAverage1 complete");
     }
 
-    public void testProfileAverage2()
-    {
+    public void testProfileAverage2() {
         System.out.println("Starting testProfileAverage2");
 
         profile.setBio("Hello! This is my bio!");
@@ -79,8 +75,7 @@ public class ProfileTest extends TestCase
         System.out.println("testProfileAverage2 complete");
     }
 
-    public void testProfileEquals()
-    {
+    public void testProfileEquals() {
         Profile profile2;
 
         System.out.println("Starting testProfileEquals");
@@ -91,13 +86,13 @@ public class ProfileTest extends TestCase
         profile.setGender(User.user_gender.Female);
         profile.setGenderPreference(User.user_gender.Female);
         profile.setDateOfBirth(1950, 2, 15);
-        profile.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        profile.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
 
         profile2.setBio("Hello! This is my bio!");
         profile2.setGender(User.user_gender.Female);
         profile2.setGenderPreference(User.user_gender.Female);
         profile2.setDateOfBirth(1950, 2, 15);
-        profile2.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        profile2.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
 
         assertNotNull(profile);
         assertNotNull(profile2);
@@ -107,8 +102,7 @@ public class ProfileTest extends TestCase
         System.out.println("testProfileEquals complete");
     }
 
-    public void testDateOfBirth()
-    {
+    public void testDateOfBirth() {
         System.out.println("Starting testDateOfBirth");
 
         profile.setDateOfBirth(1999, 1, 25);
@@ -118,8 +112,7 @@ public class ProfileTest extends TestCase
         System.out.println("testDateOfBirth complete");
     }
 
-    public void testDateOfBirthEdges1()
-    {
+    public void testDateOfBirthEdges1() {
         System.out.println("Starting testDateOfBirthEdges1");
 
         profile.setDateOfBirth(2020, 1, 1);
@@ -129,8 +122,7 @@ public class ProfileTest extends TestCase
         System.out.println("testDateOfBirthEdges1 complete");
     }
 
-    public void testDateOfBirthEdges2()
-    {
+    public void testDateOfBirthEdges2() {
         System.out.println("Starting testDateOfBirthEdges2");
 
         profile.setDateOfBirth(1, 1, 1);
@@ -140,8 +132,7 @@ public class ProfileTest extends TestCase
         System.out.println("testDateOfBirthEdges2 complete");
     }
 
-    public void testSetBio()
-    {
+    public void testSetBio() {
         System.out.println("Starting testSetBio");
 
         profile.setBio("this is a test");
@@ -150,8 +141,7 @@ public class ProfileTest extends TestCase
         System.out.println("testSetBio complete");
     }
 
-    public void testSetGenders()
-    {
+    public void testSetGenders() {
         System.out.println("Starting testSetGenders");
 
         profile.setGender(User.user_gender.Female);

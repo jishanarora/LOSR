@@ -24,10 +24,8 @@ import comp3350.losr.R;
 import comp3350.losr.business.AccessUsers;
 
 
-public class SignInFragment extends Fragment
-{
-    public SignInFragment()
-    {
+public class SignInFragment extends Fragment {
+    public SignInFragment() {
         // Required empty public constructor
     }
 
@@ -39,55 +37,48 @@ public class SignInFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-       dontHaveAnAccount= view.findViewById(R.id.tv_dont_have_an_account);
-       parentFrameLayout=getActivity().findViewById(R.id.register_framelayout);
-       signInBtn=view.findViewById(R.id.sign_in_button);
-        email=view.findViewById(R.id.sign_in_email);
-        password=view.findViewById(R.id.sign_in_password);
+        View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
+        dontHaveAnAccount = view.findViewById(R.id.tv_dont_have_an_account);
+        parentFrameLayout = getActivity().findViewById(R.id.register_framelayout);
+        signInBtn = view.findViewById(R.id.sign_in_button);
+        email = view.findViewById(R.id.sign_in_email);
+        password = view.findViewById(R.id.sign_in_password);
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dontHaveAnAccount.setOnClickListener(new View.OnClickListener()
-        {
+        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                RegisterActivity.onSignUpFragment =true;
+            public void onClick(View view) {
+                RegisterActivity.onSignUpFragment = true;
                 setFragment(new SignUpFragment());
             }
         });
 
-        signInBtn.setOnClickListener(new View.OnClickListener()
-        {
+        signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               signIn(email,password);
+                signIn(email, password);
             }
         });
     }
 
-    private void setFragment(Fragment fragment)
-    {
-        FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_right,R.anim.slideout_from_left);
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.slideout_from_left);
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
         fragmentTransaction.commit();
     }
 
-    public void signIn(EditText email, EditText password)
-    {
+    public void signIn(EditText email, EditText password) {
         String emailStr = email.getText().toString().trim();
         String passwordStr = password.getText().toString().trim();
-        AccessUsers accessUsers= new AccessUsers();
-        if(validateEmail() && validatePassword()) {
+        AccessUsers accessUsers = new AccessUsers();
+        if (validateEmail() && validatePassword()) {
             String message = accessUsers.tryLogin(emailStr, passwordStr);
             if (message != null) {
                 Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
@@ -98,21 +89,16 @@ public class SignInFragment extends Fragment
             }
         }
     }
-    private boolean validateEmail()
-    {
+
+    private boolean validateEmail() {
         String emailInput = email.getText().toString().trim();
-        if (emailInput.isEmpty())
-        {
+        if (emailInput.isEmpty()) {
             email.setError("Field can't be empty");
             return false;
-        }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches())
-        {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             email.setError("Please enter a valid email address");
             return false;
-        }
-        else
-        {
+        } else {
             email.setError(null);
             return true;
         }
@@ -120,19 +106,14 @@ public class SignInFragment extends Fragment
 
     private boolean validatePassword() {
         String passwordInput1 = password.getText().toString().trim();
-        if (passwordInput1.isEmpty())
-        {
+        if (passwordInput1.isEmpty()) {
             password.setError("Field can't be empty");
             return false;
-        }
-        else
-        {
+        } else {
             password.setError(null);
             return true;
         }
     }
-
-
 
 
 }

@@ -24,15 +24,12 @@ import comp3350.losr.business.AccessMatches;
 import comp3350.losr.objects.Match;
 
 
-public class MessageFragment extends Fragment
-{
-    public MessageFragment()
-    {
+public class MessageFragment extends Fragment {
+    public MessageFragment() {
         // Required empty public constructor
     }
 
-    public static MessageFragment newInstance()
-    {
+    public static MessageFragment newInstance() {
 
         Bundle args = new Bundle();
 
@@ -41,8 +38,7 @@ public class MessageFragment extends Fragment
         return fragment;
     }
 
-    public static MessageFragment newInstance(String param1, String param2)
-    {
+    public static MessageFragment newInstance(String param1, String param2) {
         MessageFragment fragment = new MessageFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -56,67 +52,50 @@ public class MessageFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_message, container,false);
-        View messageView = inflater.inflate(R.layout.matches_listview_detail, container,false);
+        View rootView = inflater.inflate(R.layout.fragment_message, container, false);
+        View messageView = inflater.inflate(R.layout.matches_listview_detail, container, false);
 
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
         MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
 
-        matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
+        matchesListView = (ListView) rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
-
-        /*
-        myClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent profileIntent = new Intent(getContext(), MatchProfile.class);
-                startActivity(profileIntent);
-            }
-        };
-         */
-
-
 
         return rootView;
     }
 
-    public class MatchesAdapter extends ArrayAdapter<Match>
-    {
-        public MatchesAdapter(Context context, ArrayList<Match> matches)
-        {
+    public class MatchesAdapter extends ArrayAdapter<Match> {
+        public MatchesAdapter(Context context, ArrayList<Match> matches) {
             super(context, 0, matches);
         }
 
-        public View getView(final int position, View convertView, ViewGroup parent)
-        {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             Match currMatch = getItem(position);
 
-            if (convertView == null)
-            {
+            if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
-                profile=convertView.findViewById(R.id.profileButton);
+                profile = convertView.findViewById(R.id.profileButton);
                 convertView.setClickable(true);
                 profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent= new Intent(getContext(),MatchedProfileActivity.class);
-                        intent.putExtra("value",position);
+                        Intent intent = new Intent(getContext(), MatchedProfileActivity.class);
+                        intent.putExtra("value", position);
                         startActivity(intent);
                     }
                 });
             }
 
-            TextView matchName =convertView.findViewById(R.id.matchName);
-            TextView matchPercent=convertView.findViewById(R.id.matchPercent);
+            TextView matchName = convertView.findViewById(R.id.matchName);
+            TextView matchPercent = convertView.findViewById(R.id.matchPercent);
 
             matchName.setText(String.format("  %s %s", currMatch.getMatchedUser().getUserFirstName(), currMatch.getMatchedUser().getUserLastName()));
             matchPercent.setText(Integer.toString(currMatch.getMatchPercent()) + "% Match");
-           
+
             return convertView;
         }
 

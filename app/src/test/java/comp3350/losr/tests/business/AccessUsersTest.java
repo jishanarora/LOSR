@@ -7,25 +7,21 @@ import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.User;
 import comp3350.losr.tests.persistence.DataAccessStub;
 
-public class AccessUsersTest extends TestCase
-{
+public class AccessUsersTest extends TestCase {
     AccessUsers au;
 
-    public void setUp()
-    {
+    public void setUp() {
         DatabaseService.createDataAccess(new DataAccessStub("Stub"));
         au = new AccessUsers();
     }
 
-    public void testCreate()
-    {
+    public void testCreate() {
         System.out.println("Starting testCreate");
         assertNotNull(au);
         System.out.println("testCreate complete");
     }
 
-    public void testTryLogin()
-    {
+    public void testTryLogin() {
         System.out.println("Starting testTryLogin");
 
         assertNull(au.tryLogin("laurastubbs@gmail.com", "password"));
@@ -37,8 +33,7 @@ public class AccessUsersTest extends TestCase
         System.out.println("testTryLogin complete");
     }
 
-    public void testGetGenderedUsers()
-    {
+    public void testGetGenderedUsers() {
         System.out.println("Starting testGetGenderedUsers");
 
         assertEquals(4, au.getGenderedUsers().size());
@@ -55,20 +50,19 @@ public class AccessUsersTest extends TestCase
         System.out.println("testGetGenderedUsers complete");
     }
 
-    public void testAddAndDelete()
-    {
+    public void testAddAndDelete() {
         System.out.println("Starting testAddAndDelete");
 
-        User test = new User("","","","");
-        test.setUserProfile("", User.user_gender.Female, User.user_gender.Male, 1,1,1);
+        User test = new User("", "", "", "");
+        test.setUserProfile("", User.user_gender.Female, User.user_gender.Male, 1, 1, 1);
         au.addUser(test);
 
         //shouldnt increase to 5 because adding a user would mean they are registering, when you register you are set as the currentUser
         //so you would not be included in the list of potential matches. Also the currentUser is now female and there are only 4 males.
         assertEquals(4, au.getGenderedUsers().size());
 
-        User test2 = new User("","","test","");
-        test2.setUserProfile("", User.user_gender.Male, User.user_gender.Female, 1,1,1);
+        User test2 = new User("", "", "test", "");
+        test2.setUserProfile("", User.user_gender.Male, User.user_gender.Female, 1, 1, 1);
         au.addUser(test2);
 
         //the currentUser is now male so there should be 5 females as we added 1 extra earlier
@@ -83,8 +77,7 @@ public class AccessUsersTest extends TestCase
         System.out.println("testAddAndDelete complete");
     }
 
-    public void testUpdate()
-    {
+    public void testUpdate() {
         System.out.println("Starting testUpdate");
 
         User temp = au.getCurrentUser();
@@ -101,8 +94,7 @@ public class AccessUsersTest extends TestCase
         System.out.println("testUpdate complete");
     }
 
-    public void testGetSpecifiedUser()
-    {
+    public void testGetSpecifiedUser() {
         System.out.println("Starting testGetSpecifiedUser");
 
         User test = au.getSpecificUser("marypoppins@gmail.com");
@@ -115,8 +107,7 @@ public class AccessUsersTest extends TestCase
         System.out.println("testGetSpecifiedUser complete");
     }
 
-    public void testGetSpecifiedUserFalse()
-    {
+    public void testGetSpecifiedUserFalse() {
         System.out.println("Starting testGetSpecifiedUserFalse");
 
         assertNull(au.getSpecificUser("marypoppns@gmail.com"));

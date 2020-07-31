@@ -4,12 +4,10 @@ import junit.framework.TestCase;
 
 import comp3350.losr.objects.Question;
 
-public class QuestionTest extends TestCase
-{
+public class QuestionTest extends TestCase {
     Question q;
 
-    public void testCreation()
-    {
+    public void testCreation() {
         System.out.println("Starting testCreation");
 
         q = new Question(Boolean.FALSE);
@@ -23,8 +21,7 @@ public class QuestionTest extends TestCase
         System.out.println("testCreation complete");
     }
 
-    public void testStandard()
-    {
+    public void testStandard() {
         System.out.println("Starting testStandard");
 
         q = new Question(1, "Q1", Boolean.FALSE, 2);
@@ -38,8 +35,7 @@ public class QuestionTest extends TestCase
         System.out.println("testStandard complete");
     }
 
-    public void testEquals()
-    {
+    public void testEquals() {
         System.out.println("Starting testEquals");
 
         q = new Question(1, "Q1", Boolean.FALSE, 2);
@@ -48,25 +44,24 @@ public class QuestionTest extends TestCase
         System.out.println("testEquals complete");
     }
 
-    public void testNotEquals()
-    {
+    public void testNotEquals() {
         System.out.println("Starting testNotEquals");
 
         q = new Question(1, "Q1", Boolean.FALSE, 2);
-        Question q2  = new Question(2, "Q1", Boolean.FALSE, 2);
+        Question q2 = new Question(2, "Q1", Boolean.FALSE, 2);
 
         assertFalse(q.equals(q2));
 
-        q2  = new Question(1, "Q2", Boolean.FALSE, 2);
+        q2 = new Question(1, "Q2", Boolean.FALSE, 2);
         assertFalse(q.equals(q2));
 
-        q2  = new Question(1, "Q1", Boolean.TRUE, 2);
+        q2 = new Question(1, "Q1", Boolean.TRUE, 2);
         assertFalse(q.equals(q2));
 
-        q2  = new Question(1, "Q1", Boolean.FALSE, 3);
+        q2 = new Question(1, "Q1", Boolean.FALSE, 3);
         assertFalse(q.equals(q2));
 
-        q2  = new Question(2, "Q2", Boolean.TRUE, 1);
+        q2 = new Question(2, "Q2", Boolean.TRUE, 1);
         assertFalse(q.equals(q2));
 
         System.out.println("testNotEquals complete");
