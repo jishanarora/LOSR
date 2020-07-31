@@ -201,6 +201,7 @@ public class SignUpFragment extends Fragment
         String lName = lastName.getText().toString().replaceAll(" ", "");
         String userEmail = email.getText().toString().replaceAll(" ", "");
 
+        //change the first letter to uppercase
         fName = fName.substring(0,1).toUpperCase() + fName.substring(1);
         lName = lName.substring(0,1).toUpperCase() + lName.substring(1);
 
