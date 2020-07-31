@@ -26,9 +26,6 @@ import comp3350.losr.objects.Match;
 
 public class MessageFragment extends Fragment
 {
-
-    private ImageView profile;
-  
     public MessageFragment()
     {
         // Required empty public constructor
