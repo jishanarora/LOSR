@@ -206,8 +206,8 @@ public class SignUpFragment extends Fragment
             Toast.makeText(this.getContext(), "Unable to register, Contact Support", Toast.LENGTH_SHORT).show();
         }
         else {
-            Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
-            startActivity(navigationIntent);
+            Intent signUpIntent = new Intent(getActivity(), SignUpDetails.class);
+            startActivity(signUpIntent);
             getActivity().finish();
         }
 
