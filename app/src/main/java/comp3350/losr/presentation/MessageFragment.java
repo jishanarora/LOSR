@@ -46,6 +46,7 @@ public class MessageFragment extends Fragment
     }
 
     private ListView matchesListView;
+    private FloatingActionButton profile;
 //    private String[] matches;
 //    private View view;
 
@@ -82,22 +83,21 @@ public class MessageFragment extends Fragment
             if (convertView == null)
             {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
-                convertView.findViewById(R.id.profileButton).setOnClickListener(myClickListener);
+                profile=convertView.findViewById(R.id.profileButton);
                 convertView.setClickable(true);
+                profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent= new Intent(getContext(),MatchedProfileActivity.class);
+                        intent.putExtra("value",position);
+                        startActivity(intent);
+                    }
+                });
+                
             }
 
             TextView matchName =convertView.findViewById(R.id.matchName);
             TextView matchPercent=convertView.findViewById(R.id.matchPercent);
-            myClickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent= new Intent(getContext(),MatchedProfileActivity.class);
-                    intent.putExtra("value",position);
-                    startActivity(intent);
-                }
-            };
-
-
 
             matchName.setText(String.format("  %s %s", currMatch.getMatchedUser().getUserFirstName(), currMatch.getMatchedUser().getUserLastName()));
             matchPercent.setText(Integer.toString(currMatch.getMatchPercent()) + "% Match");
