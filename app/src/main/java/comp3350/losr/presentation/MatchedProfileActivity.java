@@ -3,9 +3,6 @@ package comp3350.losr.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,7 +14,6 @@ import java.util.ArrayList;
 
 import comp3350.losr.R;
 import comp3350.losr.business.AccessMatches;
-import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
