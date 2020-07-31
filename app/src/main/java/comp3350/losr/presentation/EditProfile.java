@@ -171,7 +171,6 @@ public class EditProfile extends AppCompatActivity {
         weight1.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight1.getText().toString();
                 if (added_number.length() != 0) {
@@ -186,12 +185,10 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -201,7 +198,6 @@ public class EditProfile extends AppCompatActivity {
         weight2.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight2.getText().toString();
                 if (added_number.length() != 0) {
@@ -217,12 +213,10 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -233,7 +227,6 @@ public class EditProfile extends AppCompatActivity {
         weight3.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight3.getText().toString();
                 if (added_number.length() != 0) {
@@ -249,12 +242,10 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -265,7 +256,6 @@ public class EditProfile extends AppCompatActivity {
         weight4.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight4.getText().toString();
                 if (added_number.length() != 0) {
@@ -281,12 +271,10 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -297,7 +285,6 @@ public class EditProfile extends AppCompatActivity {
         weight5.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight5.getText().toString();
                 if (added_number.length() != 0) {
@@ -313,12 +300,10 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -365,7 +350,6 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 dateDay = dayOfMonth;
                 dateMonth = monthOfYear + 1;
                 dateYear = year;
@@ -380,7 +364,6 @@ public class EditProfile extends AppCompatActivity {
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(EditProfile.this, R.style.DialogTheme, datePicker, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();

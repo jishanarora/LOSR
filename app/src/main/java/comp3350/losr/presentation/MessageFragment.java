@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,15 +44,12 @@ public class MessageFragment extends Fragment {
 
     private ListView matchesListView;
     private FloatingActionButton profile;
-//    private String[] matches;
-//    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_message, container, false);
-        View messageView = inflater.inflate(R.layout.matches_listview_detail, container, false);
 
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
