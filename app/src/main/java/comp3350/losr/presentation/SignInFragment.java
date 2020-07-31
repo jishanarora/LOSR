@@ -18,8 +18,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.hsqldb.User;
-
 import comp3350.losr.R;
 import comp3350.losr.business.AccessUsers;
 

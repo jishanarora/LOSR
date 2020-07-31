@@ -1,11 +1,9 @@
 package comp3350.losr.presentation;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
