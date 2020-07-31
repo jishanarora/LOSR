@@ -47,9 +47,7 @@ public class SignUpFragment extends Fragment
     private EditText confirmPassword;
     Button register;
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-
-    Pattern digit = Pattern.compile("[0-9]");
-    Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+    private final String NAME_PATTERN = "[a-zA-Z]+";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,8 +96,6 @@ public class SignUpFragment extends Fragment
     private boolean validateFirstName()
     {
         String usernameInput = firstName.getText().toString().trim();
-        Matcher hasDigit = digit.matcher(usernameInput);
-        Matcher hasSpecial = special.matcher(usernameInput);
 
         if (usernameInput.isEmpty())
         {
@@ -111,7 +107,8 @@ public class SignUpFragment extends Fragment
             firstName.setError("First Name too long");
             return false;
         }
-        else if(hasDigit.find() || hasSpecial.find())
+
+        else if(!usernameInput.matches(NAME_PATTERN))
         {
             firstName.setError("First name contains invalid characters");
             return false;
@@ -124,8 +121,6 @@ public class SignUpFragment extends Fragment
     }
     private boolean validateLastName() {
         String usernameInput = lastName.getText().toString().trim();
-        Matcher hasDigit = digit.matcher(usernameInput);
-        Matcher hasSpecial = special.matcher(usernameInput);
 
         if (usernameInput.isEmpty())
         {
@@ -137,7 +132,7 @@ public class SignUpFragment extends Fragment
             lastName.setError("Last Name too long");
             return false;
         }
-        else if(hasDigit.find() || hasSpecial.find())
+        else if(!usernameInput.matches(NAME_PATTERN))
         {
             firstName.setError("Last name contains invalid characters");
             return false;
