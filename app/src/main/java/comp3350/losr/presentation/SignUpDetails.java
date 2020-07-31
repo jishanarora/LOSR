@@ -272,7 +272,6 @@ public class SignUpDetails extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
                 dateDay = dayOfMonth;
                 dateMonth = monthOfYear;
                 dateYear = year;
@@ -287,7 +286,6 @@ public class SignUpDetails extends AppCompatActivity {
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(SignUpDetails.this, R.style.DialogTheme, datePicker, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
