@@ -43,7 +43,10 @@ public class NavigationPageActivity extends AppCompatActivity
         {
             viewPager.setCurrentItem(0,false);
         }
-        else
+        else if(value == 2)
+        {
+            viewPager.setCurrentItem(2,false);
+        }else
         {
             viewPager.setCurrentItem(1,false);
         }

@@ -37,4 +37,5 @@
 
     <string name="message">Message</string>
     <string name="view_match_profile">View match profile</string>
+    <string name="title_activity_matched_profile">MatchedProfileActivity</string>
 </resources>
