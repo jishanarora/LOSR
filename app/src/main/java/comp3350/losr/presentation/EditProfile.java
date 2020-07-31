@@ -373,9 +373,9 @@ public class EditProfile extends AppCompatActivity
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
-                dateDay=dayOfMonth;
-                dateMonth=monthOfYear;
-                dateYear=year;
+                dateDay = dayOfMonth;
+                dateMonth = monthOfYear + 1;
+                dateYear = year;
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -396,7 +396,7 @@ public class EditProfile extends AppCompatActivity
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dateText.setText(sdf.format(myCalendar.getTime()));
