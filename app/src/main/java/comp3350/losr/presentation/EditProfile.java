@@ -388,7 +388,7 @@ public class EditProfile extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(EditProfile.this, datePicker, myCalendar
+                new DatePickerDialog(EditProfile.this, R.style.DialogTheme, datePicker, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
