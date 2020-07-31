@@ -167,7 +167,7 @@ public class SignUpFragment extends Fragment
             password.setError("Passwords can only contain letters and numbers");
             return false;
         }
-        else if (passwordInput1.length() < PASSWORD_MIN_LENGTH)  //!PASSWORD_PATTERN.matcher(passwordInput1).matches()
+        else if (passwordInput1.length() < PASSWORD_MIN_LENGTH)
         {
             password.setError("Password too weak");
             return false;
@@ -200,6 +200,9 @@ public class SignUpFragment extends Fragment
         String fName = firstName.getText().toString().replaceAll(" ", "");
         String lName = lastName.getText().toString().replaceAll(" ", "");
         String userEmail = email.getText().toString().replaceAll(" ", "");
+
+        fName = fName.substring(0,1).toUpperCase() + fName.substring(1);
+        lName = lName.substring(0,1).toUpperCase() + lName.substring(1);
 
         AccessUsers accessUsers= new AccessUsers();
         User registeredUser=accessUsers.addUser(new User(fName, lName, userEmail, password.getText().toString()));
