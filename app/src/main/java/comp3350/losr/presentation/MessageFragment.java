@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +27,12 @@ import comp3350.losr.objects.Match;
 public class MessageFragment extends Fragment
 {
 
-    public View.OnClickListener myClickListener;
+    private ImageView profile;
+  
+    public MessageFragment()
+    {
+        // Required empty public constructor
+    }
 
     public static MessageFragment newInstance()
     {
@@ -65,6 +72,18 @@ public class MessageFragment extends Fragment
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
 
+        /*
+        myClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent = new Intent(getContext(), MatchProfile.class);
+                startActivity(profileIntent);
+            }
+        };
+         */
+
+
+
         return rootView;
     }
 
@@ -93,7 +112,6 @@ public class MessageFragment extends Fragment
                         startActivity(intent);
                     }
                 });
-                
             }
 
             TextView matchName =convertView.findViewById(R.id.matchName);

@@ -109,8 +109,8 @@ public class AccessUsersTest extends TestCase
 
         assertEquals("marypoppins@gmail.com", test.getUserEmail());
         assertEquals("password", test.getUserPassword());
-        assertEquals("mary", test.getUserFirstName());
-        assertEquals("poppins", test.getUserLastName());
+        assertEquals("Mary", test.getUserFirstName());
+        assertEquals("Poppins", test.getUserLastName());
 
         System.out.println("testGetSpecifiedUser complete");
     }
