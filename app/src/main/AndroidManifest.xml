@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.SignUpDetails"></activity>
+        <activity
+            android:name=".presentation.MatchedProfileActivity"
+            android:label="@string/title_activity_matched_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".presentation.SignUpDetails" />
         <activity
             android:name=".presentation.EditProfile"
             android:label="@string/title_activity_edit_profile"
