@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,8 +24,11 @@ import comp3350.losr.objects.Match;
 
 public class MessageFragment extends Fragment
 {
-    Button msgButton;
-    Button profileButton;
+
+    private ImageView profile;
+    public View.OnClickListener myClickListener;
+
+
     public MessageFragment()
     {
         // Required empty public constructor
@@ -56,33 +60,27 @@ public class MessageFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_message, container,false);
 
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-        final MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
+        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
 
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
 
-        matchesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        myClickListener = new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), MessageActivity.class);
-                intent.putExtra("phoneNumber", matchAdapter.getEmail(position));
-                startActivity(intent);
+            public void onClick(View view) {
+                Intent profileIntent = new Intent(getContext(), MatchProfile.class);
+                startActivity(profileIntent);
             }
-        });
+        };
+
 
 
         return rootView;
-    }
-
-    public void openMatchMessages(){
-        Intent intent = new Intent(getActivity(), MessageActivity.class);
-        startActivity(intent);
     }
 
     public class MatchesAdapter extends ArrayAdapter<Match>
@@ -100,6 +98,8 @@ public class MessageFragment extends Fragment
             if (convertView == null)
             {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
+                convertView.setClickable(true);
+                convertView.findViewById(R.id.profileButton).setOnClickListener(myClickListener);
             }
 
             TextView matchName = (TextView) convertView.findViewById(R.id.matchName);
@@ -111,11 +111,7 @@ public class MessageFragment extends Fragment
             return convertView;
         }
 
-        public String getEmail(int position) {
-            Match currMatch = getItem(position);
-            return currMatch.getMatchedUser().getUserEmail();
 
-        }
     }
 
 }
