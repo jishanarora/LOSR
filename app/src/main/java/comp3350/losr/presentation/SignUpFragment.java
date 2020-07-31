@@ -77,6 +77,10 @@ public class SignUpFragment extends Fragment
     private boolean validateEmail()
     {
         String emailInput = email.getText().toString().trim();
+        AccessUsers tryEmail = new AccessUsers();
+
+        User testEmail = tryEmail.getSpecificUser(emailInput);
+
         if (emailInput.isEmpty())
         {
             email.setError("Field can't be empty");
@@ -85,6 +89,11 @@ public class SignUpFragment extends Fragment
         else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches())
         {
             email.setError("Please enter a valid email address");
+            return false;
+        }
+        else if (testEmail != null)
+        {
+            email.setError("That email is already in use");
             return false;
         }
         else
