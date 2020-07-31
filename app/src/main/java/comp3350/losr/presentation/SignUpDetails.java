@@ -35,9 +35,9 @@ public class SignUpDetails extends AppCompatActivity {
     private TextView date;
     private Button selectDate;
     private Button proceed;
-    private String[] answers = new String[]{"Choose","True", "False"};
-    private String[] gender = new String[]{"Choose","Male", "Female"};
-    private String[] weight = new String[]{"Choose","1", "2","3","4","5"};
+    private String[] answers = new String[]{"Choose", "True", "False"};
+    private String[] gender = new String[]{"Choose", "Male", "Female"};
+    private String[] weight = new String[]{"Choose", "1", "2", "3", "4", "5"};
     private Spinner weight1;
     private Spinner weight2;
     private Spinner weight3;
@@ -45,20 +45,21 @@ public class SignUpDetails extends AppCompatActivity {
     private Spinner weight5;
     private AccessUsers accessUsers;
     Calendar myCalendar = Calendar.getInstance();
-    private int dateDay=0;
-    private int dateMonth=0;
-    private int dateYear=0;
+    private int dateDay = 0;
+    private int dateMonth = 0;
+    private int dateYear = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_details);
 
-        spinner1= findViewById(R.id.signUp_spinner1);
+        spinner1 = findViewById(R.id.signUp_spinner1);
         spinner1.setSelection(0);
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -67,12 +68,12 @@ public class SignUpDetails extends AppCompatActivity {
             }
         });
 
-        spinner2= findViewById(R.id.signUp_spinner2);
+        spinner2 = findViewById(R.id.signUp_spinner2);
         spinner2.setSelection(0);
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -80,12 +81,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        spinner3= findViewById(R.id.signUp_spinner3);
+        spinner3 = findViewById(R.id.signUp_spinner3);
         spinner3.setSelection(0);
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -93,12 +94,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        spinner4= findViewById(R.id.signUp_spinner4);
+        spinner4 = findViewById(R.id.signUp_spinner4);
         spinner4.setSelection(0);
         spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -106,12 +107,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        spinner5= findViewById(R.id.signUp_spinner5);
+        spinner5 = findViewById(R.id.signUp_spinner5);
         spinner5.setSelection(0);
         spinner5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -119,12 +120,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        spinner6= findViewById(R.id.signUp_spinner6);
+        spinner6 = findViewById(R.id.signUp_spinner6);
         spinner6.setSelection(0);
         spinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -132,12 +133,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        spinner7= findViewById(R.id.signUp_spinner7);
+        spinner7 = findViewById(R.id.signUp_spinner7);
         spinner7.setSelection(0);
         spinner7.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -145,15 +146,15 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        date=findViewById(R.id.signUp_date);
-        selectDate=findViewById(R.id.signUp_select_date);
-        proceed=findViewById(R.id.signUp_proceed);
-        weight1=findViewById(R.id.signUp_spinner8);
+        date = findViewById(R.id.signUp_date);
+        selectDate = findViewById(R.id.signUp_select_date);
+        proceed = findViewById(R.id.signUp_proceed);
+        weight1 = findViewById(R.id.signUp_spinner8);
         weight1.setSelection(0);
         weight1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -161,12 +162,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        weight2=findViewById(R.id.signUp_spinner9);
+        weight2 = findViewById(R.id.signUp_spinner9);
         weight2.setSelection(0);
         weight2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -174,12 +175,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        weight3=findViewById(R.id.signUp_spinner10);
+        weight3 = findViewById(R.id.signUp_spinner10);
         weight3.setSelection(0);
         weight3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -187,12 +188,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        weight4=findViewById(R.id.signUp_spinner11);
+        weight4 = findViewById(R.id.signUp_spinner11);
         weight4.setSelection(0);
         weight4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -200,12 +201,12 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        weight5=findViewById(R.id.signUp_spinner12);
+        weight5 = findViewById(R.id.signUp_spinner12);
         weight5.setSelection(0);
         weight5.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                ((TextView)parentView.getChildAt(0)).setTextColor(Color.WHITE);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.WHITE);
             }
 
             @Override
@@ -213,7 +214,7 @@ public class SignUpDetails extends AppCompatActivity {
 
             }
         });
-        accessUsers= new AccessUsers();
+        accessUsers = new AccessUsers();
 
         ArrayAdapter<String> answersAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, answers);
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, gender);
@@ -233,45 +234,38 @@ public class SignUpDetails extends AppCompatActivity {
         weight5.setAdapter(weightAdapter);
         date.setText("Select Date");
 
-        proceed.setOnClickListener(new View.OnClickListener()
-        {
+        proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dateDay!=0 && dateMonth!=0 && dateYear!=0)
-                    accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear,dateMonth,dateDay);
-                else{
+                if (dateDay != 0 && dateMonth != 0 && dateYear != 0)
+                    accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear, dateMonth, dateDay);
+                else {
                     Toast.makeText(getApplicationContext(), "Select the Date of Birth", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(spinner1.getSelectedItem().toString().equals("Choose")||spinner2.getSelectedItem().toString().equals("Choose")||spinner3.getSelectedItem().toString().equals("Choose") ||spinner4.getSelectedItem().toString().equals("Choose")||spinner5.getSelectedItem().toString().equals("Choose")||spinner6.getSelectedItem().toString().equals("Choose")|| spinner7.getSelectedItem().toString().equals("Choose")||weight1.getSelectedItem().toString().equals("Choose")||weight2.getSelectedItem().toString().equals("Choose")|| weight3.getSelectedItem().toString().equals("Choose")||weight4.getSelectedItem().toString().equals("Choose")||weight5.getSelectedItem().toString().equals("Choose"))
-                {
+                if (spinner1.getSelectedItem().toString().equals("Choose") || spinner2.getSelectedItem().toString().equals("Choose") || spinner3.getSelectedItem().toString().equals("Choose") || spinner4.getSelectedItem().toString().equals("Choose") || spinner5.getSelectedItem().toString().equals("Choose") || spinner6.getSelectedItem().toString().equals("Choose") || spinner7.getSelectedItem().toString().equals("Choose") || weight1.getSelectedItem().toString().equals("Choose") || weight2.getSelectedItem().toString().equals("Choose") || weight3.getSelectedItem().toString().equals("Choose") || weight4.getSelectedItem().toString().equals("Choose") || weight5.getSelectedItem().toString().equals("Choose")) {
                     Toast.makeText(getApplicationContext(), "Please answer all the questions", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else{
-                if(spinner1.getSelectedItem().equals("Male"))
-                {
-                    accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Male);
-                }
-                else
-                {
-                    accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Female);
-                }
-                if(spinner2.getSelectedItem().equals("Male"))
-                {
-                    accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Male);
-                }
-                else
-                {
-                    accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
-                }
-                accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(spinner3.getSelectedItem().toString()),Boolean.parseBoolean(spinner4.getSelectedItem().toString()),Boolean.parseBoolean(spinner5.getSelectedItem().toString()),Boolean.parseBoolean(spinner6.getSelectedItem().toString()),Boolean.parseBoolean(spinner7.getSelectedItem().toString()),Integer.parseInt(weight1.getSelectedItem().toString()),Integer.parseInt(weight2.getSelectedItem().toString()),Integer.parseInt(weight3.getSelectedItem().toString()),Integer.parseInt(weight4.getSelectedItem().toString()),Integer.parseInt(weight5.getSelectedItem().toString()));
-                accessUsers.updateUser(accessUsers.getCurrentUser());
-                Intent intent= new Intent(SignUpDetails.this,NavigationPageActivity.class);
-                intent.putExtra("value",0);
-                startActivity(intent);
+                } else {
+                    if (spinner1.getSelectedItem().equals("Male")) {
+                        accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Male);
+                    } else {
+                        accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Female);
+                    }
+                    if (spinner2.getSelectedItem().equals("Male")) {
+                        accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Male);
+                    } else {
+                        accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
+                    }
+                    accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(spinner3.getSelectedItem().toString()), Boolean.parseBoolean(spinner4.getSelectedItem().toString()), Boolean.parseBoolean(spinner5.getSelectedItem().toString()), Boolean.parseBoolean(spinner6.getSelectedItem().toString()), Boolean.parseBoolean(spinner7.getSelectedItem().toString()), Integer.parseInt(weight1.getSelectedItem().toString()), Integer.parseInt(weight2.getSelectedItem().toString()), Integer.parseInt(weight3.getSelectedItem().toString()), Integer.parseInt(weight4.getSelectedItem().toString()), Integer.parseInt(weight5.getSelectedItem().toString()));
+                    accessUsers.updateUser(accessUsers.getCurrentUser());
+                    Intent intent = new Intent(SignUpDetails.this, NavigationPageActivity.class);
+                    intent.putExtra("value", 0);
+                    startActivity(intent);
 
-            }}});
+                }
+            }
+        });
 
         final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
 
@@ -279,9 +273,9 @@ public class SignUpDetails extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // TODO Auto-generated method stub
-                dateDay=dayOfMonth;
-                dateMonth=monthOfYear;
-                dateYear=year;
+                dateDay = dayOfMonth;
+                dateMonth = monthOfYear;
+                dateYear = year;
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);

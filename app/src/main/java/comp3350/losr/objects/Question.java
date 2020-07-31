@@ -8,15 +8,14 @@ public class Question {
     private int weight;
 
     //just for testing
-    public Question(Boolean answer, int weight)
-    {
+    public Question(Boolean answer, int weight) {
         qNum = 0;
         question = "test";
         this.answer = answer;
         this.weight = weight;
     }
-    public Question(Boolean answer)
-    {
+
+    public Question(Boolean answer) {
         qNum = 0;
         question = "test";
         this.answer = answer;
@@ -24,28 +23,24 @@ public class Question {
     }
 
 
-    public Question(int qNum, String question, Boolean answer, int weight)
-    {
+    public Question(int qNum, String question, Boolean answer, int weight) {
         this.qNum = qNum;
         this.question = question;
         this.answer = answer;
         this.weight = weight;
     }
 
-    public boolean equals(Question q)
-    {
+    public boolean equals(Question q) {
         boolean equal = false;
 
-        if(q.getqNum() == this.qNum && q.getQuestion().equals(this.question) && q.getAnswer().equals(this.answer) && q.getWeight() == this.weight)
-        {
+        if (q.getqNum() == this.qNum && q.getQuestion().equals(this.question) && q.getAnswer().equals(this.answer) && q.getWeight() == this.weight) {
             equal = true;
         }
 
         return equal;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return answer.toString();
     }
 
