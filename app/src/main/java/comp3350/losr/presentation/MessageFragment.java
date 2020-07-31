@@ -1,11 +1,15 @@
 package comp3350.losr.presentation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +24,10 @@ import comp3350.losr.objects.Match;
 
 public class MessageFragment extends Fragment
 {
+
+    private ImageView profile;
+    public View.OnClickListener myClickListener;
+
 
     public MessageFragment()
     {
@@ -62,6 +70,18 @@ public class MessageFragment extends Fragment
         matchesListView = (ListView)rootView.findViewById(R.id.matchesListView);
         matchesListView.setAdapter(matchAdapter);
 
+        /*
+        myClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileIntent = new Intent(getContext(), MatchProfile.class);
+                startActivity(profileIntent);
+            }
+        };
+         */
+
+
+
         return rootView;
     }
 
@@ -80,6 +100,8 @@ public class MessageFragment extends Fragment
             if (convertView == null)
             {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
+                convertView.setClickable(true);
+                convertView.findViewById(R.id.profileButton).setOnClickListener(myClickListener);
             }
 
             TextView matchName = (TextView) convertView.findViewById(R.id.matchName);

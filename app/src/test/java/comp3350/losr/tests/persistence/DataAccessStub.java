@@ -38,7 +38,7 @@ public class DataAccessStub implements DataAccess {
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE,2,2,2,2,2);
         users.add(newUser);
 
-        newUser = new User("mary", "poppins", "marypoppins@gmail.com", "password");
+        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password");
         newUser.setUserProfile("hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
         users.add(newUser);

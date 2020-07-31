@@ -162,10 +162,10 @@ public class EditProfile extends AppCompatActivity
         }
 
         weight1.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight2.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight3.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight4.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight5.setText(Integer.toString(userAnswers.get(0).getWeight()));
+        weight2.setText(Integer.toString(userAnswers.get(1).getWeight()));
+        weight3.setText(Integer.toString(userAnswers.get(2).getWeight()));
+        weight4.setText(Integer.toString(userAnswers.get(3).getWeight()));
+        weight5.setText(Integer.toString(userAnswers.get(4).getWeight()));
 
 
         weight1.setInputType( InputType.TYPE_CLASS_NUMBER );

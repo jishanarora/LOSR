@@ -17,11 +17,11 @@ public class DataAccessTest extends TestCase
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        dataAccess = new DataAccessStub("Stub");
-        dataAccess.openConnection("Stub");
+        //dataAccess = new DataAccessStub("Stub");
+        //dataAccess.openConnection("Stub");
         // or switch to the real database:
-        //dataAccess = new DataAccessObject(Main.dbName);
-        //dataAccess.openConnection(Main.getDBPathName());
+        dataAccess = new DataAccessObject(Main.dbName);
+        dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers()
@@ -48,8 +48,8 @@ public class DataAccessTest extends TestCase
             temp.add(Boolean.TRUE);
         }
 
-        assertEquals("mary", test.get(spot).getUserFirstName());
-        assertEquals("poppins", test.get(spot).getUserLastName());
+        assertEquals("Mary", test.get(spot).getUserFirstName());
+        assertEquals("Poppins", test.get(spot).getUserLastName());
         assertEquals("marypoppins@gmail.com", test.get(spot).getUserEmail());
         assertEquals("password", test.get(spot).getUserPassword());
         assertEquals("hello there", test.get(spot).getUserProfile().getBio());
@@ -124,6 +124,7 @@ public class DataAccessTest extends TestCase
         assertEquals("new bio", dataAccess.getCurrentUser().getUserProfile().getBio());
         assertEquals(User.user_gender.Female, dataAccess.getCurrentUser().getUserProfile().getGender());
         assertEquals(22, dataAccess.getCurrentUser().getUserProfile().getAge());
+        assertEquals("25/01/1998", dataAccess.getCurrentUser().getUserProfile().dateOfBirth());
         assertEquals(temp.get(0).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(0).getAnswer());
         assertEquals(temp.get(1).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(1).getAnswer());
         assertEquals(temp.get(2).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(2).getAnswer());
@@ -171,8 +172,8 @@ public class DataAccessTest extends TestCase
 
         assertEquals("marypoppins@gmail.com", test.getUserEmail());
         assertEquals("password", test.getUserPassword());
-        assertEquals("mary", test.getUserFirstName());
-        assertEquals("poppins", test.getUserLastName());
+        assertEquals("Mary", test.getUserFirstName());
+        assertEquals("Poppins", test.getUserLastName());
 
         System.out.println("testGetSpecifiedUser complete");
     }
