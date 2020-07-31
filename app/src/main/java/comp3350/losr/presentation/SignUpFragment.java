@@ -46,24 +46,10 @@ public class SignUpFragment extends Fragment
     private EditText password;
     private EditText confirmPassword;
     Button register;
-    /*
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    //"(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
 
-     */
-
-    Pattern letter = Pattern.compile("[a-zA-z]");
     Pattern digit = Pattern.compile("[0-9]");
     Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-    //Pattern eight = Pattern.compile (".{8}");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -165,9 +151,16 @@ public class SignUpFragment extends Fragment
     private boolean validatePassword() {
         String passwordInput1 = password.getText().toString().trim();
         String passwordInput2 = confirmPassword.getText().toString().trim();
+        Matcher m = PASSWORD_PATTERN.matcher(passwordInput1);
+
         if (passwordInput1.isEmpty())
         {
             password.setError("Field can't be empty");
+            return false;
+        }
+        else if(m.find())
+        {
+            password.setError("Passwords can only contain letters and numbers");
             return false;
         }
         else if (passwordInput1.length() < PASSWORD_MIN_LENGTH)  //!PASSWORD_PATTERN.matcher(passwordInput1).matches()
@@ -200,8 +193,12 @@ public class SignUpFragment extends Fragment
             return;
         }
 
+        String fName = firstName.getText().toString().replaceAll(" ", "");
+        String lName = lastName.getText().toString().replaceAll(" ", "");
+        String userEmail = email.getText().toString().replaceAll(" ", "");
+
         AccessUsers accessUsers= new AccessUsers();
-        User registeredUser=accessUsers.addUser(new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString()));
+        User registeredUser=accessUsers.addUser(new User(fName, lName, userEmail, password.getText().toString()));
         if(registeredUser==null) {
             Toast.makeText(this.getContext(), "Unable to register, Contact Support", Toast.LENGTH_SHORT).show();
         }
