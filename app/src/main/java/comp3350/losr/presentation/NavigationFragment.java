@@ -1,6 +1,5 @@
 package comp3350.losr.presentation;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,8 +16,7 @@ import comp3350.losr.R;
  * Use the {@link NavigationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NavigationFragment extends Fragment
-{
+public class NavigationFragment extends Fragment {
 
     private EditText userFName;
     private EditText userLName;
@@ -32,13 +30,11 @@ public class NavigationFragment extends Fragment
     private String mParam1;
     private String mParam2;
 
-    public NavigationFragment()
-    {
+    public NavigationFragment() {
         // Required empty public constructor
     }
 
-    public static NavigationFragment newInstance()
-    {
+    public static NavigationFragment newInstance() {
 
         Bundle args = new Bundle();
 
@@ -46,6 +42,7 @@ public class NavigationFragment extends Fragment
         fragment.setArguments(args);
         return fragment;
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -54,8 +51,7 @@ public class NavigationFragment extends Fragment
      * @param param2 Parameter 2.
      * @return A new instance of fragment NavigationFragment.
      */
-    public static NavigationFragment newInstance(String param1, String param2)
-    {
+    public static NavigationFragment newInstance(String param1, String param2) {
         NavigationFragment fragment = new NavigationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -65,11 +61,9 @@ public class NavigationFragment extends Fragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
+        if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -78,8 +72,7 @@ public class NavigationFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
 
         // Inflate the layout for this fragment

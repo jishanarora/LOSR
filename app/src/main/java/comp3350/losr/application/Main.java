@@ -1,13 +1,11 @@
 package comp3350.losr.application;
 
-public class Main
-{
+public class Main {
 
     public static final String dbName = "Users";
     public static String dbPathName = "database/Users";
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         startUp();
 
         shutDown();
@@ -15,13 +13,11 @@ public class Main
         System.out.println("Application closed");
     }
 
-    public static void startUp()
-    {
+    public static void startUp() {
         DatabaseService.createDataAccess(dbName);
     }
 
-    public static void shutDown()
-    {
+    public static void shutDown() {
         DatabaseService.closeDataAccess();
     }
 

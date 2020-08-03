@@ -11,8 +11,7 @@ import comp3350.losr.objects.User;
 import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
 
-public class DataAccessTest extends TestCase
-{
+public class DataAccessTest extends TestCase {
     private DataAccess dataAccess;
 
     public void setUp() {
@@ -24,8 +23,7 @@ public class DataAccessTest extends TestCase
         dataAccess.openConnection(Main.getDBPathName());
     }
 
-    public void testGetGenderedUsers()
-    {
+    public void testGetGenderedUsers() {
         System.out.println("Starting testGetGenderedUsers");
 
         List<User> test;
@@ -34,22 +32,19 @@ public class DataAccessTest extends TestCase
         assertEquals(4, test.size());
 
         int spot = -1;
-        for(int i = 0; i < test.size(); i++)
-        {
-            if(test.get(i).getUserEmail().equals("marypoppins@gmail.com"))
-            {
+        for (int i = 0; i < test.size(); i++) {
+            if (test.get(i).getUserEmail().equals("marypoppins@gmail.com")) {
                 spot = i;
             }
         }
 
         ArrayList<Boolean> temp = new ArrayList<>();
-        for(int i = 0; i < 5; i ++)
-        {
+        for (int i = 0; i < 5; i++) {
             temp.add(Boolean.TRUE);
         }
 
-        assertEquals("mary", test.get(spot).getUserFirstName());
-        assertEquals("poppins", test.get(spot).getUserLastName());
+        assertEquals("Mary", test.get(spot).getUserFirstName());
+        assertEquals("Poppins", test.get(spot).getUserLastName());
         assertEquals("marypoppins@gmail.com", test.get(spot).getUserEmail());
         assertEquals("password", test.get(spot).getUserPassword());
         assertEquals("hello there", test.get(spot).getUserProfile().getBio());
@@ -65,53 +60,47 @@ public class DataAccessTest extends TestCase
         System.out.println("testGetGenderedUsers complete");
     }
 
-    public void testTryLoginSuccess()
-    {
+    public void testTryLoginSuccess() {
         System.out.println("Starting testTryLoginSuccess");
         assertNull(dataAccess.tryLogin("mbathie@gmail.com", "password"));
         System.out.println("testTryLoginSuccess complete");
     }
 
-    public void testTryLoginWrongEmail()
-    {
+    public void testTryLoginWrongEmail() {
         System.out.println("Starting testTryLoginWrongEmail");
-        assertEquals("Could not find an account with that email",dataAccess.tryLogin("mbathie@gmail.co", "password"));
+        assertEquals("Could not find an account with that email", dataAccess.tryLogin("mbathie@gmail.co", "password"));
         System.out.println("testTryLoginWrongEmail complete");
     }
 
-    public void testTryLoginWrongPassword()
-    {
+    public void testTryLoginWrongPassword() {
         System.out.println("Starting testTryLoginWrongPassword");
         assertEquals("Incorrect password", dataAccess.tryLogin("mbathie@gmail.com", "pasword"));
         System.out.println("testTryLoginWrongPassword complete");
     }
 
-    public void testTryLoginBothWrong()
-    {
+    public void testTryLoginBothWrong() {
         System.out.println("Starting testTryLoginBothWrong");
         assertEquals("Could not find an account with that email", dataAccess.tryLogin("mbathie@gail.com", "passord"));
         System.out.println("testTryLoginBothWrong complete");
     }
 
-    public void testAddUser()
-    {
+    public void testAddUser() {
         System.out.println("Starting testAddUser");
 
-        dataAccess.addUser(new User("test","test","test","test"));
-        assertNull(dataAccess.tryLogin("test","test"));
+        dataAccess.addUser(new User("test", "test", "test", "test"));
+        assertNull(dataAccess.tryLogin("test", "test"));
 
         System.out.println("testAddUser complete");
     }
 
-    public void testUpdateUser()
-    {
+    public void testUpdateUser() {
         System.out.println("Starting testUpdateUser");
 
         User test = dataAccess.getCurrentUser();
         test.updateBio("new bio");
         test.updateGender(User.user_gender.Female);
         test.updateDateOfBirth(1998, 1, 25);
-        test.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        test.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
         dataAccess.updateUser(test);
 
         ArrayList<Question> temp = new ArrayList<>();
@@ -134,8 +123,7 @@ public class DataAccessTest extends TestCase
         System.out.println("testUpdateUser complete");
     }
 
-    public void testDeleteUser()
-    {
+    public void testDeleteUser() {
         System.out.println("Starting testDeleteUser");
 
         dataAccess.deleteUser(dataAccess.getCurrentUser());
@@ -144,8 +132,7 @@ public class DataAccessTest extends TestCase
         System.out.println("testDeleteUser complete");
     }
 
-    public void testRegistration()
-    {
+    public void testRegistration() {
         System.out.println("Starting testRegistration");
 
         assertEquals(new User("testFirstName", "testLastName", "testEmail", "testPassword"), dataAccess.addUser(new User("testFirstName", "testLastName", "testEmail", "testPassword")));
@@ -154,8 +141,7 @@ public class DataAccessTest extends TestCase
         System.out.println("testRegistration complete");
     }
 
-    public void testLogin()
-    {
+    public void testLogin() {
         System.out.println("Starting testLogin");
 
         assertNull(dataAccess.tryLogin("marypoppins@gmail.com", "password"));
@@ -164,22 +150,20 @@ public class DataAccessTest extends TestCase
         System.out.println("testLogin complete");
     }
 
-    public void testGetSpecifiedUser()
-    {
+    public void testGetSpecifiedUser() {
         System.out.println("Starting testGetSpecifiedUser");
 
         User test = dataAccess.getSpecificUser("marypoppins@gmail.com");
 
         assertEquals("marypoppins@gmail.com", test.getUserEmail());
         assertEquals("password", test.getUserPassword());
-        assertEquals("mary", test.getUserFirstName());
-        assertEquals("poppins", test.getUserLastName());
+        assertEquals("Mary", test.getUserFirstName());
+        assertEquals("Poppins", test.getUserLastName());
 
         System.out.println("testGetSpecifiedUser complete");
     }
 
-    public void testGetSpecifiedUserFalse()
-    {
+    public void testGetSpecifiedUserFalse() {
         System.out.println("Starting testGetSpecifiedUserFalse");
 
         assertNull(dataAccess.getSpecificUser("marypoppns@gmail.com"));

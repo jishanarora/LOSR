@@ -26,11 +26,9 @@ import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.User;
 
 
-public class SignUpFragment extends Fragment
-{
+public class SignUpFragment extends Fragment {
 
-    public SignUpFragment()
-    {
+    public SignUpFragment() {
         // Required empty public constructor
     }
 
@@ -46,39 +44,22 @@ public class SignUpFragment extends Fragment
     private EditText password;
     private EditText confirmPassword;
     Button register;
-    /*
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    //"(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
-
-     */
-
-    Pattern letter = Pattern.compile("[a-zA-z]");
-    Pattern digit = Pattern.compile("[0-9]");
-    Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-    //Pattern eight = Pattern.compile (".{8}");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+    private final String NAME_PATTERN = "[a-zA-Z]+";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_sign_up, container, false);
-        alreadyHaveAnAccount= view.findViewById(R.id.tv_already_have_an_account);
-        parentFrameLayout=view.findViewById(R.id.register_framelayout);
-        firstName=view.findViewById(R.id.sign_up_first_name);
-        lastName=view.findViewById(R.id.sign_up_last_name);
-        email=view.findViewById(R.id.sign_up_email);
-        password=view.findViewById(R.id.sign_up_password);
-        confirmPassword=view.findViewById(R.id.sign_up_confirm_password);
-        register=view.findViewById(R.id.sign_up_button);
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        alreadyHaveAnAccount = view.findViewById(R.id.tv_already_have_an_account);
+        parentFrameLayout = view.findViewById(R.id.register_framelayout);
+        firstName = view.findViewById(R.id.sign_up_first_name);
+        lastName = view.findViewById(R.id.sign_up_last_name);
+        email = view.findViewById(R.id.sign_up_email);
+        password = view.findViewById(R.id.sign_up_password);
+        confirmPassword = view.findViewById(R.id.sign_up_confirm_password);
+        register = view.findViewById(R.id.sign_up_button);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,124 +71,111 @@ public class SignUpFragment extends Fragment
     }
 
 
-    private boolean validateEmail()
-    {
+    private boolean validateEmail() {
         String emailInput = email.getText().toString().trim();
-        if (emailInput.isEmpty())
-        {
+        AccessUsers tryEmail = new AccessUsers();
+
+        User testEmail = tryEmail.getSpecificUser(emailInput);
+
+        if (emailInput.isEmpty()) {
             email.setError("Field can't be empty");
             return false;
-        }
-        else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches())
-        {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             email.setError("Please enter a valid email address");
             return false;
-        }
-        else
-        {
+        } else if (testEmail != null) {
+            email.setError("That email is already in use");
+            return false;
+        } else {
             email.setError(null);
             return true;
         }
     }
-    private boolean validateFirstName()
-    {
-        String usernameInput = firstName.getText().toString().trim();
-        Matcher hasDigit = digit.matcher(usernameInput);
-        Matcher hasSpecial = special.matcher(usernameInput);
 
-        if (usernameInput.isEmpty())
-        {
+    private boolean validateFirstName() {
+        String usernameInput = firstName.getText().toString().trim();
+
+        if (usernameInput.isEmpty()) {
             firstName.setError("Field can't be empty");
             return false;
-        }
-        else if (usernameInput.length() > NAME_MAX_LENGTH)
-        {
+        } else if (usernameInput.length() > NAME_MAX_LENGTH) {
             firstName.setError("First Name too long");
             return false;
-        }
-        else if(hasDigit.find() || hasSpecial.find())
-        {
+        } else if (!usernameInput.matches(NAME_PATTERN)) {
             firstName.setError("First name contains invalid characters");
             return false;
-        }
-        else
-        {
+        } else {
             firstName.setError(null);
             return true;
         }
     }
+
     private boolean validateLastName() {
         String usernameInput = lastName.getText().toString().trim();
-        Matcher hasDigit = digit.matcher(usernameInput);
-        Matcher hasSpecial = special.matcher(usernameInput);
 
-        if (usernameInput.isEmpty())
-        {
+        if (usernameInput.isEmpty()) {
             lastName.setError("Field can't be empty");
             return false;
-        }
-        else if (usernameInput.length() > NAME_MAX_LENGTH)
-        {
+        } else if (usernameInput.length() > NAME_MAX_LENGTH) {
             lastName.setError("Last Name too long");
             return false;
-        }
-        else if(hasDigit.find() || hasSpecial.find())
-        {
+        } else if (!usernameInput.matches(NAME_PATTERN)) {
             firstName.setError("Last name contains invalid characters");
             return false;
-        }
-        else
-        {
+        } else {
             lastName.setError(null);
             return true;
         }
     }
+
     private boolean validatePassword() {
         String passwordInput1 = password.getText().toString().trim();
         String passwordInput2 = confirmPassword.getText().toString().trim();
-        if (passwordInput1.isEmpty())
-        {
+        Matcher m = PASSWORD_PATTERN.matcher(passwordInput1);
+
+        if (passwordInput1.isEmpty()) {
             password.setError("Field can't be empty");
             return false;
-        }
-        else if (passwordInput1.length() < PASSWORD_MIN_LENGTH)  //!PASSWORD_PATTERN.matcher(passwordInput1).matches()
-        {
+        } else if (m.find()) {
+            password.setError("Passwords can only contain letters and numbers");
+            return false;
+        } else if (passwordInput1.length() < PASSWORD_MIN_LENGTH) {
             password.setError("Password too weak");
             return false;
-        }
-        else if(passwordInput1.length() > PASSWORD_MAX_LENGTH)
-        {
+        } else if (passwordInput1.length() > PASSWORD_MAX_LENGTH) {
             password.setError("Password too long");
             return false;
-        }
-        else if (!passwordInput1.equals(passwordInput2)) {
+        } else if (!passwordInput1.equals(passwordInput2)) {
             password.setError("Passwords don't match");
             confirmPassword.setError("Passwords don't match");
             return false;
-        }
-        else
-        {
+        } else {
             password.setError(null);
             confirmPassword.setError(null);
             return true;
         }
     }
 
-    public void confirmInput()
-    {
-        if (!validateEmail() | !validateFirstName() | !validateLastName() | !validatePassword())
-        {
+    public void confirmInput() {
+        if (!validateEmail() | !validateFirstName() | !validateLastName() | !validatePassword()) {
             return;
         }
 
-        AccessUsers accessUsers= new AccessUsers();
-        User registeredUser=accessUsers.addUser(new User(firstName.getText().toString(),lastName.getText().toString(),email.getText().toString(),password.getText().toString()));
-        if(registeredUser==null) {
+        String fName = firstName.getText().toString().replaceAll(" ", "");
+        String lName = lastName.getText().toString().replaceAll(" ", "");
+        String userEmail = email.getText().toString().replaceAll(" ", "");
+
+        //change the first letter to uppercase
+        fName = fName.substring(0, 1).toUpperCase() + fName.substring(1);
+        lName = lName.substring(0, 1).toUpperCase() + lName.substring(1);
+
+        AccessUsers accessUsers = new AccessUsers();
+        User registeredUser = accessUsers.addUser(new User(fName, lName, userEmail, password.getText().toString()));
+        if (registeredUser == null) {
             Toast.makeText(this.getContext(), "Unable to register, Contact Support", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Intent navigationIntent = new Intent(getActivity(), NavigationPageActivity.class);
-            startActivity(navigationIntent);
+        } else {
+            Intent signUpIntent = new Intent(getActivity(), SignUpDetails.class);
+            startActivity(signUpIntent);
             getActivity().finish();
         }
 
@@ -215,23 +183,19 @@ public class SignUpFragment extends Fragment
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-    {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        alreadyHaveAnAccount.setOnClickListener(new View.OnClickListener()
-        {
+        alreadyHaveAnAccount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 setFragment(new SignInFragment());
             }
         });
     }
 
-    private void setFragment(Fragment fragment)
-    {
-        FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left,R.anim.slideout_from_right);
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_left, R.anim.slideout_from_right);
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
         fragmentTransaction.commit();
     }

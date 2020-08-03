@@ -9,13 +9,11 @@ import comp3350.losr.objects.User;
 
 import static org.junit.Assert.assertNotEquals;
 
-public class UserTest extends TestCase
-{
+public class UserTest extends TestCase {
     User user;
     User user1;
 
-    public void testUserEmpty()
-    {
+    public void testUserEmpty() {
         System.out.println("Starting testUserEmpty");
 
         user = new User("", "", "", "");
@@ -30,8 +28,7 @@ public class UserTest extends TestCase
         System.out.println("testUserEmpty completed");
     }
 
-    public void testUserAverage()
-    {
+    public void testUserAverage() {
         System.out.println("Starting testUserAverage");
 
         user = new User("John", "Doe", "johndoe@gmail.com", "password");
@@ -51,8 +48,7 @@ public class UserTest extends TestCase
         System.out.println("testUserAverage completed");
     }
 
-    public void testUserAverage2()
-    {
+    public void testUserAverage2() {
         System.out.println("Starting testUserAverage2");
 
         user = new User("Mary", "Poppins", "marypoppins@gmail.com", "password1");
@@ -72,8 +68,7 @@ public class UserTest extends TestCase
         System.out.println("testUserAverage2 completed");
     }
 
-    public void testUserAverage3()
-    {
+    public void testUserAverage3() {
         System.out.println("Starting testUserAverage3");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password5");
@@ -93,8 +88,7 @@ public class UserTest extends TestCase
         System.out.println("testUserAverage3 completed");
     }
 
-    public void testUserEquals()
-    {
+    public void testUserEquals() {
         System.out.println("Starting testUserEquals");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password");
@@ -119,8 +113,7 @@ public class UserTest extends TestCase
         System.out.println("testUserEquals complete");
     }
 
-    public void testUserEqualsDiffAnswers()
-    {
+    public void testUserEqualsDiffAnswers() {
         System.out.println("Starting testUserEqualsDiffAnswers");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password");
@@ -144,11 +137,10 @@ public class UserTest extends TestCase
         System.out.println("testUserEqualsDiffAnswers complete");
     }
 
-    public void testSetUserProfile()
-    {
+    public void testSetUserProfile() {
         System.out.println("Starting testSetUserProfile");
 
-        user = new User("","","","");
+        user = new User("", "", "", "");
         user.setUserProfile("testing bio", User.user_gender.Female, User.user_gender.Female, 1999, 1, 25);
 
         assertEquals("testing bio", user.getUserProfile().getBio());
@@ -160,11 +152,10 @@ public class UserTest extends TestCase
         System.out.println("testSetUserProfile complete");
     }
 
-    public void testUpdateAnswer()
-    {
+    public void testUpdateAnswer() {
         System.out.println("Starting testUpdateAnswer");
 
-        user = new User("","","","");
+        user = new User("", "", "", "");
         user.updateAnswer(Boolean.TRUE, 2, 2);
         user.updateAnswer(Boolean.TRUE, 2, 4);
         //this is out of bounds and should do nothing
@@ -179,12 +170,11 @@ public class UserTest extends TestCase
         System.out.println("testUpdateAnswer complete");
     }
 
-    public void testUpdateAllAnswers()
-    {
+    public void testUpdateAllAnswers() {
         System.out.println("Starting testUpdateAllAnswers");
 
-        user = new User("","","","");
-        user.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        user = new User("", "", "", "");
+        user.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
 
         assertEquals(Boolean.TRUE, user.getAnswers().get(0).getAnswer());
         assertEquals(Boolean.TRUE, user.getAnswers().get(1).getAnswer());
@@ -195,11 +185,10 @@ public class UserTest extends TestCase
         System.out.println("testUpdateAllAnswers complete");
     }
 
-    public void testUpdateDateOfBirth()
-    {
+    public void testUpdateDateOfBirth() {
         System.out.println("Starting testUpdateDateOfBirth");
 
-        user = new User("","","","");
+        user = new User("", "", "", "");
         user.updateDateOfBirth(1988, 1, 12);
 
         assertEquals("12/01/1988", user.getUserProfile().dateOfBirth());
@@ -208,11 +197,10 @@ public class UserTest extends TestCase
         System.out.println("testUpdateDateOfBirth complete");
     }
 
-    public void testUpdateBio()
-    {
+    public void testUpdateBio() {
         System.out.println("Starting testUpdateBio");
 
-        user = new User("","","","");
+        user = new User("", "", "", "");
         user.updateBio("new test bio");
 
         assertEquals("new test bio", user.getUserProfile().getBio());

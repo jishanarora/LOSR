@@ -16,13 +16,11 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<User> users;
     private User currentUser;
 
-    public DataAccessStub(String name)
-    {
+    public DataAccessStub(String name) {
         this.dbName = name;
     }
 
-    public void openConnection(String path)
-    {
+    public void openConnection(String path) {
         User newUser;
 
         users = new ArrayList<>();
@@ -30,57 +28,56 @@ public class DataAccessStub implements DataAccess {
         //This is the placeholder user that "you are" when you use the app
         currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
         currentUser.setUserProfile("Hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
-        currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, 5, 5, 5, 2, 1);
         users.add(currentUser);
 
         newUser = new User("John", "Doe", "johndoe@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 8, 8);
-        newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, 1, 2, 3, 4, 2);
         users.add(newUser);
 
-        newUser = new User("mary", "poppins", "marypoppins@gmail.com", "password");
+        newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password");
         newUser.setUserProfile("hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16);
-        newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 1, 2, 5, 5, 2);
         users.add(newUser);
 
         newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1998, 4, 13);
-        newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, 1, 3, 2, 2, 5);
         users.add(newUser);
 
         newUser = new User("Sean", "Lett", "seanlett@gmail.com", "password");
         newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 9, 13);
-        newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, 1, 2, 3, 2, 5);
         users.add(newUser);
 
         newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", "password");
         newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2001, 9, 22);
-        newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, 4, 2, 1, 3, 2);
         users.add(newUser);
 
         newUser = new User("Jessica", "Fie", "jessicafie@gmail.com", "password");
         newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2000, 5, 15);
-        newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, 2, 1, 2, 3, 5);
         users.add(newUser);
 
         newUser = new User("Amy", "Kowall", "amykowall@gmail.com", "password");
         newUser.setUserProfile("Yo", User.user_gender.Female, User.user_gender.Male, 1999, 1, 2);
-        newUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE,2,2,2,2,2);
+        newUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, 3, 1, 5, 2, 4);
         users.add(newUser);
 
-        System.out.println("Opened connection to "+dbType+" database "+dbName);
+        System.out.println("Opened connection to " + dbType + " database " + dbName);
     }
 
-    public User getCurrentUser(){return currentUser;}
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
-    public User getSpecificUser(String email)
-    {
+    public User getSpecificUser(String email) {
         User specifiedUser = null;
 
-        for(int i = 0; i < users.size(); i++)
-        {
-            if(users.get(i).getUserEmail().equals(email))
-            {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserEmail().equals(email)) {
                 specifiedUser = users.get(i);
                 break;
             }
@@ -88,59 +85,46 @@ public class DataAccessStub implements DataAccess {
         return specifiedUser;
     }
 
-    public User addUser(User newUser)
-    {
+    public User addUser(User newUser) {
         users.add(newUser);
         currentUser = newUser;
         return newUser;
     }
 
-    public void deleteUser(User selectedUser)
-    {
+    public void deleteUser(User selectedUser) {
         int index;
 
         index = users.indexOf(selectedUser);
-        if(index >= 0)
-        {
+        if (index >= 0) {
             users.remove(index);
         }
     }
 
-    public void updateUser(User update)
-    {
+    public void updateUser(User update) {
         String email = update.getUserEmail();
         int spot = -1;
 
-        for(int i = 0; i < users.size(); i++)
-        {
-            if(users.get(i).getUserEmail().equals(email))
-            {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserEmail().equals(email)) {
                 spot = i;
                 break;
             }
         }
 
-        if(spot > 0)
-        {
+        if (spot > 0) {
             users.set(spot, update);
         }
     }
 
-    public String tryLogin(String userEmail, String userPassword)
-    {
+    public String tryLogin(String userEmail, String userPassword) {
         String message = "Could not find an account with that email";
 
-        for(int i = 0; i < users.size(); i++)
-        {
-            if(users.get(i).getUserEmail().equals(userEmail))
-            {
-                if(users.get(i).getUserPassword().equals(userPassword))
-                {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserEmail().equals(userEmail)) {
+                if (users.get(i).getUserPassword().equals(userPassword)) {
                     currentUser = users.get(i);
                     message = null;
-                }
-                else
-                {
+                } else {
                     message = "Incorrect password";
                 }
                 break;
@@ -150,10 +134,10 @@ public class DataAccessStub implements DataAccess {
         return message;
     }
 
-    public List<User> getGenderedUsers(){
+    public List<User> getGenderedUsers() {
         ArrayList<User> gendered = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
-            if(!users.get(i).equals(currentUser) && areGenderCompatible(currentUser, users.get(i))) {
+            if (!users.get(i).equals(currentUser) && areGenderCompatible(currentUser, users.get(i))) {
                 gendered.add(users.get(i));
             }
         }
@@ -161,9 +145,8 @@ public class DataAccessStub implements DataAccess {
         return gendered;
     }
 
-    public void closeConnection()
-    {
-        System.out.println("closed connection to "+dbType+" database "+dbName);
+    public void closeConnection() {
+        System.out.println("closed connection to " + dbType + " database " + dbName);
     }
 
 }

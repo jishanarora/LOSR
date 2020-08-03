@@ -4,8 +4,7 @@ import java.util.List;
 
 import comp3350.losr.objects.User;
 
-public interface DataAccess
-{
+public interface DataAccess {
 
     void openConnection(String string);
 

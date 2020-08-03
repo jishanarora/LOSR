@@ -20,14 +20,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import comp3350.losr.R;
@@ -36,8 +33,7 @@ import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
 
 
-public class EditProfile extends AppCompatActivity
-{
+public class EditProfile extends AppCompatActivity {
 
     private Spinner answer1;
     private Spinner answer2;
@@ -57,9 +53,9 @@ public class EditProfile extends AppCompatActivity
     private EditText bio;
     private AccessUsers accessUsers;
     Calendar myCalendar = Calendar.getInstance();
-    private int dateDay=0;
-    private int dateMonth=0;
-    private int dateYear=0;
+    private int dateDay = 0;
+    private int dateMonth = 0;
+    private int dateYear = 0;
     private EditText weight1;
     private EditText weight2;
     private EditText weight3;
@@ -68,8 +64,7 @@ public class EditProfile extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -77,37 +72,35 @@ public class EditProfile extends AppCompatActivity
         getSupportActionBar().setTitle("Edit Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-        {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
 
-                Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
-                intent.putExtra("value",1);
+                Intent intent = new Intent(EditProfile.this, NavigationPageActivity.class);
+                intent.putExtra("value", 1);
                 startActivity(intent);
             }
         });
-        answer1= findViewById(R.id.spinner1);
-        answer2= findViewById(R.id.spinner2);
-        answer3= findViewById(R.id.spinner3);
-        answer4= findViewById(R.id.spinner4);
-        answer5= findViewById(R.id.spinner5);
-        gender1= findViewById(R.id.spinner6);
-        gender2= findViewById(R.id.spinner7);
-        cancel=findViewById(R.id.edit_profile_cancel);
-        save=findViewById(R.id.edit_profile_save);
-        dateButton= findViewById(R.id.edit_profile_date_picker);
-        dateText= findViewById(R.id.edit_profile_date);
-        firstName=findViewById(R.id.edit_profile_first_name);
-        lastName=findViewById(R.id.edit_profile_last_name);
-        bio=findViewById(R.id.profile_bio);
-        weight1=findViewById(R.id.edit_profile_weight1);
-        weight2=findViewById(R.id.edit_profile_weight2);
-        weight3=findViewById(R.id.edit_profile_weight3);
-        weight4=findViewById(R.id.edit_profile_weight4);
-        weight5=findViewById(R.id.edit_profile_weight5);
-        accessUsers= new AccessUsers();
+        answer1 = findViewById(R.id.spinner1);
+        answer2 = findViewById(R.id.spinner2);
+        answer3 = findViewById(R.id.spinner3);
+        answer4 = findViewById(R.id.spinner4);
+        answer5 = findViewById(R.id.spinner5);
+        gender1 = findViewById(R.id.spinner6);
+        gender2 = findViewById(R.id.spinner7);
+        cancel = findViewById(R.id.edit_profile_cancel);
+        save = findViewById(R.id.edit_profile_save);
+        dateButton = findViewById(R.id.edit_profile_date_picker);
+        dateText = findViewById(R.id.edit_profile_date);
+        firstName = findViewById(R.id.edit_profile_first_name);
+        lastName = findViewById(R.id.edit_profile_last_name);
+        bio = findViewById(R.id.profile_bio);
+        weight1 = findViewById(R.id.edit_profile_weight1);
+        weight2 = findViewById(R.id.edit_profile_weight2);
+        weight3 = findViewById(R.id.edit_profile_weight3);
+        weight4 = findViewById(R.id.edit_profile_weight4);
+        weight5 = findViewById(R.id.edit_profile_weight5);
+        accessUsers = new AccessUsers();
         ArrayAdapter<String> answersAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, answers);
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, gender);
         answer1.setAdapter(answersAdapter);
@@ -134,7 +127,7 @@ public class EditProfile extends AppCompatActivity
             gender2.setSelection(1);
         }
 
-        final ArrayList<Question> userAnswers=accessUsers.getCurrentUser().getUserProfile().getAnswers();
+        final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserProfile().getAnswers();
         if (userAnswers.get(0).getAnswer() == true) {
             answer1.setSelection(0);
         } else {
@@ -162,53 +155,50 @@ public class EditProfile extends AppCompatActivity
         }
 
         weight1.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight2.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight3.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight4.setText(Integer.toString(userAnswers.get(0).getWeight()));
-        weight5.setText(Integer.toString(userAnswers.get(0).getWeight()));
+        weight2.setText(Integer.toString(userAnswers.get(1).getWeight()));
+        weight3.setText(Integer.toString(userAnswers.get(2).getWeight()));
+        weight4.setText(Integer.toString(userAnswers.get(3).getWeight()));
+        weight5.setText(Integer.toString(userAnswers.get(4).getWeight()));
 
 
-        weight1.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight1.setInputType(InputType.TYPE_CLASS_NUMBER);
         InputFilter[] FilterArray = new InputFilter[1];
         FilterArray[0] = new InputFilter.LengthFilter(1);
         weight1.setFilters(FilterArray);
         weight1.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight1.getText().toString();
                 if (added_number.length() != 0) {
-                    int number  = Integer.parseInt(added_number);
+                    int number = Integer.parseInt(added_number);
 
                     if (number > 5) {
                         weight1.setText("5");
                         Toast.makeText(getApplicationContext(), "Not more than 5", Toast.LENGTH_SHORT).show();
                     }
                 }
-                }
+            }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
-            }});
+            }
+        });
 
-        weight2.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight2.setInputType(InputType.TYPE_CLASS_NUMBER);
         weight2.setFilters(FilterArray);
         weight2.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight2.getText().toString();
                 if (added_number.length() != 0) {
-                    int number  = Integer.parseInt(added_number);
+                    int number = Integer.parseInt(added_number);
 
                     if (number > 5) {
                         weight2.setText("5");
@@ -220,26 +210,24 @@ public class EditProfile extends AppCompatActivity
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
-            }});
+            }
+        });
 
 
-        weight3.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight3.setInputType(InputType.TYPE_CLASS_NUMBER);
         weight3.setFilters(FilterArray);
         weight3.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight3.getText().toString();
                 if (added_number.length() != 0) {
-                    int number  = Integer.parseInt(added_number);
+                    int number = Integer.parseInt(added_number);
 
                     if (number > 5) {
                         weight3.setText("5");
@@ -251,26 +239,24 @@ public class EditProfile extends AppCompatActivity
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
-            }});
+            }
+        });
 
 
-        weight4.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight4.setInputType(InputType.TYPE_CLASS_NUMBER);
         weight4.setFilters(FilterArray);
         weight4.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight4.getText().toString();
                 if (added_number.length() != 0) {
-                    int number  = Integer.parseInt(added_number);
+                    int number = Integer.parseInt(added_number);
 
                     if (number > 5) {
                         weight4.setText("5");
@@ -282,26 +268,24 @@ public class EditProfile extends AppCompatActivity
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
-            }});
+            }
+        });
 
 
-        weight5.setInputType( InputType.TYPE_CLASS_NUMBER );
+        weight5.setInputType(InputType.TYPE_CLASS_NUMBER);
         weight5.setFilters(FilterArray);
         weight5.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
                 String added_number = weight5.getText().toString();
                 if (added_number.length() != 0) {
-                    int number  = Integer.parseInt(added_number);
+                    int number = Integer.parseInt(added_number);
 
                     if (number > 5) {
                         weight5.setText("5");
@@ -313,69 +297,59 @@ public class EditProfile extends AppCompatActivity
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
-            }});
+            }
+        });
 
 
-        cancel.setOnClickListener(new View.OnClickListener()
-        {
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
-                intent.putExtra("value",1);
+            public void onClick(View view) {
+                Intent intent = new Intent(EditProfile.this, NavigationPageActivity.class);
+                intent.putExtra("value", 1);
                 startActivity(intent);
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener()
-        {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 accessUsers.getCurrentUser().setUserFirstName(firstName.getText().toString());
                 accessUsers.getCurrentUser().setUserLastName(lastName.getText().toString());
                 accessUsers.getCurrentUser().getUserProfile().setBio(bio.getText().toString());
-                if(dateDay!=0 && dateMonth!=0 && dateYear!=0)
-                accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear,dateMonth,dateDay);
-                if(gender1.getSelectedItem().equals("Male"))
-                {
+                if (dateDay != 0 && dateMonth != 0 && dateYear != 0)
+                    accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear, dateMonth, dateDay);
+                if (gender1.getSelectedItem().equals("Male")) {
                     accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Male);
-                }
-                else
-                {
+                } else {
                     accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Female);
                 }
-                if(gender2.getSelectedItem().equals("Male"))
-                {
+                if (gender2.getSelectedItem().equals("Male")) {
                     accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Male);
-                }
-                else
-                {
+                } else {
                     accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
                 }
-                accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()),Boolean.parseBoolean(answer2.getSelectedItem().toString()),Boolean.parseBoolean(answer3.getSelectedItem().toString()),Boolean.parseBoolean(answer4.getSelectedItem().toString()),Boolean.parseBoolean(answer5.getSelectedItem().toString()),Integer.parseInt(weight1.getText().toString()),Integer.parseInt(weight2.getText().toString()),Integer.parseInt(weight3.getText().toString()),Integer.parseInt(weight4.getText().toString()),Integer.parseInt(weight5.getText().toString()));
+                accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()), Boolean.parseBoolean(answer2.getSelectedItem().toString()), Boolean.parseBoolean(answer3.getSelectedItem().toString()), Boolean.parseBoolean(answer4.getSelectedItem().toString()), Boolean.parseBoolean(answer5.getSelectedItem().toString()), Integer.parseInt(weight1.getText().toString()), Integer.parseInt(weight2.getText().toString()), Integer.parseInt(weight3.getText().toString()), Integer.parseInt(weight4.getText().toString()), Integer.parseInt(weight5.getText().toString()));
                 accessUsers.updateUser(accessUsers.getCurrentUser());
-                Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
-                intent.putExtra("value",1);
+                Intent intent = new Intent(EditProfile.this, NavigationPageActivity.class);
+                intent.putExtra("value", 1);
                 startActivity(intent);
 
-        }});
+            }
+        });
 
         final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                // TODO Auto-generated method stub
-                dateDay=dayOfMonth;
-                dateMonth=monthOfYear;
-                dateYear=year;
+                dateDay = dayOfMonth;
+                dateMonth = monthOfYear + 1;
+                dateYear = year;
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -387,8 +361,7 @@ public class EditProfile extends AppCompatActivity
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                new DatePickerDialog(EditProfile.this, datePicker, myCalendar
+                new DatePickerDialog(EditProfile.this, R.style.DialogTheme, datePicker, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -396,16 +369,16 @@ public class EditProfile extends AppCompatActivity
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dateText.setText(sdf.format(myCalendar.getTime()));
     }
+
     @Override
-    public void onBackPressed()
-    {
-        Intent intent= new Intent(EditProfile.this,NavigationPageActivity.class);
-        intent.putExtra("value",1);
+    public void onBackPressed() {
+        Intent intent = new Intent(EditProfile.this, NavigationPageActivity.class);
+        intent.putExtra("value", 1);
         startActivity(intent);
     }
 }

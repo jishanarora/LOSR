@@ -19,17 +19,15 @@ import java.util.List;
 
 import comp3350.losr.R;
 
-public class NavigationPageActivity extends AppCompatActivity
-{
+public class NavigationPageActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_page);
 
-        ViewPager viewPager= findViewById(R.id.view_pager);
-        TabLayout tabLayout=findViewById(R.id.tab_layout);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.mipmap.user);
@@ -37,49 +35,50 @@ public class NavigationPageActivity extends AppCompatActivity
         tabLayout.getTabAt(2).setIcon(R.mipmap.message);
 
         final Intent intent = new Intent(getIntent());
-         int value = intent.getIntExtra("value", -1);
+        int value = intent.getIntExtra("value", -1);
 
-        if(value == 1)
-        {
-            viewPager.setCurrentItem(0,false);
-        }
-        else
-        {
-            viewPager.setCurrentItem(1,false);
+        if (value == 1) {
+            viewPager.setCurrentItem(0, false);
+        } else if (value == 2) {
+            viewPager.setCurrentItem(2, false);
+        } else {
+            viewPager.setCurrentItem(1, false);
         }
         tabLayout.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(1).getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
         tabLayout.getTabAt(2).getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-        {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) { tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN); }
+            public void onTabSelected(TabLayout.Tab tab) {
+                tab.getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+            }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) { tab.getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN); }
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.getIcon().setColorFilter(Color.LTGRAY, PorterDuff.Mode.SRC_IN);
+            }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
 
     }
 
-    private void setupViewPager(ViewPager viewPager)
-    {
+    private void setupViewPager(ViewPager viewPager) {
 
-     SectionPagerAdapter sectionPagerAdapter= new SectionPagerAdapter(getSupportFragmentManager());
-     sectionPagerAdapter.addFragment(ProfileFragment.newInstance(), "PROFILE");
-     sectionPagerAdapter.addFragment(NavigationFragment.newInstance(), "LOSR");
-     sectionPagerAdapter.addFragment(MessageFragment.newInstance(), "MESSAGE");
-     viewPager.setAdapter(sectionPagerAdapter);
+        SectionPagerAdapter sectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
+        sectionPagerAdapter.addFragment(ProfileFragment.newInstance(), "PROFILE");
+        sectionPagerAdapter.addFragment(NavigationFragment.newInstance(), "LOSR");
+        sectionPagerAdapter.addFragment(MessageFragment.newInstance(), "MESSAGE");
+        viewPager.setAdapter(sectionPagerAdapter);
 
     }
 
-    private class SectionPagerAdapter extends FragmentPagerAdapter
-    {
-        private final List<Fragment> fragmentList= new ArrayList<>();
-        private final List<String> fragmentString= new ArrayList<>();
+    private class SectionPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentString = new ArrayList<>();
 
         public SectionPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
@@ -96,16 +95,14 @@ public class NavigationPageActivity extends AppCompatActivity
             return fragmentList.size();
         }
 
-        void addFragment(Fragment fragment, String title)
-        {
+        void addFragment(Fragment fragment, String title) {
             fragmentList.add(fragment);
             fragmentString.add(title);
         }
 
         @Override
-        public CharSequence getPageTitle(int position)
-        {
-         return fragmentString.get(position);
+        public CharSequence getPageTitle(int position) {
+            return fragmentString.get(position);
         }
     }
 }
