@@ -23,4 +23,8 @@ public interface DataAccess {
     String tryLogin(String userEmail, String userPassword);
 
     List<User> getGenderedUsers();
+
+    void report(String reportee);
+
+    List<String> getReports();
 }

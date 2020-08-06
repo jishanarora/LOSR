@@ -14,6 +14,7 @@ public class DataAccessStub implements DataAccess {
     private String dbType = "stub";
 
     private ArrayList<User> users;
+    private ArrayList<String> reports;
     private User currentUser;
 
     public DataAccessStub(String name) {
@@ -143,6 +144,16 @@ public class DataAccessStub implements DataAccess {
         }
 
         return gendered;
+    }
+
+    public void report(String reportee)
+    {
+
+    }
+
+    public List<String> getReports()
+    {
+        return null;
     }
 
     public void closeConnection() {

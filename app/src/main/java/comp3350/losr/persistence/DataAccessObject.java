@@ -381,4 +381,35 @@ public class DataAccessObject implements DataAccess {
 
         return users;
     }
+
+    public void report(String reportee)
+    {
+
+    }
+
+    public List<String> getReports()
+    {
+        List<String> reportees = new ArrayList<>();
+
+        String reportee;
+
+        try {
+            cmdString = "SELECT * FROM REPORT WHERE REPORTER = " + "'" + currentUser.getUserEmail() + "'";
+            rs1 = s1.executeQuery(cmdString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs1.next()) {
+                reportee = rs1.getString("reportee");
+
+                reportees.add(reportee);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return reportees;
+    }
 }
