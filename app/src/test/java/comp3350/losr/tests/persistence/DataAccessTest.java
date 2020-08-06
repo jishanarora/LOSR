@@ -170,4 +170,16 @@ public class DataAccessTest extends TestCase {
 
         System.out.println("testGetSpecifiedUserFalse complete");
     }
+
+    public void testReport()
+    {
+        System.out.println("Starting testReport");
+
+        dataAccess.report("marypoppins@gmail.com");
+        assertEquals(1, dataAccess.getReports().size());
+        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0).getReportee());
+        assertEquals(dataAccess.getCurrentUser().getUserEmail(), dataAccess.getReports().get(0).getReporter());
+
+        System.out.println("testReport complete");
+    }
 }
