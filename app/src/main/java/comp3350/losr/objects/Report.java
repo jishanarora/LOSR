@@ -15,7 +15,7 @@ public class Report {
         return reporterEmail;
     }
 
-    public String getReporteeEmail()
+    public String getReportee()
     {
         return reporteeEmail;
     }

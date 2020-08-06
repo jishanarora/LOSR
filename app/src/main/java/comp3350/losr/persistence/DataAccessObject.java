@@ -9,6 +9,7 @@ import java.util.List;
 
 import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.Question;
+import comp3350.losr.objects.Report;
 import comp3350.losr.objects.User;
 
 public class DataAccessObject implements DataAccess {
@@ -384,14 +385,24 @@ public class DataAccessObject implements DataAccess {
 
     public void report(String reportee)
     {
+        String values;
 
+        try {
+            values = "'" + currentUser.getUserEmail() + "', '" + reportee + "'";
+            cmdString = "Insert into REPORT " + " Values(" + values + ")";
+            s1.executeUpdate(cmdString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<String> getReports()
+    public List<Report> getReports()
     {
-        List<String> reportees = new ArrayList<>();
+        List<Report> reports = new ArrayList<>();
 
         String reportee;
+        String reporter = currentUser.getUserEmail();
 
         try {
             cmdString = "SELECT * FROM REPORT WHERE REPORTER = " + "'" + currentUser.getUserEmail() + "'";
@@ -404,12 +415,12 @@ public class DataAccessObject implements DataAccess {
             while (rs1.next()) {
                 reportee = rs1.getString("reportee");
 
-                reportees.add(reportee);
+                reports.add(new Report(reporter, reportee));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return reportees;
+        return reports;
     }
 }
