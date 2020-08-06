@@ -16,11 +16,11 @@ public class DataAccessTest extends TestCase {
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        //dataAccess = new DataAccessStub("Stub");
-        //dataAccess.openConnection("Stub");
+        dataAccess = new DataAccessStub("Stub");
+        dataAccess.openConnection("Stub");
         // or switch to the real database:
-        dataAccess = new DataAccessObject(Main.dbName);
-        dataAccess.openConnection(Main.getDBPathName());
+        //dataAccess = new DataAccessObject(Main.dbName);
+        //dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers() {

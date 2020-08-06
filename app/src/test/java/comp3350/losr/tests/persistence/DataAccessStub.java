@@ -15,7 +15,7 @@ public class DataAccessStub implements DataAccess {
     private String dbType = "stub";
 
     private ArrayList<User> users;
-    private ArrayList<Report> reports;
+    private ArrayList<Report> reports = new ArrayList<>();
     private User currentUser;
 
     public DataAccessStub(String name) {
