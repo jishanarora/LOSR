@@ -16,11 +16,11 @@ public class DataAccessTest extends TestCase {
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        //dataAccess = new DataAccessStub("Stub");
-        //dataAccess.openConnection("Stub");
+        dataAccess = new DataAccessStub("Stub");
+        dataAccess.openConnection("Stub");
         // or switch to the real database:
-        dataAccess = new DataAccessObject(Main.dbName);
-        dataAccess.openConnection(Main.getDBPathName());
+        //dataAccess = new DataAccessObject(Main.dbName);
+        //dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers() {
@@ -169,5 +169,20 @@ public class DataAccessTest extends TestCase {
         assertNull(dataAccess.getSpecificUser("marypoppns@gmail.com"));
 
         System.out.println("testGetSpecifiedUserFalse complete");
+    }
+
+    public void testReport()
+    {
+        System.out.println("Starting testReport");
+
+        dataAccess.report("marypoppins@gmail.com");
+        assertEquals(1, dataAccess.getReports().size());
+        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0).getReportee());
+        assertEquals(dataAccess.getCurrentUser().getUserEmail(), dataAccess.getReports().get(0).getReporter());
+
+        dataAccess.report("amykowall@gmail.com");
+        assertEquals(2, dataAccess.getReports().size());
+
+        System.out.println("testReport complete");
     }
 }

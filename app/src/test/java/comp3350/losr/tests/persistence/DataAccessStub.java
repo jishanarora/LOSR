@@ -3,6 +3,7 @@ package comp3350.losr.tests.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.losr.objects.Report;
 import comp3350.losr.objects.User;
 import comp3350.losr.persistence.DataAccess;
 
@@ -14,6 +15,7 @@ public class DataAccessStub implements DataAccess {
     private String dbType = "stub";
 
     private ArrayList<User> users;
+    private ArrayList<Report> reports = new ArrayList<>();
     private User currentUser;
 
     public DataAccessStub(String name) {
@@ -143,6 +145,26 @@ public class DataAccessStub implements DataAccess {
         }
 
         return gendered;
+    }
+
+    public void report(String reportee) {
+        reports.add(new Report(currentUser.getUserEmail(), reportee));
+    }
+
+    public List<Report> getReports() {
+        List<Report> currentUserReports = new ArrayList<>();
+        String currentUserEmail = currentUser.getUserEmail();
+        String userCheck;
+
+        for(int i = 0; i < reports.size(); i++) {
+            userCheck = reports.get(i).getReporter();
+
+            if(userCheck.equals(currentUserEmail)) {
+                currentUserReports.add(reports.get(i));
+            }
+        }
+
+        return currentUserReports;
     }
 
     public void closeConnection() {
