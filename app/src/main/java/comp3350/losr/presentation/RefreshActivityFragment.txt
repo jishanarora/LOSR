@@ -1,0 +1,19 @@
+REFRESH ACTIVITY 
+
+finish();
+ overridePendingTransition(0, 0);
+ startActivity(getIntent());
+ overridePendingTransition(0, 0);
+
+
+REFRESH FRAGMENT
+
+Fragment frg = null;
+frg = getSupportFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+ft.detach(frg);
+ft.attach(frg);
+ft.commit();
+
+
+
