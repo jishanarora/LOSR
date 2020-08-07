@@ -17,6 +17,8 @@ public class Profile {
     private int birthDay;
     private int age;
 
+    private Boolean isBlindMode = false;
+
     private int numQuestions = 5;
     private ArrayList<Question> answers;
 
@@ -94,6 +96,10 @@ public class Profile {
         return age;
     }
 
+    public Boolean getBlindMode() {
+        return isBlindMode;
+    }
+
     public String getBio() {
         return bio;
     }
@@ -161,6 +167,10 @@ public class Profile {
         } else {
             this.bio = bio;
         }
+    }
+
+    public void setBlindMode(Boolean blindMode) {
+        isBlindMode = blindMode;
     }
 
     public void setGender(User.user_gender gender) {
