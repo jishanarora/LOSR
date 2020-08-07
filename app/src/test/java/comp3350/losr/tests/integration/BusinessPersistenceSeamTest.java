@@ -1,0 +1,225 @@
+package comp3350.losr.tests.integration;
+
+import junit.framework.TestCase;
+import java.util.List;
+
+import comp3350.losr.application.DatabaseService;
+import comp3350.losr.application.Main;
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
+
+public class BusinessPersistenceSeamTest extends TestCase
+{
+    public BusinessPersistenceSeamTest(String arg0)
+    {
+        super(arg0);
+    }
+
+    public void testAccessUsers1()
+    {
+        AccessUsers au;
+        User user;
+        String result;
+        List<User> genderedUsers;
+
+        DatabaseService.closeDataAccess();
+
+        System.out.println("\nStarting Integration test of AccessUsers1 to persistence");
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+        au = new AccessUsers();
+
+        //get the current user
+        user = au.getCurrentUser();
+        assertNotNull(user);
+        result = au.tryLogin(user.getUserEmail(), user.getUserPassword());
+        assertNull(result);
+
+        assertEquals("Michael", user.getUserFirstName());
+        assertEquals("Bathie", user.getUserLastName());
+        assertEquals("mbathie@gmail.com", user.getUserEmail());
+        assertEquals("password", user.getUserPassword());
+        assertEquals("hi", user.getUserProfile().getBio());
+        assertEquals(User.user_gender.Male, user.getUserProfile().getGender());
+        assertEquals(User.user_gender.Female, user.getUserProfile().getGenderPreference());
+        assertEquals("25/01/1999", user.getUserProfile().dateOfBirth());
+        assertTrue(user.getUserProfile().getAnswers().get(0).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(1).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(2).getAnswer());
+        assertTrue(user.getUserProfile().getAnswers().get(3).getAnswer());
+        assertTrue(user.getUserProfile().getAnswers().get(4).getAnswer());
+
+        //update the current user
+        user.setUserFirstName("Mike");
+        au.updateUser(user);
+        user = au.getCurrentUser();
+        assertEquals("Mike", user.getUserFirstName());
+
+        user.setUserFirstName("Michael");
+        au.updateUser(user);
+        user = au.getCurrentUser();
+        assertEquals("Michael", user.getUserFirstName());
+
+        //get users whose gender match with the current user
+        genderedUsers = au.getGenderedUsers();
+        assertNotNull(genderedUsers);
+        assertEquals(genderedUsers.get(0).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+        assertEquals(genderedUsers.get(1).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+        assertEquals(genderedUsers.get(2).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+        assertEquals(genderedUsers.get(3).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+
+        DatabaseService.closeDataAccess();
+
+        System.out.println("Finished Integration test of AccessUsers1 to persistence");
+    }
+
+    public void testAccessUsers2()
+    {
+        AccessUsers au;
+        User user, temp;
+        String result;
+
+        DatabaseService.closeDataAccess();
+
+        System.out.println("\nStarting Integration test of AccessUsers2 to persistence");
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+        au = new AccessUsers();
+
+        user = au.getSpecificUser("jessicafie@gmail.com");
+        assertNotNull(user);
+        temp = user;
+
+        result = au.tryLogin("jessicafie@gmail.com", "password");
+        assertNull(result);
+
+        assertEquals("jessicafie@gmail.com", user.getUserEmail());
+        assertEquals("Jessica", user.getUserFirstName());
+        assertEquals("Fie", user.getUserLastName());
+        assertEquals("password", user.getUserPassword());
+        assertEquals("hi", user.getUserProfile().getBio());
+        assertEquals(User.user_gender.Female, user.getUserProfile().getGender());
+        assertEquals(User.user_gender.Male, user.getUserProfile().getGenderPreference());
+        assertEquals("15/05/2000", user.getUserProfile().dateOfBirth());
+        assertFalse(user.getUserProfile().getAnswers().get(0).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(1).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(2).getAnswer());
+        assertTrue(user.getUserProfile().getAnswers().get(3).getAnswer());
+        assertTrue(user.getUserProfile().getAnswers().get(4).getAnswer());
+
+        au.deleteUser(user);
+        user = au.getSpecificUser("jessicafie@gmail.com");
+        assertNull(user);
+
+        result = au.tryLogin("jessicafie@gmail.com", "password");
+        assertEquals("Could not find an account with that email", result);
+
+        user = temp;
+
+        user = au.addUser(user);
+        assertNotNull(user);
+
+        result = au.tryLogin("jessicafie@gmail.com", "password");
+        assertNull(result);
+
+        assertEquals("jessicafie@gmail.com", user.getUserEmail());
+        assertEquals("Jessica", user.getUserFirstName());
+        assertEquals("Fie", user.getUserLastName());
+        assertEquals("password", user.getUserPassword());
+
+        user.setUserProfile("hi", User.user_gender.Female,
+                User.user_gender.Male, 2000, 5, 15);
+        user.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE,
+                2, 1, 2, 3, 5);
+
+        au.updateUser(user);
+        user = au.getSpecificUser("jessicafie@gmail.com");
+
+        assertEquals("hi", user.getUserProfile().getBio());
+        assertEquals(User.user_gender.Female, user.getUserProfile().getGender());
+        assertEquals(User.user_gender.Male, user.getUserProfile().getGenderPreference());
+        assertEquals("15/05/2000", user.getUserProfile().dateOfBirth());
+        assertFalse(user.getUserProfile().getAnswers().get(0).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(1).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(2).getAnswer());
+        assertTrue(user.getUserProfile().getAnswers().get(3).getAnswer());
+        assertTrue(user.getUserProfile().getAnswers().get(4).getAnswer());
+
+        DatabaseService.closeDataAccess();
+
+        System.out.println("Finished Integration test of AccessUsers2 to persistence");
+    }
+
+    public void testAccessUsers3()
+    {
+        AccessUsers au;
+        User user;
+        String result;
+        List<User> genderedUsers;
+
+        DatabaseService.closeDataAccess();
+
+        System.out.println("\nStarting Integration test of AccessUsers3 to persistence");
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+        au = new AccessUsers();
+
+        //get a user which does not exist
+        user = au.getSpecificUser("noname@gmail.com");
+        assertNull(user);
+
+        result = au.tryLogin("noname@gmail.com", "password");
+        assertEquals("Could not find an account with that email", result);
+
+        //register for this user, and set it to the current user
+        user = new User("No", "Name", "noname@gmail.com", "password");
+        au.addUser(user);
+
+        result = au.tryLogin("noname@gmail.com", "password");
+        assertNull(result);
+
+        user = au.getSpecificUser("noname@gmail.com");
+        assertNotNull(user);
+
+        assertEquals("No", user.getUserFirstName());
+        assertEquals("Name", user.getUserLastName());
+        assertEquals("noname@gmail.com", user.getUserEmail());
+        assertEquals("password", user.getUserPassword());
+        assertEquals("hi", user.getUserProfile().getBio());
+        assertEquals(User.user_gender.Losr, user.getUserProfile().getGender());
+        assertEquals(User.user_gender.Losr, user.getUserProfile().getGenderPreference());
+        assertEquals("00/00/0000", user.getUserProfile().dateOfBirth());
+        assertFalse(user.getUserProfile().getAnswers().get(0).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(1).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(2).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(3).getAnswer());
+        assertFalse(user.getUserProfile().getAnswers().get(4).getAnswer());
+
+        //update this user
+        user.getUserProfile().setGender(User.user_gender.Female);
+        user.getUserProfile().setGenderPreference(User.user_gender.Male);
+        au.updateUser(user);
+
+        //get users whose gender match with the current user
+        genderedUsers = au.getGenderedUsers();
+        assertNotNull(genderedUsers);
+        assertEquals(genderedUsers.get(0).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+        assertEquals(genderedUsers.get(1).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+        assertEquals(genderedUsers.get(2).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+        assertEquals(genderedUsers.get(3).getUserProfile().getGender(), user.getUserProfile().getGenderPreference());
+
+        au.deleteUser(user);
+        assertNull(au.getSpecificUser("noname@gmail.com"));
+
+        result = au.tryLogin("noname@gmail.com", "password");
+        assertEquals("Could not find an account with that email", result);
+
+        DatabaseService.closeDataAccess();
+
+        System.out.println("Finished Integration test of AccessUsers3 to persistence");
+    }
+
+}
