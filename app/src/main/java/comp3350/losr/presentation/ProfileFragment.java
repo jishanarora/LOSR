@@ -1,20 +1,49 @@
 package comp3350.losr.presentation;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import comp3350.losr.R;
 import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.Question;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.app.Activity.RESULT_OK;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +68,9 @@ public class ProfileFragment extends Fragment {
     private TextView weight3;
     private TextView weight4;
     private TextView weight5;
+    private ImageView addprofile;
+    private ImageView profileImage;
+    private static final int PERMISSION_REQUEST_CODE = 1;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -66,6 +98,29 @@ public class ProfileFragment extends Fragment {
         AccessUsers accessUsers = new AccessUsers();
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserProfile().getAnswers();
+
+        addprofile = view.findViewById(R.id.profile_image_add);
+        profileImage = view.findViewById(R.id.profile_image);
+
+        File imgFile = new File("/storage/emulated/0/DCIM/Camera/IMG_20200807_002638.jpg"); //this will be grabbed from database
+        if (imgFile.exists()) {
+            checkPermissions();
+            try {
+                String[] permissions = {WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE};
+                requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+                FileInputStream fis = new FileInputStream(imgFile);
+                Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                profileImage.setImageBitmap(myBitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        addprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
         name = view.findViewById(R.id.profile_name);
         name.setText(accessUsers.getCurrentUser().getUserFirstName() + " " + accessUsers.getCurrentUser().getUserLastName());
@@ -142,6 +197,114 @@ public class ProfileFragment extends Fragment {
         weight5.setText(Integer.toString(userAnswers.get(4).getWeight()));
 
         return view;
+    }
+
+    private void selectImage() {
+        final CharSequence[] options = {"Choose from Gallery", "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Choose your profile picture");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+
+                if (options[item].equals("Choose from Gallery")) {
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto, 1);//one can be replaced with any action code
+
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+                        try {
+                            String path = convertMediaUriToPath(data.getData());
+                            //this path will be saved in the database
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
+                            profileImage.setImageBitmap(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                    break;
+            }
+        }
+    }
+
+    public String convertMediaUriToPath(Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContext().getContentResolver().query(uri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String path = cursor.getString(column_index);
+        cursor.close();
+        return path;
+    }
+
+    private void checkPermissions() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!checkAllPermission())
+                requestPermission();
+        }
+    }
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(getActivity(), new String[]
+                {
+                        READ_EXTERNAL_STORAGE,
+                        WRITE_EXTERNAL_STORAGE,
+                        //check more permissions if you want
+                }, 0);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 0:
+                if (grantResults.length > 0) {
+
+                    boolean CameraPermission = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean ReadExternalStatePermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean ReadWriteStatePermission = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+
+
+                    if (ReadExternalStatePermission && ReadWriteStatePermission) {
+
+                        Toast.makeText(getContext(), "Permissions acquired", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getContext(), "One or more permissions denied", Toast.LENGTH_LONG).show();
+
+                    }
+                }
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    public boolean checkAllPermission() {
+
+        int SecondPermissionResult = ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE);
+        int ThirdPermissionResult = ContextCompat.checkSelfPermission(getContext(), WRITE_EXTERNAL_STORAGE);
+
+
+        return
+                SecondPermissionResult == PackageManager.PERMISSION_GRANTED &&
+                        ThirdPermissionResult == PackageManager.PERMISSION_GRANTED;
     }
 
 }
