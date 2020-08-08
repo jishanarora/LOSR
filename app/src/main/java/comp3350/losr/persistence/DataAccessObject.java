@@ -108,7 +108,7 @@ public class DataAccessObject implements DataAccess {
 
         Profile p = update.getUserProfile();
         String[] dob = p.dateOfBirth().split("/");
-        System.out.println(update.getUserProfile().dateOfBirth());
+        //System.out.println(update.getUserProfile().dateOfBirth());
         List<Question> answers = p.getAnswers();
 
         try {
