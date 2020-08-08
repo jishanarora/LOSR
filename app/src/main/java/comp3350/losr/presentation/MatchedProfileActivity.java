@@ -1,6 +1,8 @@
 package comp3350.losr.presentation;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import comp3350.losr.R;
@@ -17,6 +21,9 @@ import comp3350.losr.business.AccessMatches;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MatchedProfileActivity extends AppCompatActivity {
 
@@ -26,7 +33,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
     private TextView genderPreference;
     private TextView bio;
     private TextView dob;
-    private ImageView settings;
+    private ImageView profileImage;
     private TextView answer1;
     private TextView answer2;
     private TextView answer3;
@@ -66,6 +73,19 @@ public class MatchedProfileActivity extends AppCompatActivity {
         User matchedProfile = matchList.get(value).getMatchedUser();
         final ArrayList<Question> userAnswers = matchedProfile.getUserProfile().getAnswers();
 
+        profileImage = findViewById(R.id.profile_image);
+
+        File imgFile = new File("/storage/emulated/0/DCIM/Camera/IMG_20200807_002638.jpg"); //this will be grabbed from database
+        if (imgFile.exists()) {
+            try {
+                FileInputStream fis = new FileInputStream(imgFile);
+                Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                profileImage.setImageBitmap(myBitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
         name = findViewById(R.id.matched_profile_name);
         name.setText(matchedProfile.getUserFirstName() + " " + matchedProfile.getUserLastName());
 
