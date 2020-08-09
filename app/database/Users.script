@@ -1,6 +1,7 @@
 CREATE SCHEMA PUBLIC AUTHORIZATION DBA
 CREATE MEMORY TABLE USERS(EMAIL VARCHAR(50) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(40) NOT NULL,FNAME VARCHAR(15) NOT NULL,LNAME VARCHAR(15) NOT NULL,BIO VARCHAR(200),GENDER VARCHAR(6),GENDERP VARCHAR(6),YEAR INTEGER,MONTH INTEGER,DAY INTEGER,Q1 BOOLEAN,Q2 BOOLEAN,Q3 BOOLEAN,Q4 BOOLEAN,Q5 BOOLEAN,W1 INTEGER,W2 INTEGER,W3 INTEGER,W4 INTEGER,W5 INTEGER)
-CREATE MEMORY TABLE REPORT(REPORTER VARCHAR(50) NOT NULL, REPORTEE VARCHAR(50) NOT NULL)
+CREATE MEMORY TABLE REPORT(NUM INTEGER NOT NULL PRIMARY KEY,REPORTER VARCHAR(50) NOT NULL,REPORTEE VARCHAR(50) NOT NULL)
+CREATE MEMORY TABLE MATCH(NUM INTEGER NOT NULL PRIMARY KEY,USER VARCHAR(50) NOT NULL,USERMATCH VARCHAR(50) NOT NULL)
 CREATE USER SA PASSWORD ""
 GRANT DBA TO SA
 SET WRITE_DELAY 20
@@ -13,3 +14,15 @@ INSERT INTO USERS VALUES('laurastubbs@gmail.com','password','Laura','Stubbs','hi
 INSERT INTO USERS VALUES('marypoppins@gmail.com','password','Mary','Poppins','hello there','female','male',1998,11,16,TRUE,TRUE,TRUE,TRUE,TRUE,1,2,5,5,2)
 INSERT INTO USERS VALUES('mbathie@gmail.com','password','Michael','Bathie','hi','male','female',1999,1,25,TRUE,FALSE,FALSE,TRUE,TRUE,5,5,5,2,1)
 INSERT INTO USERS VALUES('seanlett@gmail.com','password','Sean','Lett','hey','male','female',2000,9,13,FALSE,TRUE,TRUE,TRUE,FALSE,1,2,3,2,5)
+INSERT INTO MATCH VALUES(1,'mbathie@gmail.com','laurastubbs@gmail.com')
+INSERT INTO MATCH VALUES(2,'mbathie@gmail.com','jessicafie@gmail.com')
+INSERT INTO MATCH VALUES(3,'laurastubbs@gmail.com','mbathie@gmail.com')
+INSERT INTO MATCH VALUES(4,'laurastubbs@gmail.com','seanlett@gmail.com')
+INSERT INTO MATCH VALUES(5,'garychalmers@gmail.com','marypoppins@gmail.com')
+INSERT INTO MATCH VALUES(6,'garychalmers@gmail.com','jessicafie@gmail.com')
+INSERT INTO MATCH VALUES(7,'garychalmers@gmail.com','amykowall@gmail.com')
+INSERT INTO MATCH VALUES(8,'amykowall@gmail.com','mbathie@gmail.com')
+INSERT INTO MATCH VALUES(9,'amykowall@gmail.com','johndoe@gmail.com')
+INSERT INTO MATCH VALUES(10,'johndoe@gmail.com','jessicafie@gmail.com')
+INSERT INTO MATCH VALUES(11,'johndoe@gmail.com','amykowall@gmail.com')
+INSERT INTO MATCH VALUES(12,'seanlett@gmail.com','laurastubbs@gmail.com')
