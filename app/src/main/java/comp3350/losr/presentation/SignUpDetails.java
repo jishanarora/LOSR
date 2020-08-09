@@ -273,7 +273,7 @@ public class SignUpDetails extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
                 dateDay = dayOfMonth;
-                dateMonth = monthOfYear;
+                dateMonth = monthOfYear + 1;
                 dateYear = year;
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);

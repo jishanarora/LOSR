@@ -3,10 +3,12 @@ package comp3350.losr.tests.acceptance;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.DatePicker;
 
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -31,13 +33,16 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
@@ -153,317 +158,77 @@ public class AccountAcceptanceTests {
 
         Espresso.closeSoftKeyboard();
 
+        onView(withId(R.id.sign_up_email)).check(matches(withText("aaroncurry@gmail.com")));
+        onView(withId(R.id.sign_up_first_name)).check(matches(withText("Aaron")));
+        onView(withId(R.id.sign_up_last_name)).check(matches(withText("Curry")));
+        onView(withId(R.id.sign_up_password)).check(matches(withText("password")));
+        onView(withId(R.id.sign_up_confirm_password)).check(matches(withText("password")));
+
         onView(withText("Sign Up")).perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         onView(withId(R.id.signUp_spinner1)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(1);
-        appCompatCheckedTextView.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        onData(allOf(is(instanceOf(String.class)), is("Male"))).perform(click());
 
         onView(withId(R.id.signUp_spinner2)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView2 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(2);
-        appCompatCheckedTextView2.perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Female"))).perform(click());
 
         onView(withId(R.id.signUp_select_date)).perform(click());
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(2000, 8, 8));
+        onView(withText("OK")).check(matches(isDisplayed())).perform(click());
 
-        ViewInteraction appCompatTextView2 = onView(
-                allOf(withClassName(is("androidx.appcompat.widget.AppCompatTextView")), withText("2020"),
-                        childAtPosition(
-                                allOf(withClassName(is("android.widget.LinearLayout")),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        appCompatTextView2.perform(click());
+        onView(withId(R.id.signUp_spinner3)).perform(click());// answer1
+        onData(allOf(is(instanceOf(String.class)), is("True"))).perform(click());
 
-        DataInteraction appCompatTextView3 = onData(anything())
-                .inAdapterView(allOf(withClassName(is("android.widget.YearPickerView")),
-                        childAtPosition(
-                                withClassName(is("com.android.internal.widget.DialogViewAnimator")),
-                                1)))
-                .atPosition(100);
-        appCompatTextView3.perform(click());
+        onView(withId(R.id.signUp_spinner8)).perform(click());// weight1
+        onData(allOf(is(instanceOf(String.class)), is("1"))).perform(click());
 
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                allOf(withClassName(is("com.android.internal.widget.ButtonBarLayout")),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                3)),
-                                3),
-                        isDisplayed()));
-        appCompatButton3.perform(click());
+        onView(withId(R.id.signUp_spinner4)).perform(click());// answer2
+        onData(allOf(is(instanceOf(String.class)), is("False"))).perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        onView(withId(R.id.signUp_spinner9)).perform(click());// weight 2
+        onData(allOf(is(instanceOf(String.class)), is("3"))).perform(click());
 
-        onView(withId(R.id.signUp_spinner3)).perform(click());
+        onView(withId(R.id.signUp_spinner5)).perform(click());// answer 3
+        onData(allOf(is(instanceOf(String.class)), is("False"))).perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        onView(withId(R.id.signUp_spinner10)).perform(click());// weight 3
+        onData(allOf(is(instanceOf(String.class)), is("2"))).perform(click());
 
-        DataInteraction appCompatCheckedTextView3 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(1);
-        appCompatCheckedTextView3.perform(click());
+        onView(withId(R.id.signUp_spinner6)).perform(click());// answer 4
+        onData(allOf(is(instanceOf(String.class)), is("True"))).perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        onView(withId(R.id.signUp_spinner11)).perform(click());// weight 4
+        onData(allOf(is(instanceOf(String.class)), is("2"))).perform(click());
 
-        onView(withId(R.id.signUp_spinner8)).perform(click());
+        onView(withId(R.id.signUp_spinner7)).perform(click());// answer 5
+        onData(allOf(is(instanceOf(String.class)), is("True"))).perform(click());
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        onView(withId(R.id.signUp_spinner12)).perform(click());// weight 5
+        onData(allOf(is(instanceOf(String.class)), is("4"))).perform(click());
 
-        DataInteraction appCompatCheckedTextView4 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(1);
-        appCompatCheckedTextView4.perform(click());
+        onView(withId(R.id.signUp_date)).check(matches(withText("08/08/00")));
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // question 1
+        onView(withId(R.id.signUp_spinner3)).check(matches(withSpinnerText("True")));
+        onView(withId(R.id.signUp_spinner8)).check(matches(withSpinnerText("1")));
 
-        onView(withId(R.id.signUp_spinner4)).perform(click());
+        // question 2
+        onView(withId(R.id.signUp_spinner4)).check(matches(withSpinnerText("False")));
+        onView(withId(R.id.signUp_spinner9)).check(matches(withSpinnerText("3")));
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // question 3
+        onView(withId(R.id.signUp_spinner5)).check(matches(withSpinnerText("False")));
+        onView(withId(R.id.signUp_spinner10)).check(matches(withSpinnerText("2")));
 
-        DataInteraction appCompatCheckedTextView5 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(2);
-        appCompatCheckedTextView5.perform(click());
+        // question 4
+        onView(withId(R.id.signUp_spinner6)).check(matches(withSpinnerText("True")));
+        onView(withId(R.id.signUp_spinner11)).check(matches(withSpinnerText("2")));
 
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // question 5
+        onView(withId(R.id.signUp_spinner7)).check(matches(withSpinnerText("True")));
+        onView(withId(R.id.signUp_spinner12)).check(matches(withSpinnerText("4")));
 
-        onView(withId(R.id.signUp_spinner9)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView6 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(3);
-        appCompatCheckedTextView6.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(withId(R.id.signUp_spinner5)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView7 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(2);
-        appCompatCheckedTextView7.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(withId(R.id.signUp_spinner10)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView8 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(2);
-        appCompatCheckedTextView8.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(withId(R.id.signUp_spinner6)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView9 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(1);
-        appCompatCheckedTextView9.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(withId(R.id.signUp_spinner11)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView10 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(2);
-        appCompatCheckedTextView10.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(withId(R.id.signUp_spinner7)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView11 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(1);
-        appCompatCheckedTextView11.perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        onView(withId(R.id.signUp_spinner12)).perform(click());
-
-        // Added a sleep statement to match the app's execution delay.
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        DataInteraction appCompatCheckedTextView12 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(3);
-        appCompatCheckedTextView12.perform(click());
-
+        // everything ok. Proceed
         onView(withId(R.id.signUp_proceed)).perform(click());
 
         // Added a sleep statement to match the app's execution delay.
@@ -473,6 +238,28 @@ public class AccountAcceptanceTests {
             e.printStackTrace();
         }
         onView(withText("PROFILE")).perform(click());
+
+        onView(withId(R.id.profile_name)).check(matches(withText("Aaron Curry")));
+        onView(withId(R.id.profile_email)).check(matches(withText("aaroncurry@gmail.com")));
+        onView(withId(R.id.profile_date_of_birth)).check(matches(withText("08/08/2000")));
+        onView(withId(R.id.profile_gender)).check(matches(withText("Male")));
+        onView(withId(R.id.profile_gender_preference)).check(matches(withText("Female")));
+        onView(withId(R.id.profile_bio)).check(matches(withText("hi")));
+
+        onView(withId(R.id.profile_answer1)).check(matches(withText("Yes")));
+        onView(withId(R.id.profile_weight1)).check(matches(withText("1")));
+
+        onView(withId(R.id.profile_answer2)).check(matches(withText("No")));
+        onView(withId(R.id.profile_weight2)).check(matches(withText("3")));
+
+        onView(withId(R.id.profile_answer3)).check(matches(withText("No")));
+        onView(withId(R.id.profile_weight3)).check(matches(withText("2")));
+
+        onView(withId(R.id.profile_answer4)).check(matches(withText("Yes")));
+        onView(withId(R.id.profile_weight4)).check(matches(withText("2")));
+
+        onView(withId(R.id.profile_answer5)).check(matches(withText("Yes")));
+        onView(withId(R.id.profile_weight5)).check(matches(withText("4")));
 
         DatabaseService.closeDataAccess();
         DatabaseService.createDataAccess("Users");
