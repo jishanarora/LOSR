@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 
 import comp3350.losr.R;
 import comp3350.losr.application.DatabaseService;
-import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
 import comp3350.losr.presentation.RegisterActivity;
 
@@ -35,7 +34,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
@@ -477,7 +475,7 @@ public class AccountAcceptanceTests {
         onView(withText("PROFILE")).perform(click());
 
         DatabaseService.closeDataAccess();
-        DatabaseService.createDataAccess(Main.dbName);
+        DatabaseService.createDataAccess("Users");
 
         AccessUsers au = new AccessUsers();
         au.deleteUser(au.getSpecificUser("aaroncurry@gmail.com"));
@@ -546,6 +544,19 @@ public class AccountAcceptanceTests {
         }
         onView(allOf(withId(R.id.sign_up_email), isDisplayed())).
                 check(matches(hasErrorText("Please enter a valid email address")));
+
+        // email already exists
+        onView(withId(R.id.sign_up_email)).perform(clearText(), typeText("johndoe@gmail.com"));
+        Espresso.closeSoftKeyboard();
+        onView(withId(R.id.sign_up_button)).perform(click());
+        onView(withId(R.id.sign_up_email)).perform(click());
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(allOf(withId(R.id.sign_up_email), isDisplayed())).
+                check(matches(hasErrorText("That email is already in use")));
 
         onView(withId(R.id.sign_up_email)).perform(clearText(), typeText("someone@gmail.com"));
         onView(withId(R.id.sign_up_first_name)).perform(clearText(), typeText("Some"));
