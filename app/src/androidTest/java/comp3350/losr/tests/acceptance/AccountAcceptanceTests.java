@@ -474,10 +474,7 @@ public class AccountAcceptanceTests {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        ViewInteraction tabView = onView(
-                allOf(withContentDescription("PROFILE"), isDisplayed()));
-        tabView.perform(click());
+        onView(withText("PROFILE")).perform(click());
 
         DatabaseService.closeDataAccess();
         DatabaseService.createDataAccess(Main.dbName);
