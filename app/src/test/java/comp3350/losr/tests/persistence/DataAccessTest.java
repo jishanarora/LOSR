@@ -16,11 +16,11 @@ public class DataAccessTest extends TestCase {
 
     public void setUp() {
         // Use the following statements to run with the stub database:
-        dataAccess = new DataAccessStub("Stub");
-        dataAccess.openConnection("Stub");
+        //dataAccess = new DataAccessStub("Stub");
+        //dataAccess.openConnection("Stub");
         // or switch to the real database:
-        //dataAccess = new DataAccessObject(Main.dbName);
-        //dataAccess.openConnection(Main.getDBPathName());
+        dataAccess = new DataAccessObject(Main.dbName);
+        dataAccess.openConnection(Main.getDBPathName());
     }
 
     public void testGetGenderedUsers() {
@@ -171,8 +171,7 @@ public class DataAccessTest extends TestCase {
         System.out.println("testGetSpecifiedUserFalse complete");
     }
 
-    public void testReport()
-    {
+    public void testReport() {
         System.out.println("Starting testReport");
 
         dataAccess.report("marypoppins@gmail.com");
@@ -184,5 +183,29 @@ public class DataAccessTest extends TestCase {
         assertEquals(2, dataAccess.getReports().size());
 
         System.out.println("testReport complete");
+    }
+
+    public void testNewMatch() {
+        System.out.println("Starting testNewMatch");
+
+        dataAccess.newMatch("marypoppins@gmail.com");
+        //mary poppins has not matched with anyone in the db so this will always fail
+        assertFalse(dataAccess.checkMatch("marypoppins@gmail.com"));
+
+        dataAccess.newMatch("amykowall@gmail.com");
+        //amy kowall was matched with michael (the current user) but michael had yet to match back,
+        //when the current user adds the new match it will then result with true for match.
+        assertTrue(dataAccess.checkMatch("amykowall@gmail.com"));
+
+        System.out.println("testNewMatch complete");
+    }
+
+    public void testCheckMatch() {
+        System.out.println("Starting testNewMatch");
+
+        assertTrue(dataAccess.checkMatch("laurastubbs@gmail.com"));
+        assertFalse(dataAccess.checkMatch("jessicafie@gmail.com"));
+
+        System.out.println("testNewMatch complete");
     }
 }

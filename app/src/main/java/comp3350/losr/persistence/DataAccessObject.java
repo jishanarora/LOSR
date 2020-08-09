@@ -26,7 +26,7 @@ public class DataAccessObject implements DataAccess {
 
     private final int INITIAL_MATCH_COUNT = 13;
 
-    private int reportCount = 0;
+    private int reportCount = 1;
     private int matchCount = INITIAL_MATCH_COUNT;
 
     private String cmdString;
@@ -393,7 +393,10 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = reportCount+", '" + currentUser.getUserEmail() + "', '" + reportee + "'";
+            values = reportCount
+                    + ",'" + currentUser.getUserEmail()
+                    + "','" + reportee + "'";
+
             cmdString = "Insert into REPORT " + " Values(" + values + ")";
             s1.executeUpdate(cmdString);
 
@@ -435,7 +438,9 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = matchCount+", '" + currentUser.getUserEmail() + "', '" + match + "'";
+            values = matchCount
+                    + ",'" + currentUser.getUserEmail()
+                    + "','" + match + "'";
             cmdString = "Insert into MATCH " + " Values(" + values + ")";
             s1.executeUpdate(cmdString);
 
@@ -451,7 +456,7 @@ public class DataAccessObject implements DataAccess {
         boolean matchExists = false;
 
         try {
-            cmdString = "SELECT * FROM REPORT WHERE REPORTER = " + "'" + currentUser.getUserEmail() + "'";
+            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + match + "' AND USERMATCH = " + "'" + currentUser.getUserEmail() +"'";
             rs1 = s1.executeQuery(cmdString);
         } catch (Exception e) {
             e.printStackTrace();
@@ -459,15 +464,13 @@ public class DataAccessObject implements DataAccess {
 
         try {
             while (rs1.next()) {
-                reportee = rs1.getString("reportee");
-
-                reports.add(new Report(reporter, reportee));
+                matchExists = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return reports;
+        return matchExists;
 
     }
 }

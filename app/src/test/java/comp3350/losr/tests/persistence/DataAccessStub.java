@@ -3,6 +3,7 @@ package comp3350.losr.tests.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.losr.objects.Match;
 import comp3350.losr.objects.Report;
 import comp3350.losr.objects.User;
 import comp3350.losr.persistence.DataAccess;
@@ -16,6 +17,7 @@ public class DataAccessStub implements DataAccess {
 
     private ArrayList<User> users;
     private ArrayList<Report> reports = new ArrayList<>();
+    private ArrayList<Match> matches = new ArrayList<>();
     private User currentUser;
 
     public DataAccessStub(String name) {
@@ -67,6 +69,19 @@ public class DataAccessStub implements DataAccess {
         newUser.setUserProfile("Yo", User.user_gender.Female, User.user_gender.Male, 1999, 1, 2);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, 3, 1, 5, 2, 4);
         users.add(newUser);
+
+        matches.add(new Match(currentUser, getSpecificUser("laurastubbs@gmail.com")));
+        matches.add(new Match(currentUser, getSpecificUser("jessicafie@gmail.com")));
+        matches.add(new Match(getSpecificUser("laurastubbs@gmail.com"), currentUser));
+        matches.add(new Match(getSpecificUser("laurastubbs@gmail.com"), getSpecificUser("seanlett@gmail.com")));
+        matches.add(new Match(getSpecificUser("garychalmers@gmail.com"), getSpecificUser("marypoppins@gmail.com")));
+        matches.add(new Match(getSpecificUser("garychalmers@gmail.com"), getSpecificUser("jessicafie@gmail.com")));
+        matches.add(new Match(getSpecificUser("garychalmers@gmail.com"), getSpecificUser("amykowall@gmail.com")));
+        matches.add(new Match(getSpecificUser("amykowall@gmail.com"), currentUser));
+        matches.add(new Match(getSpecificUser("amykowall@gmail.com"), getSpecificUser("johndoe@gmail.com")));
+        matches.add(new Match(getSpecificUser("johndoe@gmail.com"), getSpecificUser("jessicafie@gmail.com")));
+        matches.add(new Match(getSpecificUser("johndoe@gmail.com"), getSpecificUser("amykowall@gmail.com")));
+        matches.add(new Match(getSpecificUser("seanlett@gmail.com"), getSpecificUser("laurastubbs@gmail.com")));
 
         System.out.println("Opened connection to " + dbType + " database " + dbName);
     }
@@ -165,6 +180,25 @@ public class DataAccessStub implements DataAccess {
         }
 
         return currentUserReports;
+    }
+
+    public void newMatch(String match){
+        matches.add(new Match(currentUser, getSpecificUser(match)));
+    }
+
+    public boolean checkMatch(String match) {
+        boolean matchExists = false;
+        Match current;
+
+        for(int i = 0; i < matches.size(); i++) {
+            current = matches.get(i);
+
+            if(current.getCurrentUser().getUserEmail().equals(currentUser.getUserEmail()) && current.getMatchedUser().getUserEmail().equals(match)) {
+                matchExists = true;
+                break;
+            }
+        }
+        return matchExists;
     }
 
     public void closeConnection() {
