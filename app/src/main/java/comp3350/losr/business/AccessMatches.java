@@ -50,6 +50,10 @@ public class AccessMatches {
         return allMatches;
     }
 
+    public void newMatch(String matchEmail) {dataAccess.newMatch(matchEmail);}
+
+    public boolean checkMatch(String matchEmail) {return dataAccess.checkMatch(matchEmail);}
+
     private int position(List<Match> matches, float target) {
         int left = 0;
         int right = matches.size();

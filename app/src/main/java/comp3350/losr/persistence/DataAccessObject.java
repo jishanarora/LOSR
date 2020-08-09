@@ -24,6 +24,11 @@ public class DataAccessObject implements DataAccess {
     private List<User> users;
     private User currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
 
+    private final int INITIAL_MATCH_COUNT = 13;
+
+    private int reportCount = 1;
+    private int matchCount = INITIAL_MATCH_COUNT;
+
     private String cmdString;
 
     public DataAccessObject(String dbName) {
@@ -108,7 +113,7 @@ public class DataAccessObject implements DataAccess {
 
         Profile p = update.getUserProfile();
         String[] dob = p.dateOfBirth().split("/");
-        System.out.println(update.getUserProfile().dateOfBirth());
+        //System.out.println(update.getUserProfile().dateOfBirth());
         List<Question> answers = p.getAnswers();
 
         try {
@@ -388,13 +393,18 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = "'" + currentUser.getUserEmail() + "', '" + reportee + "'";
+            values = reportCount
+                    + ",'" + currentUser.getUserEmail()
+                    + "','" + reportee + "'";
+
             cmdString = "Insert into REPORT " + " Values(" + values + ")";
             s1.executeUpdate(cmdString);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        reportCount++;
     }
 
     public List<Report> getReports()
@@ -422,5 +432,45 @@ public class DataAccessObject implements DataAccess {
         }
 
         return reports;
+    }
+
+    public void newMatch(String match) {
+        String values;
+
+        try {
+            values = matchCount
+                    + ",'" + currentUser.getUserEmail()
+                    + "','" + match + "'";
+            cmdString = "Insert into MATCH " + " Values(" + values + ")";
+            s1.executeUpdate(cmdString);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        matchCount++;
+
+    }
+
+    public boolean checkMatch(String match) {
+        boolean matchExists = false;
+
+        try {
+            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + match + "' AND USERMATCH = " + "'" + currentUser.getUserEmail() +"'";
+            rs1 = s1.executeQuery(cmdString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs1.next()) {
+                matchExists = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matchExists;
+
     }
 }
