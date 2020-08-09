@@ -54,7 +54,7 @@ public class AccessUsersTest extends TestCase {
         System.out.println("Starting testAddAndDelete");
 
         User test = new User("", "", "", "");
-        test.setUserProfile("", User.user_gender.Female, User.user_gender.Male, 1, 1, 1);
+        test.setUserProfile("", User.user_gender.Female, User.user_gender.Male, 1, 1, 1, false);
         au.addUser(test);
 
         //shouldnt increase to 5 because adding a user would mean they are registering, when you register you are set as the currentUser
@@ -62,7 +62,7 @@ public class AccessUsersTest extends TestCase {
         assertEquals(4, au.getGenderedUsers().size());
 
         User test2 = new User("", "", "test", "");
-        test2.setUserProfile("", User.user_gender.Male, User.user_gender.Female, 1, 1, 1);
+        test2.setUserProfile("", User.user_gender.Male, User.user_gender.Female, 1, 1, 1, false);
         au.addUser(test2);
 
         //the currentUser is now male so there should be 5 females as we added 1 extra earlier

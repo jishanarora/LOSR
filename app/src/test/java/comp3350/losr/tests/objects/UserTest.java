@@ -141,7 +141,7 @@ public class UserTest extends TestCase {
         System.out.println("Starting testSetUserProfile");
 
         user = new User("", "", "", "");
-        user.setUserProfile("testing bio", User.user_gender.Female, User.user_gender.Female, 1999, 1, 25);
+        user.setUserProfile("testing bio", User.user_gender.Female, User.user_gender.Female, 1999, 1, 25, false);
 
         assertEquals("testing bio", user.getUserProfile().getBio());
         assertEquals(User.user_gender.Female, user.getUserProfile().getGender());

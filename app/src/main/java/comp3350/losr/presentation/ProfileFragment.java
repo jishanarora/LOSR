@@ -1,6 +1,5 @@
 package comp3350.losr.presentation;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,25 +7,19 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Path;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -43,7 +36,6 @@ import comp3350.losr.objects.Question;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
-import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +50,7 @@ public class ProfileFragment extends Fragment {
     private TextView bio;
     private TextView dob;
     private ImageView settings;
+    private Switch mode;
     private TextView answer1;
     private TextView answer2;
     private TextView answer3;
@@ -70,6 +63,7 @@ public class ProfileFragment extends Fragment {
     private TextView weight5;
     private ImageView addprofile;
     private ImageView profileImage;
+    private AccessUsers accessUsers;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
     public ProfileFragment() {
@@ -95,9 +89,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        AccessUsers accessUsers = new AccessUsers();
+        accessUsers = new AccessUsers();
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserProfile().getAnswers();
+
 
         addprofile = view.findViewById(R.id.profile_image_add);
         profileImage = view.findViewById(R.id.profile_image);
@@ -147,6 +142,18 @@ public class ProfileFragment extends Fragment {
                 Intent EditIntent = new Intent(getActivity(), EditProfile.class);
                 startActivity(EditIntent);
                 getActivity().finish();
+            }
+        });
+
+        mode = (Switch) view.findViewById(R.id.switch1);
+        mode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mode.isChecked()){
+                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(true);
+                }else{
+                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(false);
+                }
             }
         });
 

@@ -27,6 +27,15 @@ public class AccessMatches {
         List<Match> allMatches = new ArrayList<>();
         List<User> potentialMatches = userAccess.getGenderedUsers();
         User currentUser = dataAccess.getCurrentUser();
+        Boolean isBlindMode = currentUser.getUserProfile().getBlindMode();
+
+        // create a DB Method for getting Blind Mode Users
+        // temp workaround
+        for (int i = 0; i < potentialMatches.size(); i++) {
+            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode){
+                potentialMatches.remove(i);
+            }
+        }
 
         float matchCheck;
 

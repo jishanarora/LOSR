@@ -87,11 +87,12 @@ public class User {
         userPassword = password;
     }
 
-    public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day) {
+    public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day, boolean mode) {
         userProfile.setBio(bio);
         userProfile.setGender(gender);
         userProfile.setGenderPreference(preference);
         userProfile.setDateOfBirth(year, month, day);
+        userProfile.setBlindMode(mode);
     }
 
     public void updateDateOfBirth(int year, int month, int day) {

@@ -31,42 +31,42 @@ public class DataAccessStub implements DataAccess {
 
         //This is the placeholder user that "you are" when you use the app
         currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
-        currentUser.setUserProfile("Hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
+        currentUser.setUserProfile("Hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25, false);
         currentUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, 5, 5, 5, 2, 1);
         users.add(currentUser);
 
         newUser = new User("John", "Doe", "johndoe@gmail.com", "password");
-        newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 8, 8);
+        newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 8, 8, false);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE, 1, 2, 3, 4, 2);
         users.add(newUser);
 
         newUser = new User("Mary", "Poppins", "marypoppins@gmail.com", "password");
-        newUser.setUserProfile("hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16);
+        newUser.setUserProfile("hello there", User.user_gender.Female, User.user_gender.Male, 1998, 11, 16, false);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 1, 2, 5, 5, 2);
         users.add(newUser);
 
         newUser = new User("Gary", "Chalmers", "garychalmers@gmail.com", "password");
-        newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1998, 4, 13);
+        newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1998, 4, 13, false);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, 1, 3, 2, 2, 5);
         users.add(newUser);
 
         newUser = new User("Sean", "Lett", "seanlett@gmail.com", "password");
-        newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 9, 13);
+        newUser.setUserProfile("Hey", User.user_gender.Male, User.user_gender.Female, 1999, 9, 13, false);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, 1, 2, 3, 2, 5);
         users.add(newUser);
 
         newUser = new User("Laura", "Stubbs", "laurastubbs@gmail.com", "password");
-        newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2001, 9, 22);
+        newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2001, 9, 22, false);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, 4, 2, 1, 3, 2);
         users.add(newUser);
 
         newUser = new User("Jessica", "Fie", "jessicafie@gmail.com", "password");
-        newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2000, 5, 15);
+        newUser.setUserProfile("Hi", User.user_gender.Female, User.user_gender.Male, 2000, 5, 15, false);
         newUser.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, 2, 1, 2, 3, 5);
         users.add(newUser);
 
         newUser = new User("Amy", "Kowall", "amykowall@gmail.com", "password");
-        newUser.setUserProfile("Yo", User.user_gender.Female, User.user_gender.Male, 1999, 1, 2);
+        newUser.setUserProfile("Yo", User.user_gender.Female, User.user_gender.Male, 1999, 1, 2, false);
         newUser.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, 3, 1, 5, 2, 4);
         users.add(newUser);
 
