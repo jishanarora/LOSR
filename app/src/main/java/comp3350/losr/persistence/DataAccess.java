@@ -28,4 +28,8 @@ public interface DataAccess {
     void report(String reportee);
 
     List<Report> getReports();
+
+    void newMatch(String match);
+
+    boolean checkMatch(String match);
 }
