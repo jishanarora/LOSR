@@ -33,7 +33,7 @@ public class DataAccessObject implements DataAccess {
 
     public DataAccessObject(String dbName) {
         this.dbName = dbName;
-        currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25);
+        currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25, false);
         currentUser.updateAllAnswers(true, false, false, true, true, 2, 2, 2, 2, 2);
     }
 
@@ -89,7 +89,7 @@ public class DataAccessObject implements DataAccess {
             s1.executeUpdate(cmdString);
 
             registered = new User(newUser.getUserFirstName(), newUser.getUserLastName(), newUser.getUserEmail(), newUser.getUserPassword());
-            registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0, 0, 0);
+            registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0, 0, 0, false);
             registered.updateAllAnswers(false, false, false, false, false, 2, 2, 2, 2, 2);
 
             currentUser = registered;
@@ -214,7 +214,7 @@ public class DataAccessObject implements DataAccess {
                 }
 
                 specifiedUser = new User(firstName, lastName, email, password);
-                specifiedUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                specifiedUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
                 specifiedUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
 
             }
@@ -291,7 +291,7 @@ public class DataAccessObject implements DataAccess {
 
                 if (userPassword.equals(password)) {
                     returningUser = new User(firstName, lastName, email, password);
-                    returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                    returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
                     returningUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
 
                     currentUser = returningUser;
@@ -375,7 +375,7 @@ public class DataAccessObject implements DataAccess {
 
                 if (genderPEnum.toString().equals(currentUser.getUserProfile().getGender().toString()) && !email.equals(currentUser.getUserEmail())) {
                     User newUser = new User(firstName, lastName, email, password);
-                    newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day);
+                    newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
                     newUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
                     users.add(newUser);
                 }

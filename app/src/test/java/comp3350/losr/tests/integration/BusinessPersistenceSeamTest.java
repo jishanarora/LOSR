@@ -129,8 +129,7 @@ public class BusinessPersistenceSeamTest extends TestCase
         assertEquals("Fie", user.getUserLastName());
         assertEquals("password", user.getUserPassword());
 
-        user.setUserProfile("hi", User.user_gender.Female,
-                User.user_gender.Male, 2000, 5, 15);
+        user.setUserProfile("hi", User.user_gender.Female, User.user_gender.Male, 2000, 5, 15, false);
         user.updateAllAnswers(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE,
                 2, 1, 2, 3, 5);
 

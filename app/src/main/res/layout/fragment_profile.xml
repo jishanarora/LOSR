@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/blindModeButton"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ProfileFragment">
@@ -471,6 +472,17 @@
                 android:textSize="25dp"
                 app:layout_constraintStart_toEndOf="@+id/textView40"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="77dp"
+                android:layout_height="26dp"
+                android:layout_marginTop="13dp"
+                android:text="Blind Mode"
+                android:textSize="10sp"
+                android:track="@drawable/track"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
