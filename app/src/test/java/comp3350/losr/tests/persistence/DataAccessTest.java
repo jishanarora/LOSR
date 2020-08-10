@@ -201,11 +201,23 @@ public class DataAccessTest extends TestCase {
     }
 
     public void testCheckMatch() {
-        System.out.println("Starting testNewMatch");
+        System.out.println("Starting testCheckMatch");
 
         assertTrue(dataAccess.checkMatch("laurastubbs@gmail.com"));
         assertFalse(dataAccess.checkMatch("jessicafie@gmail.com"));
 
-        System.out.println("testNewMatch complete");
+        System.out.println("testCheckMatch complete");
+    }
+
+    public void testCheckMatchExists() {
+        System.out.println("Starting testCheckMatchExists");
+
+        assertTrue(dataAccess.checkMatchExists("laurastubbs@gmail.com"));
+        assertFalse(dataAccess.checkMatchExists("marypoppins@gmail.com"));
+
+        dataAccess.newMatch("marypoppins@gmail.com");
+        assertTrue(dataAccess.checkMatchExists("marypoppins@gmail.com"));
+
+        System.out.println("testCheckMatchExists Complete");
     }
 }

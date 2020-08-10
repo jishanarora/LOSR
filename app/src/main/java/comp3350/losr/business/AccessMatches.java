@@ -54,6 +54,8 @@ public class AccessMatches {
 
     public boolean checkMatch(String matchEmail) {return dataAccess.checkMatch(matchEmail);}
 
+    public boolean checkMatchExists(String matchEmail) {return dataAccess.checkMatchExists(matchEmail);}
+
     private int position(List<Match> matches, float target) {
         int left = 0;
         int right = matches.size();
