@@ -327,7 +327,7 @@ public class DataAccessObject implements DataAccess {
 
     }
 
-    public User getUser(ResultSet rs) {
+    private User getUser(ResultSet rs) {
         User u = new User("","","","");
 
         String email, password, firstName, lastName, bio;
