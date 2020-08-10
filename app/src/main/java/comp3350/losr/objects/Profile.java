@@ -19,6 +19,8 @@ public class Profile {
 
     private Boolean isBlindMode = false;
 
+    private String profilePicture = "";
+
     private int numQuestions = 5;
     private ArrayList<Question> answers;
 
@@ -100,6 +102,8 @@ public class Profile {
         return isBlindMode;
     }
 
+    public String getProfilePicture() {return profilePicture;}
+
     public String getBio() {
         return bio;
     }
@@ -172,6 +176,8 @@ public class Profile {
     public void setBlindMode(Boolean blindMode) {
         isBlindMode = blindMode;
     }
+
+    public void setProfilePicture(String path) {profilePicture = path;}
 
     public void setGender(User.user_gender gender) {
         this.gender = gender;

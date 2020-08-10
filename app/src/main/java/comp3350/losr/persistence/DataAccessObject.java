@@ -83,7 +83,7 @@ public class DataAccessObject implements DataAccess {
                     + "', '" + newUser.getUserPassword()
                     + "', '" + newUser.getUserFirstName()
                     + "', '" + newUser.getUserLastName()
-                    + "', 'hi', 'losr', 'losr', 0, 0, 0, false, false, false, false, false, 2, 2, 2, 2, 2";
+                    + "', 'hi', 'losr', 'losr', 0, 0, 0, false, false, false, false, false, 2, 2, 2, 2, 2, '', false";
 
             cmdString = "Insert into USERS " + " Values(" + values + ")";
             s1.executeUpdate(cmdString);
@@ -91,6 +91,8 @@ public class DataAccessObject implements DataAccess {
             registered = new User(newUser.getUserFirstName(), newUser.getUserLastName(), newUser.getUserEmail(), newUser.getUserPassword());
             registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0, 0, 0, false);
             registered.updateAllAnswers(false, false, false, false, false, 2, 2, 2, 2, 2);
+            registered.getUserProfile().setBlindMode(false);
+            registered.getUserProfile().setProfilePicture("");
 
             currentUser = registered;
         } catch (Exception e) {
@@ -113,7 +115,6 @@ public class DataAccessObject implements DataAccess {
 
         Profile p = update.getUserProfile();
         String[] dob = p.dateOfBirth().split("/");
-        //System.out.println(update.getUserProfile().dateOfBirth());
         List<Question> answers = p.getAnswers();
 
         try {
@@ -136,7 +137,9 @@ public class DataAccessObject implements DataAccess {
                     + ", w2= " + answers.get(1).getWeight()
                     + ", w3= " + answers.get(2).getWeight()
                     + ", w4= " + answers.get(3).getWeight()
-                    + ", w5= " + answers.get(4).getWeight();
+                    + ", w5= " + answers.get(4).getWeight()
+                    + ", picture= " + update.getUserProfile().getProfilePicture()
+                    + ", blindmode= " + update.getUserProfile().getBlindMode();
 
             //the only time you update a user is when you're currently logged in to that user
             cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
@@ -161,6 +164,8 @@ public class DataAccessObject implements DataAccess {
         int day, month, year;
         boolean q1, q2, q3, q4, q5;
         int w1, w2, w3, w4, w5;
+        boolean blindMode;
+        String picturePath;
 
         try {
             cmdString = "SELECT * FROM USERS WHERE email = " + "'" + userEmail + "'";
@@ -191,6 +196,8 @@ public class DataAccessObject implements DataAccess {
                 w3 = rs1.getInt("w3");
                 w4 = rs1.getInt("w4");
                 w5 = rs1.getInt("w5");
+                blindMode = rs1.getBoolean("blindmode");
+                picturePath = rs1.getString("picture");
 
                 switch (gender) {
                     case "male":
@@ -216,6 +223,8 @@ public class DataAccessObject implements DataAccess {
                 specifiedUser = new User(firstName, lastName, email, password);
                 specifiedUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
                 specifiedUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
+                specifiedUser.getUserProfile().setBlindMode(blindMode);
+                specifiedUser.getUserProfile().setProfilePicture(picturePath);
 
             }
         } catch (Exception e) {
@@ -237,6 +246,8 @@ public class DataAccessObject implements DataAccess {
         int day, month, year;
         boolean q1, q2, q3, q4, q5;
         int w1, w2, w3, w4, w5;
+        boolean blindMode;
+        String picturePath;
 
         try {
             cmdString = "SELECT * FROM USERS WHERE email = " + "'" + userEmail + "'";
@@ -267,6 +278,8 @@ public class DataAccessObject implements DataAccess {
                 w3 = rs1.getInt("w3");
                 w4 = rs1.getInt("w4");
                 w5 = rs1.getInt("w5");
+                blindMode = rs1.getBoolean("blindmode");
+                picturePath = rs1.getString("picture");
 
                 switch (gender) {
                     case "male":
@@ -293,6 +306,8 @@ public class DataAccessObject implements DataAccess {
                     returningUser = new User(firstName, lastName, email, password);
                     returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
                     returningUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
+                    returningUser.getUserProfile().setBlindMode(blindMode);
+                    returningUser.getUserProfile().setProfilePicture(picturePath);
 
                     currentUser = returningUser;
                 } else {
@@ -321,6 +336,8 @@ public class DataAccessObject implements DataAccess {
         int day, month, year;
         boolean q1, q2, q3, q4, q5;
         int w1, w2, w3, w4, w5;
+        boolean blindMode;
+        String picturePath;
 
         try {
             cmdString = "SELECT * FROM USERS WHERE gender = " + "'" + currentUser.getUserProfile().genderPrefToString() + "'";
@@ -351,6 +368,8 @@ public class DataAccessObject implements DataAccess {
                 w3 = rs1.getInt("w3");
                 w4 = rs1.getInt("w4");
                 w5 = rs1.getInt("w5");
+                blindMode = rs1.getBoolean("blindmode");
+                picturePath = rs1.getString("picture");
 
                 switch (gender) {
                     case "male":
@@ -377,6 +396,8 @@ public class DataAccessObject implements DataAccess {
                     User newUser = new User(firstName, lastName, email, password);
                     newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
                     newUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
+                    newUser.getUserProfile().setBlindMode(blindMode);
+                    newUser.getUserProfile().setProfilePicture(picturePath);
                     users.add(newUser);
                 }
 
