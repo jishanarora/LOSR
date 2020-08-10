@@ -193,6 +193,21 @@ public class DataAccessStub implements DataAccess {
         for(int i = 0; i < matches.size(); i++) {
             current = matches.get(i);
 
+            if(current.getCurrentUser().getUserEmail().equals(match) && current.getMatchedUser().getUserEmail().equals(currentUser.getUserEmail())) {
+                matchExists = true;
+                break;
+            }
+        }
+        return matchExists;
+    }
+
+    public boolean checkMatchExists(String match) {
+        boolean matchExists = false;
+        Match current;
+
+        for(int i = 0; i < matches.size(); i++) {
+            current = matches.get(i);
+
             if(current.getCurrentUser().getUserEmail().equals(currentUser.getUserEmail()) && current.getMatchedUser().getUserEmail().equals(match)) {
                 matchExists = true;
                 break;
