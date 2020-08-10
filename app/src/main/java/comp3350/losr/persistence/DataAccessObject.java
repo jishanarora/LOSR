@@ -324,7 +324,27 @@ public class DataAccessObject implements DataAccess {
         }
 
         return matchExists;
+    }
 
+    public boolean checkMatchExists(String match) {
+        boolean matchExists = false;
+
+        try {
+            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + currentUser.getUserEmail() + "' AND USERMATCH = " + "'" + match +"'";
+            rs1 = s1.executeQuery(cmdString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            while (rs1.next()) {
+                matchExists = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return matchExists;
     }
 
     private User getUser(ResultSet rs) {

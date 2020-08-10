@@ -32,4 +32,6 @@ public interface DataAccess {
     void newMatch(String match);
 
     boolean checkMatch(String match);
+
+    boolean checkMatchExists(String match);
 }
