@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import comp3350.losr.R;
-import comp3350.losr.presentation.RegisterActivity;
+import comp3350.losr.presentation.SplashActivity;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -24,7 +24,6 @@ import static androidx.test.espresso.action.ViewActions.swipeDown;
 import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -33,14 +32,13 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class ProfileAcceptanceTests
 {
     @Rule
-    public ActivityTestRule<RegisterActivity> registerActivity = new ActivityTestRule<>(RegisterActivity.class);
+    public ActivityTestRule<SplashActivity> splashActivity = new ActivityTestRule<>(SplashActivity.class);
 
     @Test
     public void testDisplayProfile()
@@ -422,51 +420,31 @@ public class ProfileAcceptanceTests
         // invalid inputs of weights
         onView(withId(R.id.edit_profile_weight1)).perform(click()).perform(clearText(), typeText("-"));
         onView(withId(R.id.edit_profile_weight1)).check(matches(withText("")));
-
         onView(withId(R.id.edit_profile_weight1)).perform(click()).perform(clearText(), typeText("6"));
-        onView(withText("Not more than 5"))
-                .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
-                check(matches(isDisplayed()));
         onView(withId(R.id.edit_profile_weight1)).check(matches(withText("5")));
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.edit_profile_weight2)).perform(click()).perform(clearText(), typeText("="));
         onView(withId(R.id.edit_profile_weight2)).check(matches(withText("")));
-
         onView(withId(R.id.edit_profile_weight2)).perform(click()).perform(clearText(), typeText("9"));
-        onView(withText("Not more than 5"))
-                .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
-                check(matches(isDisplayed()));
         onView(withId(R.id.edit_profile_weight2)).check(matches(withText("5")));
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.edit_profile_weight3)).perform(click()).perform(clearText(), typeText("+"));
         onView(withId(R.id.edit_profile_weight3)).check(matches(withText("")));
-
         onView(withId(R.id.edit_profile_weight3)).perform(click()).perform(clearText(), typeText("8"));
-        onView(withText("Not more than 5"))
-                .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
-                check(matches(isDisplayed()));
         onView(withId(R.id.edit_profile_weight3)).check(matches(withText("5")));
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.edit_profile_weight4)).perform(click()).perform(clearText(), typeText("/"));
         onView(withId(R.id.edit_profile_weight4)).check(matches(withText("")));
-
         onView(withId(R.id.edit_profile_weight4)).perform(click()).perform(clearText(), typeText("7"));
-        onView(withText("Not more than 5"))
-                .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
-                check(matches(isDisplayed()));
         onView(withId(R.id.edit_profile_weight4)).check(matches(withText("5")));
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.edit_profile_weight5)).perform(click()).perform(clearText(), typeText(","));
         onView(withId(R.id.edit_profile_weight5)).check(matches(withText("")));
-
         onView(withId(R.id.edit_profile_weight5)).perform(click()).perform(clearText(), typeText("6"));
-        onView(withText("Not more than 5"))
-                .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
-                check(matches(isDisplayed()));
         onView(withId(R.id.edit_profile_weight5)).check(matches(withText("5")));
         Espresso.closeSoftKeyboard();
     }
