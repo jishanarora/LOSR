@@ -156,16 +156,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public User getSpecificUser(String userEmail) {
-        User specifiedUser = null;
-
-        String email, password, firstName, lastName, bio;
-        User.user_gender genderEnum, genderPEnum;
-        String gender, genderP;
-        int day, month, year;
-        boolean q1, q2, q3, q4, q5;
-        int w1, w2, w3, w4, w5;
-        boolean blindMode;
-        String picturePath;
+        User specificUser = null;
 
         try {
             cmdString = "SELECT * FROM USERS WHERE email = " + "'" + userEmail + "'";
@@ -176,62 +167,13 @@ public class DataAccessObject implements DataAccess {
 
         try {
             while (rs1.next()) {
-                email = rs1.getString("email");
-                password = rs1.getString("password");
-                firstName = rs1.getString("fName");
-                lastName = rs1.getString("lName");
-                bio = rs1.getString("bio");
-                gender = rs1.getString("gender");
-                genderP = rs1.getString("genderP");
-                day = rs1.getInt("day");
-                month = rs1.getInt("month");
-                year = rs1.getInt("year");
-                q1 = rs1.getBoolean("Q1");
-                q2 = rs1.getBoolean("Q2");
-                q3 = rs1.getBoolean("Q3");
-                q4 = rs1.getBoolean("Q4");
-                q5 = rs1.getBoolean("Q5");
-                w1 = rs1.getInt("w1");
-                w2 = rs1.getInt("w2");
-                w3 = rs1.getInt("w3");
-                w4 = rs1.getInt("w4");
-                w5 = rs1.getInt("w5");
-                blindMode = rs1.getBoolean("blindmode");
-                picturePath = rs1.getString("picture");
-
-                switch (gender) {
-                    case "male":
-                        genderEnum = User.user_gender.Male;
-                        break;
-                    case "female":
-                        genderEnum = User.user_gender.Female;
-                        break;
-                    default:
-                        genderEnum = User.user_gender.Losr;
-                }
-                switch (genderP) {
-                    case "male":
-                        genderPEnum = User.user_gender.Male;
-                        break;
-                    case "female":
-                        genderPEnum = User.user_gender.Female;
-                        break;
-                    default:
-                        genderPEnum = User.user_gender.Losr;
-                }
-
-                specifiedUser = new User(firstName, lastName, email, password);
-                specifiedUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
-                specifiedUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
-                specifiedUser.getUserProfile().setBlindMode(blindMode);
-                specifiedUser.getUserProfile().setProfilePicture(picturePath);
-
+                specificUser = getUser(rs1);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return specifiedUser;
+        return specificUser;
     }
 
     public String tryLogin(String userEmail, String userPassword) {
@@ -240,15 +182,6 @@ public class DataAccessObject implements DataAccess {
 
         int check = 0;
 
-        String email, password, firstName, lastName, bio;
-        User.user_gender genderEnum, genderPEnum;
-        String gender, genderP;
-        int day, month, year;
-        boolean q1, q2, q3, q4, q5;
-        int w1, w2, w3, w4, w5;
-        boolean blindMode;
-        String picturePath;
-
         try {
             cmdString = "SELECT * FROM USERS WHERE email = " + "'" + userEmail + "'";
             rs1 = s1.executeQuery(cmdString);
@@ -258,57 +191,10 @@ public class DataAccessObject implements DataAccess {
 
         try {
             while (rs1.next()) {
-                email = rs1.getString("email");
-                password = rs1.getString("password");
-                firstName = rs1.getString("fName");
-                lastName = rs1.getString("lName");
-                bio = rs1.getString("bio");
-                gender = rs1.getString("gender");
-                genderP = rs1.getString("genderP");
-                day = rs1.getInt("day");
-                month = rs1.getInt("month");
-                year = rs1.getInt("year");
-                q1 = rs1.getBoolean("Q1");
-                q2 = rs1.getBoolean("Q2");
-                q3 = rs1.getBoolean("Q3");
-                q4 = rs1.getBoolean("Q4");
-                q5 = rs1.getBoolean("Q5");
-                w1 = rs1.getInt("w1");
-                w2 = rs1.getInt("w2");
-                w3 = rs1.getInt("w3");
-                w4 = rs1.getInt("w4");
-                w5 = rs1.getInt("w5");
-                blindMode = rs1.getBoolean("blindmode");
-                picturePath = rs1.getString("picture");
 
-                switch (gender) {
-                    case "male":
-                        genderEnum = User.user_gender.Male;
-                        break;
-                    case "female":
-                        genderEnum = User.user_gender.Female;
-                        break;
-                    default:
-                        genderEnum = User.user_gender.Losr;
-                }
-                switch (genderP) {
-                    case "male":
-                        genderPEnum = User.user_gender.Male;
-                        break;
-                    case "female":
-                        genderPEnum = User.user_gender.Female;
-                        break;
-                    default:
-                        genderPEnum = User.user_gender.Losr;
-                }
+                returningUser = getUser(rs1);
 
-                if (userPassword.equals(password)) {
-                    returningUser = new User(firstName, lastName, email, password);
-                    returningUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
-                    returningUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
-                    returningUser.getUserProfile().setBlindMode(blindMode);
-                    returningUser.getUserProfile().setProfilePicture(picturePath);
-
+                if (userPassword.equals(returningUser.getUserPassword())) {
                     currentUser = returningUser;
                 } else {
                     message = "Incorrect password";
@@ -329,15 +215,7 @@ public class DataAccessObject implements DataAccess {
 
     public List<User> getGenderedUsers() {
         users = new ArrayList<>();
-
-        String email, password, firstName, lastName, bio;
-        User.user_gender genderEnum, genderPEnum;
-        String gender, genderP;
-        int day, month, year;
-        boolean q1, q2, q3, q4, q5;
-        int w1, w2, w3, w4, w5;
-        boolean blindMode;
-        String picturePath;
+        User newUser ;
 
         try {
             cmdString = "SELECT * FROM USERS WHERE gender = " + "'" + currentUser.getUserProfile().genderPrefToString() + "'";
@@ -348,56 +226,10 @@ public class DataAccessObject implements DataAccess {
 
         try {
             while (rs1.next()) {
-                email = rs1.getString("email");
-                password = rs1.getString("password");
-                firstName = rs1.getString("fName");
-                lastName = rs1.getString("lName");
-                bio = rs1.getString("bio");
-                gender = rs1.getString("gender");
-                genderP = rs1.getString("genderP");
-                day = rs1.getInt("day");
-                month = rs1.getInt("month");
-                year = rs1.getInt("year");
-                q1 = rs1.getBoolean("Q1");
-                q2 = rs1.getBoolean("Q2");
-                q3 = rs1.getBoolean("Q3");
-                q4 = rs1.getBoolean("Q4");
-                q5 = rs1.getBoolean("Q5");
-                w1 = rs1.getInt("w1");
-                w2 = rs1.getInt("w2");
-                w3 = rs1.getInt("w3");
-                w4 = rs1.getInt("w4");
-                w5 = rs1.getInt("w5");
-                blindMode = rs1.getBoolean("blindmode");
-                picturePath = rs1.getString("picture");
 
-                switch (gender) {
-                    case "male":
-                        genderEnum = User.user_gender.Male;
-                        break;
-                    case "female":
-                        genderEnum = User.user_gender.Female;
-                        break;
-                    default:
-                        genderEnum = User.user_gender.Losr;
-                }
-                switch (genderP) {
-                    case "male":
-                        genderPEnum = User.user_gender.Male;
-                        break;
-                    case "female":
-                        genderPEnum = User.user_gender.Female;
-                        break;
-                    default:
-                        genderPEnum = User.user_gender.Losr;
-                }
+                newUser = getUser(rs1);
 
-                if (genderPEnum.toString().equals(currentUser.getUserProfile().getGender().toString()) && !email.equals(currentUser.getUserEmail())) {
-                    User newUser = new User(firstName, lastName, email, password);
-                    newUser.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
-                    newUser.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
-                    newUser.getUserProfile().setBlindMode(blindMode);
-                    newUser.getUserProfile().setProfilePicture(picturePath);
+                if (newUser.getUserProfile().getGenderPreference().toString().equals(currentUser.getUserProfile().getGender().toString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
                     users.add(newUser);
                 }
 
@@ -493,5 +325,75 @@ public class DataAccessObject implements DataAccess {
 
         return matchExists;
 
+    }
+
+    public User getUser(ResultSet rs) {
+        User u = new User("","","","");
+
+        String email, password, firstName, lastName, bio;
+        User.user_gender genderEnum, genderPEnum;
+        String gender, genderP;
+        int day, month, year;
+        boolean q1, q2, q3, q4, q5;
+        int w1, w2, w3, w4, w5;
+        boolean blindMode;
+        String picturePath;
+
+        try {
+            email = rs.getString("email");
+            password = rs.getString("password");
+            firstName = rs.getString("fName");
+            lastName = rs.getString("lName");
+            bio = rs.getString("bio");
+            gender = rs.getString("gender");
+            genderP = rs.getString("genderP");
+            day = rs.getInt("day");
+            month = rs.getInt("month");
+            year = rs.getInt("year");
+            q1 = rs.getBoolean("Q1");
+            q2 = rs.getBoolean("Q2");
+            q3 = rs.getBoolean("Q3");
+            q4 = rs.getBoolean("Q4");
+            q5 = rs.getBoolean("Q5");
+            w1 = rs.getInt("w1");
+            w2 = rs.getInt("w2");
+            w3 = rs.getInt("w3");
+            w4 = rs.getInt("w4");
+            w5 = rs.getInt("w5");
+            blindMode = rs.getBoolean("blindmode");
+            picturePath = rs.getString("picture");
+
+            switch (gender) {
+                case "male":
+                    genderEnum = User.user_gender.Male;
+                    break;
+                case "female":
+                    genderEnum = User.user_gender.Female;
+                    break;
+                default:
+                    genderEnum = User.user_gender.Losr;
+            }
+            switch (genderP) {
+                case "male":
+                    genderPEnum = User.user_gender.Male;
+                    break;
+                case "female":
+                    genderPEnum = User.user_gender.Female;
+                    break;
+                default:
+                    genderPEnum = User.user_gender.Losr;
+            }
+
+            u = new User(firstName, lastName, email, password);
+            u.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
+            u.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
+            u.getUserProfile().setBlindMode(blindMode);
+            u.getUserProfile().setProfilePicture(picturePath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return u;
     }
 }
