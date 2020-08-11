@@ -8,11 +8,11 @@ SET WRITE_DELAY 20
 SET SCHEMA PUBLIC
 INSERT INTO USERS VALUES('amykowall@gmail.com','password','Amy','Kowall','yo','female','male',1999,1,2,TRUE,FALSE,TRUE,FALSE,TRUE,3,1,5,2,4,NULL,FALSE)
 INSERT INTO USERS VALUES('garychalmers@gmail.com','password','Gary','Chalmers','hey','male','female',1998,4,13,FALSE,FALSE,FALSE,TRUE,FALSE,1,3,2,2,5,NULL,FALSE)
-INSERT INTO USERS VALUES('jessicafie@gmail.com','password','Jessica','Fie','hi','female','male',2000,5,15,FALSE,FALSE,FALSE,TRUE,TRUE,2,1,2,3,5,NULL,FALSE)
+INSERT INTO USERS VALUES('jessicafie@gmail.com','password','Jessica','Fie','hi','female','male',2000,5,15,FALSE,FALSE,FALSE,TRUE,TRUE,2,1,2,3,5,'',FALSE)
 INSERT INTO USERS VALUES('johndoe@gmail.com','password','John','Doe','Hey','male','female',1999,8,8,TRUE,TRUE,TRUE,FALSE,FALSE,1,2,3,4,2,NULL,FALSE)
 INSERT INTO USERS VALUES('laurastubbs@gmail.com','password','Laura','Stubbs','hi','female','male',2001,9,22,FALSE,TRUE,FALSE,TRUE,FALSE,4,2,1,3,2,NULL,FALSE)
 INSERT INTO USERS VALUES('marypoppins@gmail.com','password','Mary','Poppins','hello there','female','male',1998,11,16,TRUE,TRUE,TRUE,TRUE,TRUE,1,2,5,5,2,NULL,FALSE)
-INSERT INTO USERS VALUES('mbathie@gmail.com','password','Michael','Bathie','hi','male','female',1999,1,25,TRUE,FALSE,FALSE,TRUE,TRUE,5,5,5,2,1,NULL,FALSE)
+INSERT INTO USERS VALUES('mbathie@gmail.com','password','Michael','Bathie','hi','male','female',1999,1,25,TRUE,FALSE,FALSE,TRUE,TRUE,2,2,2,2,2,'',FALSE)
 INSERT INTO USERS VALUES('seanlett@gmail.com','password','Sean','Lett','hey','male','female',2000,9,13,FALSE,TRUE,TRUE,TRUE,FALSE,1,2,3,2,5,NULL,FALSE)
 INSERT INTO MATCH VALUES(1,'mbathie@gmail.com','laurastubbs@gmail.com')
 INSERT INTO MATCH VALUES(2,'mbathie@gmail.com','jessicafie@gmail.com')

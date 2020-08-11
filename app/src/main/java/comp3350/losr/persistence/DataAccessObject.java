@@ -138,8 +138,8 @@ public class DataAccessObject implements DataAccess {
                     + ", w3= " + answers.get(2).getWeight()
                     + ", w4= " + answers.get(3).getWeight()
                     + ", w5= " + answers.get(4).getWeight()
-                    + ", picture= " + update.getUserProfile().getProfilePicture()
-                    + ", blindmode= " + update.getUserProfile().getBlindMode();
+                    + ", picture= '" + update.getUserProfile().getProfilePicture()
+                    + "', blindmode= " + update.getUserProfile().getBlindMode();
 
             //the only time you update a user is when you're currently logged in to that user
             cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
