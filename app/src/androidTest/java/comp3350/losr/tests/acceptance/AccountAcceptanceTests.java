@@ -1,21 +1,13 @@
 package comp3350.losr.tests.acceptance;
 
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.DatePicker;
 
-import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,12 +28,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -139,6 +129,21 @@ public class AccountAcceptanceTests {
             e.printStackTrace();
         }
         onView(withText("Could not find an account with that email"))
+                .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
+                check(matches(isDisplayed()));
+
+        // incorrect password
+        onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("mbathie@gmail.com"));
+        onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("passwords"));
+
+        Espresso.closeSoftKeyboard();
+        onView(withText("Sign In")).perform(click());
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        onView(withText("Incorrect password"))
                 .inRoot(withDecorView(not(is(registerActivity.getActivity().getWindow().getDecorView())))).
                 check(matches(isDisplayed()));
     }
@@ -398,29 +403,5 @@ public class AccountAcceptanceTests {
         }
         onView(allOf(withId(R.id.sign_up_confirm_password), isDisplayed())).
                 check(matches(hasErrorText("Passwords don't match")));
-    }
-
-
-    private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position)
-    {
-
-        return new TypeSafeMatcher<View>()
-        {
-            @Override
-            public void describeTo(Description description)
-            {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view)
-            {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
     }
 }
