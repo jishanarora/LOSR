@@ -4,7 +4,6 @@ import java.util.List;
 
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
-import comp3350.losr.objects.Report;
 import comp3350.losr.persistence.DataAccess;
 
 public class AccessReports {
@@ -19,7 +18,7 @@ public class AccessReports {
         dataAccess.report(reportee);
     }
 
-    public List<Report> getReports()
+    public List<String> getReports()
     {
         return dataAccess.getReports();
     }

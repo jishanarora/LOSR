@@ -166,8 +166,8 @@ public class DataAccessStub implements DataAccess {
         reports.add(new Report(currentUser.getUserEmail(), reportee));
     }
 
-    public List<Report> getReports() {
-        List<Report> currentUserReports = new ArrayList<>();
+    public List<String> getReports() {
+        List<String> currentUserReports = new ArrayList<>();
         String currentUserEmail = currentUser.getUserEmail();
         String userCheck;
 
@@ -175,7 +175,7 @@ public class DataAccessStub implements DataAccess {
             userCheck = reports.get(i).getReporter();
 
             if(userCheck.equals(currentUserEmail)) {
-                currentUserReports.add(reports.get(i));
+                currentUserReports.add(reports.get(i).getReportee());
             }
         }
 

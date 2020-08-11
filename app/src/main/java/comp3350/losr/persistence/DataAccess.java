@@ -1,8 +1,6 @@
 package comp3350.losr.persistence;
 
 import java.util.List;
-
-import comp3350.losr.objects.Report;
 import comp3350.losr.objects.User;
 
 public interface DataAccess {
@@ -27,7 +25,7 @@ public interface DataAccess {
 
     void report(String reportee);
 
-    List<Report> getReports();
+    List<String> getReports();
 
     void newMatch(String match);
 

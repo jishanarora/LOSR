@@ -176,8 +176,7 @@ public class DataAccessTest extends TestCase {
 
         dataAccess.report("marypoppins@gmail.com");
         assertEquals(1, dataAccess.getReports().size());
-        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0).getReportee());
-        assertEquals(dataAccess.getCurrentUser().getUserEmail(), dataAccess.getReports().get(0).getReporter());
+        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0));
 
         dataAccess.report("amykowall@gmail.com");
         assertEquals(2, dataAccess.getReports().size());
