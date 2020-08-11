@@ -216,6 +216,10 @@ public class DataAccessStub implements DataAccess {
         return matchExists;
     }
 
+    public void changeBlindMode(boolean blindMode) {
+        currentUser.getUserProfile().setBlindMode(blindMode);
+    }
+
     public void closeConnection() {
         System.out.println("closed connection to " + dbType + " database " + dbName);
     }

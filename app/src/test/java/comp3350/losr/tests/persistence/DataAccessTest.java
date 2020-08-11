@@ -220,4 +220,16 @@ public class DataAccessTest extends TestCase {
 
         System.out.println("testCheckMatchExists Complete");
     }
+
+    public void testChangeBlindMode() {
+        System.out.println("Starting testChangeBlindMode");
+
+        dataAccess.changeBlindMode(true);
+        assertTrue(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+
+        dataAccess.changeBlindMode(false);
+        assertFalse(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+
+        System.out.println("testChangeBlindMode complete");
+    }
 }

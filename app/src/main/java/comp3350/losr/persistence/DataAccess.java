@@ -34,4 +34,6 @@ public interface DataAccess {
     boolean checkMatch(String match);
 
     boolean checkMatchExists(String match);
+
+    void changeBlindMode(boolean blindMode);
 }

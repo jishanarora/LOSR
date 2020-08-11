@@ -416,4 +416,16 @@ public class DataAccessObject implements DataAccess {
 
         return u;
     }
+
+    public void changeBlindMode(boolean blindMode) {
+        try {
+            String values = "blindmode= " + blindMode;
+            cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
+            s1.executeUpdate(cmdString);
+
+            currentUser.getUserProfile().setBlindMode(blindMode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
