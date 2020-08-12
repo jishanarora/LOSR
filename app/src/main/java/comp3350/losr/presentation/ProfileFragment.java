@@ -97,7 +97,7 @@ public class ProfileFragment extends Fragment {
         addprofile = view.findViewById(R.id.profile_image_add);
         profileImage = view.findViewById(R.id.profile_image);
 
-        File imgFile = new File("/storage/emulated/0/DCIM/Camera/IMG_20200807_002638.jpg"); //this will be grabbed from database
+        File imgFile = new File(accessUsers.getCurrentUser().getUserProfile().getProfilePicture());
         if (imgFile.exists()) {
             checkPermissions();
             try {
@@ -237,7 +237,8 @@ public class ProfileFragment extends Fragment {
                     if (resultCode == RESULT_OK && data != null) {
                         try {
                             String path = convertMediaUriToPath(data.getData());
-                            //this path will be saved in the database
+                            accessUsers.getCurrentUser().getUserProfile().setProfilePicture(path);
+                            accessUsers.updateUser(accessUsers.getCurrentUser());
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
                             profileImage.setImageBitmap(bitmap);
                         } catch (IOException e) {
