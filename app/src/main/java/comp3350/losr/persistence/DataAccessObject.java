@@ -23,11 +23,6 @@ public class DataAccessObject implements DataAccess {
     private List<User> users;
     private User currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
 
-    private static final int INITIAL_MATCH_COUNT = 13;
-
-    private static int reportCount = 1;
-    private static int matchCount = INITIAL_MATCH_COUNT;
-
     private String cmdString;
 
     public DataAccessObject(String dbName) {
@@ -245,8 +240,7 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = reportCount
-                    + ",'" + currentUser.getUserEmail()
+            values = "'" + currentUser.getUserEmail()
                     + "','" + reportee + "'";
 
             cmdString = "Insert into REPORT " + " Values(" + values + ")";
@@ -256,7 +250,6 @@ public class DataAccessObject implements DataAccess {
             e.printStackTrace();
         }
 
-        reportCount++;
     }
 
     public List<String> getReports()
@@ -289,8 +282,7 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = matchCount
-                    + ",'" + currentUser.getUserEmail()
+            values = "'" + currentUser.getUserEmail()
                     + "','" + match + "'";
             cmdString = "Insert into MATCH " + " Values(" + values + ")";
             s1.executeUpdate(cmdString);
@@ -298,8 +290,6 @@ public class DataAccessObject implements DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        matchCount++;
 
     }
 
