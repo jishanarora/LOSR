@@ -57,4 +57,6 @@ public class AccessUsers {
     public String tryLogin(String email, String password) {
         return dataAccess.tryLogin(email, password);
     }
+
+    public void changeBlindMode(boolean blindMode) { dataAccess.changeBlindMode(blindMode); }
 }

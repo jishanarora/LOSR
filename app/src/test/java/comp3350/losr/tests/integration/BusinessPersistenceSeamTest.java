@@ -10,6 +10,7 @@ import comp3350.losr.objects.User;
 
 public class BusinessPersistenceSeamTest extends TestCase
 {
+
     public BusinessPersistenceSeamTest(String arg0)
     {
         super(arg0);
