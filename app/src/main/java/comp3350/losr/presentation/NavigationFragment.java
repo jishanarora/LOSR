@@ -163,7 +163,7 @@ public class NavigationFragment extends Fragment {
         {
             iterateProfiles(++position);
         }
-            if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()) && position==allOppositeUsers.size()-1)
+            if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()) && position==allOppositeUsers.size())
             {
                 makeMessageVissible();
             }
