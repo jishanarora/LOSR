@@ -113,6 +113,7 @@ public class ProfileFragment extends Fragment {
         addprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkPermissions();
                 selectImage();
             }
         });
