@@ -23,6 +23,27 @@ public class DataAccessTest extends TestCase {
         dataAccess.openConnection(Main.getDBPathName());
     }
 
+    public static void dataAccessTest(DataAccess dataAccess) {
+        DataAccessTest dataAccessTest = new DataAccessTest();
+        dataAccessTest.dataAccess = dataAccess;
+        dataAccessTest.testGetGenderedUsers();
+        dataAccessTest.testTryLoginSuccess();
+        dataAccessTest.testTryLoginWrongEmail();
+        dataAccessTest.testTryLoginWrongPassword();
+        dataAccessTest.testTryLoginBothWrong();
+        dataAccessTest.testAddUser();
+        dataAccessTest.testUpdateUser();
+        dataAccessTest.testDeleteUser();
+        dataAccessTest.testRegistration();
+        dataAccessTest.testLogin();
+        dataAccessTest.testGetSpecifiedUser();
+        dataAccessTest.testGetSpecifiedUserFalse();
+        dataAccessTest.testReport();
+        dataAccessTest.testNewMatch();
+        dataAccessTest.testCheckMatch();
+        dataAccessTest.testCheckMatchExists();
+    }
+
     public void testGetGenderedUsers() {
         System.out.println("Starting testGetGenderedUsers");
 
