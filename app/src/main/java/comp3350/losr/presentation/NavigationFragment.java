@@ -1,15 +1,33 @@
 package comp3350.losr.presentation;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessMatches;
+import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.User;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,10 +36,20 @@ import comp3350.losr.R;
  */
 public class NavigationFragment extends Fragment {
 
-    private EditText userFName;
-    private EditText userLName;
-    private EditText userGender;
-    private EditText userGenderPref;
+   private ImageView navigationProfileImage;
+   private CardView navigationCardView;
+   private TextView navigationName;
+   private Button navigationYes;
+    private Button navigationNo;
+    AccessUsers accessUsers;
+    AccessMatches accessMatches;
+    List<User> allOppositeUsers;
+    String oppositeProfileEmail;
+    int index;
+    private TextView message1;
+    private TextView message2;
+
+
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,10 +102,97 @@ public class NavigationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
-
-        // Inflate the layout for this fragment
+        setupFragment(rootView);
         return rootView;
     }
 
+    private void setupFragment(View view)
+    {
+        navigationProfileImage= view.findViewById(R.id.navigation_image);
+        navigationName= view.findViewById(R.id.navigation_name);
+        navigationYes= view.findViewById(R.id.navigation_Yes);
+        navigationNo= view.findViewById(R.id.navigation_no);
+        message1= view.findViewById(R.id.navigation_message1);
+        message2= view.findViewById(R.id.navigation_message2);
+        navigationCardView= view.findViewById(R.id.card_view_for_image_navigation);
+        accessUsers= new AccessUsers();
+        accessMatches= new AccessMatches();
+        allOppositeUsers= new ArrayList<User>();
+        allOppositeUsers=accessUsers.getGenderedUsers();
+        index=0;
+        makeMessageInvisible();
+        iterateProfiles(index);
+
+        navigationYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accessMatches.newMatch(oppositeProfileEmail);
+                iterateProfiles(++index);
+            }
+        });
+
+        navigationNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iterateProfiles(++index);
+            }
+        });
+    }
+
+    private void iterateProfiles(int position)
+    {       if(position<allOppositeUsers.size())
+    {
+            User navigationUser= allOppositeUsers.get(position);
+            oppositeProfileEmail=navigationUser.getUserEmail();
+
+            if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()))
+            {
+                File imgFile = new File(navigationUser.getUserProfile().getProfilePicture());
+                if (imgFile.exists()) {
+                    try {
+                        FileInputStream fis = new FileInputStream(imgFile);
+                        Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                        navigationProfileImage.setImageBitmap(myBitmap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                navigationName.setText(navigationUser.getUserFirstName()+ " "+ navigationUser.getUserLastName());
+            }
+            else
+        {
+            iterateProfiles(++position);
+        }
+            if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()) && position==allOppositeUsers.size()-1)
+            {
+                makeMessageVissible();
+            }
+        }
+        else {
+         makeMessageVissible();
+    }
+    }
+
+    private void makeMessageVissible()
+    {
+        navigationProfileImage.setVisibility(View.INVISIBLE);
+        navigationName.setVisibility(View.INVISIBLE);
+        navigationYes.setVisibility(View.INVISIBLE);
+        navigationNo.setVisibility(View.INVISIBLE);
+        navigationCardView.setVisibility(View.INVISIBLE);
+        message1.setVisibility(View.VISIBLE);
+        message2.setVisibility(View.VISIBLE);
+    }
+
+    private void makeMessageInvisible()
+    {
+        navigationProfileImage.setVisibility(View.VISIBLE);
+        navigationName.setVisibility(View.VISIBLE);
+        navigationYes.setVisibility(View.VISIBLE);
+        navigationNo.setVisibility(View.VISIBLE);
+        navigationCardView.setVisibility(View.VISIBLE);
+        message1.setVisibility(View.INVISIBLE);
+        message2.setVisibility(View.INVISIBLE);
+    }
 
 }
