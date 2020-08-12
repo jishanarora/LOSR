@@ -23,10 +23,10 @@ public class DataAccessObject implements DataAccess {
     private List<User> users;
     private User currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
 
-    private final int INITIAL_MATCH_COUNT = 13;
+    private static final int INITIAL_MATCH_COUNT = 13;
 
-    private int reportCount = 1;
-    private int matchCount = INITIAL_MATCH_COUNT;
+    private static int reportCount = 1;
+    private static int matchCount = INITIAL_MATCH_COUNT;
 
     private String cmdString;
 
