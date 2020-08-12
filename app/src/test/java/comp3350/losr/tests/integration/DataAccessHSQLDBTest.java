@@ -28,6 +28,8 @@ public class DataAccessHSQLDBTest extends TestCase
         DatabaseService.createDataAccess(dbname);
         dataAccess = DatabaseService.getDataAccess(dbname);
 
+        DataAccessTest.dataAccessTest(dataAccess);
+
         DatabaseService.closeDataAccess();
 
         System.out.println("Finished Integration test DataAccess (using default DB)");
