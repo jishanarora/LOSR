@@ -6,6 +6,7 @@ import comp3350.losr.application.Main;
 import comp3350.losr.application.DatabaseService;
 
 import comp3350.losr.persistence.DataAccess;
+import comp3350.losr.persistence.DataAccessObject;
 import comp3350.losr.tests.persistence.DataAccessTest;
 
 public class DataAccessHSQLDBTest extends TestCase
@@ -25,8 +26,10 @@ public class DataAccessHSQLDBTest extends TestCase
 
         System.out.println("\nStarting Integration test DataAccess (using default DB)");
 
-        DatabaseService.createDataAccess(dbname);
-        dataAccess = DatabaseService.getDataAccess(dbname);
+        dataAccess = new DataAccessObject(dbname);
+        dataAccess.openConnection(Main.getDBPathName());
+
+        DataAccessTest.dataAccessTest(dataAccess);
 
         DatabaseService.closeDataAccess();
 
