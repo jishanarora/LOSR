@@ -197,8 +197,7 @@ public class DataAccessTest extends TestCase {
 
         dataAccess.report("marypoppins@gmail.com");
         assertEquals(1, dataAccess.getReports().size());
-        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0).getReportee());
-        assertEquals(dataAccess.getCurrentUser().getUserEmail(), dataAccess.getReports().get(0).getReporter());
+        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0));
 
         dataAccess.report("amykowall@gmail.com");
         assertEquals(2, dataAccess.getReports().size());
@@ -240,5 +239,17 @@ public class DataAccessTest extends TestCase {
         assertTrue(dataAccess.checkMatchExists("marypoppins@gmail.com"));
 
         System.out.println("testCheckMatchExists Complete");
+    }
+
+    public void testChangeBlindMode() {
+        System.out.println("Starting testChangeBlindMode");
+
+        dataAccess.changeBlindMode(true);
+        assertTrue(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+
+        dataAccess.changeBlindMode(false);
+        assertFalse(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+
+        System.out.println("testChangeBlindMode complete");
     }
 }
