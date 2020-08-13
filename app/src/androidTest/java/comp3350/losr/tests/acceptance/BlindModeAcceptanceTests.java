@@ -28,6 +28,7 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
@@ -67,6 +68,7 @@ public class BlindModeAcceptanceTests {
         ViewInteraction switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
                                 0), isDisplayed()));
         switch_.perform(click());
+        onView(withId(R.id.navigation_message1)).check(matches(withText("No more profiles are avaibale near your location!")));
 
         //give time to display blind mode
         try {
@@ -77,6 +79,7 @@ public class BlindModeAcceptanceTests {
 
         ViewInteraction switch_2 = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)), 0), isDisplayed()));
         switch_2.perform(click());
+        onView(withId(R.id.navigation_name)).check(matches(withText("Amy Kowall")));
     }
 
     private static Matcher<View> childAtPosition(
