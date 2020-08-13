@@ -34,23 +34,16 @@ public class AccessMatches {
         // create a DB Method for getting Blind Mode Users
 
         for (int i = 0; i < potentialMatches.size(); i++) {
-            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode){
+            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode) {
                 potentialMatches.remove(i);
                 continue;
             }
 
             matchCheck = matchPercentage(currentUser.getAnswers(), potentialMatches.get(i).getAnswers());
 
-            if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail())) {
+            if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail()) && matchCheck > 0) {
                 allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
             }
-/*
-            if (matchCheck > 0) {
-                allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
-
-            }
-
- */
         }
 
         return allMatches;
