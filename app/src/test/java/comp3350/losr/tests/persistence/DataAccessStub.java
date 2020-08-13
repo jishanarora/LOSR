@@ -182,6 +182,8 @@ public class DataAccessStub implements DataAccess {
         return currentUserReports;
     }
 
+    public void clearReports(){}
+
     public void newMatch(String match){
         matches.add(new Match(currentUser, getSpecificUser(match)));
     }

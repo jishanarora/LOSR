@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import comp3350.losr.R;
+import comp3350.losr.business.AccessReports;
 import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.Question;
 
@@ -64,7 +65,9 @@ public class ProfileFragment extends Fragment {
     private ImageView addprofile;
     private ImageView profileImage;
     private Button signOut;
+    private Button clear_reports;
     private AccessUsers accessUsers;
+    private AccessReports accessReports;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
     public ProfileFragment() {
@@ -91,6 +94,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         accessUsers = new AccessUsers();
+        accessReports = new AccessReports();
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserProfile().getAnswers();
 
@@ -116,6 +120,15 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 checkPermissions();
                 selectImage();
+            }
+        });
+
+        clear_reports = view.findViewById(R.id.clear_reports_button);
+
+        clear_reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accessReports.clearReports();
             }
         });
 
