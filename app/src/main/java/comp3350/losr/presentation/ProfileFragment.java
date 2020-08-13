@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -63,6 +64,7 @@ public class ProfileFragment extends Fragment {
     private TextView weight5;
     private ImageView addprofile;
     private ImageView profileImage;
+    private Button signOut;
     private AccessUsers accessUsers;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -118,6 +120,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        signOut = view.findViewById(R.id.sign_out_button);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signOutIntent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(signOutIntent);
+                getActivity().finish();
+            }
+        });
+
         name = view.findViewById(R.id.profile_name);
         name.setText(accessUsers.getCurrentUser().getUserFirstName() + " " + accessUsers.getCurrentUser().getUserLastName());
 
@@ -146,6 +158,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /*
+
         mode = (Switch) view.findViewById(R.id.switch1);
         mode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +171,9 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+
+         */
 
         answer1 = view.findViewById(R.id.profile_answer1);
         if (userAnswers.get(0).getAnswer() == true) {
