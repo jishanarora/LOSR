@@ -26,6 +26,7 @@ public class AccessMatches {
     public List<Match> getMatches() {
         List<Match> allMatches = new ArrayList<>();
         List<User> potentialMatches = userAccess.getGenderedUsers();
+        List<User> potentialMatchesDeleted = new ArrayList<User>();
         User currentUser = dataAccess.getCurrentUser();
         Boolean isBlindMode = currentUser.getUserProfile().getBlindMode();
 
@@ -33,6 +34,14 @@ public class AccessMatches {
 
         // create a DB Method for getting Blind Mode Users
 
+        for (User user : potentialMatches) {
+            if (user.getUserProfile().getBlindMode() != isBlindMode) {
+                potentialMatchesDeleted.add(user);
+            }
+        }
+        for (User deleteUser : potentialMatchesDeleted) {
+            potentialMatches.remove(deleteUser);
+        }
         for (int i = 0; i < potentialMatches.size(); i++) {
             if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode){
                 potentialMatches.remove(i);
