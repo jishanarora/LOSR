@@ -21,6 +21,7 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
@@ -67,6 +68,11 @@ public class AccountAcceptanceTests {
         onView(withText("Sign In")).perform(click());
         onView(withText("PROFILE")).perform(click());
         onView(withText("MESSAGE")).perform(click());
+        onView(withText("PROFILE")).perform(click());
+
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
     }
 
     @Test
@@ -265,6 +271,10 @@ public class AccountAcceptanceTests {
 
         onView(withId(R.id.profile_answer5)).check(matches(withText("Yes")));
         onView(withId(R.id.profile_weight5)).check(matches(withText("4")));
+
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
 
         DatabaseService.closeDataAccess();
         DatabaseService.createDataAccess("Users");
