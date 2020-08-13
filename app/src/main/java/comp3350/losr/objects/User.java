@@ -70,6 +70,8 @@ public class User {
         return userProfile.getAnswers();
     }
 
+    public Boolean getUserMode() {return userProfile.getBlindMode();}
+
 
     public void setUserFirstName(String name) {
         userFirstName = name;
