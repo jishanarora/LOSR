@@ -27,6 +27,10 @@ import comp3350.losr.objects.Match;
 
 
 public class MessageFragment extends Fragment {
+
+    private ListView matchesListView;
+    private ImageView profile;
+    private View rootView;
     public MessageFragment() {
         // Required empty public constructor
     }
@@ -47,21 +51,14 @@ public class MessageFragment extends Fragment {
         return fragment;
     }
 
-    private ListView matchesListView;
-    private ImageView profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_message, container, false);
+        rootView = inflater.inflate(R.layout.fragment_message, container, false);
 
-        AccessMatches matchesAccess = new AccessMatches();
-        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
 
-        matchesListView = (ListView) rootView.findViewById(R.id.matchesListView);
-        matchesListView.setAdapter(matchAdapter);
 
         return rootView;
     }
@@ -80,17 +77,18 @@ public class MessageFragment extends Fragment {
                 profile = convertView.findViewById(R.id.profileButton);
                 File imgFile = new File(currMatch.getMatchedUser().getUserProfile().getProfilePicture()); //this will be grabbed from database
 
-                if (imgFile.exists()) {
-                    try {
-                        FileInputStream fis = new FileInputStream(imgFile);
-                        Bitmap myBitmap = BitmapFactory.decodeStream(fis);
-                        profile.setImageBitmap(myBitmap);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                if(!currMatch.getCurrentUser().getUserProfile().getBlindMode()) {
+                    if (imgFile.exists()) {
+                        try {
+                            FileInputStream fis = new FileInputStream(imgFile);
+                            Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                            profile.setImageBitmap(myBitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        profile.setImageResource(R.mipmap.profile);
                     }
-                }
-                else{
-                    profile.setImageResource(R.mipmap.profile);
                 }
                 convertView.setClickable(true);
                 profile.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +111,16 @@ public class MessageFragment extends Fragment {
         }
 
 
+    }
+
+    public void refreshMessageFragment()
+    {
+        AccessMatches matchesAccess = new AccessMatches();
+        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
+        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
+
+        matchesListView = (ListView) rootView.findViewById(R.id.matchesListView);
+        matchesListView.setAdapter(matchAdapter);
     }
 
 }

@@ -77,17 +77,18 @@ public class MatchedProfileActivity extends AppCompatActivity {
 
         File imgFile = new File(matchedProfile.getUserProfile().getProfilePicture()); //this will be grabbed from database
 
-        if (imgFile.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream(imgFile);
-                Bitmap myBitmap = BitmapFactory.decodeStream(fis);
-                profileImage.setImageBitmap(myBitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
+        if(!matchedProfile.getUserProfile().getBlindMode()) {
+            if (imgFile.exists()) {
+                try {
+                    FileInputStream fis = new FileInputStream(imgFile);
+                    Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                    profileImage.setImageBitmap(myBitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                profileImage.setImageResource(R.mipmap.profile);
             }
-        }
-        else{
-            profileImage.setImageResource(R.mipmap.profile);
         }
         
         name = findViewById(R.id.matched_profile_name);
