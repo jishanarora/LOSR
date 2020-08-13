@@ -44,36 +44,15 @@ public class BlindModeAcceptanceTests {
 
     @Test
     public void testBlindMode() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.sign_in_email),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0),
-                                1),
-                        isDisplayed()));
+        ViewInteraction appCompatEditText = onView(allOf(withId(R.id.sign_in_email), childAtPosition(childAtPosition(withClassName(is("android.widget.FrameLayout")), 0), 1), isDisplayed()));
         appCompatEditText.perform(replaceText("mbathie@gmail.com"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.sign_in_password),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0),
-                                2),
-                        isDisplayed()));
+        ViewInteraction appCompatEditText2 = onView(allOf(withId(R.id.sign_in_password), childAtPosition(childAtPosition(withClassName(is("android.widget.FrameLayout")), 0), 2), isDisplayed()));
         appCompatEditText2.perform(replaceText("password"), closeSoftKeyboard());
 
         Espresso.closeSoftKeyboard();
 
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.sign_in_button), withText("Sign In"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0),
-                                4),
-                        isDisplayed()));
+        ViewInteraction appCompatButton = onView(allOf(withId(R.id.sign_in_button), withText("Sign In"), childAtPosition(childAtPosition(withClassName(is("android.widget.FrameLayout")), 0), 4), isDisplayed()));
         appCompatButton.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
@@ -85,12 +64,8 @@ public class BlindModeAcceptanceTests {
             e.printStackTrace();
         }
 
-        ViewInteraction switch_ = onView(
-                allOf(withId(R.id.switch1), withText("Blind Mode"),
-                        childAtPosition(
-                                withParent(withId(R.id.view_pager)),
-                                0),
-                        isDisplayed()));
+        ViewInteraction switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
+                                0), isDisplayed()));
         switch_.perform(click());
 
         //give time to display blind mode
@@ -100,50 +75,8 @@ public class BlindModeAcceptanceTests {
             e.printStackTrace();
         }
 
-        ViewInteraction switch_2 = onView(
-                allOf(withId(R.id.switch1), withText("Blind Mode"),
-                        childAtPosition(
-                                withParent(withId(R.id.view_pager)),
-                                0),
-                        isDisplayed()));
+        ViewInteraction switch_2 = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)), 0), isDisplayed()));
         switch_2.perform(click());
-
-        ViewInteraction tabView = onView(
-                allOf(withContentDescription("PROFILE"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.tab_layout),
-                                        0),
-                                0),
-                        isDisplayed()));
-        tabView.perform(click());
-
-        ViewInteraction switch_3 = onView(
-                allOf(withId(R.id.switch1), withText("Blind Mode"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("androidx.core.widget.NestedScrollView")),
-                                        0),
-                                34),
-                        isDisplayed()));
-        switch_3.perform(click());
-
-        ViewInteraction tabView2 = onView(
-                allOf(withContentDescription("LOSR"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.tab_layout),
-                                        0),
-                                1),
-                        isDisplayed()));
-        tabView2.perform(click());
-
-        //give time to display blind mode
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     private static Matcher<View> childAtPosition(
