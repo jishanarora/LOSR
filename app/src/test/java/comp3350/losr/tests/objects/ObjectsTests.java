@@ -14,6 +14,7 @@ public class ObjectsTests
         suite.addTestSuite(ProfileTest.class);
         suite.addTestSuite(MatchTest.class);
         suite.addTestSuite(QuestionTest.class);
+        suite.addTestSuite(ReportTest.class);
         return suite;
     }
 }
