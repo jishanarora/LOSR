@@ -23,9 +23,12 @@ import comp3350.losr.presentation.SplashActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -99,5 +102,88 @@ public class BlindModeAcceptanceTests {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
+    }
+
+    @Test
+    public void testNewBlindMode() {
+        onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("marypoppins@gmail.com"));
+        onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
+
+        Espresso.closeSoftKeyboard();
+
+        onView(withText("Sign In")).perform(click());
+
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
+                0), isDisplayed()));
+        switch_.perform(click());
+
+        onView(withText("PROFILE")).perform(click());
+
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
+
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("mbathie@gmail.com"));
+        onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
+        Espresso.closeSoftKeyboard();
+        onView(withText("Sign In")).perform(click());
+
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
+                0), isDisplayed()));
+        switch_.perform(click());
+        onView(withId(R.id.navigation_name)).check(matches(withText("Mary Poppins")));
+
+        switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
+                0), isDisplayed()));
+        switch_.perform(click());
+
+        onView(withText("PROFILE")).perform(click());
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
+
+
+
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("marypoppins@gmail.com"));
+        onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
+
+        Espresso.closeSoftKeyboard();
+
+        onView(withText("Sign In")).perform(click());
+
+        try {
+            Thread.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
+                0), isDisplayed()));
+        switch_.perform(click());
+
     }
 }
