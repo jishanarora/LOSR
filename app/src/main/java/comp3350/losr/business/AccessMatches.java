@@ -29,6 +29,8 @@ public class AccessMatches {
         List<User> potentialMatchesDeleted = new ArrayList<User>();
         User currentUser = dataAccess.getCurrentUser();
         Boolean isBlindMode = currentUser.getUserProfile().getBlindMode();
+        AccessReports ar = new AccessReports();
+        List<String> reports = ar.getReports();
 
         float matchCheck;
 
@@ -43,23 +45,28 @@ public class AccessMatches {
             potentialMatches.remove(deleteUser);
         }
         for (int i = 0; i < potentialMatches.size(); i++) {
-            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode){
+            /*
+            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode) {
                 potentialMatches.remove(i);
                 continue;
             }
 
+             */
+
             matchCheck = matchPercentage(currentUser.getAnswers(), potentialMatches.get(i).getAnswers());
 
-            if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail())) {
+            if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail()) && matchCheck > 0) {
                 allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
             }
-/*
-            if (matchCheck > 0) {
-                allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
+        }
 
+        //remove reported users from the match list
+        for(int i = 0; i < allMatches.size(); i++) {
+            for(int j = 0; j < reports.size(); j++) {
+                if(allMatches.get(i).getMatchedUser().getUserEmail().equals(reports.get(j))) {
+                    allMatches.remove(i);
+                }
             }
-
- */
         }
 
         return allMatches;

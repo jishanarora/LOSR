@@ -7,17 +7,21 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.losr.R;
 import comp3350.losr.business.AccessMatches;
+import comp3350.losr.business.AccessReports;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
@@ -44,6 +48,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
     private TextView weight3;
     private TextView weight4;
     private TextView weight5;
+    private Button report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +75,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
 
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-        User matchedProfile = matchList.get(value).getMatchedUser();
+        final User matchedProfile = matchList.get(value).getMatchedUser();
         final ArrayList<Question> userAnswers = matchedProfile.getUserProfile().getAnswers();
 
         profileImage = findViewById(R.id.matched_profile_image);
@@ -90,6 +95,17 @@ public class MatchedProfileActivity extends AppCompatActivity {
                 profileImage.setImageResource(R.mipmap.profile);
             }
         }
+
+        final AccessReports aReport = new AccessReports();
+
+        report = findViewById(R.id.report_button);
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aReport.report(matchedProfile.getUserEmail());
+            }
+        });
+
         
         name = findViewById(R.id.matched_profile_name);
         name.setText(matchedProfile.getUserFirstName() + " " + matchedProfile.getUserLastName());
@@ -110,31 +126,31 @@ public class MatchedProfileActivity extends AppCompatActivity {
         dob.setText(matchedProfile.getUserProfile().dateOfBirth());
 
         answer1 = findViewById(R.id.matched_profile_answer1);
-        if (userAnswers.get(0).getAnswer() == true) {
+        if (userAnswers.get(0).getAnswer()) {
             answer1.setText("Yes");
         } else {
             answer1.setText("No");
         }
         answer2 = findViewById(R.id.matched_profile_answer2);
-        if (userAnswers.get(1).getAnswer() == true) {
+        if (userAnswers.get(1).getAnswer()) {
             answer2.setText("Yes");
         } else {
             answer2.setText("No");
         }
         answer3 = findViewById(R.id.matched_profile_answer3);
-        if (userAnswers.get(2).getAnswer() == true) {
+        if (userAnswers.get(2).getAnswer()) {
             answer3.setText("Yes");
         } else {
             answer3.setText("No");
         }
         answer4 = findViewById(R.id.matched_profile_answer4);
-        if (userAnswers.get(3).getAnswer() == true) {
+        if (userAnswers.get(3).getAnswer()) {
             answer4.setText("Yes");
         } else {
             answer4.setText("No");
         }
         answer5 = findViewById(R.id.matched_profile_answer5);
-        if (userAnswers.get(4).getAnswer() == true) {
+        if (userAnswers.get(4).getAnswer()) {
             answer5.setText("Yes");
         } else {
             answer5.setText("No");

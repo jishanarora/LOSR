@@ -278,6 +278,15 @@ public class DataAccessObject implements DataAccess {
         return reports;
     }
 
+    public void clearReports() {
+        try {
+            cmdString = "Delete from REPORT where reporter= '" + currentUser.getUserEmail() + "'";
+            s1.executeUpdate(cmdString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void newMatch(String match) {
         String values;
 
