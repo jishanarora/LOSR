@@ -47,13 +47,14 @@ public class NavigationFragment extends Fragment {
     AccessUsers accessUsers;
     AccessMatches accessMatches;
     List<User> allOppositeUsers;
+    List<User> allOppositeUsersDeleted;
     String oppositeProfileEmail;
     int index;
     private TextView message1;
     private TextView message2;
     private Switch mode;
     View rootView;
-    MessageFragment messageFragment;
+    private MessageFragment messageFragment;
 
 
 
@@ -116,11 +117,19 @@ public class NavigationFragment extends Fragment {
         message2= rootView.findViewById(R.id.navigation_message2);
         navigationCardView= rootView.findViewById(R.id.card_view_for_image_navigation);
         mode = (Switch) rootView.findViewById(R.id.switch1);
+        List<Fragment> currentFragments=getActivity().getSupportFragmentManager().getFragments();
+         messageFragment=null;
+        for(int i=0;i<currentFragments.size();i++)
+        {
+            if(currentFragments.get(i) instanceof MessageFragment)
+                messageFragment=(MessageFragment)currentFragments.get(i);
+        }
         navigationYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 accessMatches.newMatch(oppositeProfileEmail);
                 iterateProfiles(++index);
+                messageFragment.refreshMessageFragment();
             }
         });
 
@@ -128,6 +137,7 @@ public class NavigationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 iterateProfiles(++index);
+                messageFragment.refreshMessageFragment();
             }
         });
 
@@ -165,12 +175,15 @@ public class NavigationFragment extends Fragment {
         accessMatches= new AccessMatches();
         allOppositeUsers= new ArrayList<User>();
         allOppositeUsers=accessUsers.getGenderedUsers();
+        allOppositeUsersDeleted=new ArrayList<User>();
         Boolean isBlindMode = accessUsers.getCurrentUser().getUserProfile().getBlindMode();
-        for (int i = 0; i < allOppositeUsers.size(); i++) {
-            if (allOppositeUsers.get(i).getUserProfile().getBlindMode() != isBlindMode) {
-                allOppositeUsers.remove(i);
-                continue;
+        for (User user : allOppositeUsers) {
+            if (user.getUserProfile().getBlindMode() != isBlindMode) {
+                allOppositeUsersDeleted.add(user);
             }
+        }
+        for (User deleteUser : allOppositeUsersDeleted) {
+            allOppositeUsers.remove(deleteUser);
         }
         index=0;
         makeMessageInvisible();
