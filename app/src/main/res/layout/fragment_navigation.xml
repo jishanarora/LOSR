@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/navigation_fragment"
     tools:context="comp3350.losr.presentation.NavigationFragment">
 
     <Switch
@@ -81,5 +82,30 @@
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navigation_name" />
+
+    <TextView
+        android:id="@+id/navigation_message1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No more profiles are avaibale near your location!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="25dp"
+        android:visibility="invisible"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/navigation_message2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check again in some time"
+        android:visibility="invisible"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigation_message1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

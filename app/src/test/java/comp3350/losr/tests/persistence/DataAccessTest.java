@@ -23,6 +23,47 @@ public class DataAccessTest extends TestCase {
         dataAccess.openConnection(Main.getDBPathName());
     }
 
+    public void resetRealDB() {
+        dataAccess = new DataAccessObject(Main.dbName);
+        dataAccess.openConnection(Main.getDBPathName());
+    }
+
+    public static void dataAccessTest(DataAccess dataAccess) {
+        DataAccessTest dataAccessTest = new DataAccessTest();
+        dataAccessTest.dataAccess = dataAccess;
+        dataAccessTest.testGetGenderedUsers();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testTryLoginSuccess();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testTryLoginWrongEmail();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testTryLoginWrongPassword();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testTryLoginBothWrong();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testAddUser();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testUpdateUser();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testDeleteUser();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testRegistration();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testLogin();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testGetSpecifiedUser();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testGetSpecifiedUserFalse();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testReport();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testNewMatch();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testCheckMatch();
+        dataAccessTest.resetRealDB();
+        dataAccessTest.testCheckMatchExists();
+    }
+
     public void testGetGenderedUsers() {
         System.out.println("Starting testGetGenderedUsers");
 
@@ -176,8 +217,7 @@ public class DataAccessTest extends TestCase {
 
         dataAccess.report("marypoppins@gmail.com");
         assertEquals(1, dataAccess.getReports().size());
-        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0).getReportee());
-        assertEquals(dataAccess.getCurrentUser().getUserEmail(), dataAccess.getReports().get(0).getReporter());
+        assertEquals("marypoppins@gmail.com", dataAccess.getReports().get(0));
 
         dataAccess.report("amykowall@gmail.com");
         assertEquals(2, dataAccess.getReports().size());
@@ -213,11 +253,23 @@ public class DataAccessTest extends TestCase {
         System.out.println("Starting testCheckMatchExists");
 
         assertTrue(dataAccess.checkMatchExists("laurastubbs@gmail.com"));
-        assertFalse(dataAccess.checkMatchExists("marypoppins@gmail.com"));
+        assertFalse(dataAccess.checkMatchExists("seanlett@gmail.com"));
 
         dataAccess.newMatch("marypoppins@gmail.com");
         assertTrue(dataAccess.checkMatchExists("marypoppins@gmail.com"));
 
         System.out.println("testCheckMatchExists Complete");
+    }
+
+    public void testChangeBlindMode() {
+        System.out.println("Starting testChangeBlindMode");
+
+        dataAccess.changeBlindMode(true);
+        assertTrue(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+
+        dataAccess.changeBlindMode(false);
+        assertFalse(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+
+        System.out.println("testChangeBlindMode complete");
     }
 }

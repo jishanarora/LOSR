@@ -9,7 +9,6 @@ import java.util.List;
 
 import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.Question;
-import comp3350.losr.objects.Report;
 import comp3350.losr.objects.User;
 
 public class DataAccessObject implements DataAccess {
@@ -23,11 +22,6 @@ public class DataAccessObject implements DataAccess {
 
     private List<User> users;
     private User currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
-
-    private final int INITIAL_MATCH_COUNT = 13;
-
-    private int reportCount = 1;
-    private int matchCount = INITIAL_MATCH_COUNT;
 
     private String cmdString;
 
@@ -138,8 +132,8 @@ public class DataAccessObject implements DataAccess {
                     + ", w3= " + answers.get(2).getWeight()
                     + ", w4= " + answers.get(3).getWeight()
                     + ", w5= " + answers.get(4).getWeight()
-                    + ", picture= " + update.getUserProfile().getProfilePicture()
-                    + ", blindmode= " + update.getUserProfile().getBlindMode();
+                    + ", picture= '" + update.getUserProfile().getProfilePicture()
+                    + "', blindmode= " + update.getUserProfile().getBlindMode();
 
             //the only time you update a user is when you're currently logged in to that user
             cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
@@ -246,8 +240,7 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = reportCount
-                    + ",'" + currentUser.getUserEmail()
+            values = "'" + currentUser.getUserEmail()
                     + "','" + reportee + "'";
 
             cmdString = "Insert into REPORT " + " Values(" + values + ")";
@@ -257,15 +250,13 @@ public class DataAccessObject implements DataAccess {
             e.printStackTrace();
         }
 
-        reportCount++;
     }
 
-    public List<Report> getReports()
+    public List<String> getReports()
     {
-        List<Report> reports = new ArrayList<>();
+        List<String> reports = new ArrayList<>();
 
         String reportee;
-        String reporter = currentUser.getUserEmail();
 
         try {
             cmdString = "SELECT * FROM REPORT WHERE REPORTER = " + "'" + currentUser.getUserEmail() + "'";
@@ -278,7 +269,7 @@ public class DataAccessObject implements DataAccess {
             while (rs1.next()) {
                 reportee = rs1.getString("reportee");
 
-                reports.add(new Report(reporter, reportee));
+                reports.add(reportee);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -291,8 +282,7 @@ public class DataAccessObject implements DataAccess {
         String values;
 
         try {
-            values = matchCount
-                    + ",'" + currentUser.getUserEmail()
+            values = "'" + currentUser.getUserEmail()
                     + "','" + match + "'";
             cmdString = "Insert into MATCH " + " Values(" + values + ")";
             s1.executeUpdate(cmdString);
@@ -300,8 +290,6 @@ public class DataAccessObject implements DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        matchCount++;
 
     }
 
@@ -415,5 +403,17 @@ public class DataAccessObject implements DataAccess {
         }
 
         return u;
+    }
+
+    public void changeBlindMode(boolean blindMode) {
+        try {
+            String values = "blindmode= " + blindMode;
+            cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
+            s1.executeUpdate(cmdString);
+
+            currentUser.getUserProfile().setBlindMode(blindMode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

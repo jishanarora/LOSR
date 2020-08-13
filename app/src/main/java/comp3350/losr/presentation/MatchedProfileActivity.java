@@ -73,16 +73,21 @@ public class MatchedProfileActivity extends AppCompatActivity {
         User matchedProfile = matchList.get(value).getMatchedUser();
         final ArrayList<Question> userAnswers = matchedProfile.getUserProfile().getAnswers();
 
-        profileImage = findViewById(R.id.profile_image);
+        profileImage = findViewById(R.id.matched_profile_image);
 
-        File imgFile = new File("/storage/emulated/0/DCIM/Camera/IMG_20200807_002638.jpg"); //this will be grabbed from database
-        if (imgFile.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream(imgFile);
-                Bitmap myBitmap = BitmapFactory.decodeStream(fis);
-                profileImage.setImageBitmap(myBitmap);
-            } catch (Exception e) {
-                e.printStackTrace();
+        File imgFile = new File(matchedProfile.getUserProfile().getProfilePicture()); //this will be grabbed from database
+
+        if(!matchedProfile.getUserProfile().getBlindMode()) {
+            if (imgFile.exists()) {
+                try {
+                    FileInputStream fis = new FileInputStream(imgFile);
+                    Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                    profileImage.setImageBitmap(myBitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                profileImage.setImageResource(R.mipmap.profile);
             }
         }
         

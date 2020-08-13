@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -50,7 +51,6 @@ public class ProfileFragment extends Fragment {
     private TextView bio;
     private TextView dob;
     private ImageView settings;
-    private Switch mode;
     private TextView answer1;
     private TextView answer2;
     private TextView answer3;
@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
     private TextView weight5;
     private ImageView addprofile;
     private ImageView profileImage;
+    private Button signOut;
     private AccessUsers accessUsers;
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -97,7 +98,7 @@ public class ProfileFragment extends Fragment {
         addprofile = view.findViewById(R.id.profile_image_add);
         profileImage = view.findViewById(R.id.profile_image);
 
-        File imgFile = new File("/storage/emulated/0/DCIM/Camera/IMG_20200807_002638.jpg"); //this will be grabbed from database
+        File imgFile = new File(accessUsers.getCurrentUser().getUserProfile().getProfilePicture());
         if (imgFile.exists()) {
             checkPermissions();
             try {
@@ -113,7 +114,18 @@ public class ProfileFragment extends Fragment {
         addprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkPermissions();
                 selectImage();
+            }
+        });
+
+        signOut = view.findViewById(R.id.sign_out_button);
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signOutIntent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(signOutIntent);
+                getActivity().finish();
             }
         });
 
@@ -145,17 +157,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        mode = (Switch) view.findViewById(R.id.switch1);
-        mode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mode.isChecked()){
-                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(true);
-                }else{
-                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(false);
-                }
-            }
-        });
 
         answer1 = view.findViewById(R.id.profile_answer1);
         if (userAnswers.get(0).getAnswer() == true) {
@@ -237,7 +238,8 @@ public class ProfileFragment extends Fragment {
                     if (resultCode == RESULT_OK && data != null) {
                         try {
                             String path = convertMediaUriToPath(data.getData());
-                            //this path will be saved in the database
+                            accessUsers.getCurrentUser().getUserProfile().setProfilePicture(path);
+                            accessUsers.updateUser(accessUsers.getCurrentUser());
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
                             profileImage.setImageBitmap(bitmap);
                         } catch (IOException e) {

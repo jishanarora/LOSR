@@ -26,7 +26,7 @@ import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.User;
 
 
-public class SignUpFragment extends Fragment {
+public class   SignUpFragment extends Fragment {
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -53,7 +53,7 @@ public class SignUpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         alreadyHaveAnAccount = view.findViewById(R.id.tv_already_have_an_account);
-        parentFrameLayout = view.findViewById(R.id.register_framelayout);
+        parentFrameLayout = getActivity().findViewById(R.id.register_framelayout);
         firstName = view.findViewById(R.id.sign_up_first_name);
         lastName = view.findViewById(R.id.sign_up_last_name);
         email = view.findViewById(R.id.sign_up_email);
