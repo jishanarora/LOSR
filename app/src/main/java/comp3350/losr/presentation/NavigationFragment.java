@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.io.File;
@@ -48,6 +51,9 @@ public class NavigationFragment extends Fragment {
     int index;
     private TextView message1;
     private TextView message2;
+    private Switch mode;
+    View rootView;
+    MessageFragment messageFragment;
 
 
 
@@ -101,28 +107,15 @@ public class NavigationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
-        setupFragment(rootView);
-        return rootView;
-    }
-
-    private void setupFragment(View view)
-    {
-        navigationProfileImage= view.findViewById(R.id.navigation_image);
-        navigationName= view.findViewById(R.id.navigation_name);
-        navigationYes= view.findViewById(R.id.navigation_Yes);
-        navigationNo= view.findViewById(R.id.navigation_no);
-        message1= view.findViewById(R.id.navigation_message1);
-        message2= view.findViewById(R.id.navigation_message2);
-        navigationCardView= view.findViewById(R.id.card_view_for_image_navigation);
-        accessUsers= new AccessUsers();
-        accessMatches= new AccessMatches();
-        allOppositeUsers= new ArrayList<User>();
-        allOppositeUsers=accessUsers.getGenderedUsers();
-        index=0;
-        makeMessageInvisible();
-        iterateProfiles(index);
-
+         rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
+        navigationProfileImage= rootView.findViewById(R.id.navigation_image);
+        navigationName= rootView.findViewById(R.id.navigation_name);
+        navigationYes= rootView.findViewById(R.id.navigation_Yes);
+        navigationNo= rootView.findViewById(R.id.navigation_no);
+        message1= rootView.findViewById(R.id.navigation_message1);
+        message2= rootView.findViewById(R.id.navigation_message2);
+        navigationCardView= rootView.findViewById(R.id.card_view_for_image_navigation);
+        mode = (Switch) rootView.findViewById(R.id.switch1);
         navigationYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,6 +130,57 @@ public class NavigationFragment extends Fragment {
                 iterateProfiles(++index);
             }
         });
+
+        mode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Fragment> currentFragments=getActivity().getSupportFragmentManager().getFragments();
+                MessageFragment messageFragment=null;
+                for(int i=0;i<currentFragments.size();i++)
+                {
+                    if(currentFragments.get(i) instanceof MessageFragment)
+                        messageFragment=(MessageFragment)currentFragments.get(i);
+                }
+                if (mode.isChecked()){
+                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(true);
+                    accessUsers.updateUser(accessUsers.getCurrentUser());
+                    setupFragment();
+                    messageFragment.refreshMessageFragment();
+                }else{
+                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(false);
+                    accessUsers.updateUser(accessUsers.getCurrentUser());
+                    setupFragment();
+                    messageFragment.refreshMessageFragment();
+                }
+            }
+        });
+
+        setupFragment();
+        return rootView;
+    }
+
+    private void setupFragment()
+    {
+        accessUsers= new AccessUsers();
+        accessMatches= new AccessMatches();
+        allOppositeUsers= new ArrayList<User>();
+        allOppositeUsers=accessUsers.getGenderedUsers();
+        Boolean isBlindMode = accessUsers.getCurrentUser().getUserProfile().getBlindMode();
+        for (int i = 0; i < allOppositeUsers.size(); i++) {
+            if (allOppositeUsers.get(i).getUserProfile().getBlindMode() != isBlindMode) {
+                allOppositeUsers.remove(i);
+                continue;
+            }
+        }
+        index=0;
+        makeMessageInvisible();
+        iterateProfiles(index);
+
+
+        if(accessUsers.getCurrentUser().getUserProfile().getBlindMode())
+            mode.setChecked(true);
+        else
+            mode.setChecked(false);
     }
 
     private void iterateProfiles(int position) {
@@ -144,16 +188,21 @@ public class NavigationFragment extends Fragment {
             User navigationUser= allOppositeUsers.get(position);
             oppositeProfileEmail=navigationUser.getUserEmail();
 
+            navigationProfileImage.setImageResource(R.mipmap.profile);
             if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()))
             {
-                File imgFile = new File(navigationUser.getUserProfile().getProfilePicture());
-                if (imgFile.exists()) {
-                    try {
-                        FileInputStream fis = new FileInputStream(imgFile);
-                        Bitmap myBitmap = BitmapFactory.decodeStream(fis);
-                        navigationProfileImage.setImageBitmap(myBitmap);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                if(!accessUsers.getCurrentUser().getUserProfile().getBlindMode()) {
+                    File imgFile = new File(navigationUser.getUserProfile().getProfilePicture());
+                    if (imgFile.exists()) {
+                        try {
+                            FileInputStream fis = new FileInputStream(imgFile);
+                            Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                            navigationProfileImage.setImageBitmap(myBitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        navigationProfileImage.setImageResource(R.mipmap.profile);
                     }
                 }
                 navigationName.setText(navigationUser.getUserFirstName()+ " "+ navigationUser.getUserLastName());
@@ -193,5 +242,6 @@ public class NavigationFragment extends Fragment {
         message1.setVisibility(View.INVISIBLE);
         message2.setVisibility(View.INVISIBLE);
     }
+
 
 }

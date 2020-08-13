@@ -2,11 +2,14 @@ package comp3350.losr.presentation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import comp3350.losr.R;
@@ -22,6 +27,10 @@ import comp3350.losr.objects.Match;
 
 
 public class MessageFragment extends Fragment {
+
+    private ListView matchesListView;
+    private ImageView profile;
+    private View rootView;
     public MessageFragment() {
         // Required empty public constructor
     }
@@ -42,22 +51,13 @@ public class MessageFragment extends Fragment {
         return fragment;
     }
 
-    private ListView matchesListView;
-    private FloatingActionButton profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_message, container, false);
-
-        AccessMatches matchesAccess = new AccessMatches();
-        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
-
-        matchesListView = (ListView) rootView.findViewById(R.id.matchesListView);
-        matchesListView.setAdapter(matchAdapter);
-
+        rootView = inflater.inflate(R.layout.fragment_message, container, false);
+      refreshMessageFragment();
         return rootView;
     }
 
@@ -73,6 +73,21 @@ public class MessageFragment extends Fragment {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
                 profile = convertView.findViewById(R.id.profileButton);
+                File imgFile = new File(currMatch.getMatchedUser().getUserProfile().getProfilePicture()); //this will be grabbed from database
+
+                if(!currMatch.getCurrentUser().getUserProfile().getBlindMode()) {
+                    if (imgFile.exists()) {
+                        try {
+                            FileInputStream fis = new FileInputStream(imgFile);
+                            Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                            profile.setImageBitmap(myBitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        profile.setImageResource(R.mipmap.profile);
+                    }
+                }
                 convertView.setClickable(true);
                 profile.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -94,6 +109,16 @@ public class MessageFragment extends Fragment {
         }
 
 
+    }
+
+    public void refreshMessageFragment()
+    {
+        AccessMatches matchesAccess = new AccessMatches();
+        ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
+        MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);
+
+        matchesListView = (ListView) rootView.findViewById(R.id.matchesListView);
+        matchesListView.setAdapter(matchAdapter);
     }
 
 }
