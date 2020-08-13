@@ -51,7 +51,6 @@ public class ProfileFragment extends Fragment {
     private TextView bio;
     private TextView dob;
     private ImageView settings;
-    private Switch mode;
     private TextView answer1;
     private TextView answer2;
     private TextView answer3;
@@ -158,22 +157,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        /*
-
-        mode = (Switch) view.findViewById(R.id.switch1);
-        mode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mode.isChecked()){
-                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(true);
-                }else{
-                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(false);
-                }
-            }
-        });
-
-
-         */
 
         answer1 = view.findViewById(R.id.profile_answer1);
         if (userAnswers.get(0).getAnswer() == true) {
