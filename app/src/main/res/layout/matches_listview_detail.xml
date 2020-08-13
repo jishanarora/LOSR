@@ -16,24 +16,29 @@
         android:textSize="34sp"
         tools:text="@tools:sample/full_names" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/profileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_weight="1"
-        android:adjustViewBounds="false"
-        android:baselineAlignBottom="false"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_for_image_matched_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
         android:clickable="true"
-        android:contentDescription="@string/view_match_profile"
-        android:focusable="true"
-        app:backgroundTint="#E91E63"
-        app:borderWidth="0dp"
-        app:elevation="0dp"
-        app:maxImageSize="50dp"
-        app:srcCompat="@mipmap/profile"
-        app:useCompatPadding="false" />
+        app:cardCornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profileButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/messageButton"
@@ -46,7 +51,8 @@
         android:foregroundGravity="center_vertical|center"
         android:src="@mipmap/message"
         app:backgroundTint="#E91E63"
-        app:maxImageSize="40dp" />
+        app:maxImageSize="40dp"
+        android:layout_marginLeft="8dp"/>
 
     <TextView
         android:id="@+id/matchPercent"

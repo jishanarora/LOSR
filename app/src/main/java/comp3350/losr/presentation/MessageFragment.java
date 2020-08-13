@@ -2,11 +2,14 @@ package comp3350.losr.presentation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import comp3350.losr.R;
@@ -43,7 +48,7 @@ public class MessageFragment extends Fragment {
     }
 
     private ListView matchesListView;
-    private FloatingActionButton profile;
+    private ImageView profile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +78,20 @@ public class MessageFragment extends Fragment {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
                 profile = convertView.findViewById(R.id.profileButton);
+                File imgFile = new File(currMatch.getMatchedUser().getUserProfile().getProfilePicture()); //this will be grabbed from database
+
+                if (imgFile.exists()) {
+                    try {
+                        FileInputStream fis = new FileInputStream(imgFile);
+                        Bitmap myBitmap = BitmapFactory.decodeStream(fis);
+                        profile.setImageBitmap(myBitmap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    profile.setImageResource(R.mipmap.profile);
+                }
                 convertView.setClickable(true);
                 profile.setOnClickListener(new View.OnClickListener() {
                     @Override
