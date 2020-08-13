@@ -135,6 +135,9 @@ public class QuestionsAcceptanceTests {
 
         onView(withId(R.id.edit_profile_save)).check(matches(isDisplayed())).perform(click());
 
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
     }
 
     @Test
@@ -246,5 +249,8 @@ public class QuestionsAcceptanceTests {
 
         onView(withId(R.id.edit_profile_save)).check(matches(isDisplayed())).perform(click());
 
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
     }
 }

@@ -77,6 +77,9 @@ public class ProfileAcceptanceTests
 
         onView(withId(R.id.profile_answer5)).check(matches(withText("No")));
         onView(withId(R.id.profile_weight5)).check(matches(withText("2")));
+
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
     }
 
     @Test
@@ -292,6 +295,8 @@ public class ProfileAcceptanceTests
 
         onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
                 swipeUp(), swipeUp(), swipeUp(), swipeUp());
+
+        onView(withId(R.id.sign_out_button)).perform(click());
     }
 
     @Test
@@ -447,6 +452,12 @@ public class ProfileAcceptanceTests
         onView(withId(R.id.edit_profile_weight5)).perform(click()).perform(clearText(), typeText("6"));
         onView(withId(R.id.edit_profile_weight5)).check(matches(withText("5")));
         Espresso.closeSoftKeyboard();
+
+        onView((withId(R.id.edit_profile_cancel))).perform(click());
+
+        onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
+                swipeUp(), swipeUp(), swipeUp(), swipeUp());
+        onView(withId(R.id.sign_out_button)).perform(click());
     }
 }
 
