@@ -157,6 +157,9 @@ public class NavigationFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
+                else{
+                    navigationProfileImage.setImageResource(R.mipmap.profile);
+                }
                 navigationName.setText(navigationUser.getUserFirstName()+ " "+ navigationUser.getUserLastName());
             }
             else
