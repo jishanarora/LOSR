@@ -7,6 +7,7 @@ import java.util.List;
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
 import comp3350.losr.objects.Match;
+import comp3350.losr.objects.Report;
 import comp3350.losr.objects.User;
 import comp3350.losr.persistence.DataAccess;
 
@@ -26,24 +27,32 @@ public class AccessMatches {
     public List<Match> getMatches() {
         List<Match> allMatches = new ArrayList<>();
         List<User> potentialMatches = userAccess.getGenderedUsers();
+        List<User> sameModeMatches = new ArrayList<>();
+        List<Report> reportedUsers = dataAccess.getReports();
         User currentUser = dataAccess.getCurrentUser();
         Boolean isBlindMode = currentUser.getUserProfile().getBlindMode();
 
-        // create a DB Method for getting Blind Mode Users
-        // temp workaround
+        // makes sure to select the same setting for blindMode users
         for (int i = 0; i < potentialMatches.size(); i++) {
-            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode){
-                potentialMatches.remove(i);
+            if (potentialMatches.get(i).getUserProfile().getBlindMode() == isBlindMode){
+                for (int j = 0; j < reportedUsers.size(); j++) {
+                    if( !(reportedUsers.get(j).getReportee().equals(potentialMatches.get(i).getUserEmail())) ){
+                        sameModeMatches.add(potentialMatches.get(i));
+                    }
+                }
+
             }
         }
 
+
+
         float matchCheck;
 
-        for (int i = 0; i < potentialMatches.size(); i++) {
-            matchCheck = matchPercentage(currentUser.getAnswers(), potentialMatches.get(i).getAnswers());
+        for (int i = 0; i < sameModeMatches.size(); i++) {
+            matchCheck = matchPercentage(currentUser.getAnswers(), sameModeMatches.get(i).getAnswers());
 
             if (matchCheck > 0) {
-                allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
+                allMatches.add(position(allMatches, matchCheck), new Match(currentUser, sameModeMatches.get(i)));
             }
 
         }

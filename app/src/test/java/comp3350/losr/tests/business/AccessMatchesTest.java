@@ -31,4 +31,11 @@ public class AccessMatchesTest extends TestCase {
 
         System.out.println("testGetMatches complete");
     }
+
+    public void testBlindMatches() {
+
+        am.getMatches();
+
+
+    }
 }
