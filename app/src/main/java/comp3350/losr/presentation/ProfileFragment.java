@@ -106,8 +106,6 @@ public class ProfileFragment extends Fragment {
         if (imgFile.exists()) {
             checkPermissions();
             try {
-                String[] permissions = {WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE};
-                requestPermissions(permissions, PERMISSION_REQUEST_CODE);
                 FileInputStream fis = new FileInputStream(imgFile);
                 Bitmap myBitmap = BitmapFactory.decodeStream(fis);
                 profileImage.setImageBitmap(myBitmap);
