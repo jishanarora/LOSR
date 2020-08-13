@@ -40,32 +40,19 @@ public class AccessMatches {
             if (user.getUserProfile().getBlindMode() != isBlindMode) {
                 potentialMatchesDeleted.add(user);
             }
+            if(reports.contains(user.getUserEmail())) {
+                potentialMatchesDeleted.add(user);
+            }
         }
         for (User deleteUser : potentialMatchesDeleted) {
             potentialMatches.remove(deleteUser);
         }
         for (int i = 0; i < potentialMatches.size(); i++) {
-            /*
-            if (potentialMatches.get(i).getUserProfile().getBlindMode() != isBlindMode) {
-                potentialMatches.remove(i);
-                continue;
-            }
-
-             */
 
             matchCheck = matchPercentage(currentUser.getAnswers(), potentialMatches.get(i).getAnswers());
 
             if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail()) && matchCheck > 0) {
                 allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
-            }
-        }
-
-        //remove reported users from the match list
-        for(int i = 0; i < allMatches.size(); i++) {
-            for(int j = 0; j < reports.size(); j++) {
-                if(allMatches.get(i).getMatchedUser().getUserEmail().equals(reports.get(j))) {
-                    allMatches.remove(i);
-                }
             }
         }
 
