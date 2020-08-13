@@ -158,6 +158,8 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /*
+
         mode = (Switch) view.findViewById(R.id.switch1);
         mode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +171,9 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+
+         */
 
         answer1 = view.findViewById(R.id.profile_answer1);
         if (userAnswers.get(0).getAnswer() == true) {
