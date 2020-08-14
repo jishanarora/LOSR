@@ -2,7 +2,6 @@ package comp3350.losr.tests.integration;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.application.DatabaseService;
