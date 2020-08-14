@@ -82,6 +82,7 @@ public class BlindModeAcceptanceTests {
 
         ViewInteraction switch_2 = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)), 0), isDisplayed()));
         switch_2.perform(click());
+        System.out.println(R.id.navigation_name);
         onView(withId(R.id.navigation_name)).check(matches(withText("Amy Kowall")));
     }
 

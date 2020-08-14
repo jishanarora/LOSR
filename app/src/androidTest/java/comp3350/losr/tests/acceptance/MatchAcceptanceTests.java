@@ -118,7 +118,6 @@ public class MatchAcceptanceTests {
             } catch (NullPointerException npe) {
 
             }
-            assertEquals(1, 2);
         } catch (NoMatchingViewException nmve) {
 
         }
