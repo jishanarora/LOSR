@@ -62,7 +62,11 @@ public class SignInFragment extends Fragment {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(validateEmail())
                 Toast.makeText(getContext(), "You will receive an email to " + email.getText().toString() + " if the account exists", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getContext(), "Enter the email", Toast.LENGTH_SHORT).show();
+
             }
         });
 
