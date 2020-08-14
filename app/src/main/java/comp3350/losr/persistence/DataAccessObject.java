@@ -221,8 +221,6 @@ public class DataAccessObject implements DataAccess {
             while (rs1.next()) {
 
                 newUser = getUser(rs1);
-                System.out.println(newUser.userGenderPrefToString());
-                System.out.println(currentUser.userGenderToString());
                 if (newUser.userGenderPrefToString().equals(currentUser.userGenderToString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
                     users.add(newUser);
                 }
