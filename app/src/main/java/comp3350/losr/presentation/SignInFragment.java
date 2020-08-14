@@ -32,6 +32,7 @@ public class SignInFragment extends Fragment {
     private Button signInBtn;
     private EditText email;
     private EditText password;
+    private TextView forgotPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +44,7 @@ public class SignInFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_button);
         email = view.findViewById(R.id.sign_in_email);
         password = view.findViewById(R.id.sign_in_password);
+        forgotPassword=view.findViewById(R.id.sign_in_forgot_password);
         return view;
     }
 
@@ -54,6 +56,13 @@ public class SignInFragment extends Fragment {
             public void onClick(View view) {
                 RegisterActivity.onSignUpFragment = true;
                 setFragment(new SignUpFragment());
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "You will receive an email to " + email.getText().toString() + " if the account exists", Toast.LENGTH_SHORT).show();
             }
         });
 
