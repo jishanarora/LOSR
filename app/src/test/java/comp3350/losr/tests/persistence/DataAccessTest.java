@@ -222,6 +222,9 @@ public class DataAccessTest extends TestCase {
         dataAccess.report("amykowall@gmail.com");
         assertEquals(2, dataAccess.getReports().size());
 
+        dataAccess.clearReports();
+        assertEquals(0, dataAccess.getReports().size());
+
         System.out.println("testReport complete");
     }
 

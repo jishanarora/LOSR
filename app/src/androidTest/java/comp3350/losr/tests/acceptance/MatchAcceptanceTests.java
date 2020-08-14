@@ -105,7 +105,7 @@ public class MatchAcceptanceTests {
     }
 
     @Test
-    public void newMatch() {
+    public void testNewMatch() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("jessicafie@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
