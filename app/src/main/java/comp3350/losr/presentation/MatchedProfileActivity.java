@@ -61,7 +61,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               moveBack();
+                moveBack();
             }
         });
 
@@ -74,7 +74,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
 
         File imgFile = new File(matchedProfile.getUserPicture()); //this will be grabbed from database
 
-        if(!matchedProfile.getUserMode()) {
+        if (!matchedProfile.getUserMode()) {
             if (imgFile.exists()) {
                 try {
                     FileInputStream fis = new FileInputStream(imgFile);
@@ -100,7 +100,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
             }
         });
 
-        
+
         name = findViewById(R.id.matched_profile_name);
         name.setText(matchedProfile.getUserFirstName() + " " + matchedProfile.getUserLastName());
 
@@ -167,8 +167,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
 
     }
 
-    private void moveBack()
-    {
+    private void moveBack() {
         Intent intent = new Intent(MatchedProfileActivity.this, NavigationPageActivity.class);
         intent.putExtra("value", 2);
         startActivity(intent);

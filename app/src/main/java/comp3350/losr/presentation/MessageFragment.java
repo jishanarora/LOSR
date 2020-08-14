@@ -29,6 +29,7 @@ public class MessageFragment extends Fragment {
     private ListView matchesListView;
     private ImageView profile;
     private View rootView;
+
     public MessageFragment() {
         // Required empty public constructor
     }
@@ -55,7 +56,7 @@ public class MessageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_message, container, false);
-      refreshMessageFragment();
+        refreshMessageFragment();
         return rootView;
     }
 
@@ -73,7 +74,7 @@ public class MessageFragment extends Fragment {
                 profile = convertView.findViewById(R.id.profileButton);
                 File imgFile = new File(currMatch.getMatchedUser().getUserPicture()); //this will be grabbed from database
 
-                if(!currMatch.getCurrentUser().getUserMode()) {
+                if (!currMatch.getCurrentUser().getUserMode()) {
                     if (imgFile.exists()) {
                         try {
                             FileInputStream fis = new FileInputStream(imgFile);
@@ -109,8 +110,7 @@ public class MessageFragment extends Fragment {
 
     }
 
-    public void refreshMessageFragment()
-    {
+    public void refreshMessageFragment() {
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
         MatchesAdapter matchAdapter = new MatchesAdapter(getContext(), matchList);

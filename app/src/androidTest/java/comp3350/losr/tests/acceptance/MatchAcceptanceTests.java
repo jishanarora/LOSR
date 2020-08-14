@@ -38,8 +38,7 @@ public class MatchAcceptanceTests {
     public ActivityTestRule<SplashActivity> splashActivity = new ActivityTestRule<>(SplashActivity.class);
 
     @Test
-    public void testDisplayMatches()
-    {
+    public void testDisplayMatches() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("johndoe@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
@@ -50,12 +49,11 @@ public class MatchAcceptanceTests {
 
         onView(withIndex(withId(R.id.matchName), 0)).
                 check(matches(withText(containsString("Amy Kowall"))));
-        onView(withIndex(withId(R.id.matchPercent),0)).check(matches(withText("36% Match")));
+        onView(withIndex(withId(R.id.matchPercent), 0)).check(matches(withText("36% Match")));
     }
 
     @Test
-    public void testViewMatchProfile()
-    {
+    public void testViewMatchProfile() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("johndoe@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
@@ -90,8 +88,7 @@ public class MatchAcceptanceTests {
     }
 
     @Test
-    public void testInvalidMatches()
-    {
+    public void testInvalidMatches() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("johndoe@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
@@ -121,8 +118,8 @@ public class MatchAcceptanceTests {
             } catch (NullPointerException npe) {
 
             }
-            assertEquals(1,2);
-        } catch (NoMatchingViewException nmve){
+            assertEquals(1, 2);
+        } catch (NoMatchingViewException nmve) {
 
         }
 

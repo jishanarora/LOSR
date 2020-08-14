@@ -42,11 +42,10 @@ import static org.hamcrest.Matchers.not;
 public class AccountAcceptanceTests {
 
     @Rule
-    public ActivityTestRule<RegisterActivity> registerActivity= new ActivityTestRule<>(RegisterActivity.class);
+    public ActivityTestRule<RegisterActivity> registerActivity = new ActivityTestRule<>(RegisterActivity.class);
 
     @Test
-    public void testHomeScreen()
-    {
+    public void testHomeScreen() {
         Espresso.closeSoftKeyboard();
 
         onView(withId(R.id.sign_in_email)).check(matches(withText("")));
@@ -58,8 +57,7 @@ public class AccountAcceptanceTests {
     }
 
     @Test
-    public void testSignIn()
-    {
+    public void testSignIn() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("mbathie@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
@@ -76,8 +74,7 @@ public class AccountAcceptanceTests {
     }
 
     @Test
-    public void testInvalidSignIn()
-    {
+    public void testInvalidSignIn() {
         // empty email
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText(""));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
@@ -155,8 +152,7 @@ public class AccountAcceptanceTests {
     }
 
     @Test
-    public void testSignUp()
-    {
+    public void testSignUp() {
         Espresso.closeSoftKeyboard();
 
         onView(withText("Don't have an account? Sign Up! ")).perform(click());
@@ -286,8 +282,7 @@ public class AccountAcceptanceTests {
     }
 
     @Test
-    public void testInvalidSignUp()
-    {
+    public void testInvalidSignUp() {
         Espresso.closeSoftKeyboard();
 
         onView(withText("Don't have an account? Sign Up! ")).perform(click());

@@ -26,7 +26,7 @@ import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.User;
 
 
-public class   SignUpFragment extends Fragment {
+public class SignUpFragment extends Fragment {
 
     public SignUpFragment() {
         // Required empty public constructor

@@ -92,8 +92,8 @@ public class ReportAcceptanceTests {
             } catch (NullPointerException npe) {
 
             }
-            assertEquals(1,2);
-        } catch (NoMatchingViewException nmve){
+            assertEquals(1, 2);
+        } catch (NoMatchingViewException nmve) {
 
         }
 
