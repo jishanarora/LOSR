@@ -61,9 +61,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MatchedProfileActivity.this, NavigationPageActivity.class);
-                intent.putExtra("value", 2);
-                startActivity(intent);
+               moveBack();
             }
         });
 
@@ -97,6 +95,8 @@ public class MatchedProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 aReport.report(matchedProfile.getUserEmail());
+                moveBack();
+
             }
         });
 
@@ -165,5 +165,12 @@ public class MatchedProfileActivity extends AppCompatActivity {
         weight5 = findViewById(R.id.matched_profile_weight5);
         weight5.setText(Integer.toString(userAnswers.get(4).getWeight()));
 
+    }
+
+    private void moveBack()
+    {
+        Intent intent = new Intent(MatchedProfileActivity.this, NavigationPageActivity.class);
+        intent.putExtra("value", 2);
+        startActivity(intent);
     }
 }
