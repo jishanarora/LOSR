@@ -61,6 +61,8 @@ public class AccessMatches {
 
     public void newMatch(String matchEmail) {dataAccess.newMatch(matchEmail);}
 
+    public void deleteMatch(String matchEmail) { dataAccess.deleteMatch(matchEmail);}
+
     public boolean checkMatch(String matchEmail) {return dataAccess.checkMatch(matchEmail);}
 
     public boolean checkMatchExists(String matchEmail) {return dataAccess.checkMatchExists(matchEmail);}
