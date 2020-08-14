@@ -3,6 +3,7 @@ package comp3350.losr.tests.acceptance;
 import android.view.View;
 
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -28,6 +29,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -100,6 +102,39 @@ public class MatchAcceptanceTests {
 
         onView(withIndex(withId(R.id.matchName), 0)).check(matches(not(withText("Jessica Fie"))));
         onView(withIndex(withId(R.id.matchName), 0)).check(matches(not(withText("Gary Chalmers"))));
+    }
+
+    @Test
+    public void newMatch() {
+        onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("jessicafie@gmail.com"));
+        onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
+
+        Espresso.closeSoftKeyboard();
+
+        onView(withId(R.id.sign_in_button)).check(matches(isDisplayed())).perform(click());
+        onView(withText("MESSAGE")).check(matches(isDisplayed())).perform(click());
+
+        try {
+            try {
+                onView(withIndex(withId(R.id.matchName), 0)).
+                        check(matches(withText(containsString(null))));
+            } catch (NullPointerException npe) {
+
+            }
+            assertEquals(1,2);
+        } catch (NoMatchingViewException nmve){
+
+        }
+
+        onView(withText("LOSR")).check(matches(isDisplayed())).perform(click());
+        onView(withId(R.id.navigation_Yes)).perform(click());
+
+        onView(withText("MESSAGE")).check(matches(isDisplayed())).perform(click());
+
+        onView(withIndex(withId(R.id.matchName), 0)).
+                check(matches(withText(containsString("Gary Chalmers"))));
+
+
     }
 
     // a method that find the index of matches
