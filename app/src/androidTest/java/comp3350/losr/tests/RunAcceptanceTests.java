@@ -8,9 +8,11 @@ import comp3350.losr.tests.acceptance.BlindModeAcceptanceTests;
 import comp3350.losr.tests.acceptance.MatchAcceptanceTests;
 import comp3350.losr.tests.acceptance.ProfileAcceptanceTests;
 import comp3350.losr.tests.acceptance.QuestionsAcceptanceTests;
+import comp3350.losr.tests.acceptance.ReportAcceptanceTests;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({AccountAcceptanceTests.class, ProfileAcceptanceTests.class, MatchAcceptanceTests.class, BlindModeAcceptanceTests.class, QuestionsAcceptanceTests.class})
+@Suite.SuiteClasses({AccountAcceptanceTests.class, ProfileAcceptanceTests.class, MatchAcceptanceTests.class,
+        BlindModeAcceptanceTests.class, QuestionsAcceptanceTests.class, ReportAcceptanceTests.class})
 public class RunAcceptanceTests
 {
     public RunAcceptanceTests()
