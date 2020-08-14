@@ -298,6 +298,7 @@ public class BusinessPersistenceSeamTest extends TestCase {
         temp = au.getCurrentUser();
         temp.setUserMode(Boolean.FALSE);
         au.updateUser(temp);
+        am.deleteMatch("mbathie@gmail.com");
 
 
         System.out.println("\nFinished Integration of testAccessMatchesBlind to persistence");
