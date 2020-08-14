@@ -23,7 +23,6 @@ import comp3350.losr.R;
 import comp3350.losr.business.AccessMatches;
 import comp3350.losr.business.AccessUsers;
 import comp3350.losr.business.CheckMatches;
-import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
 
 /**

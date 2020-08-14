@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-//import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
 
