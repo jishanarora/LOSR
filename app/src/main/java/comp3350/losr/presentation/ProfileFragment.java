@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -92,13 +91,13 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         accessUsers = new AccessUsers();
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserProfile().getAnswers();
+        final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserAnswers();
 
 
         addprofile = view.findViewById(R.id.profile_image_add);
         profileImage = view.findViewById(R.id.profile_image);
 
-        File imgFile = new File(accessUsers.getCurrentUser().getUserProfile().getProfilePicture());
+        File imgFile = new File(accessUsers.getCurrentUser().getUserPicture());
         if (imgFile.exists()) {
             checkPermissions();
             try {
@@ -136,16 +135,16 @@ public class ProfileFragment extends Fragment {
         email.setText(accessUsers.getCurrentUser().getUserEmail());
 
         gender = view.findViewById(R.id.profile_gender);
-        gender.setText(accessUsers.getCurrentUser().getUserProfile().getGender().toString());
+        gender.setText(accessUsers.getCurrentUser().userGenderToString());
 
         genderPreference = view.findViewById(R.id.profile_gender_preference);
-        genderPreference.setText(accessUsers.getCurrentUser().getUserProfile().getGenderPreference().toString());
+        genderPreference.setText(accessUsers.getCurrentUser().userGenderPrefToString());
 
         bio = view.findViewById(R.id.profile_bio);
-        bio.setText(accessUsers.getCurrentUser().getUserProfile().getBio());
+        bio.setText(accessUsers.getCurrentUser().getUserBio());
 
         dob = view.findViewById(R.id.profile_date_of_birth);
-        dob.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
+        dob.setText(accessUsers.getCurrentUser().getUserDateOfBirth());
 
         settings = view.findViewById(R.id.settings);
         settings.setOnClickListener(new View.OnClickListener() {
@@ -159,31 +158,31 @@ public class ProfileFragment extends Fragment {
 
 
         answer1 = view.findViewById(R.id.profile_answer1);
-        if (userAnswers.get(0).getAnswer() == true) {
+        if (userAnswers.get(0).getAnswer()) {
             answer1.setText("Yes");
         } else {
             answer1.setText("No");
         }
         answer2 = view.findViewById(R.id.profile_answer2);
-        if (userAnswers.get(1).getAnswer() == true) {
+        if (userAnswers.get(1).getAnswer()) {
             answer2.setText("Yes");
         } else {
             answer2.setText("No");
         }
         answer3 = view.findViewById(R.id.profile_answer3);
-        if (userAnswers.get(2).getAnswer() == true) {
+        if (userAnswers.get(2).getAnswer()) {
             answer3.setText("Yes");
         } else {
             answer3.setText("No");
         }
         answer4 = view.findViewById(R.id.profile_answer4);
-        if (userAnswers.get(3).getAnswer() == true) {
+        if (userAnswers.get(3).getAnswer()) {
             answer4.setText("Yes");
         } else {
             answer4.setText("No");
         }
         answer5 = view.findViewById(R.id.profile_answer5);
-        if (userAnswers.get(4).getAnswer() == true) {
+        if (userAnswers.get(4).getAnswer()) {
             answer5.setText("Yes");
         } else {
             answer5.setText("No");
@@ -238,7 +237,7 @@ public class ProfileFragment extends Fragment {
                     if (resultCode == RESULT_OK && data != null) {
                         try {
                             String path = convertMediaUriToPath(data.getData());
-                            accessUsers.getCurrentUser().getUserProfile().setProfilePicture(path);
+                            accessUsers.getCurrentUser().setUserPicture(path);
                             accessUsers.updateUser(accessUsers.getCurrentUser());
                             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), data.getData());
                             profileImage.setImageBitmap(bitmap);

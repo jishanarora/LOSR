@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,9 +20,6 @@ import comp3350.losr.business.AccessMatches;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MatchedProfileActivity extends AppCompatActivity {
 
@@ -71,13 +67,13 @@ public class MatchedProfileActivity extends AppCompatActivity {
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
         User matchedProfile = matchList.get(value).getMatchedUser();
-        final ArrayList<Question> userAnswers = matchedProfile.getUserProfile().getAnswers();
+        final ArrayList<Question> userAnswers = matchedProfile.getUserAnswers();
 
         profileImage = findViewById(R.id.matched_profile_image);
 
-        File imgFile = new File(matchedProfile.getUserProfile().getProfilePicture()); //this will be grabbed from database
+        File imgFile = new File(matchedProfile.getUserPicture()); //this will be grabbed from database
 
-        if(!matchedProfile.getUserProfile().getBlindMode()) {
+        if(!matchedProfile.getUserMode()) {
             if (imgFile.exists()) {
                 try {
                     FileInputStream fis = new FileInputStream(imgFile);
@@ -98,16 +94,16 @@ public class MatchedProfileActivity extends AppCompatActivity {
         email.setText(matchedProfile.getUserEmail());
 
         gender = findViewById(R.id.matched_profile_gender);
-        gender.setText(matchedProfile.getUserProfile().getGender().toString());
+        gender.setText(matchedProfile.getUserGender().toString());
 
         genderPreference = findViewById(R.id.matched_profile_gender_preference);
-        genderPreference.setText(matchedProfile.getUserProfile().getGenderPreference().toString());
+        genderPreference.setText(matchedProfile.getUserGenderPreference().toString());
 
         bio = findViewById(R.id.matched_profile_bio);
-        bio.setText(matchedProfile.getUserProfile().getBio());
+        bio.setText(matchedProfile.getUserBio());
 
         dob = findViewById(R.id.matched_profile_date_of_birth);
-        dob.setText(matchedProfile.getUserProfile().dateOfBirth());
+        dob.setText(matchedProfile.getUserDateOfBirth());
 
         answer1 = findViewById(R.id.matched_profile_answer1);
         if (userAnswers.get(0).getAnswer() == true) {

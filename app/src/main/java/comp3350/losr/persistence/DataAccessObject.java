@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp3350.losr.objects.Profile;
+//import comp3350.losr.objects.Profile;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
 
@@ -20,7 +20,6 @@ public class DataAccessObject implements DataAccess {
     private String dbName;
     private String dbType;
 
-    private List<User> users;
     private User currentUser = new User("Michael", "Bathie", "mbathie@gmail.com", "password");
 
     private String cmdString;
@@ -28,7 +27,7 @@ public class DataAccessObject implements DataAccess {
     public DataAccessObject(String dbName) {
         this.dbName = dbName;
         currentUser.setUserProfile("hi", User.user_gender.Male, User.user_gender.Female, 1999, 1, 25, false);
-        currentUser.updateAllAnswers(true, false, false, true, true, 2, 2, 2, 2, 2);
+        currentUser.setUserAllAnswers(true, false, false, true, true, 2, 2, 2, 2, 2);
     }
 
     public void openConnection(String dbPath) {
@@ -84,9 +83,9 @@ public class DataAccessObject implements DataAccess {
 
             registered = new User(newUser.getUserFirstName(), newUser.getUserLastName(), newUser.getUserEmail(), newUser.getUserPassword());
             registered.setUserProfile("hi", User.user_gender.Losr, User.user_gender.Losr, 0, 0, 0, false);
-            registered.updateAllAnswers(false, false, false, false, false, 2, 2, 2, 2, 2);
-            registered.getUserProfile().setBlindMode(false);
-            registered.getUserProfile().setProfilePicture("");
+            registered.setUserAllAnswers(false, false, false, false, false, 2, 2, 2, 2, 2);
+            registered.setUserMode(false);
+            registered.setUserPicture("");
 
             currentUser = registered;
         } catch (Exception e) {
@@ -107,18 +106,18 @@ public class DataAccessObject implements DataAccess {
     public void updateUser(User update) {
         String values;
 
-        Profile p = update.getUserProfile();
-        String[] dob = p.dateOfBirth().split("/");
-        List<Question> answers = p.getAnswers();
+//        Profile p = update;
+        String[] dob = update.getUserDateOfBirth().split("/");
+        List<Question> answers = update.getUserAnswers();
 
         try {
             values = "email='" + update.getUserEmail()
                     + "', password='" + update.getUserPassword()
                     + "', fname='" + update.getUserFirstName()
                     + "', lname='" + update.getUserLastName()
-                    + "', bio='" + p.getBio()
-                    + "', gender='" + p.genderToString()
-                    + "', genderp='" + p.genderPrefToString()
+                    + "', bio='" + update.getUserBio()
+                    + "', gender='" + update.userGenderToString()
+                    + "', genderp='" + update.userGenderPrefToString()
                     + "', year= " + dob[2]
                     + ", month= " + dob[1]
                     + ", day= " + dob[0]
@@ -132,8 +131,8 @@ public class DataAccessObject implements DataAccess {
                     + ", w3= " + answers.get(2).getWeight()
                     + ", w4= " + answers.get(3).getWeight()
                     + ", w5= " + answers.get(4).getWeight()
-                    + ", picture= '" + update.getUserProfile().getProfilePicture()
-                    + "', blindmode= " + update.getUserProfile().getBlindMode();
+                    + ", picture= '" + update.getUserPicture()
+                    + "', blindmode= " + update.getUserMode();
 
             //the only time you update a user is when you're currently logged in to that user
             cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
@@ -208,11 +207,11 @@ public class DataAccessObject implements DataAccess {
     }
 
     public List<User> getGenderedUsers() {
-        users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         User newUser ;
 
         try {
-            cmdString = "SELECT * FROM USERS WHERE gender = " + "'" + currentUser.getUserProfile().genderPrefToString() + "'";
+            cmdString = "SELECT * FROM USERS WHERE gender = " + "'" + currentUser.userGenderPrefToString() + "'";
             rs1 = s1.executeQuery(cmdString);
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,7 +222,7 @@ public class DataAccessObject implements DataAccess {
 
                 newUser = getUser(rs1);
 
-                if (newUser.getUserProfile().getGenderPreference().toString().equals(currentUser.getUserProfile().getGender().toString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
+                if (newUser.getUserGenderPreference().toString().equals(currentUser.userGenderToString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
                     users.add(newUser);
                 }
 
@@ -394,9 +393,9 @@ public class DataAccessObject implements DataAccess {
 
             u = new User(firstName, lastName, email, password);
             u.setUserProfile(bio, genderEnum, genderPEnum, year, month, day, false);
-            u.updateAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
-            u.getUserProfile().setBlindMode(blindMode);
-            u.getUserProfile().setProfilePicture(picturePath);
+            u.setUserAllAnswers(q1, q2, q3, q4, q5, w1, w2, w3, w4, w5);
+            u.setUserMode(blindMode);
+            u.setUserPicture(picturePath);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -411,7 +410,7 @@ public class DataAccessObject implements DataAccess {
             cmdString = "Update USERS Set " + values + " where email = " + "'" + currentUser.getUserEmail() + "'";
             s1.executeUpdate(cmdString);
 
-            currentUser.getUserProfile().setBlindMode(blindMode);
+            currentUser.setUserMode(blindMode);
         } catch (Exception e) {
             e.printStackTrace();
         }

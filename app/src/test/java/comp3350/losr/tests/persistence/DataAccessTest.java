@@ -88,15 +88,15 @@ public class DataAccessTest extends TestCase {
         assertEquals("Poppins", test.get(spot).getUserLastName());
         assertEquals("marypoppins@gmail.com", test.get(spot).getUserEmail());
         assertEquals("password", test.get(spot).getUserPassword());
-        assertEquals("hello there", test.get(spot).getUserProfile().getBio());
-        assertEquals(User.user_gender.Female, test.get(spot).getUserProfile().getGender());
-        assertEquals(User.user_gender.Male, test.get(spot).getUserProfile().getGenderPreference());
-        assertEquals("16/11/1998", test.get(spot).getUserProfile().dateOfBirth());
-        assertEquals(temp.get(0), test.get(spot).getAnswers().get(0).getAnswer());
-        assertEquals(temp.get(1), test.get(spot).getAnswers().get(1).getAnswer());
-        assertEquals(temp.get(2), test.get(spot).getAnswers().get(2).getAnswer());
-        assertEquals(temp.get(3), test.get(spot).getAnswers().get(3).getAnswer());
-        assertEquals(temp.get(4), test.get(spot).getAnswers().get(4).getAnswer());
+        assertEquals("hello there", test.get(spot).getUserBio());
+        assertEquals(User.user_gender.Female, test.get(spot).getUserGender());
+        assertEquals(User.user_gender.Male, test.get(spot).getUserGenderPreference());
+        assertEquals("16/11/1998", test.get(spot).getUserDateOfBirth());
+        assertEquals(temp.get(0), test.get(spot).getUserAnswers().get(0).getAnswer());
+        assertEquals(temp.get(1), test.get(spot).getUserAnswers().get(1).getAnswer());
+        assertEquals(temp.get(2), test.get(spot).getUserAnswers().get(2).getAnswer());
+        assertEquals(temp.get(3), test.get(spot).getUserAnswers().get(3).getAnswer());
+        assertEquals(temp.get(4), test.get(spot).getUserAnswers().get(4).getAnswer());
 
         System.out.println("testGetGenderedUsers complete");
     }
@@ -138,10 +138,10 @@ public class DataAccessTest extends TestCase {
         System.out.println("Starting testUpdateUser");
 
         User test = dataAccess.getCurrentUser();
-        test.updateBio("new bio");
-        test.updateGender(User.user_gender.Female);
-        test.updateDateOfBirth(1998, 1, 25);
-        test.updateAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
+        test.setUserBio("new bio");
+        test.setUserGender(User.user_gender.Female);
+        test.setUserDateOfBirth(1998, 1, 25);
+        test.setUserAllAnswers(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
         dataAccess.updateUser(test);
 
         ArrayList<Question> temp = new ArrayList<>();
@@ -151,15 +151,15 @@ public class DataAccessTest extends TestCase {
         temp.add(new Question(4, "tempQ4", Boolean.TRUE, 2));
         temp.add(new Question(5, "tempQ5", Boolean.TRUE, 2));
 
-        assertEquals("new bio", dataAccess.getCurrentUser().getUserProfile().getBio());
-        assertEquals(User.user_gender.Female, dataAccess.getCurrentUser().getUserProfile().getGender());
-        assertEquals(22, dataAccess.getCurrentUser().getUserProfile().getAge());
-        assertEquals("25/01/1998", dataAccess.getCurrentUser().getUserProfile().dateOfBirth());
-        assertEquals(temp.get(0).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(0).getAnswer());
-        assertEquals(temp.get(1).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(1).getAnswer());
-        assertEquals(temp.get(2).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(2).getAnswer());
-        assertEquals(temp.get(3).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(3).getAnswer());
-        assertEquals(temp.get(4).getAnswer(), dataAccess.getCurrentUser().getAnswers().get(4).getAnswer());
+        assertEquals("new bio", dataAccess.getCurrentUser().getUserBio());
+        assertEquals(User.user_gender.Female, dataAccess.getCurrentUser().getUserGender());
+        assertEquals(22, dataAccess.getCurrentUser().getUserAge());
+        assertEquals("25/01/1998", dataAccess.getCurrentUser().getUserDateOfBirth());
+        assertEquals(temp.get(0).getAnswer(), dataAccess.getCurrentUser().getUserAnswers().get(0).getAnswer());
+        assertEquals(temp.get(1).getAnswer(), dataAccess.getCurrentUser().getUserAnswers().get(1).getAnswer());
+        assertEquals(temp.get(2).getAnswer(), dataAccess.getCurrentUser().getUserAnswers().get(2).getAnswer());
+        assertEquals(temp.get(3).getAnswer(), dataAccess.getCurrentUser().getUserAnswers().get(3).getAnswer());
+        assertEquals(temp.get(4).getAnswer(), dataAccess.getCurrentUser().getUserAnswers().get(4).getAnswer());
 
         System.out.println("testUpdateUser complete");
     }
@@ -265,10 +265,10 @@ public class DataAccessTest extends TestCase {
         System.out.println("Starting testChangeBlindMode");
 
         dataAccess.changeBlindMode(true);
-        assertTrue(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+        assertTrue(dataAccess.getCurrentUser().getUserMode());
 
         dataAccess.changeBlindMode(false);
-        assertFalse(dataAccess.getCurrentUser().getUserProfile().getBlindMode());
+        assertFalse(dataAccess.getCurrentUser().getUserMode());
 
         System.out.println("testChangeBlindMode complete");
     }

@@ -62,16 +62,31 @@ public class User {
         return userPassword;
     }
 
-    public Profile getUserProfile() {
-        return userProfile;
-    }
+//    public Profile getUserProfile() {
+//        return userProfile;
+//    }
 
-    public ArrayList<Question> getAnswers() {
+    public ArrayList<Question> getUserAnswers() {
         return userProfile.getAnswers();
     }
 
     public Boolean getUserMode() {return userProfile.getBlindMode();}
 
+    public user_gender getUserGender(){return userProfile.getGender();}
+
+    public  user_gender getUserGenderPreference(){return  userProfile.getGenderPreference();}
+
+    public String getUserBio(){return  userProfile.getBio();}
+
+    public String getUserDateOfBirth(){return  userProfile.getDateOfBirth();}
+
+    public int getUserAge(){return  userProfile.getAge();}
+
+    public String getUserPicture(){return userProfile.getProfilePicture();}
+
+    public String userGenderToString(){return  userProfile.genderToString();}
+
+    public String userGenderPrefToString(){return  userProfile.genderPrefToString();}
 
     public void setUserFirstName(String name) {
         userFirstName = name;
@@ -79,14 +94,6 @@ public class User {
 
     public void setUserLastName(String name) {
         userLastName = name;
-    }
-
-    public void setUserEmail(String email) {
-        userEmail = email;
-    }
-
-    public void setUserPassword(String password) {
-        userPassword = password;
     }
 
     public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day, boolean mode) {
@@ -97,24 +104,28 @@ public class User {
         userProfile.setBlindMode(mode);
     }
 
-    public void updateDateOfBirth(int year, int month, int day) {
+    public void setUserMode(Boolean mode){userProfile.setBlindMode(mode);}
+
+    public void setUserPicture(String path){userProfile.setProfilePicture(path);}
+
+    public void setUserDateOfBirth(int year, int month, int day) {
         userProfile.setDateOfBirth(year, month, day);
     }
 
-    public void updateBio(String bio) {
+    public void setUserBio(String bio) {
         userProfile.setBio(bio);
     }
 
-    public void updateGender(user_gender gender) {
+    public void setUserGender(user_gender gender) {
         userProfile.setGender(gender);
     }
 
-    public void updatePreference(user_gender pref) {
+    public void setUserGenderPreference(user_gender pref) {
         userProfile.setGenderPreference(pref);
     }
 
     //update a specific answer
-    public String updateAnswer(Boolean answer, int weight, int spot) {
+    public String setUserAnswer(Boolean answer, int weight, int spot) {
         String message = null;
         int numQuestions = this.userProfile.getNumQuestions();
 
@@ -128,7 +139,7 @@ public class User {
     }
 
     //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5, int w1, int w2, int w3, int w4, int w5) {
-        userProfile.updateAllAnswers(a1, a2, a3, a4, a5, w1, w2, w3, w4, w5);
+    public void setUserAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5, int w1, int w2, int w3, int w4, int w5) {
+        userProfile.setUserAllAnswers(a1, a2, a3, a4, a5, w1, w2, w3, w4, w5);
     }
 }
