@@ -26,7 +26,7 @@ public class AccessMatches {
     public List<Match> getMatches() {
         List<Match> allMatches = new ArrayList<>();
         List<User> potentialMatches = userAccess.getGenderedUsers();
-        List<User> potentialMatchesDeleted = new ArrayList<User>();
+        List<User> potentialMatchesDeleted = new ArrayList<>();
         User currentUser = dataAccess.getCurrentUser();
         Boolean isBlindMode = currentUser.getUserMode();
         AccessReports ar = new AccessReports();

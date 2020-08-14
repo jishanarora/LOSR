@@ -2,7 +2,7 @@ package comp3350.losr.tests.objects;
 
 import junit.framework.TestCase;
 
-//import comp3350.losr.objects.Profile;
+
 import comp3350.losr.objects.User;
 
 public class ProfileTest extends TestCase {

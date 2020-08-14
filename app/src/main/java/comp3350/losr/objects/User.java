@@ -12,6 +12,7 @@ public class User {
     private String userPassword;
     private Profile userProfile;
 
+    // Constructor, toString and equals methods
     public User(String userFirstName, String userLastName, String userEmail, String userPassword) {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
@@ -45,7 +46,7 @@ public class User {
         return result;
     }
 
-
+    // getters for User variables (Besides Profile)
     public String getUserFirstName() {
         return userFirstName;
     }
@@ -62,32 +63,30 @@ public class User {
         return userPassword;
     }
 
-//    public Profile getUserProfile {
-//        return userProfile;
-//    }
 
-    public ArrayList<Question> getUserAnswers() {
-        return userProfile.getAnswers();
-    }
-
-    public Boolean getUserMode() {return userProfile.getBlindMode();}
+    // getters for User Profile
+    public String getUserBio(){return  userProfile.getBio();}
 
     public user_gender getUserGender(){return userProfile.getGender();}
 
-    public  user_gender getUserGenderPreference(){return  userProfile.getGenderPreference();}
-
-    public String getUserBio(){return  userProfile.getBio();}
+    public user_gender getUserGenderPreference(){return  userProfile.getGenderPreference();}
 
     public String getUserDateOfBirth(){return  userProfile.getDateOfBirth();}
 
     public int getUserAge(){return  userProfile.getAge();}
 
+    public Boolean getUserMode() {return userProfile.getBlindMode();}
+
     public String getUserPicture(){return userProfile.getProfilePicture();}
+
+    public ArrayList<Question> getUserAnswers() {return userProfile.getAnswers();}
 
     public String userGenderToString(){return  userProfile.genderToString();}
 
     public String userGenderPrefToString(){return  userProfile.genderPrefToString();}
 
+
+    // setters for User variables (Besides Profile)
     public void setUserFirstName(String name) {
         userFirstName = name;
     }
@@ -96,20 +95,14 @@ public class User {
         userLastName = name;
     }
 
+
+    // getters for User Profile variables
     public void setUserProfile(String bio, user_gender gender, user_gender preference, int year, int month, int day, boolean mode) {
         userProfile.setBio(bio);
         userProfile.setGender(gender);
         userProfile.setGenderPreference(preference);
         userProfile.setDateOfBirth(year, month, day);
         userProfile.setBlindMode(mode);
-    }
-
-    public void setUserMode(Boolean mode){userProfile.setBlindMode(mode);}
-
-    public void setUserPicture(String path){userProfile.setProfilePicture(path);}
-
-    public void setUserDateOfBirth(int year, int month, int day) {
-        userProfile.setDateOfBirth(year, month, day);
     }
 
     public void setUserBio(String bio) {
@@ -123,6 +116,14 @@ public class User {
     public void setUserGenderPreference(user_gender pref) {
         userProfile.setGenderPreference(pref);
     }
+
+    public void setUserDateOfBirth(int year, int month, int day) {
+        userProfile.setDateOfBirth(year, month, day);
+    }
+
+    public void setUserMode(Boolean mode){userProfile.setBlindMode(mode);}
+
+    public void setUserPicture(String path){userProfile.setProfilePicture(path);}
 
     //update a specific answer
     public String setUserAnswer(Boolean answer, int weight, int spot) {
