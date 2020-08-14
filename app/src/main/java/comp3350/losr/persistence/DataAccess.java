@@ -1,6 +1,7 @@
 package comp3350.losr.persistence;
 
 import java.util.List;
+
 import comp3350.losr.objects.User;
 
 public interface DataAccess {

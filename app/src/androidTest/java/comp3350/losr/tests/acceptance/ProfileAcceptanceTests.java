@@ -35,14 +35,12 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ProfileAcceptanceTests
-{
+public class ProfileAcceptanceTests {
     @Rule
     public ActivityTestRule<SplashActivity> splashActivity = new ActivityTestRule<>(SplashActivity.class);
 
     @Test
-    public void testDisplayProfile()
-    {
+    public void testDisplayProfile() {
         onView(withId(R.id.sign_in_email)).check(matches(withText("")));
         onView(withId(R.id.sign_in_password)).check(matches(withText("")));
 
@@ -83,8 +81,7 @@ public class ProfileAcceptanceTests
     }
 
     @Test
-    public void testEditProfile()
-    {
+    public void testEditProfile() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("johndoe@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
@@ -300,8 +297,7 @@ public class ProfileAcceptanceTests
     }
 
     @Test
-    public void testCancelEditing()
-    {
+    public void testCancelEditing() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("johndoe@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 
@@ -405,8 +401,7 @@ public class ProfileAcceptanceTests
     }
 
     @Test
-    public void testInvalidEdit()
-    {
+    public void testInvalidEdit() {
         onView(withId(R.id.sign_in_email)).perform(clearText(), typeText("johndoe@gmail.com"));
         onView(withId(R.id.sign_in_password)).perform(clearText(), typeText("password"));
 

@@ -11,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import comp3350.losr.R;
 
-public class MessageActivity extends AppCompatActivity
-{
-    private  TextView phoneNumber;
+public class MessageActivity extends AppCompatActivity {
+    private TextView phoneNumber;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -30,8 +28,8 @@ public class MessageActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                Intent intent= new Intent(MessageActivity.this,NavigationPageActivity.class);
-                intent.putExtra("value",1);
+                Intent intent = new Intent(MessageActivity.this, NavigationPageActivity.class);
+                intent.putExtra("value", 1);
                 startActivity(intent);
             }
         });
@@ -43,10 +41,11 @@ public class MessageActivity extends AppCompatActivity
         phoneNumber.setText(intent.getStringExtra("phoneNumber"));
 
     }
+
     @Override
     public void onBackPressed() {
-        Intent intent= new Intent(MessageActivity.this,NavigationPageActivity.class);
-        intent.putExtra("value",1);
+        Intent intent = new Intent(MessageActivity.this, NavigationPageActivity.class);
+        intent.putExtra("value", 1);
         startActivity(intent);
     }
 }

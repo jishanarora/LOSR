@@ -40,7 +40,7 @@ public class AccessMatches {
             if (user.getUserMode() != isBlindMode) {
                 potentialMatchesDeleted.add(user);
             }
-            if(reports.contains(user.getUserEmail())) {
+            if (reports.contains(user.getUserEmail())) {
                 potentialMatchesDeleted.add(user);
             }
         }
@@ -59,13 +59,18 @@ public class AccessMatches {
         return allMatches;
     }
 
-    public void newMatch(String matchEmail) {dataAccess.newMatch(matchEmail);}
+    public void newMatch(String matchEmail) {
+        dataAccess.newMatch(matchEmail);
+    }
+
 
     public void deleteMatch(String matchEmail) { dataAccess.deleteMatch(matchEmail);}
 
     public boolean checkMatch(String matchEmail) {return dataAccess.checkMatch(matchEmail);}
 
-    public boolean checkMatchExists(String matchEmail) {return dataAccess.checkMatchExists(matchEmail);}
+    public boolean checkMatchExists(String matchEmail) {
+        return dataAccess.checkMatchExists(matchEmail);
+    }
 
     private int position(List<Match> matches, float target) {
         int left = 0;

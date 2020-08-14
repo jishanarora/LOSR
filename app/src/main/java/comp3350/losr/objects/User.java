@@ -70,23 +70,41 @@ public class User {
         return userProfile.getAnswers();
     }
 
-    public Boolean getUserMode() {return userProfile.getBlindMode();}
+    public Boolean getUserMode() {
+        return userProfile.getBlindMode();
+    }
 
-    public user_gender getUserGender(){return userProfile.getGender();}
+    public user_gender getUserGender() {
+        return userProfile.getGender();
+    }
 
-    public  user_gender getUserGenderPreference(){return  userProfile.getGenderPreference();}
+    public user_gender getUserGenderPreference() {
+        return userProfile.getGenderPreference();
+    }
 
-    public String getUserBio(){return  userProfile.getBio();}
+    public String getUserBio() {
+        return userProfile.getBio();
+    }
 
-    public String getUserDateOfBirth(){return  userProfile.getDateOfBirth();}
+    public String getUserDateOfBirth() {
+        return userProfile.getDateOfBirth();
+    }
 
-    public int getUserAge(){return  userProfile.getAge();}
+    public int getUserAge() {
+        return userProfile.getAge();
+    }
 
-    public String getUserPicture(){return userProfile.getProfilePicture();}
+    public String getUserPicture() {
+        return userProfile.getProfilePicture();
+    }
 
-    public String userGenderToString(){return  userProfile.genderToString();}
+    public String userGenderToString() {
+        return userProfile.genderToString();
+    }
 
-    public String userGenderPrefToString(){return  userProfile.genderPrefToString();}
+    public String userGenderPrefToString() {
+        return userProfile.genderPrefToString();
+    }
 
     public void setUserFirstName(String name) {
         userFirstName = name;
@@ -104,9 +122,13 @@ public class User {
         userProfile.setBlindMode(mode);
     }
 
-    public void setUserMode(Boolean mode){userProfile.setBlindMode(mode);}
+    public void setUserMode(Boolean mode) {
+        userProfile.setBlindMode(mode);
+    }
 
-    public void setUserPicture(String path){userProfile.setProfilePicture(path);}
+    public void setUserPicture(String path) {
+        userProfile.setProfilePicture(path);
+    }
 
     public void setUserDateOfBirth(int year, int month, int day) {
         userProfile.setDateOfBirth(year, month, day);

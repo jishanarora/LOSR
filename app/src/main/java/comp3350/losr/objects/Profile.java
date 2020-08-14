@@ -102,7 +102,9 @@ class Profile {
         return isBlindMode;
     }
 
-    public String getProfilePicture() {return profilePicture;}
+    public String getProfilePicture() {
+        return profilePicture;
+    }
 
     public String getBio() {
         return bio;
@@ -177,7 +179,9 @@ class Profile {
         isBlindMode = blindMode;
     }
 
-    public void setProfilePicture(String path) {profilePicture = path;}
+    public void setProfilePicture(String path) {
+        profilePicture = path;
+    }
 
     public void setGender(User.user_gender gender) {
         this.gender = gender;

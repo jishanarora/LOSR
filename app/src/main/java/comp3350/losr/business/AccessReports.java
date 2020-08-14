@@ -13,16 +13,16 @@ public class AccessReports {
         dataAccess = DatabaseService.getDataAccess(Main.dbName);
     }
 
-    public void report(String reportee)
-    {
+    public void report(String reportee) {
         dataAccess.report(reportee);
     }
 
-    public List<String> getReports()
-    {
+    public List<String> getReports() {
         return dataAccess.getReports();
     }
 
-    public void clearReports() { dataAccess.clearReports();}
+    public void clearReports() {
+        dataAccess.clearReports();
+    }
 
 }
