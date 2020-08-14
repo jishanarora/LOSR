@@ -183,7 +183,17 @@ public class DataAccessStub implements DataAccess {
         return currentUserReports;
     }
 
-    public void clearReports(){}
+    public void clearReports()  {
+        ArrayList<Report> tempReport = new ArrayList<>();
+
+        for(int i = 0; i < reports.size(); i ++) {
+            if(!reports.get(i).getReporter().equals(currentUser.getUserEmail())) {
+                tempReport.add(reports.get(i));
+            }
+        }
+
+        reports = tempReport;
+    }
 
     public void newMatch(String match){
         matches.add(new Match(currentUser, getSpecificUser(match)));

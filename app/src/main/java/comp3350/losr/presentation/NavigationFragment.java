@@ -221,7 +221,7 @@ public class NavigationFragment extends Fragment {
                     }
                 }
                 navigationName.setText(navigationUser.getUserFirstName()+ " "+ navigationUser.getUserLastName());
-                matchPercent.setText(Integer.toString(checkMatches.matchPercentage(accessUsers.getCurrentUser().getUserProfile().getAnswers(),navigationUser.getUserProfile().getAnswers())) + "%");
+                matchPercent.setText(Integer.toString(checkMatches.matchPercentage(accessUsers.getCurrentUser().getUserAnswers(),navigationUser.getUserAnswers())) + "%");
             }
             else
         {

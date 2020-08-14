@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LOSR</string>
+    <string name="app_name">LOSR Dating App</string>
     <string name="profile_navigation_button">Profile</string>
     <string name="login_button">Login</string>
     <string name="login_email">Email</string>
