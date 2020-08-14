@@ -22,6 +22,8 @@ import java.util.List;
 import comp3350.losr.R;
 import comp3350.losr.business.AccessMatches;
 import comp3350.losr.business.AccessUsers;
+import comp3350.losr.business.CheckMatches;
+import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
 
 /**
@@ -34,6 +36,8 @@ public class NavigationFragment extends Fragment {
    private ImageView navigationProfileImage;
    private CardView navigationCardView;
    private TextView navigationName;
+   private TextView matchPercent;
+    private TextView matchPercentText;
    private Button navigationYes;
     private Button navigationNo;
     AccessUsers accessUsers;
@@ -47,6 +51,7 @@ public class NavigationFragment extends Fragment {
     private Switch mode;
     View rootView;
     private MessageFragment messageFragment;
+    CheckMatches checkMatches;
 
 
 
@@ -108,6 +113,8 @@ public class NavigationFragment extends Fragment {
         message1= rootView.findViewById(R.id.navigation_message1);
         message2= rootView.findViewById(R.id.navigation_message2);
         navigationCardView= rootView.findViewById(R.id.card_view_for_image_navigation);
+        matchPercent=rootView.findViewById(R.id.navigation_match_percent);
+        matchPercentText=rootView.findViewById(R.id.navigation_match_percent_text);
         mode = (Switch) rootView.findViewById(R.id.switch1);
         List<Fragment> currentFragments=getActivity().getSupportFragmentManager().getFragments();
          messageFragment=null;
@@ -168,7 +175,10 @@ public class NavigationFragment extends Fragment {
         allOppositeUsers= new ArrayList<User>();
         allOppositeUsers=accessUsers.getGenderedUsers();
         allOppositeUsersDeleted=new ArrayList<User>();
+      
         Boolean isBlindMode = accessUsers.getCurrentUser().getUserMode();
+        checkMatches=new CheckMatches();
+
         for (User user : allOppositeUsers) {
             if (user.getUserMode() != isBlindMode) {
                 allOppositeUsersDeleted.add(user);
@@ -211,6 +221,7 @@ public class NavigationFragment extends Fragment {
                     }
                 }
                 navigationName.setText(navigationUser.getUserFirstName()+ " "+ navigationUser.getUserLastName());
+                matchPercent.setText(Integer.toString(checkMatches.matchPercentage(accessUsers.getCurrentUser().getUserProfile().getAnswers(),navigationUser.getUserProfile().getAnswers())) + "%");
             }
             else
         {
@@ -232,6 +243,8 @@ public class NavigationFragment extends Fragment {
         navigationName.setVisibility(View.INVISIBLE);
         navigationYes.setVisibility(View.INVISIBLE);
         navigationNo.setVisibility(View.INVISIBLE);
+        matchPercent.setVisibility(View.INVISIBLE);
+        matchPercentText.setVisibility(View.INVISIBLE);
         navigationCardView.setVisibility(View.INVISIBLE);
         message1.setVisibility(View.VISIBLE);
         message2.setVisibility(View.VISIBLE);
@@ -243,6 +256,8 @@ public class NavigationFragment extends Fragment {
         navigationName.setVisibility(View.VISIBLE);
         navigationYes.setVisibility(View.VISIBLE);
         navigationNo.setVisibility(View.VISIBLE);
+        matchPercent.setVisibility(View.VISIBLE);
+        matchPercentText.setVisibility(View.VISIBLE);
         navigationCardView.setVisibility(View.VISIBLE);
         message1.setVisibility(View.INVISIBLE);
         message2.setVisibility(View.INVISIBLE);
