@@ -199,6 +199,18 @@ public class DataAccessStub implements DataAccess {
         matches.add(new Match(currentUser, getSpecificUser(match)));
     }
 
+    public void deleteMatch(String match) {
+        ArrayList<Match> tempMatchList = new ArrayList<>();
+
+        for(int i = 0; i < matches.size(); i++) {
+            if(!(matches.get(i).getCurrentUser().equals(currentUser.getUserEmail()) && matches.get(i).getMatchedUser().getUserEmail().equals(match))) {
+                tempMatchList.add(matches.get(i));
+            }
+        }
+
+        matches = tempMatchList;
+    }
+
     public boolean checkMatch(String match) {
         boolean matchExists = false;
         Match current;

@@ -2,11 +2,15 @@ package comp3350.losr.tests.integration;
 
 import junit.framework.TestCase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
+import comp3350.losr.business.AccessMatches;
+import comp3350.losr.business.AccessReports;
 import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
 
 public class BusinessPersistenceSeamTest extends TestCase {
@@ -220,6 +224,123 @@ public class BusinessPersistenceSeamTest extends TestCase {
 
     public void testAccessMatches() {
 
+        DatabaseService.closeDataAccess();
+
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+
+        AccessUsers au = new AccessUsers();
+        AccessMatches am = new AccessMatches();
+        List<Match> matchList;
+
+
+        System.out.println("\nStarting Integration of testAccessMatches to persistence");
+
+        au.tryLogin("mbathie@gmail.com", "password");
+        assertEquals("mbathie@gmail.com", au.getCurrentUser().getUserEmail());
+
+        matchList = am.getMatches();
+
+        assertEquals(1, matchList.size());
+        assertEquals(matchList.get(0).getCurrentUser().getUserEmail(), "mbathie@gmail.com");
+        assertEquals(matchList.get(0).getMatchedUser().getUserEmail(), "laurastubbs@gmail.com");
+
+        am.newMatch("amykowall@gmail.com");
+
+        matchList = am.getMatches();
+
+        assertEquals(2, matchList.size());
+
+        am.deleteMatch("amykowall@gmail.com");
+
+        System.out.println("\nFinished Integration of testAccessMatches to persistence");
     }
 
+    public void testAccessMatchesBlind() {
+        DatabaseService.closeDataAccess();
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+        System.out.println("\nStarting Integration of testAccessMatchesBlind to persistence");
+
+        AccessUsers au = new AccessUsers();
+        AccessMatches am = new AccessMatches();
+        List<Match> matchList;
+
+
+        au.tryLogin("marypoppins@gmail.com", "password");
+        assertEquals("marypoppins@gmail.com", au.getCurrentUser().getUserEmail());
+        User temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.TRUE);
+        au.updateUser(temp);
+        am.newMatch("mbathie@gmail.com");
+
+        au.tryLogin("mbathie@gmail.com", "password");
+        assertEquals("mbathie@gmail.com", au.getCurrentUser().getUserEmail());
+        temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.TRUE);
+        au.updateUser(temp);
+
+        am.newMatch("marypoppins@gmail.com");
+
+        assertEquals(1, am.getMatches().size());
+        assertEquals("marypoppins@gmail.com", am.getMatches().get(0).getMatchedUser().getUserEmail());
+
+        am.deleteMatch("marypoppins@gmail.com");
+
+        temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.FALSE);
+        au.updateUser(temp);
+
+        au.tryLogin("marypoppins@gmail.com", "password");
+        assertEquals("marypoppins@gmail.com", au.getCurrentUser().getUserEmail());
+
+        temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.FALSE);
+        au.updateUser(temp);
+
+
+        System.out.println("\nFinished Integration of testAccessMatchesBlind to persistence");
+
+    }
+
+    public void testAccessReports() {
+        DatabaseService.closeDataAccess();
+
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+        System.out.println("\nStarting Integration of testAccessReports to persistence");
+
+        AccessUsers au = new AccessUsers();
+        AccessMatches am = new AccessMatches();
+        AccessReports ar = new AccessReports();
+        List<Match> matchList;
+
+        au.tryLogin("mbathie@gmail.com", "password");
+        assertEquals("mbathie@gmail.com", au.getCurrentUser().getUserEmail());
+
+        matchList = am.getMatches();
+
+        assertEquals(1, matchList.size());
+        assertEquals(matchList.get(0).getCurrentUser().getUserEmail(), "mbathie@gmail.com");
+        assertEquals(matchList.get(0).getMatchedUser().getUserEmail(), "laurastubbs@gmail.com");
+
+        ar.report("laurastubbs@gmail.com");
+
+        assertEquals(1, ar.getReports().size());
+        assertEquals(0, am.getMatches().size());
+
+        ar.clearReports();
+
+        assertEquals(0, ar.getReports().size());
+        assertEquals(1, am.getMatches().size());
+
+        assertEquals(am.getMatches().get(0).getCurrentUser().getUserEmail(), "mbathie@gmail.com");
+        assertEquals(am.getMatches().get(0).getMatchedUser().getUserEmail(), "laurastubbs@gmail.com");
+
+
+        System.out.println("\nFinished Integration of testAccessReports to persistence");
+    }
 }

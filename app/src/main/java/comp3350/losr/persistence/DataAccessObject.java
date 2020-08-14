@@ -298,6 +298,15 @@ public class DataAccessObject implements DataAccess {
 
     }
 
+    public void deleteMatch(String email) {
+        try {
+            cmdString = "Delete from MATCH where USER= '" + currentUser.getUserEmail() + "' AND USERMATCH = '" + email + "'";
+            s1.executeUpdate(cmdString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean checkMatch(String match) {
         boolean matchExists = false;
 
