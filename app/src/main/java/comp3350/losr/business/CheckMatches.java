@@ -36,8 +36,8 @@ public class CheckMatches {
 
     // compares genders and gender preference to ensure compatibility
     public static boolean areGenderCompatible(User curr, User match) {
-        return curr.getUserProfile().getGenderPreference() == match.getUserProfile().getGender() &&
-                curr.getUserProfile().getGender() == match.getUserProfile().getGenderPreference();
+        return curr.getUserGenderPreference() == match.getUserGender() &&
+                curr.getUserGender() == match.getUserGenderPreference();
     }
 
 }

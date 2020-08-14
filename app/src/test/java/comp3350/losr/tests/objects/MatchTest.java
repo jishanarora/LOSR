@@ -22,9 +22,9 @@ public class MatchTest extends TestCase {
     public void testAverage() {
         User user1 = new User("firstName", "lastName", "email@email.com", "password");
         User user2 = new User("firstName1", "lastName1", "email1@email.com", "password1");
-        user1.updateAnswer(Boolean.TRUE, 2, 2);
-        user1.updateAnswer(Boolean.TRUE, 2, 3);
-        user2.updateAnswer(Boolean.TRUE, 2, 2);
+        user1.setUserAnswer(Boolean.TRUE, 2, 2);
+        user1.setUserAnswer(Boolean.TRUE, 2, 3);
+        user2.setUserAnswer(Boolean.TRUE, 2, 2);
         user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25, false);
         user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22, false   );
 
@@ -53,7 +53,7 @@ public class MatchTest extends TestCase {
         User user1 = new User("firstName", "lastName", "email@email.com", "password");
         User user2 = new User("firstName1", "lastName1", "email1@email.com", "password1");
 
-        user1.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
+        user1.setUserAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
 
         user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25, false);
         user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22, false);
@@ -63,20 +63,6 @@ public class MatchTest extends TestCase {
         assertEquals(user1, match.getCurrentUser());
         assertEquals(user2, match.getMatchedUser());
         assertEquals(0, match.getMatchPercent());
-    }
-
-    public void testBlindMatch() {
-        User user1 = new User("firstName", "lastName", "email@email.com", "password");
-        User user2 = new User("firstName1", "lastName1", "email1@email.com", "password1");
-
-        user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25, true);
-        user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22, false);
-
-        Match match = new Match(user1, user2);
-
-        assertEquals(user1, match.getCurrentUser());
-        assertEquals(user2, match.getMatchedUser());
-        assertEquals(100, match.getMatchPercent());
     }
 
 }
