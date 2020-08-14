@@ -62,7 +62,7 @@ public class User {
         return userPassword;
     }
 
-//    public Profile getUserProfile() {
+//    public Profile getUserProfile {
 //        return userProfile;
 //    }
 

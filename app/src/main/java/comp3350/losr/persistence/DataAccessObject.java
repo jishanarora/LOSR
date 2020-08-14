@@ -222,7 +222,7 @@ public class DataAccessObject implements DataAccess {
 
                 newUser = getUser(rs1);
 
-                if (newUser.getUserGenderPreference().toString().equals(currentUser.userGenderToString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
+                if (newUser.userGenderPrefToString().equals(currentUser.userGenderToString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
                     users.add(newUser);
                 }
 

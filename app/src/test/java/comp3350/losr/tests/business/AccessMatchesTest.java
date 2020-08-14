@@ -22,7 +22,7 @@ public class AccessMatchesTest extends TestCase {
 
     public void testGetMatches() {
         System.out.println("Starting testGetMatches");
-
+        int a = am.getMatches().size();
         assertEquals(1, am.getMatches().size()); //these are sorted by best compatibility with the fake current user
         assertEquals("laurastubbs@gmail.com", am.getMatches().get(0).getMatchedUser().getUserEmail());
 
