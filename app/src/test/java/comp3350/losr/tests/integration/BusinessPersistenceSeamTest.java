@@ -262,6 +262,54 @@ public class BusinessPersistenceSeamTest extends TestCase
         System.out.println("\nFinished Integration of testAccessMatches to persistence");
     }
 
+    public void testAccessMatchesBlind() {
+        DatabaseService.closeDataAccess();
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+        System.out.println("\nStarting Integration of testAccessMatchesBlind to persistence");
+
+        AccessUsers au = new AccessUsers();
+        AccessMatches am = new AccessMatches();
+        List<Match> matchList;
+
+
+        au.tryLogin("marypoppins@gmail.com", "password");
+        assertEquals("marypoppins@gmail.com", au.getCurrentUser().getUserEmail());
+        User temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.TRUE);
+        au.updateUser(temp);
+        am.newMatch("mbathie@gmail.com");
+
+        au.tryLogin("mbathie@gmail.com", "password");
+        assertEquals("mbathie@gmail.com", au.getCurrentUser().getUserEmail());
+        temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.TRUE);
+        au.updateUser(temp);
+
+        am.newMatch("marypoppins@gmail.com");
+
+        assertEquals(1, am.getMatches().size());
+        assertEquals("marypoppins@gmail.com", am.getMatches().get(0).getMatchedUser().getUserEmail());
+
+        am.deleteMatch("marypoppins@gmail.com");
+
+        temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.FALSE);
+        au.updateUser(temp);
+
+        au.tryLogin("marypoppins@gmail.com", "password");
+        assertEquals("marypoppins@gmail.com", au.getCurrentUser().getUserEmail());
+
+        temp = au.getCurrentUser();
+        temp.setUserMode(Boolean.FALSE);
+        au.updateUser(temp);
+
+
+        System.out.println("\nFinished Integration of testAccessMatchesBlind to persistence");
+
+    }
+
     public void testAccessReports() {
         DatabaseService.closeDataAccess();
 
@@ -300,5 +348,4 @@ public class BusinessPersistenceSeamTest extends TestCase
 
         System.out.println("\nFinished Integration of testAccessReports to persistence");
     }
-
 }
