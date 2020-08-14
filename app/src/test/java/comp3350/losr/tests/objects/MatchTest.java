@@ -26,7 +26,7 @@ public class MatchTest extends TestCase {
         user1.setUserAnswer(Boolean.TRUE, 2, 3);
         user2.setUserAnswer(Boolean.TRUE, 2, 2);
         user1.setUserProfile("bio here", User.user_gender.Female, User.user_gender.Male, 1999, 1, 25, false);
-        user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22, false   );
+        user2.setUserProfile("bio here", User.user_gender.Male, User.user_gender.Male, 1998, 2, 22, false);
 
         Match match = new Match(user1, user2);
 

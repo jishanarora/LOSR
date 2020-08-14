@@ -11,10 +11,8 @@ import comp3350.losr.tests.acceptance.QuestionsAcceptanceTests;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({AccountAcceptanceTests.class, ProfileAcceptanceTests.class, MatchAcceptanceTests.class, BlindModeAcceptanceTests.class, QuestionsAcceptanceTests.class})
-public class RunAcceptanceTests
-{
-    public RunAcceptanceTests()
-    {
+public class RunAcceptanceTests {
+    public RunAcceptanceTests() {
         System.out.println("Acceptance tests");
     }
 }

@@ -1,6 +1,7 @@
 package comp3350.losr.tests.integration;
 
 import junit.framework.TestCase;
+
 import java.util.List;
 
 import comp3350.losr.application.DatabaseService;
@@ -8,16 +9,13 @@ import comp3350.losr.application.Main;
 import comp3350.losr.business.AccessUsers;
 import comp3350.losr.objects.User;
 
-public class BusinessPersistenceSeamTest extends TestCase
-{
+public class BusinessPersistenceSeamTest extends TestCase {
 
-    public BusinessPersistenceSeamTest(String arg0)
-    {
+    public BusinessPersistenceSeamTest(String arg0) {
         super(arg0);
     }
 
-    public void testAccessUsers1()
-    {
+    public void testAccessUsers1() {
         AccessUsers au;
         User user;
         String result;
@@ -75,8 +73,7 @@ public class BusinessPersistenceSeamTest extends TestCase
         System.out.println("Finished Integration test of AccessUsers1 to persistence");
     }
 
-    public void testAccessUsers2()
-    {
+    public void testAccessUsers2() {
         AccessUsers au;
         User user, temp;
         String result;
@@ -152,8 +149,7 @@ public class BusinessPersistenceSeamTest extends TestCase
         System.out.println("Finished Integration test of AccessUsers2 to persistence");
     }
 
-    public void testAccessUsers3()
-    {
+    public void testAccessUsers3() {
         AccessUsers au;
         User user;
         String result;

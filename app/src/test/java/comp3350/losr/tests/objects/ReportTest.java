@@ -8,7 +8,7 @@ public class ReportTest extends TestCase {
 
     public void testCreate() {
         System.out.println("Starting testCreate");
-        assertNotNull(new Report("",""));
+        assertNotNull(new Report("", ""));
         System.out.println("testCreate complete");
     }
 

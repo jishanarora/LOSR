@@ -208,7 +208,7 @@ public class DataAccessObject implements DataAccess {
 
     public List<User> getGenderedUsers() {
         List<User> users = new ArrayList<>();
-        User newUser ;
+        User newUser;
 
         try {
             cmdString = "SELECT * FROM USERS WHERE gender = " + "'" + currentUser.userGenderPrefToString() + "'";
@@ -233,8 +233,7 @@ public class DataAccessObject implements DataAccess {
         return users;
     }
 
-    public void report(String reportee)
-    {
+    public void report(String reportee) {
         String values;
 
         try {
@@ -250,8 +249,7 @@ public class DataAccessObject implements DataAccess {
 
     }
 
-    public List<String> getReports()
-    {
+    public List<String> getReports() {
         List<String> reports = new ArrayList<>();
 
         String reportee;
@@ -304,7 +302,7 @@ public class DataAccessObject implements DataAccess {
         boolean matchExists = false;
 
         try {
-            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + match + "' AND USERMATCH = " + "'" + currentUser.getUserEmail() +"'";
+            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + match + "' AND USERMATCH = " + "'" + currentUser.getUserEmail() + "'";
             rs1 = s1.executeQuery(cmdString);
         } catch (Exception e) {
             e.printStackTrace();
@@ -325,7 +323,7 @@ public class DataAccessObject implements DataAccess {
         boolean matchExists = false;
 
         try {
-            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + currentUser.getUserEmail() + "' AND USERMATCH = " + "'" + match +"'";
+            cmdString = "SELECT * FROM MATCH WHERE USER = " + "'" + currentUser.getUserEmail() + "' AND USERMATCH = " + "'" + match + "'";
             rs1 = s1.executeQuery(cmdString);
         } catch (Exception e) {
             e.printStackTrace();
@@ -343,7 +341,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     private User getUser(ResultSet rs) {
-        User u = new User("","","","");
+        User u = new User("", "", "", "");
 
         String email, password, firstName, lastName, bio;
         User.user_gender genderEnum, genderPEnum;
