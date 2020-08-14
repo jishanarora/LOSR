@@ -40,20 +40,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/messageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:focusable="true"
-        android:foregroundGravity="center_vertical|center"
-        android:src="@mipmap/message"
-        app:backgroundTint="#E91E63"
-        app:maxImageSize="40dp" />
-
     <TextView
         android:id="@+id/matchPercent"
         android:layout_width="wrap_content"
