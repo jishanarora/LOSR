@@ -221,7 +221,8 @@ public class DataAccessObject implements DataAccess {
             while (rs1.next()) {
 
                 newUser = getUser(rs1);
-
+                System.out.println(newUser.userGenderPrefToString());
+                System.out.println(currentUser.userGenderToString());
                 if (newUser.userGenderPrefToString().equals(currentUser.userGenderToString()) && !newUser.getUserEmail().equals(currentUser.getUserEmail())) {
                     users.add(newUser);
                 }
@@ -380,20 +381,20 @@ public class DataAccessObject implements DataAccess {
             picturePath = rs.getString("picture");
 
             switch (gender) {
-                case "male":
+                case "Male":
                     genderEnum = User.user_gender.Male;
                     break;
-                case "female":
+                case "Female":
                     genderEnum = User.user_gender.Female;
                     break;
                 default:
                     genderEnum = User.user_gender.Losr;
             }
             switch (genderP) {
-                case "male":
+                case "Male":
                     genderPEnum = User.user_gender.Male;
                     break;
-                case "female":
+                case "Female":
                     genderPEnum = User.user_gender.Female;
                     break;
                 default:

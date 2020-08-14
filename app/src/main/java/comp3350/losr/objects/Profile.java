@@ -69,11 +69,11 @@ class Profile {
         String result;
 
         if (gender == User.user_gender.Female) {
-            result = "female";
+            result = "Female";
         } else if (gender == User.user_gender.Male) {
-            result = "male";
+            result = "Male";
         } else {
-            result = "losr";
+            result = "Losr";
         }
 
         return result;
@@ -83,11 +83,11 @@ class Profile {
         String result;
 
         if (genderPreference == User.user_gender.Female) {
-            result = "female";
+            result = "Female";
         } else if (genderPreference == User.user_gender.Male) {
-            result = "male";
+            result = "Male";
         } else {
-            result = "losr";
+            result = "Losr";
         }
 
         return result;
