@@ -1,11 +1,15 @@
 package comp3350.losr.tests.integration;
 
 import junit.framework.TestCase;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.losr.application.DatabaseService;
 import comp3350.losr.application.Main;
+import comp3350.losr.business.AccessMatches;
 import comp3350.losr.business.AccessUsers;
+import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
 
 public class BusinessPersistenceSeamTest extends TestCase
@@ -224,6 +228,37 @@ public class BusinessPersistenceSeamTest extends TestCase
 
     public void testAccessMatches() {
 
+        DatabaseService.closeDataAccess();
+
+
+        DatabaseService.createDataAccess(Main.dbName);
+
+
+        AccessUsers au = new AccessUsers();
+        AccessMatches am = new AccessMatches();
+        List<Match> matchList;
+
+
+        System.out.println("\nStarting Integration of testAccessMatches to persistence");
+
+        au.tryLogin("mbathie@gmail.com", "password");
+        assertEquals("mbathie@gmail.com", au.getCurrentUser().getUserEmail());
+
+        matchList = am.getMatches();
+
+        assertEquals(1, matchList.size());
+        assertEquals(matchList.get(0).getCurrentUser().getUserEmail(), "mbathie@gmail.com");
+        assertEquals(matchList.get(0).getMatchedUser().getUserEmail(), "laurastubbs@gmail.com");
+
+        am.newMatch("amykowall@gmail.com");
+
+        matchList = am.getMatches();
+
+        assertEquals(2, matchList.size());
+
+
+
+        System.out.println("\nFinished Integration of testAccessMatches to persistence");
     }
 
 }
