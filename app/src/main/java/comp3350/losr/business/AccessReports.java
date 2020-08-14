@@ -23,4 +23,6 @@ public class AccessReports {
         return dataAccess.getReports();
     }
 
+    public void clearReports() { dataAccess.clearReports();}
+
 }

@@ -28,14 +28,19 @@ public class AccessMatches {
         List<User> potentialMatches = userAccess.getGenderedUsers();
         List<User> potentialMatchesDeleted = new ArrayList<User>();
         User currentUser = dataAccess.getCurrentUser();
-        Boolean isBlindMode = currentUser.getUserMode();
+        Boolean isBlindMode = currentUser.getUserProfile().getBlindMode();
+        AccessReports ar = new AccessReports();
+        List<String> reports = ar.getReports();
 
         float matchCheck;
 
         // create a DB Method for getting Blind Mode Users
 
         for (User user : potentialMatches) {
-            if (user.getUserMode() != isBlindMode) {
+            if (user.getUserProfile().getBlindMode() != isBlindMode) {
+                potentialMatchesDeleted.add(user);
+            }
+            if(reports.contains(user.getUserEmail())) {
                 potentialMatchesDeleted.add(user);
             }
         }
@@ -43,23 +48,12 @@ public class AccessMatches {
             potentialMatches.remove(deleteUser);
         }
         for (int i = 0; i < potentialMatches.size(); i++) {
-            if (potentialMatches.get(i).getUserMode() != isBlindMode){
-                potentialMatches.remove(i);
-                continue;
-            }
 
-            matchCheck = matchPercentage(currentUser.getUserAnswers(), potentialMatches.get(i).getUserAnswers());
+            matchCheck = matchPercentage(currentUser.getAnswers(), potentialMatches.get(i).getAnswers());
 
-            if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail())) {
+            if (checkMatchExists(potentialMatches.get(i).getUserEmail()) && checkMatch(potentialMatches.get(i).getUserEmail()) && matchCheck > 0) {
                 allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
             }
-/*
-            if (matchCheck > 0) {
-                allMatches.add(position(allMatches, matchCheck), new Match(currentUser, potentialMatches.get(i)));
-
-            }
-
- */
         }
 
         return allMatches;

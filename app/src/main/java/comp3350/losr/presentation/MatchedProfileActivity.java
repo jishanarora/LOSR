@@ -4,22 +4,30 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.losr.R;
 import comp3350.losr.business.AccessMatches;
+import comp3350.losr.business.AccessReports;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.Question;
 import comp3350.losr.objects.User;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MatchedProfileActivity extends AppCompatActivity {
 
@@ -40,6 +48,7 @@ public class MatchedProfileActivity extends AppCompatActivity {
     private TextView weight3;
     private TextView weight4;
     private TextView weight5;
+    private Button report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +75,14 @@ public class MatchedProfileActivity extends AppCompatActivity {
 
         AccessMatches matchesAccess = new AccessMatches();
         ArrayList<Match> matchList = (ArrayList<Match>) matchesAccess.getMatches();
-        User matchedProfile = matchList.get(value).getMatchedUser();
-        final ArrayList<Question> userAnswers = matchedProfile.getUserAnswers();
+        final User matchedProfile = matchList.get(value).getMatchedUser();
+        final ArrayList<Question> userAnswers = matchedProfile.getUserProfile().getAnswers();
 
         profileImage = findViewById(R.id.matched_profile_image);
 
-        File imgFile = new File(matchedProfile.getUserPicture()); //this will be grabbed from database
+        File imgFile = new File(matchedProfile.getUserProfile().getProfilePicture()); //this will be grabbed from database
 
-        if(!matchedProfile.getUserMode()) {
+        if(!matchedProfile.getUserProfile().getBlindMode()) {
             if (imgFile.exists()) {
                 try {
                     FileInputStream fis = new FileInputStream(imgFile);
@@ -86,6 +95,17 @@ public class MatchedProfileActivity extends AppCompatActivity {
                 profileImage.setImageResource(R.mipmap.profile);
             }
         }
+
+        final AccessReports aReport = new AccessReports();
+
+        report = findViewById(R.id.report_button);
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aReport.report(matchedProfile.getUserEmail());
+            }
+        });
+
         
         name = findViewById(R.id.matched_profile_name);
         name.setText(matchedProfile.getUserFirstName() + " " + matchedProfile.getUserLastName());
@@ -94,43 +114,43 @@ public class MatchedProfileActivity extends AppCompatActivity {
         email.setText(matchedProfile.getUserEmail());
 
         gender = findViewById(R.id.matched_profile_gender);
-        gender.setText(matchedProfile.getUserGender().toString());
+        gender.setText(matchedProfile.getUserProfile().getGender().toString());
 
         genderPreference = findViewById(R.id.matched_profile_gender_preference);
-        genderPreference.setText(matchedProfile.getUserGenderPreference().toString());
+        genderPreference.setText(matchedProfile.getUserProfile().getGenderPreference().toString());
 
         bio = findViewById(R.id.matched_profile_bio);
-        bio.setText(matchedProfile.getUserBio());
+        bio.setText(matchedProfile.getUserProfile().getBio());
 
         dob = findViewById(R.id.matched_profile_date_of_birth);
-        dob.setText(matchedProfile.getUserDateOfBirth());
+        dob.setText(matchedProfile.getUserProfile().dateOfBirth());
 
         answer1 = findViewById(R.id.matched_profile_answer1);
-        if (userAnswers.get(0).getAnswer() == true) {
+        if (userAnswers.get(0).getAnswer()) {
             answer1.setText("Yes");
         } else {
             answer1.setText("No");
         }
         answer2 = findViewById(R.id.matched_profile_answer2);
-        if (userAnswers.get(1).getAnswer() == true) {
+        if (userAnswers.get(1).getAnswer()) {
             answer2.setText("Yes");
         } else {
             answer2.setText("No");
         }
         answer3 = findViewById(R.id.matched_profile_answer3);
-        if (userAnswers.get(2).getAnswer() == true) {
+        if (userAnswers.get(2).getAnswer()) {
             answer3.setText("Yes");
         } else {
             answer3.setText("No");
         }
         answer4 = findViewById(R.id.matched_profile_answer4);
-        if (userAnswers.get(3).getAnswer() == true) {
+        if (userAnswers.get(3).getAnswer()) {
             answer4.setText("Yes");
         } else {
             answer4.setText("No");
         }
         answer5 = findViewById(R.id.matched_profile_answer5);
-        if (userAnswers.get(4).getAnswer() == true) {
+        if (userAnswers.get(4).getAnswer()) {
             answer5.setText("Yes");
         } else {
             answer5.setText("No");

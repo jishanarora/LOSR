@@ -27,6 +27,8 @@ public interface DataAccess {
 
     List<String> getReports();
 
+    void clearReports();
+
     void newMatch(String match);
 
     boolean checkMatch(String match);

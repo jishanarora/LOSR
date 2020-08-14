@@ -222,4 +222,8 @@ public class BusinessPersistenceSeamTest extends TestCase
         System.out.println("Finished Integration test of AccessUsers3 to persistence");
     }
 
+    public void testAccessMatches() {
+
+    }
+
 }

@@ -188,9 +188,8 @@ public class NavigationFragment extends Fragment {
             mode.setChecked(false);
     }
 
-    private void iterateProfiles(int position)
-    {       if(position<allOppositeUsers.size())
-    {
+    private void iterateProfiles(int position) {
+        if(position<allOppositeUsers.size()) {
             User navigationUser= allOppositeUsers.get(position);
             oppositeProfileEmail=navigationUser.getUserEmail();
 
