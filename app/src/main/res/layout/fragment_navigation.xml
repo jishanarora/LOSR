@@ -1,9 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/navigation_fragment"
     tools:context="comp3350.losr.presentation.NavigationFragment">
 
     <Switch
@@ -88,11 +88,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="No more profiles are avaibale near your location!"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="25dp"
-        android:visibility="invisible"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,9 +101,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Check again in some time"
-        android:visibility="invisible"
         android:textSize="25dp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navigation_message1" />
@@ -128,9 +128,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
         android:text="TextView"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/navigation_match_percent_text"
         app:layout_constraintTop_toBottomOf="@+id/navigation_name" />
 

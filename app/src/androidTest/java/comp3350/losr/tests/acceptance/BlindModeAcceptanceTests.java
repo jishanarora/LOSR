@@ -69,7 +69,7 @@ public class BlindModeAcceptanceTests {
         }
 
         ViewInteraction switch_ = onView(allOf(withId(R.id.switch1), withText("Blind Mode"), childAtPosition(withParent(withId(R.id.view_pager)),
-                                0), isDisplayed()));
+                0), isDisplayed()));
         switch_.perform(click());
         onView(withId(R.id.navigation_message1)).check(matches(withText("No more profiles are avaibale near your location!")));
 
@@ -159,7 +159,6 @@ public class BlindModeAcceptanceTests {
         onView(withId(R.id.profile_bio)).perform(swipeUp(), swipeUp(), swipeUp(), swipeUp(),
                 swipeUp(), swipeUp(), swipeUp(), swipeUp());
         onView(withId(R.id.sign_out_button)).perform(click());
-
 
 
         try {

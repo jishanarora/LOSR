@@ -9,17 +9,14 @@ import comp3350.losr.persistence.DataAccess;
 import comp3350.losr.persistence.DataAccessObject;
 import comp3350.losr.tests.persistence.DataAccessTest;
 
-public class DataAccessHSQLDBTest extends TestCase
-{
+public class DataAccessHSQLDBTest extends TestCase {
     private static String dbname = Main.dbName;
 
-    public DataAccessHSQLDBTest(String arg0)
-    {
+    public DataAccessHSQLDBTest(String arg0) {
         super(arg0);
     }
 
-    public void testDataAccess()
-    {
+    public void testDataAccess() {
         DataAccess dataAccess;
 
         DatabaseService.closeDataAccess();

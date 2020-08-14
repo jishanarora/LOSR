@@ -33,12 +33,12 @@ import comp3350.losr.objects.User;
  */
 public class NavigationFragment extends Fragment {
 
-   private ImageView navigationProfileImage;
-   private CardView navigationCardView;
-   private TextView navigationName;
-   private TextView matchPercent;
+    private ImageView navigationProfileImage;
+    private CardView navigationCardView;
+    private TextView navigationName;
+    private TextView matchPercent;
     private TextView matchPercentText;
-   private Button navigationYes;
+    private Button navigationYes;
     private Button navigationNo;
     AccessUsers accessUsers;
     AccessMatches accessMatches;
@@ -52,7 +52,6 @@ public class NavigationFragment extends Fragment {
     View rootView;
     private MessageFragment messageFragment;
     CheckMatches checkMatches;
-
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,23 +104,22 @@ public class NavigationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
-        navigationProfileImage= rootView.findViewById(R.id.navigation_image);
-        navigationName= rootView.findViewById(R.id.navigation_name);
-        navigationYes= rootView.findViewById(R.id.navigation_Yes);
-        navigationNo= rootView.findViewById(R.id.navigation_no);
-        message1= rootView.findViewById(R.id.navigation_message1);
-        message2= rootView.findViewById(R.id.navigation_message2);
-        navigationCardView= rootView.findViewById(R.id.card_view_for_image_navigation);
-        matchPercent=rootView.findViewById(R.id.navigation_match_percent);
-        matchPercentText=rootView.findViewById(R.id.navigation_match_percent_text);
+        rootView = inflater.inflate(R.layout.fragment_navigation, container, false);
+        navigationProfileImage = rootView.findViewById(R.id.navigation_image);
+        navigationName = rootView.findViewById(R.id.navigation_name);
+        navigationYes = rootView.findViewById(R.id.navigation_Yes);
+        navigationNo = rootView.findViewById(R.id.navigation_no);
+        message1 = rootView.findViewById(R.id.navigation_message1);
+        message2 = rootView.findViewById(R.id.navigation_message2);
+        navigationCardView = rootView.findViewById(R.id.card_view_for_image_navigation);
+        matchPercent = rootView.findViewById(R.id.navigation_match_percent);
+        matchPercentText = rootView.findViewById(R.id.navigation_match_percent_text);
         mode = (Switch) rootView.findViewById(R.id.switch1);
-        List<Fragment> currentFragments=getActivity().getSupportFragmentManager().getFragments();
-         messageFragment=null;
-        for(int i=0;i<currentFragments.size();i++)
-        {
-            if(currentFragments.get(i) instanceof MessageFragment)
-                messageFragment=(MessageFragment)currentFragments.get(i);
+        List<Fragment> currentFragments = getActivity().getSupportFragmentManager().getFragments();
+        messageFragment = null;
+        for (int i = 0; i < currentFragments.size(); i++) {
+            if (currentFragments.get(i) instanceof MessageFragment)
+                messageFragment = (MessageFragment) currentFragments.get(i);
         }
         navigationYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,19 +141,18 @@ public class NavigationFragment extends Fragment {
         mode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<Fragment> currentFragments=getActivity().getSupportFragmentManager().getFragments();
-                MessageFragment messageFragment=null;
-                for(int i=0;i<currentFragments.size();i++)
-                {
-                    if(currentFragments.get(i) instanceof MessageFragment)
-                        messageFragment=(MessageFragment)currentFragments.get(i);
+                List<Fragment> currentFragments = getActivity().getSupportFragmentManager().getFragments();
+                MessageFragment messageFragment = null;
+                for (int i = 0; i < currentFragments.size(); i++) {
+                    if (currentFragments.get(i) instanceof MessageFragment)
+                        messageFragment = (MessageFragment) currentFragments.get(i);
                 }
-                if (mode.isChecked()){
+                if (mode.isChecked()) {
                     accessUsers.getCurrentUser().setUserMode(true);
                     accessUsers.updateUser(accessUsers.getCurrentUser());
                     setupFragment();
                     messageFragment.refreshMessageFragment();
-                }else{
+                } else {
                     accessUsers.getCurrentUser().setUserMode(false);
                     accessUsers.updateUser(accessUsers.getCurrentUser());
                     setupFragment();
@@ -168,16 +165,15 @@ public class NavigationFragment extends Fragment {
         return rootView;
     }
 
-    private void setupFragment()
-    {
-        accessUsers= new AccessUsers();
-        accessMatches= new AccessMatches();
-        allOppositeUsers= new ArrayList<User>();
-        allOppositeUsers=accessUsers.getGenderedUsers();
-        allOppositeUsersDeleted=new ArrayList<User>();
-      
+    private void setupFragment() {
+        accessUsers = new AccessUsers();
+        accessMatches = new AccessMatches();
+        allOppositeUsers = new ArrayList<User>();
+        allOppositeUsers = accessUsers.getGenderedUsers();
+        allOppositeUsersDeleted = new ArrayList<User>();
+
         Boolean isBlindMode = accessUsers.getCurrentUser().getUserMode();
-        checkMatches=new CheckMatches();
+        checkMatches = new CheckMatches();
 
         for (User user : allOppositeUsers) {
             if (user.getUserMode() != isBlindMode) {
@@ -187,26 +183,25 @@ public class NavigationFragment extends Fragment {
         for (User deleteUser : allOppositeUsersDeleted) {
             allOppositeUsers.remove(deleteUser);
         }
-        index=0;
+        index = 0;
         makeMessageInvisible();
         iterateProfiles(index);
 
 
-        if(accessUsers.getCurrentUser().getUserMode())
+        if (accessUsers.getCurrentUser().getUserMode())
             mode.setChecked(true);
         else
             mode.setChecked(false);
     }
 
     private void iterateProfiles(int position) {
-        if(position<allOppositeUsers.size()) {
-            User navigationUser= allOppositeUsers.get(position);
-            oppositeProfileEmail=navigationUser.getUserEmail();
+        if (position < allOppositeUsers.size()) {
+            User navigationUser = allOppositeUsers.get(position);
+            oppositeProfileEmail = navigationUser.getUserEmail();
 
             navigationProfileImage.setImageResource(R.mipmap.profile);
-            if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()))
-            {
-                if(!accessUsers.getCurrentUser().getUserMode()) {
+            if (!accessMatches.checkMatchExists(navigationUser.getUserEmail())) {
+                if (!accessUsers.getCurrentUser().getUserMode()) {
                     File imgFile = new File(navigationUser.getUserPicture());
                     if (imgFile.exists()) {
                         try {
@@ -220,25 +215,20 @@ public class NavigationFragment extends Fragment {
                         navigationProfileImage.setImageResource(R.mipmap.profile);
                     }
                 }
-                navigationName.setText(navigationUser.getUserFirstName()+ " "+ navigationUser.getUserLastName());
-                matchPercent.setText(Integer.toString(checkMatches.matchPercentage(accessUsers.getCurrentUser().getUserAnswers(),navigationUser.getUserAnswers())) + "%");
+                navigationName.setText(navigationUser.getUserFirstName() + " " + navigationUser.getUserLastName());
+                matchPercent.setText(Integer.toString(checkMatches.matchPercentage(accessUsers.getCurrentUser().getUserAnswers(), navigationUser.getUserAnswers())) + "%");
+            } else {
+                iterateProfiles(++position);
             }
-            else
-        {
-            iterateProfiles(++position);
-        }
-            if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()) && position==allOppositeUsers.size())
-            {
+            if (!accessMatches.checkMatchExists(navigationUser.getUserEmail()) && position == allOppositeUsers.size()) {
                 makeMessageVissible();
             }
+        } else {
+            makeMessageVissible();
         }
-        else {
-         makeMessageVissible();
-    }
     }
 
-    private void makeMessageVissible()
-    {
+    private void makeMessageVissible() {
         navigationProfileImage.setVisibility(View.INVISIBLE);
         navigationName.setVisibility(View.INVISIBLE);
         navigationYes.setVisibility(View.INVISIBLE);
@@ -250,8 +240,7 @@ public class NavigationFragment extends Fragment {
         message2.setVisibility(View.VISIBLE);
     }
 
-    private void makeMessageInvisible()
-    {
+    private void makeMessageInvisible() {
         navigationProfileImage.setVisibility(View.VISIBLE);
         navigationName.setVisibility(View.VISIBLE);
         navigationYes.setVisibility(View.VISIBLE);

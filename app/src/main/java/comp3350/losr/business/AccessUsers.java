@@ -58,5 +58,7 @@ public class AccessUsers {
         return dataAccess.tryLogin(email, password);
     }
 
-    public void changeBlindMode(boolean blindMode) { dataAccess.changeBlindMode(blindMode); }
+    public void changeBlindMode(boolean blindMode) {
+        dataAccess.changeBlindMode(blindMode);
+    }
 }

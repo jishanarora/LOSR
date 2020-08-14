@@ -172,10 +172,10 @@ public class DataAccessStub implements DataAccess {
         String currentUserEmail = currentUser.getUserEmail();
         String userCheck;
 
-        for(int i = 0; i < reports.size(); i++) {
+        for (int i = 0; i < reports.size(); i++) {
             userCheck = reports.get(i).getReporter();
 
-            if(userCheck.equals(currentUserEmail)) {
+            if (userCheck.equals(currentUserEmail)) {
                 currentUserReports.add(reports.get(i).getReportee());
             }
         }
@@ -183,11 +183,11 @@ public class DataAccessStub implements DataAccess {
         return currentUserReports;
     }
 
-    public void clearReports()  {
+    public void clearReports() {
         ArrayList<Report> tempReport = new ArrayList<>();
 
-        for(int i = 0; i < reports.size(); i ++) {
-            if(!reports.get(i).getReporter().equals(currentUser.getUserEmail())) {
+        for (int i = 0; i < reports.size(); i++) {
+            if (!reports.get(i).getReporter().equals(currentUser.getUserEmail())) {
                 tempReport.add(reports.get(i));
             }
         }
@@ -195,7 +195,7 @@ public class DataAccessStub implements DataAccess {
         reports = tempReport;
     }
 
-    public void newMatch(String match){
+    public void newMatch(String match) {
         matches.add(new Match(currentUser, getSpecificUser(match)));
     }
 
@@ -215,10 +215,10 @@ public class DataAccessStub implements DataAccess {
         boolean matchExists = false;
         Match current;
 
-        for(int i = 0; i < matches.size(); i++) {
+        for (int i = 0; i < matches.size(); i++) {
             current = matches.get(i);
 
-            if(current.getCurrentUser().getUserEmail().equals(match) && current.getMatchedUser().getUserEmail().equals(currentUser.getUserEmail())) {
+            if (current.getCurrentUser().getUserEmail().equals(match) && current.getMatchedUser().getUserEmail().equals(currentUser.getUserEmail())) {
                 matchExists = true;
                 break;
             }
@@ -230,10 +230,10 @@ public class DataAccessStub implements DataAccess {
         boolean matchExists = false;
         Match current;
 
-        for(int i = 0; i < matches.size(); i++) {
+        for (int i = 0; i < matches.size(); i++) {
             current = matches.get(i);
 
-            if(current.getCurrentUser().getUserEmail().equals(currentUser.getUserEmail()) && current.getMatchedUser().getUserEmail().equals(match)) {
+            if (current.getCurrentUser().getUserEmail().equals(currentUser.getUserEmail()) && current.getMatchedUser().getUserEmail().equals(match)) {
                 matchExists = true;
                 break;
             }
