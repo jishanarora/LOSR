@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -73,9 +71,9 @@ public class MessageFragment extends Fragment {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.matches_listview_detail, parent, false);
                 profile = convertView.findViewById(R.id.profileButton);
-                File imgFile = new File(currMatch.getMatchedUser().getUserProfile().getProfilePicture()); //this will be grabbed from database
+                File imgFile = new File(currMatch.getMatchedUser().getUserPicture()); //this will be grabbed from database
 
-                if(!currMatch.getCurrentUser().getUserProfile().getBlindMode()) {
+                if(!currMatch.getCurrentUser().getUserMode()) {
                     if (imgFile.exists()) {
                         try {
                             FileInputStream fis = new FileInputStream(imgFile);

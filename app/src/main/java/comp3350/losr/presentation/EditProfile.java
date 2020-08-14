@@ -3,13 +3,6 @@ package comp3350.losr.presentation;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -21,6 +14,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,21 +109,21 @@ public class EditProfile extends AppCompatActivity {
 
         firstName.setText(accessUsers.getCurrentUser().getUserFirstName());
         lastName.setText(accessUsers.getCurrentUser().getUserLastName());
-        bio.setText(accessUsers.getCurrentUser().getUserProfile().getBio());
-        dateText.setText(accessUsers.getCurrentUser().getUserProfile().dateOfBirth());
-        if (accessUsers.getCurrentUser().getUserProfile().genderToString().equals("male")) {
+        bio.setText(accessUsers.getCurrentUser().getUserBio());
+        dateText.setText(accessUsers.getCurrentUser().getUserDateOfBirth());
+        if (accessUsers.getCurrentUser().userGenderToString().equals("male")) {
             gender1.setSelection(0);
         } else {
             gender1.setSelection(1);
         }
 
-        if (accessUsers.getCurrentUser().getUserProfile().genderPrefToString().equals("male")) {
+        if (accessUsers.getCurrentUser().userGenderPrefToString().equals("male")) {
             gender2.setSelection(0);
         } else {
             gender2.setSelection(1);
         }
 
-        final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserProfile().getAnswers();
+        final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserAnswers();
         if (userAnswers.get(0).getAnswer() == true) {
             answer1.setSelection(0);
         } else {
@@ -320,20 +316,20 @@ public class EditProfile extends AppCompatActivity {
             public void onClick(View view) {
                 accessUsers.getCurrentUser().setUserFirstName(firstName.getText().toString());
                 accessUsers.getCurrentUser().setUserLastName(lastName.getText().toString());
-                accessUsers.getCurrentUser().getUserProfile().setBio(bio.getText().toString());
+                accessUsers.getCurrentUser().setUserBio(bio.getText().toString());
                 if (dateDay != 0 && dateMonth != 0 && dateYear != 0)
-                    accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear, dateMonth, dateDay);
+                    accessUsers.getCurrentUser().setUserDateOfBirth(dateYear, dateMonth, dateDay);
                 if (gender1.getSelectedItem().equals("Male")) {
-                    accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Male);
+                    accessUsers.getCurrentUser().setUserGender(User.user_gender.Male);
                 } else {
-                    accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Female);
+                    accessUsers.getCurrentUser().setUserGender(User.user_gender.Female);
                 }
                 if (gender2.getSelectedItem().equals("Male")) {
-                    accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Male);
+                    accessUsers.getCurrentUser().setUserGenderPreference(User.user_gender.Male);
                 } else {
-                    accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
+                    accessUsers.getCurrentUser().setUserGenderPreference(User.user_gender.Female);
                 }
-                accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()), Boolean.parseBoolean(answer2.getSelectedItem().toString()), Boolean.parseBoolean(answer3.getSelectedItem().toString()), Boolean.parseBoolean(answer4.getSelectedItem().toString()), Boolean.parseBoolean(answer5.getSelectedItem().toString()), Integer.parseInt(weight1.getText().toString()), Integer.parseInt(weight2.getText().toString()), Integer.parseInt(weight3.getText().toString()), Integer.parseInt(weight4.getText().toString()), Integer.parseInt(weight5.getText().toString()));
+                accessUsers.getCurrentUser().setUserAllAnswers(Boolean.parseBoolean(answer1.getSelectedItem().toString()), Boolean.parseBoolean(answer2.getSelectedItem().toString()), Boolean.parseBoolean(answer3.getSelectedItem().toString()), Boolean.parseBoolean(answer4.getSelectedItem().toString()), Boolean.parseBoolean(answer5.getSelectedItem().toString()), Integer.parseInt(weight1.getText().toString()), Integer.parseInt(weight2.getText().toString()), Integer.parseInt(weight3.getText().toString()), Integer.parseInt(weight4.getText().toString()), Integer.parseInt(weight5.getText().toString()));
                 accessUsers.updateUser(accessUsers.getCurrentUser());
                 Intent intent = new Intent(EditProfile.this, NavigationPageActivity.class);
                 intent.putExtra("value", 1);

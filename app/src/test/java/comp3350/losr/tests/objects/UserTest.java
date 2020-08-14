@@ -23,7 +23,7 @@ public class UserTest extends TestCase {
         assertEquals("", user.getUserLastName());
         assertEquals("", user.getUserEmail());
         assertEquals("", user.getUserPassword());
-        assertEquals(5, user.getAnswers().size());
+        assertEquals(5, user.getUserAnswers().size());
 
         System.out.println("testUserEmpty completed");
     }
@@ -32,9 +32,9 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserAverage");
 
         user = new User("John", "Doe", "johndoe@gmail.com", "password");
-        user.updateAnswer(Boolean.TRUE, 2, 0);
-        user.updateAnswer(Boolean.TRUE, 2, 2);
-        ArrayList<Question> userAnswers = user.getAnswers();
+        user.setUserAnswer(Boolean.TRUE, 2, 0);
+        user.setUserAnswer(Boolean.TRUE, 2, 2);
+        ArrayList<Question> userAnswers = user.getUserAnswers();
 
         assertNotNull(user);
         assertEquals("John", user.getUserFirstName());
@@ -52,9 +52,9 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserAverage2");
 
         user = new User("Mary", "Poppins", "marypoppins@gmail.com", "password1");
-        user.updateAnswer(Boolean.TRUE, 2, 0);
-        user.updateAnswer(Boolean.TRUE, 2, 3);
-        ArrayList<Question> userAnswers = user.getAnswers();
+        user.setUserAnswer(Boolean.TRUE, 2, 0);
+        user.setUserAnswer(Boolean.TRUE, 2, 3);
+        ArrayList<Question> userAnswers = user.getUserAnswers();
 
         assertNotNull(user);
         assertEquals("Mary", user.getUserFirstName());
@@ -72,9 +72,9 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserAverage3");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password5");
-        user.updateAnswer(Boolean.TRUE, 2, 0);
-        user.updateAnswer(Boolean.TRUE, 2, 1);
-        ArrayList<Question> userAnswers = user.getAnswers();
+        user.setUserAnswer(Boolean.TRUE, 2, 0);
+        user.setUserAnswer(Boolean.TRUE, 2, 1);
+        ArrayList<Question> userAnswers = user.getUserAnswers();
 
         assertNotNull(user);
         assertEquals("Sam", user.getUserFirstName());
@@ -92,20 +92,20 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserEquals");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user.updateAnswer(Boolean.FALSE, 2, 0);
-        user.updateAnswer(Boolean.FALSE, 2, 1);
-        user.updateDateOfBirth(1999, 1, 25);
-        user.updateBio("Hi! My name is Sam!");
-        user.updateGender(User.user_gender.Female);
-        user.updatePreference(User.user_gender.Female);
+        user.setUserAnswer(Boolean.FALSE, 2, 0);
+        user.setUserAnswer(Boolean.FALSE, 2, 1);
+        user.setUserDateOfBirth(1999, 1, 25);
+        user.setUserBio("Hi! My name is Sam!");
+        user.setUserGender(User.user_gender.Female);
+        user.setUserGenderPreference(User.user_gender.Female);
 
         user1 = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user1.updateAnswer(Boolean.FALSE, 2, 0);
-        user1.updateAnswer(Boolean.FALSE, 2, 1);
-        user1.updateDateOfBirth(1999, 1, 25);
-        user1.updateBio("Hi! My name is Sam!");
-        user1.updateGender(User.user_gender.Female);
-        user1.updatePreference(User.user_gender.Female);
+        user1.setUserAnswer(Boolean.FALSE, 2, 0);
+        user1.setUserAnswer(Boolean.FALSE, 2, 1);
+        user1.setUserDateOfBirth(1999, 1, 25);
+        user1.setUserBio("Hi! My name is Sam!");
+        user1.setUserGender(User.user_gender.Female);
+        user1.setUserGenderPreference(User.user_gender.Female);
 
         //assertTrue(user.equals(user1));
         assertEquals(user, user1);
@@ -117,20 +117,20 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUserEqualsDiffAnswers");
 
         user = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user.updateAnswer(Boolean.FALSE, 2, 0);
-        user.updateAnswer(Boolean.FALSE, 2, 1);
-        user.updateDateOfBirth(1999, 1, 25);
-        user.updateBio("Hi! My name is Sam!");
-        user.updateGender(User.user_gender.Female);
-        user.updatePreference(User.user_gender.Female);
+        user.setUserAnswer(Boolean.FALSE, 2, 0);
+        user.setUserAnswer(Boolean.FALSE, 2, 1);
+        user.setUserDateOfBirth(1999, 1, 25);
+        user.setUserBio("Hi! My name is Sam!");
+        user.setUserGender(User.user_gender.Female);
+        user.setUserGenderPreference(User.user_gender.Female);
 
         user1 = new User("Sam", "Smith", "samsmith@gmail.com", "password");
-        user1.updateAnswer(Boolean.TRUE, 2, 0);
-        user1.updateAnswer(Boolean.FALSE, 2, 1);
-        user1.updateDateOfBirth(1999, 1, 25);
-        user1.updateBio("Hi! My name is Sam!");
-        user1.updateGender(User.user_gender.Female);
-        user1.updatePreference(User.user_gender.Female);
+        user1.setUserAnswer(Boolean.TRUE, 2, 0);
+        user1.setUserAnswer(Boolean.FALSE, 2, 1);
+        user1.setUserDateOfBirth(1999, 1, 25);
+        user1.setUserBio("Hi! My name is Sam!");
+        user1.setUserGender(User.user_gender.Female);
+        user1.setUserGenderPreference(User.user_gender.Female);
 
         assertNotEquals(user, user1);
 
@@ -143,11 +143,11 @@ public class UserTest extends TestCase {
         user = new User("", "", "", "");
         user.setUserProfile("testing bio", User.user_gender.Female, User.user_gender.Female, 1999, 1, 25, false);
 
-        assertEquals("testing bio", user.getUserProfile().getBio());
-        assertEquals(User.user_gender.Female, user.getUserProfile().getGender());
-        assertEquals(User.user_gender.Female, user.getUserProfile().getGenderPreference());
-        assertEquals("25/01/1999", user.getUserProfile().dateOfBirth());
-        assertEquals(21, user.getUserProfile().getAge());
+        assertEquals("testing bio", user.getUserBio());
+        assertEquals(User.user_gender.Female, user.getUserGender());
+        assertEquals(User.user_gender.Female, user.getUserGenderPreference());
+        assertEquals("25/01/1999", user.getUserDateOfBirth());
+        assertEquals(21, user.getUserAge());
 
         System.out.println("testSetUserProfile complete");
     }
@@ -156,16 +156,16 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUpdateAnswer");
 
         user = new User("", "", "", "");
-        user.updateAnswer(Boolean.TRUE, 2, 2);
-        user.updateAnswer(Boolean.TRUE, 2, 4);
+        user.setUserAnswer(Boolean.TRUE, 2, 2);
+        user.setUserAnswer(Boolean.TRUE, 2, 4);
         //this is out of bounds and should do nothing
-        user.updateAnswer(Boolean.TRUE, 2, 12);
+        user.setUserAnswer(Boolean.TRUE, 2, 12);
 
-        assertEquals(Boolean.FALSE, user.getAnswers().get(0).getAnswer());
-        assertEquals(Boolean.FALSE, user.getAnswers().get(1).getAnswer());
-        assertEquals(Boolean.TRUE, user.getAnswers().get(2).getAnswer());
-        assertEquals(Boolean.FALSE, user.getAnswers().get(3).getAnswer());
-        assertEquals(Boolean.TRUE, user.getAnswers().get(4).getAnswer());
+        assertEquals(Boolean.FALSE, user.getUserAnswers().get(0).getAnswer());
+        assertEquals(Boolean.FALSE, user.getUserAnswers().get(1).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(2).getAnswer());
+        assertEquals(Boolean.FALSE, user.getUserAnswers().get(3).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(4).getAnswer());
 
         System.out.println("testUpdateAnswer complete");
     }
@@ -174,13 +174,13 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUpdateAllAnswers");
 
         user = new User("", "", "", "");
-        user.updateAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
+        user.setUserAllAnswers(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, 2, 2, 2, 2, 2);
 
-        assertEquals(Boolean.TRUE, user.getAnswers().get(0).getAnswer());
-        assertEquals(Boolean.TRUE, user.getAnswers().get(1).getAnswer());
-        assertEquals(Boolean.TRUE, user.getAnswers().get(2).getAnswer());
-        assertEquals(Boolean.TRUE, user.getAnswers().get(3).getAnswer());
-        assertEquals(Boolean.TRUE, user.getAnswers().get(4).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(0).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(1).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(2).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(3).getAnswer());
+        assertEquals(Boolean.TRUE, user.getUserAnswers().get(4).getAnswer());
 
         System.out.println("testUpdateAllAnswers complete");
     }
@@ -189,10 +189,10 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUpdateDateOfBirth");
 
         user = new User("", "", "", "");
-        user.updateDateOfBirth(1988, 1, 12);
+        user.setUserDateOfBirth(1988, 1, 12);
 
-        assertEquals("12/01/1988", user.getUserProfile().dateOfBirth());
-        assertEquals(32, user.getUserProfile().getAge());
+        assertEquals("12/01/1988", user.getUserDateOfBirth());
+        assertEquals(32, user.getUserAge());
 
         System.out.println("testUpdateDateOfBirth complete");
     }
@@ -201,9 +201,9 @@ public class UserTest extends TestCase {
         System.out.println("Starting testUpdateBio");
 
         user = new User("", "", "", "");
-        user.updateBio("new test bio");
+        user.setUserBio("new test bio");
 
-        assertEquals("new test bio", user.getUserProfile().getBio());
+        assertEquals("new test bio", user.getUserBio());
 
         System.out.println("testUpdateBio complete");
     }

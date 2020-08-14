@@ -1,7 +1,5 @@
 package comp3350.losr.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -238,7 +238,7 @@ public class SignUpDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (dateDay != 0 && dateMonth != 0 && dateYear != 0)
-                    accessUsers.getCurrentUser().getUserProfile().setDateOfBirth(dateYear, dateMonth, dateDay);
+                    accessUsers.getCurrentUser().setUserDateOfBirth(dateYear, dateMonth, dateDay);
                 else {
                     Toast.makeText(getApplicationContext(), "Select the Date of Birth", Toast.LENGTH_SHORT).show();
                     return;
@@ -248,16 +248,16 @@ public class SignUpDetails extends AppCompatActivity {
                     return;
                 } else {
                     if (spinner1.getSelectedItem().equals("Male")) {
-                        accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Male);
+                        accessUsers.getCurrentUser().setUserGender(User.user_gender.Male);
                     } else {
-                        accessUsers.getCurrentUser().getUserProfile().setGender(User.user_gender.Female);
+                        accessUsers.getCurrentUser().setUserGender(User.user_gender.Female);
                     }
                     if (spinner2.getSelectedItem().equals("Male")) {
-                        accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Male);
+                        accessUsers.getCurrentUser().setUserGenderPreference(User.user_gender.Male);
                     } else {
-                        accessUsers.getCurrentUser().getUserProfile().setGenderPreference(User.user_gender.Female);
+                        accessUsers.getCurrentUser().setUserGenderPreference(User.user_gender.Female);
                     }
-                    accessUsers.getCurrentUser().getUserProfile().updateAllAnswers(Boolean.parseBoolean(spinner3.getSelectedItem().toString()), Boolean.parseBoolean(spinner4.getSelectedItem().toString()), Boolean.parseBoolean(spinner5.getSelectedItem().toString()), Boolean.parseBoolean(spinner6.getSelectedItem().toString()), Boolean.parseBoolean(spinner7.getSelectedItem().toString()), Integer.parseInt(weight1.getSelectedItem().toString()), Integer.parseInt(weight2.getSelectedItem().toString()), Integer.parseInt(weight3.getSelectedItem().toString()), Integer.parseInt(weight4.getSelectedItem().toString()), Integer.parseInt(weight5.getSelectedItem().toString()));
+                    accessUsers.getCurrentUser().setUserAllAnswers(Boolean.parseBoolean(spinner3.getSelectedItem().toString()), Boolean.parseBoolean(spinner4.getSelectedItem().toString()), Boolean.parseBoolean(spinner5.getSelectedItem().toString()), Boolean.parseBoolean(spinner6.getSelectedItem().toString()), Boolean.parseBoolean(spinner7.getSelectedItem().toString()), Integer.parseInt(weight1.getSelectedItem().toString()), Integer.parseInt(weight2.getSelectedItem().toString()), Integer.parseInt(weight3.getSelectedItem().toString()), Integer.parseInt(weight4.getSelectedItem().toString()), Integer.parseInt(weight5.getSelectedItem().toString()));
                     accessUsers.updateUser(accessUsers.getCurrentUser());
                     Intent intent = new Intent(SignUpDetails.this, NavigationPageActivity.class);
                     intent.putExtra("value", 0);

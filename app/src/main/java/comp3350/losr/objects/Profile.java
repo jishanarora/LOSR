@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Calendar;
 
 //used to hold a lot of the user information
-public class Profile {
+class Profile {
     private String bio = "hi";
 
     private User.user_gender gender = User.user_gender.Losr;
@@ -124,7 +124,7 @@ public class Profile {
         return numQuestions;
     }
 
-    public String dateOfBirth() {
+    public String getDateOfBirth() {
         String dateOfBirth;
 
         if (birthYear == 0 && birthMonth == 0 && birthDay == 0) {
@@ -151,7 +151,7 @@ public class Profile {
     }
 
     //different wants to set a users answers mainly for testing
-    public void updateAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5, int w1, int w2, int w3, int w4, int w5) {
+    public void setUserAllAnswers(Boolean a1, Boolean a2, Boolean a3, Boolean a4, Boolean a5, int w1, int w2, int w3, int w4, int w5) {
         answers.get(0).setAnswer(a1);
         answers.get(0).setWeight(w1);
         answers.get(1).setAnswer(a2);

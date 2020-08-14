@@ -38,14 +38,14 @@ public class AccessUsersTest extends TestCase {
 
         assertEquals(4, au.getGenderedUsers().size());
         System.out.println(au.getGenderedUsers().get(0).getUserEmail());
-        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(0).getUserProfile().getGender());
-        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(0).getUserProfile().getGenderPreference());
-        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(1).getUserProfile().getGender());
-        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(1).getUserProfile().getGenderPreference());
-        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(2).getUserProfile().getGender());
-        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(2).getUserProfile().getGenderPreference());
-        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(3).getUserProfile().getGender());
-        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(3).getUserProfile().getGenderPreference());
+        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(0).getUserGender());
+        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(0).getUserGenderPreference());
+        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(1).getUserGender());
+        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(1).getUserGenderPreference());
+        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(2).getUserGender());
+        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(2).getUserGenderPreference());
+        assertEquals(User.user_gender.Female, au.getGenderedUsers().get(3).getUserGender());
+        assertEquals(User.user_gender.Male, au.getGenderedUsers().get(3).getUserGenderPreference());
 
         System.out.println("testGetGenderedUsers complete");
     }
@@ -57,7 +57,7 @@ public class AccessUsersTest extends TestCase {
         test.setUserProfile("", User.user_gender.Female, User.user_gender.Male, 1, 1, 1, false);
         au.addUser(test);
 
-        //shouldnt increase to 5 because adding a user would mean they are registering, when you register you are set as the currentUser
+        //shouldn't increase to 5 because adding a user would mean they are registering, when you register you are set as the currentUser
         //so you would not be included in the list of potential matches. Also the currentUser is now female and there are only 4 males.
         assertEquals(4, au.getGenderedUsers().size());
 

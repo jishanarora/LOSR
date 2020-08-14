@@ -3,21 +3,16 @@ package comp3350.losr.presentation;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,9 +25,6 @@ import comp3350.losr.business.AccessUsers;
 import comp3350.losr.business.CheckMatches;
 import comp3350.losr.objects.Match;
 import comp3350.losr.objects.User;
-
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -159,12 +151,12 @@ public class NavigationFragment extends Fragment {
                         messageFragment=(MessageFragment)currentFragments.get(i);
                 }
                 if (mode.isChecked()){
-                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(true);
+                    accessUsers.getCurrentUser().setUserMode(true);
                     accessUsers.updateUser(accessUsers.getCurrentUser());
                     setupFragment();
                     messageFragment.refreshMessageFragment();
                 }else{
-                    accessUsers.getCurrentUser().getUserProfile().setBlindMode(false);
+                    accessUsers.getCurrentUser().setUserMode(false);
                     accessUsers.updateUser(accessUsers.getCurrentUser());
                     setupFragment();
                     messageFragment.refreshMessageFragment();
@@ -183,10 +175,12 @@ public class NavigationFragment extends Fragment {
         allOppositeUsers= new ArrayList<User>();
         allOppositeUsers=accessUsers.getGenderedUsers();
         allOppositeUsersDeleted=new ArrayList<User>();
+      
+        Boolean isBlindMode = accessUsers.getCurrentUser().getUserMode();
         checkMatches=new CheckMatches();
-        Boolean isBlindMode = accessUsers.getCurrentUser().getUserProfile().getBlindMode();
+
         for (User user : allOppositeUsers) {
-            if (user.getUserProfile().getBlindMode() != isBlindMode) {
+            if (user.getUserMode() != isBlindMode) {
                 allOppositeUsersDeleted.add(user);
             }
         }
@@ -198,7 +192,7 @@ public class NavigationFragment extends Fragment {
         iterateProfiles(index);
 
 
-        if(accessUsers.getCurrentUser().getUserProfile().getBlindMode())
+        if(accessUsers.getCurrentUser().getUserMode())
             mode.setChecked(true);
         else
             mode.setChecked(false);
@@ -212,8 +206,8 @@ public class NavigationFragment extends Fragment {
             navigationProfileImage.setImageResource(R.mipmap.profile);
             if(!accessMatches.checkMatchExists(navigationUser.getUserEmail()))
             {
-                if(!accessUsers.getCurrentUser().getUserProfile().getBlindMode()) {
-                    File imgFile = new File(navigationUser.getUserProfile().getProfilePicture());
+                if(!accessUsers.getCurrentUser().getUserMode()) {
+                    File imgFile = new File(navigationUser.getUserPicture());
                     if (imgFile.exists()) {
                         try {
                             FileInputStream fis = new FileInputStream(imgFile);
