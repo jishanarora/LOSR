@@ -111,40 +111,40 @@ public class EditProfile extends AppCompatActivity {
         lastName.setText(accessUsers.getCurrentUser().getUserLastName());
         bio.setText(accessUsers.getCurrentUser().getUserBio());
         dateText.setText(accessUsers.getCurrentUser().getUserDateOfBirth());
-        if (accessUsers.getCurrentUser().userGenderToString().equals("male")) {
+        if (accessUsers.getCurrentUser().userGenderToString().equals("Male")) {
             gender1.setSelection(0);
         } else {
             gender1.setSelection(1);
         }
 
-        if (accessUsers.getCurrentUser().userGenderPrefToString().equals("male")) {
+        if (accessUsers.getCurrentUser().userGenderPrefToString().equals("Male")) {
             gender2.setSelection(0);
         } else {
             gender2.setSelection(1);
         }
 
         final ArrayList<Question> userAnswers = accessUsers.getCurrentUser().getUserAnswers();
-        if (userAnswers.get(0).getAnswer() == true) {
+        if (userAnswers.get(0).getAnswer()) {
             answer1.setSelection(0);
         } else {
             answer1.setSelection(1);
         }
-        if (userAnswers.get(1).getAnswer() == true) {
+        if (userAnswers.get(1).getAnswer()) {
             answer2.setSelection(0);
         } else {
             answer2.setSelection(1);
         }
-        if (userAnswers.get(2).getAnswer() == true) {
+        if (userAnswers.get(2).getAnswer()) {
             answer3.setSelection(0);
         } else {
             answer3.setSelection(1);
         }
-        if (userAnswers.get(3).getAnswer() == true) {
+        if (userAnswers.get(3).getAnswer()) {
             answer4.setSelection(0);
         } else {
             answer4.setSelection(1);
         }
-        if (userAnswers.get(4).getAnswer() == true) {
+        if (userAnswers.get(4).getAnswer()) {
             answer5.setSelection(0);
         } else {
             answer5.setSelection(1);
